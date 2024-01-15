@@ -9,7 +9,9 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@layout/*": ["src/layout/*"],
-      "@routes/*": ["src/routes/*"]
+      "@routes/*": ["src/routes/*"],
+      "@pages/*": ["src/pages/*"],
+      "@css/*": ["src/css/*"]
     }
   },
   "include": ["vite.config.ts"]
