@@ -14,10 +14,12 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import FeedIcon from "@mui/icons-material/Feed";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import { useNavigate } from "react-router-dom";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function NavbarContent() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const icons = {
     home: <HomeIcon />,
     person: <PersonIcon />,
@@ -55,7 +57,6 @@ export default function NavbarContent() {
         flexDirection: "column",
         height: "100%",
         justifyContent: "space-between",
-        alignItems: "space-between",
         overflowY: "scroll",
       }}
     >
@@ -78,10 +79,10 @@ export default function NavbarContent() {
           }}
         />
       </Stack>
-
       <List>
         {navbarItems.map((item) => (
           <ListItemButton
+            onClick={() => navigate(item.url)}
             key={item.url}
             //   {...listItemProps}
             //   disabled={item.disabled}

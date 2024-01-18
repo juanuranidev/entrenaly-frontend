@@ -29,11 +29,10 @@ const closedMixin = (theme: any) => ({
 type DrawerStylesProps = {
   theme: any;
   open: boolean;
-  isLargeScreen: boolean;
 };
 
 export const DrawerStyles = styled(Drawer)<DrawerStylesProps>(
-  ({ theme, open, isLargeScreen }: any) => ({
+  ({ theme, open }: any) => ({
     display: { xs: "block", lg: "none" },
     "& .MuiDrawer-paper": {
       width: "15rem",
@@ -42,12 +41,6 @@ export const DrawerStyles = styled(Drawer)<DrawerStylesProps>(
       backgroundImage: "none",
       boxShadow: "inherit",
     },
-    // ...(isLargeScreen && {
-    //   flexShrink: 0,
-    //   whiteSpace: "now/rap",
-    //   boxSizing: "border-box",
-    //   variant: "permanent",
-    // }),
     ...(open && {
       ...openedMixin(theme),
       "& .MuiDrawer-paper": openedMixin(theme),
