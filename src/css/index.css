@@ -1,0 +1,9 @@
+body {
+  padding: 0rem;
+  margin: 0rem;
+  box-sizing: border-box;
+  background-color: #242424;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
