@@ -24,7 +24,7 @@ export default function TrainerLayout() {
           p={3}
           sx={{
             height: "100%",
-            backgroundColor: "#fafafb",
+            backgroundColor: "#edf3f8",
           }}
         >
           <Outlet />
