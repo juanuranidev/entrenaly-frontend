@@ -16,16 +16,8 @@ type Props = {
 };
 
 export default function PlansTable({ plans }: Props) {
-  const theme = useTheme();
-
   return (
-    <Card
-      sx={{
-        padding: 2,
-        boxShadow: "none",
-        border: `1px solid ${theme.palette.divider}`,
-      }}
-    >
+    <Card>
       <TableContainer
         sx={{
           width: "100%",
@@ -49,7 +41,7 @@ export default function PlansTable({ plans }: Props) {
           </TableHead>
           <TableBody>
             {plans.map((plan: any) => (
-              <PlanRow plan={plan} />
+              <PlanRow plan={plan} key={plan.name} />
             ))}
           </TableBody>
         </Table>

@@ -6,7 +6,9 @@ import ClientsTable from "./components/ClientsTable";
 import AddClientDrawer from "./components/AddClientDrawer";
 
 export default function Clients() {
-  const theme = useTheme();
+  const theme: any = useTheme();
+
+  console.log(theme.backgrounds);
 
   const [openAddClientDrawer, setOpenAddClientDrawer] =
     useState<boolean>(false);
@@ -39,7 +41,7 @@ export default function Clients() {
       <ClientsTable clients={clients} />
       <AddClientDrawer
         open={openAddClientDrawer}
-        onClose={() => setOpenAddClientDrawer(false)}
+        close={() => setOpenAddClientDrawer(false)}
       />
     </Box>
   );

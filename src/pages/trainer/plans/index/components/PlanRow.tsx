@@ -7,7 +7,6 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
