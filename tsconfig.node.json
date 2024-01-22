@@ -14,5 +14,8 @@
       "@css/*": ["src/css/*"]
     }
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts"],
+  "linterOptions": {
+    "exclude": ["*/**"]
+  }
 }
