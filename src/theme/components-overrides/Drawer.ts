@@ -4,7 +4,7 @@ export default function Drawer(theme: any) {
       styleOverrides: {
         root: {
           "& .MuiDrawer-paper": {
-            width: 500,
+            width: { base: "100%", lg: 400 },
             padding: theme.spacing(2),
           },
         },

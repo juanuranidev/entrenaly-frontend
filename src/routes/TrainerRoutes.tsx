@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import Loadable from "components/common/Loadable";
 import TrainerLayout from "layout/trainer/TrainerLayout";
+import NewPlanV2 from "pages/trainer/plans/NewPlanV2";
 
 const Dashboard = Loadable(
   lazy(() => import("pages/trainer/dashboard/Dashboard"))
@@ -30,6 +31,10 @@ const TrainerRoutes = {
     {
       path: "/plans/new",
       element: <NewPlan />,
+    },
+    {
+      path: "/plans/new/v2",
+      element: <NewPlanV2 />,
     },
   ],
 };

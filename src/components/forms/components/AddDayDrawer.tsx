@@ -17,6 +17,7 @@ type Props = {
   onClose: () => void;
   onSubmit: (day: any) => void;
   daysAlreadyAdded: any;
+  view?: number;
 };
 
 const days = [
@@ -31,13 +32,15 @@ const days = [
 
 export default function AddDayDrawer({
   open,
+  view = 1,
   onClose,
   onSubmit,
   daysAlreadyAdded,
 }: Props) {
   const theme: any = useTheme();
+  console.log(view);
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(view);
   const [daySelected, setDaySelected] = useState<string | null>(null);
 
   const handleSelectDay = (day: string) => {
@@ -51,7 +54,7 @@ export default function AddDayDrawer({
   };
 
   useEffect(() => {
-    setStep(1);
+    setStep(view);
   }, [open]);
 
   return (
