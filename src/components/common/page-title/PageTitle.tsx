@@ -4,7 +4,7 @@ import { PageTitleStyled } from "./Styles";
 
 type Props = {
   title: string;
-  action: any;
+  action?: any;
 };
 
 export default function PageTitle({ title, action }: Props) {
@@ -12,10 +12,10 @@ export default function PageTitle({ title, action }: Props) {
 
   return (
     <PageTitleStyled theme={theme}>
-      <Typography fontWeight={600} fontSize={20}>
+      <Typography fontWeight={800} fontSize={20}>
         {title}
       </Typography>
-      <Box>{action}</Box>
+      {action ? <Box>{action}</Box> : null}
     </PageTitleStyled>
   );
 }
