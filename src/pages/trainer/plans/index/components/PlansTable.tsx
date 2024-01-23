@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  useTheme,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PlanRow from "./PlanRow";

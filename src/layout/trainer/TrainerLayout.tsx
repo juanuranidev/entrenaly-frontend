@@ -8,11 +8,6 @@ import Navbar from "./components/navbar/Navbar";
 
 export default function TrainerLayout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // const theme = useTheme();
-
-  // const handleDrawerToggle = () => {
-  //   setOpenDrawer(!openDrawer);
-  // };
 
   return (
     <Stack height="100vh" direction="row">

@@ -1,9 +1,7 @@
-// ==============================|| OVERRIDES - BUTTON ||============================== //
-
-export default function Button(theme: any) {
+export default function Button() {
   const disabledStyle = {
     "&.Mui-disabled": {
-      backgroundColor: theme.palette.grey[200],
+      backgroundColor: "#eeeeee",
     },
   };
 

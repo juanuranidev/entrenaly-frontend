@@ -5,10 +5,6 @@ import {
   MenuItem,
   TextField,
   Typography,
-  Accordion,
-  AccordionActions,
-  AccordionSummary,
-  AccordionDetails,
   useTheme,
   Button,
   Stack,
@@ -17,7 +13,6 @@ import { useFormik } from "formik";
 import AddDayDrawer from "components/forms/components/AddDayDrawer";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function NewPlanV2() {
   const theme: any = useTheme();
@@ -52,14 +47,14 @@ export default function NewPlanV2() {
     handleCloseDrawerDays();
   };
 
-  const removeExercise = (exerciseName: any) => {
-    formik.setValues((prevValues: any) => ({
-      ...prevValues,
-      exercises: prevValues.exercises.filter(
-        (exercise: any) => exercise.name !== exerciseName
-      ),
-    }));
-  };
+  // const removeExercise = (exerciseName: any) => {
+  //   formik.setValues((prevValues: any) => ({
+  //     ...prevValues,
+  //     exercises: prevValues.exercises.filter(
+  //       (exercise: any) => exercise.name !== exerciseName
+  //     ),
+  //   }));
+  // };
 
   return (
     <Box>

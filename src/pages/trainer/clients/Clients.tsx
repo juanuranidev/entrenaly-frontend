@@ -1,6 +1,4 @@
 import { Box, Typography, Stack, useTheme, Button } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
 import ClientsTable from "./components/ClientsTable";
 import AddClientDrawer from "./components/AddClientDrawer";

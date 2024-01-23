@@ -1,7 +1,6 @@
 import { useTheme } from "@emotion/react";
 import {
   Drawer,
-  Input,
   TextField,
   Typography,
   InputAdornment,
@@ -20,7 +19,7 @@ import { styled } from "@mui/material/styles";
 //   isLargeScreen: boolean;
 // };
 
-export const DrawerStyled = styled(Drawer)(({ theme }) => ({
+export const DrawerStyled = styled(Drawer)(() => ({
   // display: "flex",
   // alignItems: "center",
   padding: "20rem",

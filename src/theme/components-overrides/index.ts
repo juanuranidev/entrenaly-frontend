@@ -14,10 +14,10 @@ export default function ComponentsOverrides(theme: any) {
   return merge(
     Link(),
     Tabs(),
+    Button(),
     Tab(theme),
     Card(theme),
     Drawer(theme),
-    Button(theme),
     TableCell(theme),
     IconButton(theme),
     InputLabel(theme),

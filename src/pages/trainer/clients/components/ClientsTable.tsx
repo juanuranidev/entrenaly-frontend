@@ -1,7 +1,5 @@
 import {
-  Button,
   Card,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -11,7 +9,6 @@ import {
   useTheme,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useState } from "react";
 import ClientRow from "./ClientRow";
 
 type Props = {

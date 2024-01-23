@@ -7,7 +7,6 @@ import Profile from "./components/Profile";
 export default function Header({ setIsDrawerOpen }: any) {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
-  console.log(theme);
 
   return (
     <HeaderStyled theme={theme} isLargeScreen={Boolean(isLargeScreen)}>

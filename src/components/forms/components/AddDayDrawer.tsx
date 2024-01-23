@@ -38,7 +38,6 @@ export default function AddDayDrawer({
   daysAlreadyAdded,
 }: Props) {
   const theme: any = useTheme();
-  console.log(view);
 
   const [step, setStep] = useState(view);
   const [daySelected, setDaySelected] = useState<string | null>(null);

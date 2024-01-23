@@ -15,10 +15,7 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
       <DrawerStyles
         theme={theme}
         open={isDrawerOpen}
-        // variant="permanent"
         onClose={() => setIsDrawerOpen(false)}
-        // isLargeScreen
-        // ModalProps={{ keepMounted: true }}
       >
         <NavbarContent />
       </DrawerStyles>

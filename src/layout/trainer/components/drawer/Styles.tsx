@@ -1,9 +1,7 @@
-// material-ui
 import { styled } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 
 const openedMixin = (theme: any) => ({
-  // width: 300,
   width: "15rem",
   borderRight: `1px solid ${theme.palette.divider}`,
   transition: theme.transitions.create("width", {
