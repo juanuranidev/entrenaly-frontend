@@ -1,15 +1,21 @@
 import { lazy } from "react";
 import Loadable from "components/common/Loadable";
 import TrainerLayout from "layout/trainer/TrainerLayout";
-import NewPlanV2 from "pages/trainer/plans/NewPlanV2";
 
 const Dashboard = Loadable(
   lazy(() => import("pages/trainer/dashboard/Dashboard"))
 );
 const Clients = Loadable(lazy(() => import("pages/trainer/clients/Clients")));
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
-const NewPlan = Loadable(
-  lazy(() => import("pages/trainer/plans/new-plan/NewPlan"))
+const NewWeeklyPlan = Loadable(
+  lazy(() => import("pages/trainer/plans/new-weekly-plan/NewWeeklyPlan"))
+);
+const NewCircuitPlan = Loadable(
+  lazy(() => import("pages/trainer/plans/new-circuit-plan/NewCircuitPlan"))
+);
+
+const Exercises = Loadable(
+  lazy(() => import("pages/trainer/exercises/Exercises"))
 );
 
 const TrainerRoutes = {
@@ -29,12 +35,16 @@ const TrainerRoutes = {
       element: <Plans />,
     },
     {
-      path: "/plans/new",
-      element: <NewPlan />,
+      path: "/plans/new/weekly",
+      element: <NewWeeklyPlan />,
     },
     {
-      path: "/plans/new/v2",
-      element: <NewPlanV2 />,
+      path: "/plans/new/circuit",
+      element: <NewCircuitPlan />,
+    },
+    {
+      path: "/exercises",
+      element: <Exercises />,
     },
   ],
 };
