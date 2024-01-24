@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
+import { alpha, useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import PlansTable from "./components/PlansTable";
 import PageTitle from "components/common/page-title/PageTitle";
-import React, { useState } from "react";
-import { alpha, useTheme } from "@mui/material/styles";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Plans() {
   const theme = useTheme();
@@ -46,8 +47,9 @@ export default function Plans() {
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
               variant="contained"
+              startIcon={<AddIcon />}
             >
-              Nueva plantilla
+              Nuevo
             </Button>
             <Menu
               id="basic-menu"
@@ -58,10 +60,10 @@ export default function Plans() {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={() => navigate("/plans/new")}>
+              <MenuItem onClick={() => navigate("/plans/new/weekly")}>
                 Plan mensual
               </MenuItem>
-              <MenuItem onClick={() => navigate("/plans/new/v2")}>
+              <MenuItem onClick={() => navigate("/plans/new/circuit")}>
                 Circuito
               </MenuItem>
             </Menu>

@@ -27,7 +27,7 @@ export default function PlansTable({ plans }: Props) {
           "& td, & th": { whiteSpace: "nowrap" },
         }}
       >
-        <Table size="small" aria-labelledby="tableTitle">
+        <Table size="medium" aria-labelledby="{lanes">
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>

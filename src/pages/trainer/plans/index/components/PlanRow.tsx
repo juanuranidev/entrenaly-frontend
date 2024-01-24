@@ -31,7 +31,7 @@ export default function PlanRow({ plan }: Props) {
     <TableRow
       hover
       role="checkbox"
-      tabIndex={-1}
+      // tabIndex={-1}
       key={plan.name}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
