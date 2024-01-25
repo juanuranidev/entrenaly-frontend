@@ -1,48 +1,59 @@
 export const exercises = [
   {
-    name: "Press de banca",
+    name: "Press de banca plano",
     video: "https://i.gifer.com/FmTK.gif",
     category: "Pecho",
   },
   {
-    name: "Biceps alternado",
+    name: "Press de banca inclinado",
     video:
-      "https://i.pinimg.com/originals/00/27/44/002744f2d84069eeec855a9aac41c436.gif",
-    category: "Bíceps",
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/07/oie_ihyVRmb3VFfW.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
   },
   {
-    name: "Flexiones de espalda",
-    video: "https://example.com/flexiones_espalda.gif",
-    category: "Espalda",
+    name: "Pull-over con mancuerna",
+    video:
+      "https://entrenandoc.com/wp-content/uploads/2023/06/oie_eu2KJdgLGbRI.gif",
+    category: "Pecho",
   },
   {
-    name: "Sentadillas",
-    video: "https://example.com/sentadillas.gif",
-    category: "Piernas",
+    name: "Flexiones (push-ups)",
+    video: "https://hips.hearstapps.com/hmg-prod/images/pushup-1525365829.gif",
+    category: "Pecho",
   },
   {
-    name: "Zancadas laterales",
-    video: "https://example.com/zancadas.gif",
-    category: "Piernas",
+    name: "Aperturas con mancuernas",
+    video:
+      "https://static.wixstatic.com/media/c94d75_1b9fb13e05454a8cb084f1adbb95438e~mv2.gif",
+    category: "Pecho",
   },
   {
-    name: "Elevación de talones",
-    video: "https://example.com/elevacion_talones.gif",
-    category: "Piernas",
+    name: "Fondos en paralelas",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/06/oie_6XNNBnRjlp0Y.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
   },
   {
-    name: "Extensiones de tríceps",
-    video: "https://example.com/extensiones_triceps.gif",
-    category: "Tríceps",
+    name: "Press de banca declinado",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/06/oie_ZGvtkeOAbCFf.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
   },
   {
-    name: "Plancha abdominal",
-    video: "https://example.com/plancha.gif",
-    category: "Abdominales",
+    name: "Aperturas inclinadas con mancuernas",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/06/oie_KZOXOecggF7W.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
   },
   {
-    name: "Crunches oblicuos",
-    video: "https://example.com/crunches_oblicuos.gif",
-    category: "Abdominales",
+    name: "Pec Deck (máquina de vuelo)",
+    video: "https://pbs.twimg.com/tweet_video_thumb/FKRYXR6XMAEAyCN.jpg",
+    category: "Pecho",
+  },
+  {
+    name: "Pullover en polea alta",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/09/oie_cSHIhZEn9jXQ.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
   },
 ];

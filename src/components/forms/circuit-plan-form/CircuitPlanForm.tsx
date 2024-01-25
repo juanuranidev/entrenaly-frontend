@@ -43,7 +43,6 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
   };
 
   const handleOnSubmitExercisesDrawer = (selectedExercises: any) => {
-    console.log(selectedExercises);
     formik.setValues((prevValues: any) => ({
       ...prevValues,
       exercises: [...prevValues.exercises, ...selectedExercises],

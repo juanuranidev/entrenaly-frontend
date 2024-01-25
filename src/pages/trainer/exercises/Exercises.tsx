@@ -8,25 +8,54 @@ import {
   TextField,
   Typography,
   IconButton,
+  Button,
 } from "@mui/material";
 import { exercises } from "../../../lib/utils/exercises";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import PageTitle from "components/common/page-title/PageTitle";
 import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import { useFormik } from "formik";
+import AddExerciseDrawer from "components/drawers/add-exercise-drawer/AddExerciseDrawer";
 
 export default function Exercises() {
   const theme: any = useTheme();
 
   const [searchValue, setSearchValue] = useState("");
+  const [openDrawerAddExercise, setOpenDrawerAddExercise] = useState(false);
 
   const filteredExercises = exercises.filter((exercise) =>
     exercise.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      video: "",
+      format: "",
+      muscularGroup: "",
+    },
+    onSubmit(values) {
+      console.log(values);
+      setOpenDrawerAddExercise(false);
+    },
+  });
+
   return (
     <Box>
-      <PageTitle title="Ejercicios" />
+      <PageTitle
+        title="Ejercicios"
+        action={
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setOpenDrawerAddExercise(true)}
+          >
+            Agregar nuevo
+          </Button>
+        }
+      />
       <Card>
         <Grid container spacing={theme.spacing(3)}>
           <Grid item xs={12}>
@@ -94,6 +123,11 @@ export default function Exercises() {
           </Grid>
         </Grid>
       </Card>
+      <AddExerciseDrawer
+        formik={formik}
+        open={openDrawerAddExercise}
+        onClose={() => setOpenDrawerAddExercise(false)}
+      />
     </Box>
   );
 }
