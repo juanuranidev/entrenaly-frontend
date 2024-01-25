@@ -8,6 +8,7 @@ type HeaderStyledProps = {
 export const HeaderStyled = styled(Box)<HeaderStyledProps>(
   ({ theme, isLargeScreen }) => ({
     display: "flex",
+    height: "5rem",
     alignItems: "center",
     padding: theme.spacing(2),
     backgroundColor: "#ffffff",

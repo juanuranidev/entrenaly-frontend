@@ -1,6 +1,6 @@
+import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Box, Stack } from "@mui/material";
 
 import Drawer from "./components/drawer/Drawer";
 import Header from "./components/header/Header";
@@ -10,7 +10,7 @@ export default function TrainerLayout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Stack height="100vh" direction="row">
+    <Stack direction="row" height="100vh">
       <Navbar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Drawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Box width="100%">
@@ -18,8 +18,9 @@ export default function TrainerLayout() {
         <Box
           p={3}
           sx={{
-            height: "100%",
+            overflow: "scroll",
             backgroundColor: "#edf3f8",
+            height: "calc(100vh - 5rem)",
           }}
         >
           <Outlet />

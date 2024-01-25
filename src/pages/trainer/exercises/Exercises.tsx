@@ -62,8 +62,10 @@ export default function Exercises() {
         <Grid container spacing={theme.spacing(3)}>
           <Grid item xs={12}>
             <Alert severity="info">
-              Acá podrás visualizar todos los ejercicios con los que podrás
-              armar tus planes de entrenamiento
+              <Typography fontSize={16}>
+                Acá podrás visualizar todos los ejercicios con los que podrás
+                armar tus planes de entrenamiento
+              </Typography>
             </Alert>
           </Grid>
           <Grid item xs={12}>
@@ -126,11 +128,10 @@ export default function Exercises() {
                   />
                   <Typography
                     mt={1}
-                    lineHeight="1"
+                    lineHeight="1.2"
                     align="left"
                     fontSize={16}
                     fontWeight={600}
-                    // pl={theme.spacing(2)}
                   >
                     {exercise.name}
                   </Typography>

@@ -8,10 +8,10 @@ export default function Navbar({ isDrawerOpen, setIsDrawerOpen }: any) {
 
   return (
     <Box
-      display={isLargeScreen ? "block" : "none"}
-      p={1}
+      width="12rem"
       bgcolor="#ffffff"
-      width="15rem"
+      p={theme.spacing(1)}
+      display={isLargeScreen ? "block" : "none"}
       sx={{
         borderRight: `1px solid ${theme.palette.divider}`,
       }}
