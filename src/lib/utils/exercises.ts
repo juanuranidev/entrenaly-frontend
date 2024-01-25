@@ -1,5 +1,35 @@
 export const exercises = [
   {
+    name: "Flexiones a un brazo con pelota medicinal",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2024/01/oie_2A4chWrSkRQK.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
+  },
+  {
+    name: "Apertura de pecho con banda elástica",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2024/01/oie_SVAULKOISP5h.gif?fit=360%2C360&ssl=1https://i0.wp.com/entrenandoc.com/wp-content/uploads/2024/01/oie_SVAULKOISP5h.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
+  },
+  {
+    name: "Flexiones con elevación de brazo",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/12/oie_oAkGB36zSMkq.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
+  },
+  {
+    name: "Flexiones con toque de hombro",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/12/oie_0vha2CUhuNxy.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
+  },
+  {
+    name: "Fondos en anillos",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/12/oie_w2dTlzQbHdIC.gif?fit=360%2C360&ssl=1",
+    category: "Pecho",
+  },
+  {
     name: "Press de banca plano",
     video: "https://i.gifer.com/FmTK.gif",
     category: "Pecho",
@@ -55,5 +85,29 @@ export const exercises = [
     video:
       "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/09/oie_cSHIhZEn9jXQ.gif?fit=360%2C360&ssl=1",
     category: "Pecho",
+  },
+  {
+    name: "Dominadas",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/07/oie_4bO6nFCvWWKo.gif?fit=360%2C360&ssl=1",
+    category: "Espalda",
+  },
+  {
+    name: "Remo en polea baja",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/06/oie_tjL7L7y33idj.gif?fit=360%2C360&ssl=1",
+    category: "Espalda",
+  },
+  {
+    name: "Remo inclinado con mancuernas",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/07/REMO-INCLINADO-CON-MANCUERNAS.gif?fit=360%2C360&ssl=1",
+    category: "Espalda",
+  },
+  {
+    name: "Polea alta",
+    video:
+      "https://i0.wp.com/entrenandoc.com/wp-content/uploads/2023/07/oie_LlfTrc6CY9UF.gif?fit=360%2C360&ssl=1",
+    category: "Espalda",
   },
 ];
