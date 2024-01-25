@@ -17,7 +17,10 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
       >
-        <NavbarContent />
+        <NavbarContent
+          isDrawerOpen={isDrawerOpen}
+          setIsDrawerOpen={setIsDrawerOpen}
+        />
       </DrawerStyles>
     </Box>
   );

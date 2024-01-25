@@ -14,9 +14,9 @@ import FeedIcon from "@mui/icons-material/Feed";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import { useNavigate } from "react-router-dom";
 
-export default function NavbarContent() {
+export default function NavbarContent({ isDrawerOpen, setIsDrawerOpen }: any) {
   const navigate = useNavigate();
-
+  console.log(isDrawerOpen);
   const icons = {
     home: <HomeIcon />,
     person: <PersonIcon />,
@@ -81,7 +81,10 @@ export default function NavbarContent() {
           <ListItemButton
             key={item.url}
             sx={{ zIndex: 1000 }}
-            onClick={() => navigate(item.url)}
+            onClick={() => {
+              setIsDrawerOpen(false);
+              navigate(item.url);
+            }}
           >
             <ListItemIcon sx={{ minWidth: 28 }}>{item.icon}</ListItemIcon>
             <ListItemText

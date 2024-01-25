@@ -11,7 +11,7 @@ export default function TrainerLayout() {
 
   return (
     <Stack height="100vh" direction="row">
-      <Navbar />
+      <Navbar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Drawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Box width="100%">
         <Header setIsDrawerOpen={setIsDrawerOpen} />
