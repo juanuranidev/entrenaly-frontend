@@ -6,8 +6,6 @@ import Link from "./Link";
 import Button from "./Button";
 import TableCell from "./TableCell";
 import IconButton from "./IconButton";
-import InputLabel from "./InputLabel";
-import OutlinedInput from "./OutlinedInput";
 
 export default function ComponentsOverrides(theme: any) {
   return merge(
@@ -17,8 +15,6 @@ export default function ComponentsOverrides(theme: any) {
     Tab(theme),
     Card(theme),
     TableCell(theme),
-    IconButton(theme),
-    InputLabel(theme),
-    OutlinedInput(theme)
+    IconButton(theme)
   );
 }
