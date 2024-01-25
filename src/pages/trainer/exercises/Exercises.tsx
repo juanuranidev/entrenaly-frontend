@@ -9,6 +9,7 @@ import {
   Typography,
   IconButton,
   Button,
+  Chip,
 } from "@mui/material";
 import { exercises } from "../../../lib/utils/exercises";
 import { useState } from "react";
@@ -18,6 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useFormik } from "formik";
 import AddExerciseDrawer from "components/drawers/add-exercise-drawer/AddExerciseDrawer";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function Exercises() {
   const theme: any = useTheme();
@@ -98,6 +100,21 @@ export default function Exercises() {
                   }}
                   boxShadow={theme.customShadows.secondary}
                 >
+                  <Grid container mt={1} direction="row" alignItems="center">
+                    <Grid item xs={10}>
+                      <Chip
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        label={exercise.category}
+                      />
+                    </Grid>
+                    <Grid item xs={2}>
+                      <IconButton size="small">
+                        <EditIcon color="primary" fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
                   <img
                     src={exercise.video}
                     style={{
