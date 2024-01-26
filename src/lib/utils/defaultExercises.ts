@@ -1,4 +1,4 @@
-export const exercises = [
+export const defaultExercises = [
   {
     name: "Flexiones a un brazo con pelota medicinal",
     video:
