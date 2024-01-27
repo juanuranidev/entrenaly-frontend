@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
-import { exercises } from "../../../../lib/utils/exercises";
+import { defaultExercises } from "../../../../lib/utils/defaultExercises";
 
 type Exercise = {
   name: string;
@@ -46,7 +46,7 @@ export default function SelectExercisesView({ onSubmit }: Props) {
         justifyContent="space-between"
         flexWrap="wrap"
       >
-        {exercises.map((exercise) => (
+        {defaultExercises.map((exercise) => (
           <Card
             key={exercise.name}
             onClick={() => toggleExerciseSelection(exercise)}

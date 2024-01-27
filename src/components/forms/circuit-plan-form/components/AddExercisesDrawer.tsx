@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import PageTitle from "components/common/page-title/PageTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { exercises } from "../../../../lib/utils/exercises";
+import { defaultExercises } from "../../../../lib/utils/defaultExercises";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 
 type Exercise = {
@@ -69,7 +69,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
             justifyContent="space-between"
             flexWrap="wrap"
           >
-            {exercises.map((exercise) => (
+            {defaultExercises.map((exercise) => (
               <Card
                 key={exercise.name}
                 onClick={() => toggleExerciseSelection(exercise)}
