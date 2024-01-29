@@ -1,27 +1,11 @@
 import React, { useState } from "react";
-import PageTitle from "components/common/page-title/PageTitle";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useFormik } from "formik";
-import AddExerciseDrawer from "components/drawers/add-exercise-drawer/AddExerciseDrawer";
+import PageTitle from "components/common/page-title/PageTitle";
+import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
 
-type Props = {};
-
-export default function MainTitle({}: Props) {
+export default function MainTitle() {
   const [openDrawerAddExercise, setOpenDrawerAddExercise] = useState(false);
-
-  const addExerciseFormik = useFormik({
-    initialValues: {
-      name: "",
-      video: "",
-      format: "",
-      muscularGroup: "",
-    },
-    onSubmit(values) {
-      console.log(values);
-      setOpenDrawerAddExercise(false);
-    },
-  });
 
   return (
     <React.Fragment>
@@ -37,10 +21,10 @@ export default function MainTitle({}: Props) {
           </Button>
         }
       />
-      <AddExerciseDrawer
-        formik={addExerciseFormik}
+      <AddExerciseForm
         open={openDrawerAddExercise}
         onClose={() => setOpenDrawerAddExercise(false)}
+        onSubmit={() => console.log("first")}
       />
     </React.Fragment>
   );
