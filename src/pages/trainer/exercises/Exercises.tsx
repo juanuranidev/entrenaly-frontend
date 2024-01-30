@@ -26,8 +26,8 @@ export default function Exercises() {
           <Grid item xs={12}>
             <Alert severity="info">
               <Typography fontSize={16}>
-                Acá podrás visualizar todos los ejercicios con los que podrás
-                armar tus planes de entrenamiento
+                Acá vas a ver todos los ejercicios con los que podrás armar tus
+                planes de entrenamiento
               </Typography>
             </Alert>
           </Grid>
@@ -35,7 +35,11 @@ export default function Exercises() {
             <Searchbar exercises={exercises} setExercises={setExercises} />
           </Grid>
           <Grid item xs={12}>
-            <Stack direction="row" flexWrap="wrap">
+            <Stack
+              direction="row"
+              flexWrap="wrap"
+              justifyContent={{ xs: "center", md: "flex-start" }}
+            >
               {exercises.map((exercise) => (
                 <ExerciseCard key={exercise.name} exercise={exercise} />
               ))}

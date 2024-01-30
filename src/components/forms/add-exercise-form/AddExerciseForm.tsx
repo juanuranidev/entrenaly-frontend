@@ -25,7 +25,7 @@ export default function AddExerciseForm({
   exerciseSelected,
 }: Props) {
   const theme: any = useTheme();
-  console.log(exerciseSelected);
+
   const formik = useFormik({
     initialValues: {
       name: exerciseSelected?.name ? exerciseSelected.name : "",
@@ -33,9 +33,15 @@ export default function AddExerciseForm({
       format: exerciseSelected?.format ?? "",
       muscularGroup: exerciseSelected?.muscularGroup ?? "",
     },
+    enableReinitialize: true,
     onSubmit(values) {
-      console.log(values);
-      onSubmit();
+      try {
+        console.log(values);
+        onSubmit();
+        onClose();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Chip,
@@ -7,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import React, { useState } from "react";
 import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
 
 type Props = {
