@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 export default function Plans() {
   const theme = useTheme();
   const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
