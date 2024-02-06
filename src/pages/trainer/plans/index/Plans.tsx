@@ -7,7 +7,7 @@ import PageTitle from "components/common/page-title/PageTitle";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function Plans() {
-  const theme = useTheme();
+  const theme: any = useTheme();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -43,19 +43,20 @@ export default function Plans() {
                 )}`,
               }}
               id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
               variant="contained"
+              aria-haspopup="true"
+              onClick={handleClick}
               startIcon={<AddIcon />}
+              aria-expanded={open ? "true" : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
             >
               Nuevo
             </Button>
             <Menu
+              open={open}
+              elevation={4}
               id="basic-menu"
               anchorEl={anchorEl}
-              open={open}
               onClose={handleClose}
               MenuListProps={{
                 "aria-labelledby": "basic-button",

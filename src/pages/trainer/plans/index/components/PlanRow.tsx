@@ -1,14 +1,14 @@
 import {
-  Typography,
-  Stack,
-  TableCell,
-  TableRow,
-  IconButton,
   Menu,
+  Stack,
+  TableRow,
   MenuItem,
+  TableCell,
+  Typography,
+  IconButton,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
 type Props = {
@@ -31,7 +31,6 @@ export default function PlanRow({ plan }: Props) {
     <TableRow
       hover
       role="checkbox"
-      // tabIndex={-1}
       key={plan.name}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >

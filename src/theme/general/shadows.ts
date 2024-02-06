@@ -1,4 +1,4 @@
-const Shadows = {
+const shadows = {
   primary:
     "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
   secondary:
@@ -7,4 +7,4 @@ const Shadows = {
     "rgba(25, 118, 210, 0.30) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px",
 };
 
-export default Shadows;
+export default shadows;
