@@ -1,16 +1,17 @@
 import {
   Box,
+  Stack,
+  Button,
   IconButton,
   Typography,
-  Stack,
-  Card,
-  Button,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import PageTitle from "components/common/page-title/PageTitle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { defaultExercises } from "../../../../lib/utils/defaultExercises";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
+import ExerciseCard from "./ExerciseCard";
 
 type Exercise = {
   name: string;
@@ -24,6 +25,7 @@ type Props = {
 };
 
 export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
+  const theme: any = useTheme();
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
 
   const toggleExerciseSelection = (exercise: Exercise) => {
@@ -52,7 +54,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
     <BaseDrawer open={open} onClose={onClose}>
       <Box>
         <PageTitle
-          title="Nuevo día"
+          title="Agregar ejercicios"
           action={
             <IconButton onClick={onClose}>
               <HighlightOffIcon />
@@ -65,38 +67,18 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
           </Typography>
           <Stack
             direction="row"
+            flexWrap="wrap"
+            width="100%"
+            gap={theme.spacing(2)}
             alignItems="center"
             justifyContent="space-between"
-            flexWrap="wrap"
           >
             {defaultExercises.map((exercise) => (
-              <Card
-                key={exercise.name}
-                onClick={() => toggleExerciseSelection(exercise)}
-                sx={{
-                  marginBottom: 2,
-                  width: "45%",
-                  display: "flex",
-                  cursor: "pointer",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  boxShadow: "rgba(0, 0, 0, 0.08) 0px 4px 12px",
-                  backgroundColor: exercisesSelected.some(
-                    (selectedExercise) =>
-                      selectedExercise.name === exercise.name
-                  )
-                    ? "#e0f7fa"
-                    : "white",
-                }}
-              >
-                <img
-                  src={exercise.video}
-                  style={{ width: 100, height: 100, objectFit: "contain" }}
-                />
-                <Typography mt={1} fontWeight={600}>
-                  {exercise.name}
-                </Typography>
-              </Card>
+              <ExerciseCard
+                exercise={exercise}
+                exercisesSelected={exercisesSelected}
+                toggleExerciseSelection={toggleExerciseSelection}
+              />
             ))}
           </Stack>
           <Box pt={2}>

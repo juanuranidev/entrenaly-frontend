@@ -105,75 +105,76 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
           Agregar ejercicios
         </Button>
       </Grid>
-      {formik.values.exercises.length &&
-        formik.values.exercises.map((exercise: any) => (
-          <Grid item xs={12} sm={12} key={exercise.name}>
-            <Card
-              elevation={0}
-              sx={{
-                backgroundColor: theme.backgrounds.secondary,
-                boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
-              }}
-            >
-              <Stack
-                gap={2}
-                width="100%"
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
+      {formik.values.exercises.length
+        ? formik.values.exercises.map((exercise: any) => (
+            <Grid item xs={12} sm={12} key={exercise.name}>
+              <Card
+                elevation={0}
+                sx={{
+                  backgroundColor: theme.backgrounds.secondary,
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+                }}
               >
-                <img
-                  key={exercise.name}
-                  src={exercise.video}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    objectFit: "contain",
-                  }}
-                />
-                <Box width="100%">
-                  <Typography mb={2}>{exercise.name}</Typography>
-                  <TextField
-                    label="Descripcion"
-                    placeholder="1 serie 2 repeticiones"
-                    value={exercise.description}
-                    onChange={(e) =>
-                      formik.setValues((prevValues: any) => {
-                        const updatedDays = prevValues.days.map(
-                          (prevDay: any) => {
-                            if (prevDay.name === exercise.name) {
-                              const updatedExercises = prevDay.exercises.map(
-                                (prevExercise: any) => {
-                                  if (prevExercise.name === exercise.name) {
-                                    return {
-                                      ...prevExercise,
-                                      description: e.target.value,
-                                    };
-                                  }
-                                  return prevExercise;
-                                }
-                              );
-                              return {
-                                ...prevDay,
-                                exercises: updatedExercises,
-                              };
-                            }
-                            return prevDay;
-                          }
-                        );
-                        return { ...prevValues, days: updatedDays };
-                      })
-                    }
+                <Stack
+                  gap={2}
+                  width="100%"
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <img
+                    key={exercise.name}
+                    src={exercise.video}
                     style={{
-                      width: "100%",
-                      backgroundColor: "white",
+                      width: 100,
+                      height: 100,
+                      objectFit: "contain",
                     }}
                   />
-                </Box>
-              </Stack>
-            </Card>
-          </Grid>
-        ))}
+                  <Box width="100%">
+                    <Typography mb={2}>{exercise.name}</Typography>
+                    <TextField
+                      label="Descripcion"
+                      placeholder="1 serie 2 repeticiones"
+                      value={exercise.description}
+                      onChange={(e) =>
+                        formik.setValues((prevValues: any) => {
+                          const updatedDays = prevValues.days.map(
+                            (prevDay: any) => {
+                              if (prevDay.name === exercise.name) {
+                                const updatedExercises = prevDay.exercises.map(
+                                  (prevExercise: any) => {
+                                    if (prevExercise.name === exercise.name) {
+                                      return {
+                                        ...prevExercise,
+                                        description: e.target.value,
+                                      };
+                                    }
+                                    return prevExercise;
+                                  }
+                                );
+                                return {
+                                  ...prevDay,
+                                  exercises: updatedExercises,
+                                };
+                              }
+                              return prevDay;
+                            }
+                          );
+                          return { ...prevValues, days: updatedDays };
+                        })
+                      }
+                      style={{
+                        width: "100%",
+                        backgroundColor: "white",
+                      }}
+                    />
+                  </Box>
+                </Stack>
+              </Card>
+            </Grid>
+          ))
+        : null}
       <Grid item xs={12} display="flex" justifyContent="flex-end">
         <Button
           color="primary"
