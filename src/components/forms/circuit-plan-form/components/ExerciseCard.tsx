@@ -25,10 +25,10 @@ export default function ExerciseCard({
       borderRadius="0.5rem"
       flexDirection="column"
       justifyContent="center"
-      sx={{ cursor: "pointer" }}
-      boxShadow={theme.customShadows.secondary}
+      sx={{ cursor: "pointer", userSelect: "none" }}
+      // boxShadow={theme.customShadows.primary}
       onClick={() => toggleExerciseSelection(exercise)}
-      borderColor={isSelected ? theme.colors.brand.primary : "white"}
+      borderColor={isSelected ? theme.colors.brand.primary : "#eeeeee"}
       width={{
         base: `calc(100% - ${theme.spacing(1)})`,
         sm: `calc(50% - ${theme.spacing(1)})`,

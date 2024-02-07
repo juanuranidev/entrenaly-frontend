@@ -8,11 +8,13 @@ import {
   MenuItem,
   TextField,
   Typography,
+  Chip,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddExercisesDrawer from "./components/AddExercisesDrawer";
+import { Group } from "@mui/icons-material";
 
 type Props = {
   onSubmit: (values: any) => any;
@@ -106,13 +108,13 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
         </Button>
       </Grid>
       {formik.values.exercises.length
-        ? formik.values.exercises.map((exercise: any) => (
-            <Grid item xs={12} sm={12} key={exercise.name}>
+        ? formik.values.exercises.map((exercise: any, index: number) => (
+            <Grid item xs={12} sm={6} key={exercise.name}>
               <Card
                 elevation={0}
                 sx={{
-                  backgroundColor: theme.backgrounds.secondary,
-                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+                  backgroundColor: theme.backgrounds.primary,
+                  boxShadow: theme.customShadows.secondary,
                 }}
               >
                 <Stack
@@ -132,7 +134,23 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
                     }}
                   />
                   <Box width="100%">
-                    <Typography mb={2}>{exercise.name}</Typography>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      mb={2}
+                    >
+                      <Stack direction="row" alignItems="center">
+                        <Typography>{`${index + 1}. `}</Typography>
+                        <Typography>{exercise.name}</Typography>
+                      </Stack>
+                      <Chip
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                        label={exercise.muscularGroup}
+                      />
+                    </Stack>
                     <TextField
                       label="Descripcion"
                       placeholder="1 serie 2 repeticiones"

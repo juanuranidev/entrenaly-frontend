@@ -52,46 +52,45 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
-      <Box>
-        <PageTitle
-          title="Agregar ejercicios"
-          action={
-            <IconButton onClick={onClose}>
-              <HighlightOffIcon />
-            </IconButton>
-          }
-        />
-        <Box>
-          <Typography fontWeight={600} fontSize={15} pb={2}>
-            Selecciona los ejercicios
-          </Typography>
-          <Stack
-            direction="row"
-            flexWrap="wrap"
-            width="100%"
-            gap={theme.spacing(2)}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            {defaultExercises.map((exercise) => (
-              <ExerciseCard
-                exercise={exercise}
-                exercisesSelected={exercisesSelected}
-                toggleExerciseSelection={toggleExerciseSelection}
-              />
-            ))}
-          </Stack>
-          <Box pt={2}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={handleSubmit}
-              disabled={!exercisesSelected.length}
-            >
-              Agregar
-            </Button>
-          </Box>
-        </Box>
+      <PageTitle
+        title="Agregar ejercicios"
+        action={
+          <IconButton onClick={onClose}>
+            <HighlightOffIcon />
+          </IconButton>
+        }
+      />
+      <Typography fontWeight={600} fontSize={15} pb={2}>
+        Selecciona los ejercicios que quieres agregar
+      </Typography>
+      <Box height="calc(100% - 10rem)" overflow="auto">
+        <Stack
+          width="100%"
+          direction="row"
+          flexWrap="wrap"
+          alignItems="center"
+          gap={theme.spacing(2)}
+          justifyContent="space-between"
+        >
+          {defaultExercises.map((exercise) => (
+            <ExerciseCard
+              key={exercise.name}
+              exercise={exercise}
+              exercisesSelected={exercisesSelected}
+              toggleExerciseSelection={toggleExerciseSelection}
+            />
+          ))}
+        </Stack>
+      </Box>
+      <Box p={theme.spacing(2)} bgcolor={theme.backgrounds.primary}>
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={!exercisesSelected.length}
+        >
+          Agregar
+        </Button>
       </Box>
     </BaseDrawer>
   );
