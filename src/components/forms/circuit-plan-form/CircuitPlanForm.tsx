@@ -14,7 +14,6 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddExercisesDrawer from "./components/AddExercisesDrawer";
-import { Group } from "@mui/icons-material";
 
 type Props = {
   onSubmit: (values: any) => any;
@@ -49,6 +48,21 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
       ...prevValues,
       exercises: [...prevValues.exercises, ...selectedExercises],
     }));
+  };
+
+  const handleOnChange = (exerciseName: string, description: string) => {
+    formik.setValues((prevValues: any) => {
+      const updatedExercises = prevValues.exercises.map((exercise: any) => {
+        if (exercise.name === exerciseName) {
+          return {
+            ...exercise,
+            description: description,
+          };
+        }
+        return exercise;
+      });
+      return { ...prevValues, exercises: updatedExercises };
+    });
   };
 
   return (
@@ -141,8 +155,9 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
                       mb={2}
                     >
                       <Stack direction="row" alignItems="center">
-                        <Typography>{`${index + 1}. `}</Typography>
-                        <Typography>{exercise.name}</Typography>
+                        <Typography>{`${index + 1}. ${
+                          exercise.name
+                        }`}</Typography>
                       </Stack>
                       <Chip
                         size="small"
@@ -156,31 +171,7 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
                       placeholder="1 serie 2 repeticiones"
                       value={exercise.description}
                       onChange={(e) =>
-                        formik.setValues((prevValues: any) => {
-                          const updatedDays = prevValues.days.map(
-                            (prevDay: any) => {
-                              if (prevDay.name === exercise.name) {
-                                const updatedExercises = prevDay.exercises.map(
-                                  (prevExercise: any) => {
-                                    if (prevExercise.name === exercise.name) {
-                                      return {
-                                        ...prevExercise,
-                                        description: e.target.value,
-                                      };
-                                    }
-                                    return prevExercise;
-                                  }
-                                );
-                                return {
-                                  ...prevDay,
-                                  exercises: updatedExercises,
-                                };
-                              }
-                              return prevDay;
-                            }
-                          );
-                          return { ...prevValues, days: updatedDays };
-                        })
+                        handleOnChange(exercise.name, e.target.value)
                       }
                       style={{
                         width: "100%",

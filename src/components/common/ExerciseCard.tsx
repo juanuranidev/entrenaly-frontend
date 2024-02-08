@@ -26,7 +26,6 @@ export default function ExerciseCard({
       flexDirection="column"
       justifyContent="center"
       sx={{ cursor: "pointer", userSelect: "none" }}
-      // boxShadow={theme.customShadows.primary}
       onClick={() => toggleExerciseSelection(exercise)}
       borderColor={isSelected ? theme.colors.brand.primary : "#eeeeee"}
       width={{
