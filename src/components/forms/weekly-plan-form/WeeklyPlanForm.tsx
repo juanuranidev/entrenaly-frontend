@@ -17,6 +17,7 @@ import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddDayDrawer from "./components/AddDayDrawer";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddExercisesDrawer from "../circuit-plan-form/components/AddExercisesDrawer";
 
 type Props = {
   onSubmit: () => any;
@@ -28,15 +29,12 @@ type Exercise = {
   description: string;
 };
 
-type PlanDay = {
-  exercises: Exercise[];
-  name: string;
-};
-
 export default function WeeklyPlanForm({ onSubmit }: Props) {
   const theme: any = useTheme();
 
+  const [daySelected, setDaySelected] = useState<string | null>(null);
   const [openDrawerDays, setOpenDrawerDays] = useState(false);
+  const [openExercisesDrawer, setOpenExercisesDrawer] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -49,25 +47,21 @@ export default function WeeklyPlanForm({ onSubmit }: Props) {
     },
   });
 
-  const handleOpenDrawerDays = () => {
-    setOpenDrawerDays(true);
+  const handleOnSubmitDrawerDays = (day: any) => {
+    setDaySelected(day);
+    setOpenExercisesDrawer(true);
   };
 
-  const handleCloseDrawerDays = () => {
-    setOpenDrawerDays(false);
-  };
+  const handleSubmitExercisesDrawer = (selectedExercises: any) => {
+    const dayWithExercises = {
+      name: daySelected,
+      exercises: selectedExercises,
+    };
 
-  const handleOnSubmitDrawerDays = (day: PlanDay) => {
-    const isDayExists = formik.values.days.find(
-      (existingDay: any) => existingDay.name === day.name
-    );
+    formik.setFieldValue("days", [...formik.values.days, dayWithExercises]);
 
-    if (!isDayExists) {
-      formik.setValues((prevValues: any) => ({
-        ...prevValues,
-        days: [...prevValues.days, day],
-      }));
-    }
+    setOpenExercisesDrawer(false);
+    setDaySelected(null);
   };
 
   return (
@@ -122,7 +116,7 @@ export default function WeeklyPlanForm({ onSubmit }: Props) {
         <Typography fontWeight={600} fontSize={15}>
           Días de la semana
         </Typography>
-        <Button onClick={handleOpenDrawerDays} startIcon={<AddIcon />}>
+        <Button onClick={() => setOpenDrawerDays(true)} startIcon={<AddIcon />}>
           Agregar día
         </Button>
       </Grid>
@@ -233,9 +227,14 @@ export default function WeeklyPlanForm({ onSubmit }: Props) {
       </Grid>
       <AddDayDrawer
         open={openDrawerDays}
-        onClose={handleCloseDrawerDays}
         onSubmit={handleOnSubmitDrawerDays}
         daysAlreadyAdded={formik.values.days}
+        onClose={() => setOpenDrawerDays(false)}
+      />
+      <AddExercisesDrawer
+        open={openExercisesDrawer}
+        onSubmit={handleSubmitExercisesDrawer}
+        onClose={() => setOpenExercisesDrawer(false)}
       />
     </Grid>
   );

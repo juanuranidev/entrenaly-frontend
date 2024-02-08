@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Box, Button, Card, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { defaultExercises } from "../../../../lib/utils/defaultExercises";
+import ExerciseCard from "components/common/ExerciseCard";
 
 type Exercise = {
   name: string;
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export default function SelectExercisesView({ onSubmit }: Props) {
+  const theme: any = useTheme();
+
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
 
   const toggleExerciseSelection = (exercise: Exercise) => {
@@ -40,42 +43,26 @@ export default function SelectExercisesView({ onSubmit }: Props) {
       <Typography fontWeight={600} fontSize={15} pb={2}>
         Selecciona los ejercicios
       </Typography>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        flexWrap="wrap"
-      >
-        {defaultExercises.map((exercise) => (
-          <Card
-            key={exercise.name}
-            onClick={() => toggleExerciseSelection(exercise)}
-            sx={{
-              marginBottom: 2,
-              width: "45%",
-              display: "flex",
-              cursor: "pointer",
-              flexDirection: "column",
-              justifyContent: "center",
-              boxShadow: "rgba(0, 0, 0, 0.08) 0px 4px 12px",
-              backgroundColor: exercisesSelected.some(
-                (selectedExercise) => selectedExercise.name === exercise.name
-              )
-                ? "#e0f7fa"
-                : "white",
-            }}
-          >
-            <img
-              src={exercise.video}
-              style={{ width: 100, height: 100, objectFit: "contain" }}
+      <Box height="calc(100% - 10rem)" overflow="auto">
+        <Stack
+          width="100%"
+          direction="row"
+          flexWrap="wrap"
+          alignItems="center"
+          gap={theme.spacing(2)}
+          justifyContent="center"
+        >
+          {defaultExercises.map((exercise) => (
+            <ExerciseCard
+              key={exercise.name}
+              exercise={exercise}
+              exercisesSelected={exercisesSelected}
+              toggleExerciseSelection={toggleExerciseSelection}
             />
-            <Typography mt={1} fontWeight={600}>
-              {exercise.name}
-            </Typography>
-          </Card>
-        ))}
-      </Stack>
-      <Box pt={2}>
+          ))}
+        </Stack>
+      </Box>
+      <Box p={theme.spacing(2)} bgcolor={theme.backgrounds.primary}>
         <Button
           fullWidth
           variant="contained"

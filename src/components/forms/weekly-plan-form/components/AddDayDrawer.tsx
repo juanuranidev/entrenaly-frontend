@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import { Box, IconButton } from "@mui/material";
-import SelectExercisesView from "./SelectExercisesView";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import SelectDayView from "./SelectDayView";
+import { Box, Stack, useTheme, IconButton, Typography } from "@mui/material";
 import PageTitle from "components/common/page-title/PageTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import DayCard from "./DayCard";
 
 type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit: (day: any) => void;
   daysAlreadyAdded: any;
-  view?: number;
 };
 
 const days = [
@@ -26,46 +23,16 @@ const days = [
 
 export default function AddDayDrawer({
   open,
-  view = 1,
   onClose,
   onSubmit,
   daysAlreadyAdded,
 }: Props) {
-  const [step, setStep] = useState(view);
-  const [daySelected, setDaySelected] = useState<string | null>(null);
+  const theme: any = useTheme();
 
   const handleSelectDay = (day: string) => {
-    setDaySelected(day);
-    setStep(2);
-  };
-
-  const handleSubmitExercises = (exercises: any) => {
-    onSubmit({ exercises, name: daySelected });
+    onSubmit(day);
     onClose();
   };
-
-  const handleRenderView = (step: any) => {
-    switch (step) {
-      case 1:
-        return (
-          <SelectDayView
-            days={days}
-            daysAlreadyAdded={daysAlreadyAdded}
-            handleSelectDay={handleSelectDay}
-          />
-        );
-      case 2:
-        return (
-          <SelectExercisesView
-            onSubmit={(exercises: any) => handleSubmitExercises(exercises)}
-          />
-        );
-    }
-  };
-
-  useEffect(() => {
-    setStep(view);
-  }, [open]);
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
@@ -78,7 +45,30 @@ export default function AddDayDrawer({
             </IconButton>
           }
         />
-        {handleRenderView(step)}
+        <Box>
+          <Typography fontWeight={600} fontSize={15} pb={2}>
+            Selecciona el día
+          </Typography>
+          <Box height="calc(100% - 10rem)" overflow="auto">
+            <Stack
+              width="100%"
+              direction="row"
+              flexWrap="wrap"
+              alignItems="center"
+              gap={theme.spacing(2)}
+              justifyContent="center"
+            >
+              {days.map((day: any) => (
+                <DayCard
+                  key={day}
+                  day={day}
+                  daysAlreadyAdded={daysAlreadyAdded}
+                  handleSelectDay={handleSelectDay}
+                />
+              ))}
+            </Stack>
+          </Box>
+        </Box>
       </Box>
     </BaseDrawer>
   );
