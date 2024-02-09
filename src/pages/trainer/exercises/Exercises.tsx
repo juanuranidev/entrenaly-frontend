@@ -26,7 +26,7 @@ export default function Exercises() {
         <Grid container spacing={theme.spacing(3)}>
           <Grid item xs={12}>
             <Alert severity="info">
-              <Typography fontSize={16}>
+              <Typography fontSize={15}>
                 Acá vas a ver todos los ejercicios con los que podrás armar tus
                 planes de entrenamiento
               </Typography>
