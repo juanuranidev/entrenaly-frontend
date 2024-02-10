@@ -30,11 +30,11 @@ export default function NavbarContent({ isDrawerOpen, setIsDrawerOpen }: any) {
       url: "/dashboard",
       icon: icons.home,
     },
-    // {
-    //   title: "Clientes",
-    //   url: "/clients",
-    //   icon: icons.person,
-    // },
+    {
+      title: "Clientes",
+      url: "/clients",
+      icon: icons.person,
+    },
     {
       title: "Planes",
       url: "/plans",
