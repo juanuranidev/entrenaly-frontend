@@ -8,15 +8,15 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import PersonIcon from "@mui/icons-material/Person";
-import FeedIcon from "@mui/icons-material/Feed";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import FeedIcon from "@mui/icons-material/Feed";
+import PersonIcon from "@mui/icons-material/Person";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
-export default function NavbarContent({ isDrawerOpen, setIsDrawerOpen }: any) {
+export default function NavbarContent({ setIsDrawerOpen }: any) {
   const navigate = useNavigate();
-  console.log(isDrawerOpen);
+
   const icons = {
     home: <HomeIcon />,
     person: <PersonIcon />,
@@ -25,11 +25,11 @@ export default function NavbarContent({ isDrawerOpen, setIsDrawerOpen }: any) {
   };
 
   const navbarItems = [
-    {
-      title: "Inicio",
-      url: "/dashboard",
-      icon: icons.home,
-    },
+    // {
+    //   title: "Inicio",
+    //   url: "/dashboard",
+    //   icon: icons.home,
+    // },
     {
       title: "Clientes",
       url: "/clients",
