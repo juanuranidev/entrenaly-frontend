@@ -1,21 +1,12 @@
-import {
-  Stack,
-  Chip,
-  Typography,
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Stack, Chip, Typography, Box, List, useTheme } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import FeedIcon from "@mui/icons-material/Feed";
 import PersonIcon from "@mui/icons-material/Person";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import NavbarItem from "../navbar-item/NavbarItem";
 
 export default function NavbarContent({ setIsDrawerOpen }: any) {
-  const navigate = useNavigate();
+  const theme: any = useTheme();
 
   const icons = {
     home: <HomeIcon />,
@@ -64,33 +55,24 @@ export default function NavbarContent({ setIsDrawerOpen }: any) {
         py={2}
         alignItems="center"
       >
-        <Typography fontWeight={600} fontSize={20}>
+        <Typography fontWeight={700} fontSize={20}>
           Entrenaly
         </Typography>
         <Chip
           label="v1.0.0"
           size="small"
           sx={{
-            height: 16,
+            height: 20,
+            fontWeight: 800,
+            color: theme.colors.general.white,
+            backgroundColor: theme.colors.brand.primary,
             "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
           }}
         />
       </Stack>
       <List>
         {navbarItems.map((item) => (
-          <ListItemButton
-            key={item.url}
-            sx={{ zIndex: 1000 }}
-            onClick={() => {
-              setIsDrawerOpen(false);
-              navigate(item.url);
-            }}
-          >
-            <ListItemIcon sx={{ minWidth: 28 }}>{item.icon}</ListItemIcon>
-            <ListItemText
-              primary={<Typography variant="h6">{item.title}</Typography>}
-            />
-          </ListItemButton>
+          <NavbarItem item={item} setIsDrawerOpen={setIsDrawerOpen} />
         ))}
       </List>
       <Box />

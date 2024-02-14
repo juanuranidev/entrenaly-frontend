@@ -2,7 +2,7 @@ import { IconButton, useMediaQuery } from "@mui/material";
 import { HeaderStyled } from "./Styles";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import Profile from "./components/Profile";
+import Profile from "../profile/Profile";
 
 export default function Header({ setIsDrawerOpen }: any) {
   const theme = useTheme();

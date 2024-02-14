@@ -1,7 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-
 import Drawer from "./components/drawer/Drawer";
 import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
