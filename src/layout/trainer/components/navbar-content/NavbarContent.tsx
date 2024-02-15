@@ -1,18 +1,18 @@
 import { Stack, Chip, Typography, Box, List, useTheme } from "@mui/material";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import PersonIcon from "@mui/icons-material/Person";
+import NavbarItem from "../navbar-item/NavbarItem";
 import HomeIcon from "@mui/icons-material/Home";
 import FeedIcon from "@mui/icons-material/Feed";
-import PersonIcon from "@mui/icons-material/Person";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import NavbarItem from "../navbar-item/NavbarItem";
 
 export default function NavbarContent({ setIsDrawerOpen }: any) {
   const theme: any = useTheme();
 
   const icons = {
-    home: <HomeIcon />,
-    person: <PersonIcon />,
-    feed: <FeedIcon />,
-    fitness: <FitnessCenterIcon />,
+    home: <HomeIcon fontSize="medium" />,
+    person: <PersonIcon fontSize="medium" />,
+    feed: <FeedIcon fontSize="medium" />,
+    fitness: <FitnessCenterIcon fontSize="medium" />,
   };
 
   const navbarItems = [
@@ -41,19 +41,20 @@ export default function NavbarContent({ setIsDrawerOpen }: any) {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
         height: "100%",
-        justifyContent: "space-between",
+        display: "flex",
         overflowY: "scroll",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <Stack
-        direction="row"
-        justifyContent="center"
-        spacing={1}
+        mt={2}
         py={2}
+        spacing={1}
+        direction="row"
         alignItems="center"
+        justifyContent="center"
       >
         <Typography fontWeight={700} fontSize={20}>
           Entrenaly
@@ -72,7 +73,11 @@ export default function NavbarContent({ setIsDrawerOpen }: any) {
       </Stack>
       <List>
         {navbarItems.map((item) => (
-          <NavbarItem item={item} setIsDrawerOpen={setIsDrawerOpen} />
+          <NavbarItem
+            item={item}
+            key={item.url}
+            setIsDrawerOpen={setIsDrawerOpen}
+          />
         ))}
       </List>
       <Box />

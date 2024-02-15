@@ -1,11 +1,12 @@
 import {
+  useTheme,
   Typography,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
-  useTheme,
+  ListItemButton,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+
 type Props = {
   item: any;
   setIsDrawerOpen: (boolean: boolean) => void;
@@ -16,22 +17,22 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname);
+  const currentView = location.pathname === item.url;
+
   return (
     <ListItemButton
+      color="primary"
       key={item.url}
       sx={{
         zIndex: 1000,
-
         "& .MuiListItemIcon-root, & .MuiTypography-root": {
-          color:
-            location.pathname === item.url ? theme.colors.brand.primary : "",
+          color: currentView ? theme.colors.brand.primary : "",
         },
-
         "&:hover": {
           "& .MuiListItemIcon-root, & .MuiTypography-root": {
             color: theme.colors.brand.primary,
           },
+          backgroundColor: theme.colors.brand.primaryHover,
         },
       }}
       onClick={() => {
@@ -39,10 +40,10 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
         navigate(item.url);
       }}
     >
-      <ListItemIcon sx={{ minWidth: 28 }}>{item.icon}</ListItemIcon>
+      <ListItemIcon>{item.icon}</ListItemIcon>
       <ListItemText
         primary={
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography variant="h6" fontSize={18} sx={{ fontWeight: 600 }}>
             {item.title}
           </Typography>
         }

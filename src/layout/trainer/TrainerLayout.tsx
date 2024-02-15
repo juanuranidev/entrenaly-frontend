@@ -3,14 +3,12 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Drawer from "./components/drawer/Drawer";
 import Header from "./components/header/Header";
-import Navbar from "./components/navbar/Navbar";
 
 export default function TrainerLayout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <Stack direction="row" height="100vh">
-      <Navbar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Drawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <Box width="100%">
         <Header setIsDrawerOpen={setIsDrawerOpen} />

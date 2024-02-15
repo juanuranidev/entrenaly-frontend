@@ -1,27 +1,23 @@
 import { useTheme } from "@mui/material/styles";
-import { Box } from "@mui/material";
 import { DrawerStyles } from "./Styles";
+import { useMediaQuery } from "@mui/material";
 import NavbarContent from "../navbar-content/NavbarContent";
 
 export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
   const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Box
-      component="nav"
-      aria-label="mailbox folders"
-      sx={{ flexShrink: { md: 0 }, zIndex: 1300 }}
+    <DrawerStyles
+      theme={theme}
+      open={isDrawerOpen}
+      onClose={() => setIsDrawerOpen(false)}
+      variant={isLargeScreen ? "permanent" : "temporary"}
     >
-      <DrawerStyles
-        theme={theme}
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      >
-        <NavbarContent
-          isDrawerOpen={isDrawerOpen}
-          setIsDrawerOpen={setIsDrawerOpen}
-        />
-      </DrawerStyles>
-    </Box>
+      <NavbarContent
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+      />
+    </DrawerStyles>
   );
 }
