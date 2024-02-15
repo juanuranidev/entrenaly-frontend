@@ -171,7 +171,7 @@ export default function AddExerciseForm({
           paddingY={theme.spacing(2)}
           paddingLeft={theme.spacing(3)}
           bottom={theme.spacing(0)}
-          bgcolor={theme.backgrounds.primary}
+          bgcolor={theme.colors.backgrounds.primary}
         >
           <Button
             fullWidth

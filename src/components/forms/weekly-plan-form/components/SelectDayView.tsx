@@ -29,8 +29,8 @@ export default function SelectDayView({
               key={day}
               onClick={() => handleSelectDay(day)}
               sx={{
-                backgroundColor: theme.backgrounds.secondary,
                 cursor: "pointer",
+                backgroundColor: theme.colors.backgrounds.secondary,
               }}
             >
               {day}

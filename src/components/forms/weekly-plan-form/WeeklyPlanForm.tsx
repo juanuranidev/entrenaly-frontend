@@ -125,7 +125,7 @@ export default function WeeklyPlanForm({ onSubmit }: Props) {
           <Accordion
             elevation={0}
             sx={{
-              backgroundColor: theme.backgrounds.secondary,
+              backgroundColor: theme.colors.backgrounds.secondary,
               boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
             }}
           >

@@ -24,7 +24,7 @@ export default function DayCard({
         width: "100%",
         backgroundColor: isDayAlreadyAdded
           ? "lightgray"
-          : theme.backgrounds.secondary,
+          : theme.colors.backgrounds.secondary,
         cursor: isDayAlreadyAdded ? "not-allowed" : "pointer",
       }}
     >
