@@ -14,10 +14,6 @@ export default function Theme({ children }) {
       colors: colors,
       customShadows: shadows,
       typography: themeTypography,
-      backgrounds: {
-        primary: "#ffffff",
-        secondary: "#edf3f8",
-      },
     }),
     [themeTypography]
   );
