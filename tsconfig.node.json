@@ -5,14 +5,15 @@
     "module": "ESNext",
     "baseUrl": "./src",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@layout/*": ["src/layout/*"],
-      "@routes/*": ["src/routes/*"],
-      "@pages/*": ["src/pages/*"],
-      "@css/*": ["src/css/*"]
-    }
+    "allowSyntheticDefaultImports": true
+    // "paths": {
+    //   "@css/*": ["src/css/*"],
+    //   "@lib"
+    //   "@pages/*": ["src/pages/*"],
+    //   "@routes/*": ["src/routes/*"],
+    //   "@layout/*": ["src/layout/*"],
+    //   "@components/*": ["src/components/*"],
+    // }
   },
   "include": ["vite.config.ts"]
 }
