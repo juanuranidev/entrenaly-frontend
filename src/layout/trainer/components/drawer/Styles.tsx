@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 
 const openedMixin = (theme: any) => ({
-  width: "15rem",
+  width: "14rem",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -10,7 +10,7 @@ const openedMixin = (theme: any) => ({
 });
 
 const closedMixin = (theme: any) => ({
-  width: "15rem",
+  width: "14rem",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
