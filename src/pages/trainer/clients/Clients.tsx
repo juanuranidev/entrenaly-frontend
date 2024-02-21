@@ -1,15 +1,9 @@
-import { Box, Typography, Stack, useTheme, Button } from "@mui/material";
-import { useState } from "react";
+import { Box, Typography, useTheme, Card, Grid, Alert } from "@mui/material";
 import ClientsTable from "./components/ClientsTable";
-import AddClientDrawer from "./components/AddClientDrawer";
+import MainTitle from "./components/MainTitle";
 
 export default function Clients() {
   const theme: any = useTheme();
-
-  console.log(theme.backgrounds);
-
-  const [openAddClientDrawer, setOpenAddClientDrawer] =
-    useState<boolean>(false);
 
   const clients = [
     {
@@ -25,22 +19,22 @@ export default function Clients() {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" pb={3}>
-        <Typography fontWeight={600} fontSize={20}>
-          Clientes
-        </Typography>
-        <Button
-          variant="contained"
-          onClick={() => setOpenAddClientDrawer(true)}
-        >
-          Nuevo cliente
-        </Button>
-      </Stack>
-      <ClientsTable clients={clients} />
-      <AddClientDrawer
-        open={openAddClientDrawer}
-        close={() => setOpenAddClientDrawer(false)}
-      />
+      <MainTitle />
+      <Card>
+        <Grid container spacing={theme.spacing(3)}>
+          <Grid item xs={12}>
+            <Alert severity="info">
+              <Typography fontSize={15}>
+                Acá vas a ver todos tus clientes que se registraran con el link
+                que generes
+              </Typography>
+            </Alert>
+          </Grid>
+          <Grid item xs={12}>
+            <ClientsTable clients={clients} />
+          </Grid>
+        </Grid>
+      </Card>
     </Box>
   );
 }

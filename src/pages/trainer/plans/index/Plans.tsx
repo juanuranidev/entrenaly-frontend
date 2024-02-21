@@ -1,20 +1,20 @@
 import {
-  Alert,
   Box,
   Card,
   Grid,
   Table,
+  Alert,
+  TableRow,
+  useTheme,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TableRow,
   Typography,
-  useTheme,
+  TableContainer,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import PlanRow from "./components/PlanRow";
 import MainTitle from "./components/MainTitle";
+import PlanRow from "./components/PlanRow";
 
 export default function Plans() {
   const theme: any = useTheme();

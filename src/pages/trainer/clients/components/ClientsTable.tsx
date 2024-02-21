@@ -1,12 +1,11 @@
 import {
   Card,
   Table,
+  TableRow,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TableRow,
-  useTheme,
+  TableContainer,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ClientRow from "./ClientRow";
@@ -16,14 +15,12 @@ type Props = {
 };
 
 export default function ClientsTable({ clients }: Props) {
-  const theme = useTheme();
-
   return (
     <Card
       sx={{
-        padding: 2,
+        padding: 0,
+        border: "none",
         boxShadow: "none",
-        border: `1px solid ${theme.palette.divider}`,
       }}
     >
       <TableContainer
@@ -49,7 +46,7 @@ export default function ClientsTable({ clients }: Props) {
           </TableHead>
           <TableBody>
             {clients.map((client: any) => (
-              <ClientRow client={client} />
+              <ClientRow client={client} key={client.id} />
             ))}
           </TableBody>
         </Table>

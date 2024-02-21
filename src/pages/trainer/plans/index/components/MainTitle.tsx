@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, Menu, MenuItem, useTheme } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { alpha } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import PageTitle from "components/common/page-title/PageTitle";
 
@@ -12,8 +11,6 @@ const icons = {
 };
 
 export default function MainTitle({}: Props) {
-  const theme: any = useTheme();
-
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,9 +30,6 @@ export default function MainTitle({}: Props) {
       action={
         <React.Fragment>
           <Button
-            sx={{
-              boxShadow: `0px 2px 8px ${alpha(theme.palette.grey[900], 0.15)}`,
-            }}
             id="basic-button"
             variant="contained"
             aria-haspopup="true"
@@ -44,11 +38,11 @@ export default function MainTitle({}: Props) {
             aria-expanded={open ? "true" : undefined}
             aria-controls={open ? "basic-menu" : undefined}
           >
-            Nuevo
+            Agregar nuevo
           </Button>
           <Menu
             open={open}
-            elevation={4}
+            elevation={2}
             id="basic-menu"
             anchorEl={anchorEl}
             onClose={handleClose}
