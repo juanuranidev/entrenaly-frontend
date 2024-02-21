@@ -1,7 +1,7 @@
 import { Box, Stack, useTheme, IconButton, Typography } from "@mui/material";
-import PageTitle from "components/common/page-title/PageTitle";
-import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import BaseDrawer from "components/common/base-drawer/BaseDrawer";
+import PageTitle from "components/common/page-title/PageTitle";
 import DayCard from "./DayCard";
 
 type Props = {
@@ -62,8 +62,8 @@ export default function AddDayDrawer({
                 <DayCard
                   key={day}
                   day={day}
-                  daysAlreadyAdded={daysAlreadyAdded}
                   handleSelectDay={handleSelectDay}
+                  daysAlreadyAdded={daysAlreadyAdded}
                 />
               ))}
             </Stack>

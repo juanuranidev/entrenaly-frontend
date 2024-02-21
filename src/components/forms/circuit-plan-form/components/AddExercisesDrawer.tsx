@@ -47,6 +47,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
   const handleSubmit = () => {
     onSubmit(exercisesSelected);
     setExercisesSelected([]);
+    onClose();
   };
 
   return (
@@ -81,7 +82,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
           ))}
         </Stack>
       </Box>
-      <Box p={theme.spacing(2)} bgcolor={theme.backgrounds.primary}>
+      <Box p={theme.spacing(2)} bgcolor={theme.colors.backgrounds.primary}>
         <Button
           fullWidth
           variant="contained"
