@@ -4,9 +4,9 @@ import TrainerLayout from "layout/trainer/TrainerLayout";
 
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
 const Clients = Loadable(lazy(() => import("pages/trainer/clients/Clients")));
-// const Dashboard = Loadable(
-//   lazy(() => import("pages/trainer/dashboard/Dashboard"))
-// );
+const Dashboard = Loadable(
+  lazy(() => import("pages/trainer/dashboard/Dashboard"))
+);
 const Exercises = Loadable(
   lazy(() => import("pages/trainer/exercises/Exercises"))
 );
@@ -21,10 +21,10 @@ const TrainerRoutes = {
   path: "/",
   element: <TrainerLayout />,
   children: [
-    // {
-    //   path: "/dashboard",
-    //   element: <Dashboard />,
-    // },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+    },
     {
       path: "/clients",
       element: <Clients />,

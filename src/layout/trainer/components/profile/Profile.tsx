@@ -100,18 +100,61 @@ export default function Profile() {
                   </Grid>
                   <Grid item xs={12} p={0}>
                     <List component="nav">
-                      <ListItemButton>
+                      <ListItemButton
+                        color="primary"
+                        sx={{
+                          zIndex: 1000,
+                          "& .MuiListItemIcon-root, & .MuiTypography-root": {},
+                          "&:hover": {
+                            "& .MuiListItemIcon-root, & .MuiTypography-root": {
+                              color: theme.colors.brand.primary,
+                            },
+                            backgroundColor: theme.colors.brand.primaryHover,
+                          },
+                        }}
+                      >
                         <ListItemIcon>
                           <PersonIcon fontSize="small" />
                         </ListItemIcon>
-                        <ListItemText primary="Perfil" />
+                        <ListItemText
+                          primary={
+                            <Typography
+                              variant="h6"
+                              fontSize={18}
+                              sx={{ fontWeight: 600 }}
+                            >
+                              Perfil
+                            </Typography>
+                          }
+                        />
                       </ListItemButton>
                       <Divider />
-                      <ListItemButton>
+                      <ListItemButton
+                        sx={{
+                          zIndex: 1000,
+                          "& .MuiListItemIcon-root, & .MuiTypography-root": {},
+                          "&:hover": {
+                            "& .MuiListItemIcon-root, & .MuiTypography-root": {
+                              color: theme.colors.brand.primary,
+                            },
+                            backgroundColor: theme.colors.brand.primaryHover,
+                          },
+                        }}
+                      >
                         <ListItemIcon>
                           <PowerSettingsNewSharpIcon fontSize="small" />
                         </ListItemIcon>
-                        <ListItemText primary="Cerrar sesión" />
+                        <ListItemText
+                          primary={
+                            <Typography
+                              variant="h6"
+                              fontSize={18}
+                              sx={{ fontWeight: 600 }}
+                            >
+                              Cerrar Sesión
+                            </Typography>
+                          }
+                        />
                       </ListItemButton>
                     </List>
                   </Grid>
