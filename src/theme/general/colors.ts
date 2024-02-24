@@ -6,7 +6,7 @@ const colors = {
   general: {
     white: "#ffeeee",
   },
-  backgrounds: {
+  background: {
     primary: "#ffffff",
     secondary: "#edf3f8",
   },
