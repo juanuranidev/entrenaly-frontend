@@ -7,7 +7,9 @@ import shadows from "./general/shadows";
 import colors from "./general/colors";
 
 export default function Theme({ children }) {
-  const themeTypography = Typography(`'Public Sans', sans-serif`);
+  const themeTypography = Typography(
+    `'Roboto', 'Helvetica', 'Arial', sans-serif`
+  );
 
   const themeOptions = useMemo(
     () => ({
