@@ -18,7 +18,6 @@ const NewCircuitPlan = Loadable(
 );
 
 const TrainerRoutes = {
-  path: "/",
   element: <TrainerLayout />,
   children: [
     {
