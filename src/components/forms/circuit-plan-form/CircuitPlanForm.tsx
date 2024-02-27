@@ -128,7 +128,7 @@ export default function CircuitPlanForm({ onSubmit }: Props) {
                 elevation={0}
                 sx={{
                   boxShadow: theme.customShadows.card,
-                  backgroundColor: theme.colors.backgrounds.primary,
+                  backgroundColor: theme.colors.backgroun.primary,
                 }}
               >
                 <Stack

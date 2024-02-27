@@ -82,7 +82,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
           ))}
         </Stack>
       </Box>
-      <Box p={theme.spacing(2)} bgcolor={theme.colors.backgrounds.primary}>
+      <Box p={theme.spacing(2)} bgcolor={theme.colors.background.primary}>
         <Button
           fullWidth
           variant="contained"

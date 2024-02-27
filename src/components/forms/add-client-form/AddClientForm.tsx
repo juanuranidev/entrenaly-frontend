@@ -60,7 +60,7 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
           paddingY={theme.spacing(2)}
           paddingLeft={theme.spacing(3)}
           bottom={theme.spacing(0)}
-          bgcolor={theme.colors.backgrounds.primary}
+          bgcolor={theme.colors.background.primary}
         >
           <Button
             fullWidth
