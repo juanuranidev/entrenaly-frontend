@@ -46,7 +46,7 @@ export default function ClientsTable({ clients }: Props) {
           </TableHead>
           <TableBody>
             {clients.map((client: any) => (
-              <ClientRow client={client} key={client.id} />
+              <ClientRow client={client} key={client} />
             ))}
           </TableBody>
         </Table>
