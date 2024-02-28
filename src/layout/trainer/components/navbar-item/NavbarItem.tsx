@@ -24,15 +24,8 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
       color="primary"
       key={item.url}
       sx={{
-        zIndex: 1000,
         "& .MuiListItemIcon-root, & .MuiTypography-root": {
           color: currentView ? theme.colors.brand.primary : "",
-        },
-        "&:hover": {
-          "& .MuiListItemIcon-root, & .MuiTypography-root": {
-            color: theme.colors.brand.primary,
-          },
-          backgroundColor: theme.colors.brand.primaryHover,
         },
       }}
       onClick={() => {

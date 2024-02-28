@@ -7,7 +7,6 @@ import {
   Stack,
   Avatar,
   Popper,
-  Divider,
   useTheme,
   ButtonBase,
   Typography,
@@ -50,14 +49,16 @@ export default function Profile() {
         aria-label="open profile"
         aria-controls={open ? "profile-grow" : undefined}
         sx={{
-          p: 0.5,
           borderRadius: 2,
-          "&:hover": { bgcolor: "#eeeeee" },
+          p: theme.spacing(1),
+          "&:hover": { bgcolor: theme.colors.brand.primaryHover },
         }}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={""} sx={{ width: 32, height: 32 }} />
-          <Typography>Juan Urani</Typography>
+          <Typography variant="h6" fontSize={15} sx={{ fontWeight: 500 }}>
+            Juan Urani
+          </Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -71,56 +72,39 @@ export default function Profile() {
         {open ? (
           <Paper
             sx={{
-              width: 240,
-              // minWidth: 240,÷
-              maxWidth: 290,
+              width: 150,
+              padding: 0,
               boxShadow: theme.customShadows.primary,
             }}
           >
             <ClickAwayListener onClickAway={handleClose}>
               <Card
                 elevation={0}
-                style={{ padding: 10, boxShadow: theme.shadows[1] }}
+                style={{ padding: 0, boxShadow: theme.shadows[1] }}
               >
                 <Grid container alignItems="center">
-                  <Grid item xs={12} p={2}>
-                    <Stack direction="row" spacing={1.25} alignItems="center">
-                      <Avatar
-                        alt="profile user"
-                        src={""}
-                        sx={{ width: 32, height: 32 }}
-                      />
-                      <Stack>
-                        <Typography variant="h6">John Doe</Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          UI/UX Designer
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                  </Grid>
                   <Grid item xs={12} p={0}>
-                    <List component="nav">
+                    <List sx={{ padding: 0 }}>
                       <ListItemButton
                         color="primary"
                         sx={{
-                          zIndex: 1000,
-                          "& .MuiListItemIcon-root, & .MuiTypography-root": {},
-                          "&:hover": {
-                            "& .MuiListItemIcon-root, & .MuiTypography-root": {
-                              color: theme.colors.brand.primary,
-                            },
-                            backgroundColor: theme.colors.brand.primaryHover,
+                          padding: theme.spacing(1),
+                          "& .MuiListItemIcon-root, & .MuiTypography-root": {
+                            color: false ? theme.colors.brand.primary : "",
                           },
                         }}
+                        onClick={() => {
+                          console.log("A");
+                        }}
                       >
-                        <ListItemIcon>
+                        <ListItemIcon sx={{ minWidth: "2rem" }}>
                           <PersonIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography
                               variant="h6"
-                              fontSize={18}
+                              fontSize={12}
                               sx={{ fontWeight: 600 }}
                             >
                               Perfil
@@ -128,30 +112,29 @@ export default function Profile() {
                           }
                         />
                       </ListItemButton>
-                      <Divider />
                       <ListItemButton
+                        color="primary"
                         sx={{
-                          zIndex: 1000,
-                          "& .MuiListItemIcon-root, & .MuiTypography-root": {},
-                          "&:hover": {
-                            "& .MuiListItemIcon-root, & .MuiTypography-root": {
-                              color: theme.colors.brand.primary,
-                            },
-                            backgroundColor: theme.colors.brand.primaryHover,
+                          padding: theme.spacing(1),
+                          "& .MuiListItemIcon-root, & .MuiTypography-root": {
+                            color: false ? theme.colors.brand.primary : "",
                           },
                         }}
+                        onClick={() => {
+                          console.log("A");
+                        }}
                       >
-                        <ListItemIcon>
+                        <ListItemIcon sx={{ minWidth: "2rem" }}>
                           <PowerSettingsNewSharpIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography
                               variant="h6"
-                              fontSize={18}
+                              fontSize={12}
                               sx={{ fontWeight: 600 }}
                             >
-                              Cerrar Sesión
+                              Cerrar sesion
                             </Typography>
                           }
                         />
