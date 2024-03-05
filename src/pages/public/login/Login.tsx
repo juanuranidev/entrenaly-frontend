@@ -1,4 +1,7 @@
-import { Box, Card, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Card, Stack, Typography, useTheme, Link } from "@mui/material";
+import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
+import LoginForm from "components/forms/login-form/LoginForm";
+import Footer from "./components/footer/Footer";
 
 type Props = {};
 
@@ -9,33 +12,11 @@ export default function Login({}: Props) {
     <Stack
       width="100%"
       height="100vh"
-      px={theme.spacing(5)}
+      p={theme.spacing(4)}
       justifyContent="space-between"
+      bgcolor={theme.colors.background.secondary}
     >
-      <Stack
-        mt={2}
-        py={2}
-        spacing={1}
-        direction="row"
-        alignItems="center"
-        bgcolor="red"
-        justifyContent="flex-start"
-      >
-        <Typography fontWeight={700} fontSize={20}>
-          Entrenaly
-        </Typography>
-        <Chip
-          label="v1.0.0"
-          size="small"
-          sx={{
-            height: 20,
-            fontWeight: 800,
-            color: theme.colors.general.white,
-            backgroundColor: theme.colors.brand.primary,
-            "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
-          }}
-        />
-      </Stack>
+      <LogoWithVersion />
       <Box
         width="100%"
         bgcolor="blue"
@@ -43,9 +24,38 @@ export default function Login({}: Props) {
         justifyContent="center"
         margin="auto"
       >
-        <Card>awd</Card>
+        <Card
+          sx={{
+            padding: theme.spacing(5),
+            minWidth: "30rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: theme.spacing(4),
+          }}
+        >
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="baseline"
+            sx={{ mb: { xs: -0.5, sm: 0.5 } }}
+          >
+            <Typography textAlign="left" fontWeight={600} fontSize={25}>
+              Ingresar
+            </Typography>
+            <Typography
+              component={Link}
+              href="/register"
+              variant="body1"
+              color="primary"
+              sx={{ textDecoration: "none" }}
+            >
+              ¿No tienes una cuenta?
+            </Typography>
+          </Stack>
+          <LoginForm />
+        </Card>
       </Box>
-      <Box bgcolor="green">awdadawn</Box>
+      <Footer />
     </Stack>
   );
 }
