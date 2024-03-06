@@ -1,12 +1,15 @@
-import { Box, Card, Stack, Typography, useTheme, Link } from "@mui/material";
+import { useState } from "react";
+import { Box, Card, Stack, Typography, useTheme } from "@mui/material";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import LoginForm from "components/forms/login-form/LoginForm";
 import Footer from "./components/footer/Footer";
+import RegisterForm from "components/forms/register-form/RegisterForm";
 
 type Props = {};
 
 export default function Login({}: Props) {
   const theme: any = useTheme();
+  const [registerView, setRegisterView] = useState(false);
 
   return (
     <Stack
@@ -28,6 +31,7 @@ export default function Login({}: Props) {
           sx={{
             padding: theme.spacing(5),
             minWidth: "30rem",
+            maxWidth: "30rem",
             display: "flex",
             flexDirection: "column",
             gap: theme.spacing(4),
@@ -40,19 +44,25 @@ export default function Login({}: Props) {
             sx={{ mb: { xs: -0.5, sm: 0.5 } }}
           >
             <Typography textAlign="left" fontWeight={600} fontSize={25}>
-              Ingresar
+              {registerView ? "Registrarse" : "Ingresar"}
             </Typography>
             <Typography
-              component={Link}
-              href="/register"
               variant="body1"
               color="primary"
-              sx={{ textDecoration: "none" }}
+              onClick={() => setRegisterView(!registerView)}
+              sx={{
+                cursor: "pointer",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
             >
-              ¿No tienes una cuenta?
+              {registerView
+                ? "¿Ya tienes una cuenta?"
+                : "  ¿No tienes una cuenta?"}
             </Typography>
           </Stack>
-          <LoginForm />
+          {registerView ? <RegisterForm /> : <LoginForm />}
         </Card>
       </Box>
       <Footer />

@@ -16,11 +16,12 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 type Props = {};
 
-export default function LoginForm({}: Props) {
+export default function RegisterForm({}: Props) {
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -43,7 +44,25 @@ export default function LoginForm({}: Props) {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={6}>
+        <InputLabel htmlFor="password" sx={{ fontWeight: 600 }}>
+          Nombre
+        </InputLabel>
+        <TextField
+          fullWidth
+          name="name"
+          size="small"
+          placeholder="Juan"
+          value={formik.values.name}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          error={Boolean(formik.touched.name) && Boolean(formik.errors.name)}
+          helperText={
+            Boolean(formik.touched.name) && Boolean(formik.errors.name)
+          }
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
         <InputLabel htmlFor="password" sx={{ fontWeight: 600 }}>
           Email
         </InputLabel>
@@ -100,12 +119,12 @@ export default function LoginForm({}: Props) {
       </Grid>
       <Grid item xs={12}>
         <Button fullWidth variant="contained">
-          Ingresar
+          Registrarse
         </Button>
       </Grid>
       <Grid item xs={12}>
         <Divider>
-          <Typography variant="caption">Ingresar con</Typography>
+          <Typography variant="caption">Registrarse con</Typography>
         </Divider>
       </Grid>
       <Grid item xs={12}>
