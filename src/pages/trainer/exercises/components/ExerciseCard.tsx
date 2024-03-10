@@ -67,6 +67,7 @@ export default function ExerciseCard({ exercise }: Props) {
             height: "100%",
             margin: "auto",
             objectFit: "contain",
+            aspectRatio: "16/12",
           }}
         />
         <Typography

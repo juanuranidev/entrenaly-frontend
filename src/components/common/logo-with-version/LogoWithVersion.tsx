@@ -4,13 +4,7 @@ export default function LogoWithVersion() {
   const theme: any = useTheme();
 
   return (
-    <Stack
-      spacing={1}
-      bgcolor="green"
-      direction="row"
-      alignItems="center"
-      justifyContent="flex-start"
-    >
+    <Stack spacing={1} direction="row" alignItems="center">
       <Typography fontWeight={700} fontSize={20}>
         Entrenaly
       </Typography>
