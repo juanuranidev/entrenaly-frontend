@@ -1,8 +1,11 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { Link, Stack, Typography, useTheme } from "@mui/material";
 
 export default function Footer() {
+  const theme: any = useTheme();
+
   return (
     <Stack
+      p={theme.spacing(4)}
       spacing={2}
       direction={"row"}
       textAlign={"inherit"}

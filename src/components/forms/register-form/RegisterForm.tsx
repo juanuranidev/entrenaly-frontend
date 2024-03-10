@@ -14,9 +14,7 @@ import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-type Props = {};
-
-export default function RegisterForm({}: Props) {
+export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
