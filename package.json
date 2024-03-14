@@ -16,6 +16,8 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
+    "axios": "^1.6.7",
+    "firebase": "^10.8.1",
     "formik": "^2.4.5",
     "lodash": "^4.17.21",
     "react": "^18.2.0",

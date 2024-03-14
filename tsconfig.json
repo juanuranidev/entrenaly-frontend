@@ -28,7 +28,8 @@
       "@layout/*": ["src/layout/*"],
       "@routes/*": ["src/routes/*"],
       "@pages/*": ["src/pages/*"],
-      "@css/*": ["src/css/*"]
+      "@css/*": ["src/css/*"],
+      "@services/*": ["src/services/*"]
     }
   },
   "include": ["./src/**/**/*"],
