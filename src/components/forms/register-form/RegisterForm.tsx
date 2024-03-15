@@ -8,13 +8,19 @@ import {
   Typography,
   InputAdornment,
 } from "@mui/material";
-import { useFormik } from "formik";
 import { useState } from "react";
-import Google from "../../../assets/icons/google.svg";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { successToast } from "lib/utils/toast";
+import { registerWithEmailService } from "services/user/user.services";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Google from "../../../assets/icons/google.svg";
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
@@ -24,9 +30,22 @@ export default function RegisterForm() {
       password: "",
     },
     onSubmit(values) {
-      console.log(values);
+      handleRegisterWithEmail(values);
     },
   });
+
+  const handleRegisterWithEmail = async (data: any) => {
+    setIsLoading(true);
+    try {
+      await registerWithEmailService(data);
+
+      successToast("Registrado con éxito");
+      navigate("/clients");
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -34,10 +53,6 @@ export default function RegisterForm() {
 
   const handleMouseDownPassword = (event: any) => {
     event.preventDefault();
-  };
-
-  const googleHandler = async () => {
-    // login || singup
   };
 
   return (
@@ -116,7 +131,12 @@ export default function RegisterForm() {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button fullWidth variant="contained">
+        <Button
+          fullWidth
+          variant="contained"
+          disabled={isLoading}
+          onClick={() => formik.handleSubmit()}
+        >
           Registrarse
         </Button>
       </Grid>
@@ -128,10 +148,11 @@ export default function RegisterForm() {
       <Grid item xs={12}>
         <Button
           fullWidth
-          variant="outlined"
           color="primary"
+          variant="outlined"
+          disabled={isLoading}
           startIcon={<img src={Google} alt="Google" />}
-          onClick={googleHandler}
+          onClick={() => {}}
         >
           Google
         </Button>

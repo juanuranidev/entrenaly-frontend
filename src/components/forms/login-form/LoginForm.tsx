@@ -8,8 +8,15 @@ import {
   Typography,
   InputAdornment,
 } from "@mui/material";
+import {
+  googleAuthService,
+  loginWithEmailService,
+  verifyGoogleAuthService,
+} from "services/user/user.services";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
-import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -17,6 +24,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 type Props = {};
 
 export default function LoginForm({}: Props) {
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
@@ -25,9 +35,29 @@ export default function LoginForm({}: Props) {
       password: "",
     },
     onSubmit(values) {
-      console.log(values);
+      handleLoginWithEmail(values);
     },
   });
+
+  const handleLoginWithEmail = async (data: any) => {
+    setIsLoading(true);
+    try {
+      await loginWithEmailService(data);
+      navigate("/clients");
+    } catch (error: any) {
+      console.log(error);
+      errorToast("Credenciales inválidas");
+    }
+    setIsLoading(false);
+  };
+
+  const handleVerifyGoogleAuth = async () => {
+    try {
+      await verifyGoogleAuthService();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -37,9 +67,9 @@ export default function LoginForm({}: Props) {
     event.preventDefault();
   };
 
-  const googleHandler = async () => {
-    // login || singup
-  };
+  useEffect(() => {
+    handleVerifyGoogleAuth();
+  }, []);
 
   return (
     <Grid container spacing={3}>
@@ -99,7 +129,12 @@ export default function LoginForm({}: Props) {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button fullWidth variant="contained">
+        <Button
+          fullWidth
+          variant="contained"
+          disabled={isLoading}
+          onClick={() => formik.handleSubmit()}
+        >
           Ingresar
         </Button>
       </Grid>
@@ -111,10 +146,11 @@ export default function LoginForm({}: Props) {
       <Grid item xs={12}>
         <Button
           fullWidth
-          variant="outlined"
           color="primary"
+          variant="outlined"
+          disabled={isLoading}
+          onClick={() => googleAuthService()}
           startIcon={<img src={Google} alt="Google" />}
-          onClick={googleHandler}
         >
           Google
         </Button>
