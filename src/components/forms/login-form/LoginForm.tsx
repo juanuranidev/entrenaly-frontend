@@ -7,16 +7,17 @@ import {
   InputLabel,
   Typography,
   InputAdornment,
+  CircularProgress,
 } from "@mui/material";
 import {
   googleAuthService,
   loginWithEmailService,
-  verifyGoogleAuthService,
 } from "services/user/user.services";
-import { useState, useEffect } from "react";
+import { loginFormValidation } from "./validations";
 import { useNavigate } from "react-router-dom";
 import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
+import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -34,6 +35,7 @@ export default function LoginForm({}: Props) {
       email: "",
       password: "",
     },
+    validationSchema: loginFormValidation,
     onSubmit(values) {
       handleLoginWithEmail(values);
     },
@@ -51,26 +53,6 @@ export default function LoginForm({}: Props) {
     setIsLoading(false);
   };
 
-  const handleVerifyGoogleAuth = async () => {
-    try {
-      await verifyGoogleAuthService();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event: any) => {
-    event.preventDefault();
-  };
-
-  useEffect(() => {
-    handleVerifyGoogleAuth();
-  }, []);
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -78,6 +60,7 @@ export default function LoginForm({}: Props) {
           Email
         </InputLabel>
         <TextField
+          autoFocus
           fullWidth
           value={formik.values.email}
           name="email"
@@ -97,29 +80,32 @@ export default function LoginForm({}: Props) {
         </InputLabel>
         <TextField
           fullWidth
-          value={formik.values.password}
-          name="password"
-          id="password"
           size="small"
-          type={showPassword ? "text" : "password"}
+          id="password"
+          name="password"
           placeholder="**********"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          value={formik.values.password}
+          type={showPassword ? "text" : "password"}
           error={
             Boolean(formik.touched.password) && Boolean(formik.errors.password)
           }
           helperText={
-            Boolean(formik.touched.password) && Boolean(formik.errors.password)
+            Boolean(formik.touched.password) &&
+            Boolean(formik.errors.password) &&
+            formik.errors.password === "Mínimo 6 caracteres" &&
+            formik.errors.password
           }
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                   edge="end"
                   size="large"
+                  onMouseDown={(event) => event.preventDefault()}
+                  aria-label="toggle password visibility"
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
@@ -134,6 +120,7 @@ export default function LoginForm({}: Props) {
           variant="contained"
           disabled={isLoading}
           onClick={() => formik.handleSubmit()}
+          endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Ingresar
         </Button>
@@ -151,6 +138,7 @@ export default function LoginForm({}: Props) {
           disabled={isLoading}
           onClick={() => googleAuthService()}
           startIcon={<img src={Google} alt="Google" />}
+          endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Google
         </Button>

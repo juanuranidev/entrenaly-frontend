@@ -7,15 +7,20 @@ import {
   InputLabel,
   Typography,
   InputAdornment,
+  CircularProgress,
 } from "@mui/material";
-import { useState } from "react";
-import { useFormik } from "formik";
+import {
+  googleAuthService,
+  registerWithEmailService,
+} from "services/user/user.services";
+import { errorToast, successToast } from "lib/utils/toast";
+import { registerFormValidation } from "./validations";
 import { useNavigate } from "react-router-dom";
-import { successToast } from "lib/utils/toast";
-import { registerWithEmailService } from "services/user/user.services";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useFormik } from "formik";
+import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -29,6 +34,7 @@ export default function RegisterForm() {
       email: "",
       password: "",
     },
+    validationSchema: registerFormValidation,
     onSubmit(values) {
       handleRegisterWithEmail(values);
     },
@@ -41,18 +47,32 @@ export default function RegisterForm() {
 
       successToast("Registrado con éxito");
       navigate("/clients");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      handleManageRegisterWithEmailError(error);
     }
     setIsLoading(false);
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleManageRegisterWithEmailError = (error: Error) => {
+    const errorInString = String(error);
+
+    switch (true) {
+      case errorInString.includes("email-already-in-use"):
+        return errorToast("Email ya en uso");
+      default:
+        return errorToast("Error en el servidor");
+    }
   };
 
-  const handleMouseDownPassword = (event: any) => {
-    event.preventDefault();
+  const handleRegisterWithGoogle = () => {
+    setIsLoading(true);
+    try {
+      googleAuthService();
+    } catch (error) {
+      console.log(error);
+      errorToast("Error en el servidor");
+    }
   };
 
   return (
@@ -62,6 +82,7 @@ export default function RegisterForm() {
           Nombre
         </InputLabel>
         <TextField
+          autoFocus
           fullWidth
           name="name"
           size="small"
@@ -70,9 +91,6 @@ export default function RegisterForm() {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           error={Boolean(formik.touched.name) && Boolean(formik.errors.name)}
-          helperText={
-            Boolean(formik.touched.name) && Boolean(formik.errors.name)
-          }
         />
       </Grid>
       <Grid item xs={12} md={6}>
@@ -88,9 +106,6 @@ export default function RegisterForm() {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
-          helperText={
-            Boolean(formik.touched.email) && Boolean(formik.errors.email)
-          }
         />
       </Grid>
       <Grid item xs={12}>
@@ -99,29 +114,32 @@ export default function RegisterForm() {
         </InputLabel>
         <TextField
           fullWidth
-          value={formik.values.password}
-          name="password"
-          id="password"
           size="small"
-          type={showPassword ? "text" : "password"}
+          id="password"
+          name="password"
           placeholder="**********"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          value={formik.values.password}
+          type={showPassword ? "text" : "password"}
           error={
             Boolean(formik.touched.password) && Boolean(formik.errors.password)
           }
           helperText={
-            Boolean(formik.touched.password) && Boolean(formik.errors.password)
+            Boolean(formik.touched.password) &&
+            Boolean(formik.errors.password) &&
+            formik.errors.password === "Mínimo 6 caracteres" &&
+            formik.errors.password
           }
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                   edge="end"
                   size="large"
+                  onClick={() => setShowPassword(!showPassword)}
+                  onMouseDown={(event) => event.preventDefault()}
+                  aria-label="toggle password visibility"
                 >
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
@@ -136,6 +154,7 @@ export default function RegisterForm() {
           variant="contained"
           disabled={isLoading}
           onClick={() => formik.handleSubmit()}
+          endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Registrarse
         </Button>
@@ -151,8 +170,9 @@ export default function RegisterForm() {
           color="primary"
           variant="outlined"
           disabled={isLoading}
+          onClick={handleRegisterWithGoogle}
           startIcon={<img src={Google} alt="Google" />}
-          onClick={() => {}}
+          endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Google
         </Button>
