@@ -1,11 +1,13 @@
 import request from "services/request";
 import {
   getAuth,
+  signOut,
   getRedirectResult,
   signInWithRedirect,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  // onAuthStateChanged,
 } from "firebase/auth";
 
 type DataForLogin = {
@@ -40,7 +42,9 @@ export const verifyGoogleAuthService = async () => {
       authId: signInInformation.user.uid,
     };
 
-    loginUserService(userFormatted);
+    const response = await gooogleAuthService(userFormatted);
+
+    return response;
   } catch (error) {
     throw error;
   }
@@ -49,26 +53,22 @@ export const verifyGoogleAuthService = async () => {
 // Auth provider
 export const registerWithEmailService = async (data: any) => {
   try {
-    await createUserWithEmailAndPassword(auth, data.email, data.password);
+    const registerInformation = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
 
-    // const registerInformation = await createUserWithEmailAndPassword(
-    //   auth,
-    //   data.email,
-    //   data.password
-    // );
+    const userFormatted = {
+      name: data.name,
+      email: registerInformation.user.email,
+      authId: registerInformation.user.uid,
+    };
 
-    // const userFormatted = {
-    //   name: registerInformation.user.displayName,
-    //   email: registerInformation.user.email,
-    //   image: registerInformation.user.photoURL,
-    //   authId: registerInformation.user.uid,
-    // };
+    const response = await registerUserService(userFormatted);
 
-    // const response = await registerUserService(userFormatted);
-
-    // return response;
+    return response;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -77,7 +77,17 @@ export const loginWithEmailService = async (data: DataForLogin) => {
   try {
     await signInWithEmailAndPassword(auth, data.email, data.password);
 
-    return true;
+    const response = await loginUserService(data);
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const signOutService = async () => {
+  try {
+    await signOut(auth);
   } catch (error) {
     throw error;
   }
@@ -110,7 +120,23 @@ export const loginUserService = async (user: any) => {
       },
     });
 
-    console.log(response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const gooogleAuthService = async (user: any) => {
+  try {
+    const response = await request({
+      method: "POST",
+      url: "users/v1/google/auth",
+      data: {
+        data: user,
+      },
+    });
+
+    return response;
   } catch (error) {
     throw error;
   }

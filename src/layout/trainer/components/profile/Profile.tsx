@@ -18,9 +18,12 @@ import {
 import { useRef, useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import PowerSettingsNewSharpIcon from "@mui/icons-material/PowerSettingsNewSharp";
+import { signOutService } from "services/user/user.services";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const theme: any = useTheme();
+  const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
 
   const [open, setOpen] = useState(false);
@@ -38,6 +41,16 @@ export default function Profile() {
       return;
     }
     setOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOutService();
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -120,9 +133,7 @@ export default function Profile() {
                             color: false ? theme.colors.brand.primary : "",
                           },
                         }}
-                        onClick={() => {
-                          console.log("A");
-                        }}
+                        onClick={handleSignOut}
                       >
                         <ListItemIcon sx={{ minWidth: "2rem" }}>
                           <PowerSettingsNewSharpIcon fontSize="small" />
