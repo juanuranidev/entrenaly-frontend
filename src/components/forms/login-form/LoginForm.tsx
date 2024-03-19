@@ -12,19 +12,18 @@ import {
 import {
   googleAuthService,
   loginWithEmailService,
+  verifyGoogleAuthService,
 } from "services/user/user.services";
+import { useEffect, useState } from "react";
 import { loginFormValidation } from "./validations";
 import { useNavigate } from "react-router-dom";
 import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
-import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-type Props = {};
-
-export default function LoginForm({}: Props) {
+export default function LoginForm() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +51,34 @@ export default function LoginForm({}: Props) {
     }
     setIsLoading(false);
   };
+
+  const handleLoginWithGoogle = () => {
+    setIsLoading(true);
+    try {
+      googleAuthService();
+    } catch (error) {
+      console.log(error);
+      errorToast("Error en el servidor");
+    }
+  };
+
+  const handleVerifyGoogleAuth = async () => {
+    setIsLoading(true);
+    try {
+      const response = await verifyGoogleAuthService();
+
+      if (response) {
+        navigate("/clients");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    handleVerifyGoogleAuth();
+  }, []);
 
   return (
     <Grid container spacing={3}>
@@ -136,7 +163,7 @@ export default function LoginForm({}: Props) {
           color="primary"
           variant="outlined"
           disabled={isLoading}
-          onClick={() => googleAuthService()}
+          onClick={handleLoginWithGoogle}
           startIcon={<img src={Google} alt="Google" />}
           endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >

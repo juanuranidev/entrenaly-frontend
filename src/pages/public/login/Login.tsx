@@ -1,35 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, Card, Stack, Typography, useTheme } from "@mui/material";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import RegisterForm from "components/forms/register-form/RegisterForm";
 import LoginForm from "components/forms/login-form/LoginForm";
 import Footer from "./components/footer/Footer";
-import { useNavigate } from "react-router-dom";
-import { verifyGoogleAuthService } from "services/user/user.services";
 
-type Props = {};
-
-export default function Login({}: Props) {
+export default function Login() {
   const theme: any = useTheme();
-  const navigate = useNavigate();
+
   const [registerView, setRegisterView] = useState(false);
-
-  const handleVerifyGoogleAuth = async () => {
-    try {
-      const response = await verifyGoogleAuthService();
-      console.log(response);
-
-      if (response) {
-        navigate("/clients");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleVerifyGoogleAuth();
-  }, []);
 
   return (
     <Stack
