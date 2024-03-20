@@ -3,11 +3,11 @@ import {
   getAuth,
   signOut,
   getRedirectResult,
+  onAuthStateChanged,
   signInWithRedirect,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  // onAuthStateChanged,
 } from "firebase/auth";
 
 type DataForLogin = {
@@ -16,6 +16,51 @@ type DataForLogin = {
 };
 
 const auth = getAuth();
+
+// Auth provider
+export const registerWithEmailService = async (data: any) => {
+  try {
+    const registerInformation = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+
+    const userFormatted = {
+      name: data.name,
+      email: registerInformation.user.email,
+      authId: registerInformation.user.uid,
+    };
+
+    const response = await registerUserService(userFormatted);
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const loginWithEmailService = async (data: DataForLogin) => {
+  try {
+    const response = await signInWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const signOutService = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const googleAuthService = async () => {
   try {
@@ -50,47 +95,25 @@ export const verifyGoogleAuthService = async () => {
   }
 };
 
-// Auth provider
-export const registerWithEmailService = async (data: any) => {
-  try {
-    const registerInformation = await createUserWithEmailAndPassword(
-      auth,
-      data.email,
-      data.password
-    );
+export const getUserSessionService = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        resolve(null);
+        return;
+      }
 
-    const userFormatted = {
-      name: data.name,
-      email: registerInformation.user.email,
-      authId: registerInformation.user.uid,
-    };
+      try {
+        const response = await getUserByAuthIdService(user.uid);
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
+    });
 
-    const response = await registerUserService(userFormatted);
-
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const loginWithEmailService = async (data: DataForLogin) => {
-  try {
-    await signInWithEmailAndPassword(auth, data.email, data.password);
-
-    const response = await loginUserService(data);
-
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const signOutService = async () => {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    throw error;
-  }
+    // Retornar la función de limpieza del efecto
+    return unsubscribe;
+  });
 };
 
 // Server
@@ -99,22 +122,6 @@ export const registerUserService = async (user: any) => {
     const response = await request({
       method: "POST",
       url: "users/v1/register",
-      data: {
-        data: user,
-      },
-    });
-
-    return response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const loginUserService = async (user: any) => {
-  try {
-    const response = await request({
-      method: "POST",
-      url: "users/v1/login",
       data: {
         data: user,
       },
@@ -137,6 +144,22 @@ export const gooogleAuthService = async (user: any) => {
     });
 
     return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserByAuthIdService = async (authId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: `users/v1/get/authId`,
+      params: {
+        authId: authId,
+      },
+    });
+
+    return response.data;
   } catch (error) {
     throw error;
   }
