@@ -9,7 +9,12 @@ export default function Header({ setIsDrawerOpen }: any) {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <HeaderStyled theme={theme} isLargeScreen={Boolean(isLargeScreen)}>
+    <HeaderStyled
+      theme={theme}
+      style={{
+        justifyContent: isLargeScreen ? "flex-end" : "space-between",
+      }}
+    >
       {!isLargeScreen ? (
         <IconButton onClick={() => setIsDrawerOpen(true)}>
           <MenuIcon />

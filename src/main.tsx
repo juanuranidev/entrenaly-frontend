@@ -15,13 +15,13 @@ import { AuthContextProvider } from "contexts/Auth";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Theme>
-      <AuthContextProvider>
-        {initializeFirebaseApp()}
+      <Router>
         <Toaster richColors />
-        <Router>
+        <AuthContextProvider>
+          {initializeFirebaseApp()}
           <Routes />
-        </Router>
-      </AuthContextProvider>
+        </AuthContextProvider>
+      </Router>
     </Theme>
   </React.StrictMode>
 );
