@@ -87,7 +87,6 @@ export default function LoginForm() {
           Email
         </InputLabel>
         <TextField
-          autoFocus
           fullWidth
           value={formik.values.email}
           name="email"
@@ -97,7 +96,7 @@ export default function LoginForm() {
           onChange={formik.handleChange}
           error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
           helperText={
-            Boolean(formik.touched.email) && Boolean(formik.errors.email)
+            Boolean(formik.touched.email) && <span>{formik.errors.email}</span>
           }
         />
       </Grid>
@@ -121,8 +120,9 @@ export default function LoginForm() {
           helperText={
             Boolean(formik.touched.password) &&
             Boolean(formik.errors.password) &&
-            formik.errors.password === "Mínimo 6 caracteres" &&
-            formik.errors.password
+            formik.errors.password === "Mínimo 6 caracteres" && (
+              <span>{formik.errors.password}</span>
+            )
           }
           InputProps={{
             endAdornment: (

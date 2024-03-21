@@ -82,7 +82,6 @@ export default function RegisterForm() {
           Nombre
         </InputLabel>
         <TextField
-          autoFocus
           fullWidth
           name="name"
           size="small"
@@ -128,8 +127,9 @@ export default function RegisterForm() {
           helperText={
             Boolean(formik.touched.password) &&
             Boolean(formik.errors.password) &&
-            formik.errors.password === "Mínimo 6 caracteres" &&
-            formik.errors.password
+            formik.errors.password === "Mínimo 6 caracteres" && (
+              <span>{formik.errors.password}</span>
+            )
           }
           InputProps={{
             endAdornment: (
