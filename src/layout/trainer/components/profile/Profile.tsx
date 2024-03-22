@@ -20,11 +20,14 @@ import PersonIcon from "@mui/icons-material/Person";
 import PowerSettingsNewSharpIcon from "@mui/icons-material/PowerSettingsNewSharp";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "contexts/Auth";
 
 export default function Profile() {
   const theme: any = useTheme();
   const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
+  const { userData } = useAuthContext();
+  console.log(userData.image);
 
   const [open, setOpen] = useState(false);
 
@@ -68,9 +71,9 @@ export default function Profile() {
         }}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={""} sx={{ width: 32, height: 32 }} />
+          <Avatar src={userData?.image} sx={{ width: 32, height: 32 }} />
           <Typography variant="h6" fontSize={15} sx={{ fontWeight: 500 }}>
-            Juan Urani
+            {userData?.name}
           </Typography>
         </Stack>
       </ButtonBase>
