@@ -48,7 +48,7 @@ export default function ExerciseCard({ exercise }: Props) {
               size="small"
               color="primary"
               variant="outlined"
-              label={exercise.muscularGroup}
+              label={exercise.category}
             />
           </Grid>
           <Grid item xs={2}>

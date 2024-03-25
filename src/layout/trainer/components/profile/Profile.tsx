@@ -27,7 +27,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
   const { userData } = useAuthContext();
-  console.log(userData.image);
+  // console.log(userData.image);
 
   const [open, setOpen] = useState(false);
 

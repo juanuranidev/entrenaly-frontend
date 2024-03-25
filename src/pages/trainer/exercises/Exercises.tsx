@@ -8,16 +8,31 @@ import {
   Typography,
 } from "@mui/material";
 import { defaultExercises } from "../../../lib/utils/defaultExercises";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainTitle from "./components/MainTitle";
 import Searchbar from "./components/ExercisesSearchBar";
 import ExerciseCard from "./components/ExerciseCard";
 import MuscularGroupsFilter from "./components/MuscularGroupsFilter";
+import { getAllExercisesService } from "services/exercise/exercise.services";
 
 export default function Exercises() {
   const theme: any = useTheme();
 
-  const [exercises, setExercises] = useState(defaultExercises);
+  const [exercises, setExercises] = useState([]);
+
+  const handleGetExercises = async () => {
+    try {
+      const response = await getAllExercisesService();
+
+      setExercises(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetExercises();
+  }, []);
 
   return (
     <Box>
@@ -47,9 +62,11 @@ export default function Exercises() {
               flexWrap="wrap"
               justifyContent={{ xs: "center", md: "flex-start" }}
             >
-              {exercises.map((exercise) => (
-                <ExerciseCard key={exercise.name} exercise={exercise} />
-              ))}
+              {exercises.length
+                ? exercises.map((exercise: any) => (
+                    <ExerciseCard key={exercise.name} exercise={exercise} />
+                  ))
+                : null}
             </Stack>
           </Grid>
         </Grid>
