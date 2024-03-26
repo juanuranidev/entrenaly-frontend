@@ -7,22 +7,25 @@ import {
   useTheme,
   Typography,
 } from "@mui/material";
-import { defaultExercises } from "../../../lib/utils/defaultExercises";
 import { useEffect, useState } from "react";
 import MainTitle from "./components/MainTitle";
 import Searchbar from "./components/ExercisesSearchBar";
 import ExerciseCard from "./components/ExerciseCard";
-import MuscularGroupsFilter from "./components/MuscularGroupsFilter";
+// import MuscularGroupsFilter from "./components/MuscularGroupsFilter";
 import { getAllExercisesService } from "services/exercise/exercise.services";
+import { useDebounce } from "hooks/useDebounce";
 
 export default function Exercises() {
   const theme: any = useTheme();
 
   const [exercises, setExercises] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
   const handleGetExercises = async () => {
     try {
-      const response = await getAllExercisesService();
+      const response = await getAllExercisesService(debouncedSearchValue);
 
       setExercises(response);
     } catch (error) {
@@ -32,7 +35,7 @@ export default function Exercises() {
 
   useEffect(() => {
     handleGetExercises();
-  }, []);
+  }, [debouncedSearchValue]);
 
   return (
     <Box>
@@ -48,14 +51,17 @@ export default function Exercises() {
             </Alert>
           </Grid>
           <Grid item xs={12}>
-            <Searchbar exercises={exercises} setExercises={setExercises} />
+            <Searchbar
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <MuscularGroupsFilter
               exercises={exercises}
               setExercises={setExercises}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <Stack
               direction="row"
@@ -64,7 +70,11 @@ export default function Exercises() {
             >
               {exercises.length
                 ? exercises.map((exercise: any) => (
-                    <ExerciseCard key={exercise.name} exercise={exercise} />
+                    <ExerciseCard
+                      key={exercise.name}
+                      exercise={exercise}
+                      handleGetExercises={handleGetExercises}
+                    />
                   ))
                 : null}
             </Stack>

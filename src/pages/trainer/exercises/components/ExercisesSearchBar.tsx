@@ -1,38 +1,22 @@
 import { TextField, IconButton } from "@mui/material";
-import { defaultExercises } from "../../../../lib/utils/defaultExercises";
-import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
-  exercises: any;
-  setExercises: any;
+  searchValue: string;
+  setSearchValue: any;
 };
 
-export default function ExercisesSearchBar({ exercises, setExercises }: Props) {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleFindExercises = (e: any) => {
-    const value = e.target.value;
-    setSearchValue(value);
-
-    if (!value) {
-      return setExercises(defaultExercises);
-    }
-
-    const filteredExercises = exercises.filter((exercise: any) =>
-      exercise.name.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setExercises(filteredExercises);
-  };
-
+export default function ExercisesSearchBar({
+  searchValue,
+  setSearchValue,
+}: Props) {
   return (
     <TextField
       fullWidth
       label="Buscar"
       value={searchValue}
-      onChange={(e) => handleFindExercises(e)}
+      onChange={(e) => setSearchValue(e.target.value)}
       InputProps={{
         startAdornment: <SearchIcon />,
         endAdornment: searchValue ? (

@@ -8,21 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
+import AddVariantForm from "components/forms/add-variant-form/AddVariantForm";
 
 type Props = {
   exercise: any;
+  handleGetExercises: () => void;
 };
 
-export default function ExerciseCard({ exercise }: Props) {
+export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
   const theme: any = useTheme();
 
   const [exerciseSelected, setExerciseSelected] = useState(null);
-  const [openFormAddExercise, setOpenFormAddExercise] = useState(false);
+  const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
 
   const handleOpenFormEditExercise = (exercise: any) => {
     setExerciseSelected(exercise);
-    setOpenFormAddExercise(true);
+    setOpenFormAddVariant(true);
   };
 
   return (
@@ -80,11 +81,12 @@ export default function ExerciseCard({ exercise }: Props) {
           {exercise.name}
         </Typography>
       </Box>
-      <AddExerciseForm
-        open={openFormAddExercise}
+      <AddVariantForm
+        exerciseId={exercise?.id}
+        open={openFormAddVariant}
         exerciseSelected={exerciseSelected}
-        onClose={() => setOpenFormAddExercise(false)}
-        onSubmit={() => console.log("first")}
+        onClose={() => setOpenFormAddVariant(false)}
+        onSubmit={() => handleGetExercises()}
       />
     </React.Fragment>
   );

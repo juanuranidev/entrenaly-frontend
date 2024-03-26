@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import PageTitle from "components/common/page-title/PageTitle";
 import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
@@ -12,13 +12,16 @@ export default function MainTitle() {
       <PageTitle
         title="Ejercicios"
         action={
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={() => setOpenDrawerAddExercise(true)}
-          >
-            Agregar nuevo
-          </Button>
+          <Tooltip title="Próximamente">
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              // onClick={() => setOpenDrawerAddExercise(true)}
+              onClick={() => {}}
+            >
+              Agregar nuevo
+            </Button>
+          </Tooltip>
         }
       />
       <AddExerciseForm
