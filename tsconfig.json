@@ -24,12 +24,13 @@
     "allowJs": true,
     "paths": {
       "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
+      "@css/*": ["src/css/*"],
+      "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@layout/*": ["src/layout/*"],
       "@routes/*": ["src/routes/*"],
-      "@pages/*": ["src/pages/*"],
-      "@css/*": ["src/css/*"],
-      "@services/*": ["src/services/*"]
+      "@services/*": ["src/services/*"],
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["./src/**/**/*"],
