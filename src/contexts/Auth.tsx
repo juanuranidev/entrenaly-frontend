@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { getUserSessionService } from "services/user/user.services";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const initialContextValue = {
   userData: null,
@@ -19,10 +20,14 @@ export const AuthContextProvider = ({ children }: any) => {
   const handleManageSession = async () => {
     setIsLoading(true);
     try {
-      const response = await getUserSessionService();
+      const response: any = await getUserSessionService();
       if (!response) {
         throw "Not an user in session";
       }
+
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.authId}`;
 
       setUserData(response);
     } catch (error) {
