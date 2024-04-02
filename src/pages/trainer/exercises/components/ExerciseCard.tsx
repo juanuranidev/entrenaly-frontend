@@ -16,6 +16,7 @@ type Props = {
 };
 
 export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
+  const isVariant = exercise.variant;
   const theme: any = useTheme();
 
   const [exerciseSelected, setExerciseSelected] = useState(null);
@@ -49,8 +50,17 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
               size="small"
               color="primary"
               variant="outlined"
-              label={exercise.category}
+              label={exercise?.category?.name}
             />
+            {exercise.variant ? (
+              <Chip
+                style={{ marginLeft: theme.spacing(1) }}
+                size="small"
+                color="success"
+                variant="outlined"
+                label="Editado"
+              />
+            ) : null}
           </Grid>
           <Grid item xs={2}>
             <IconButton
@@ -62,7 +72,7 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
           </Grid>
         </Grid>
         <img
-          src={exercise.video}
+          src={isVariant ? exercise?.variant?.video : exercise?.video}
           style={{
             width: "100%",
             height: "100%",
@@ -78,7 +88,7 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
           fontSize={16}
           fontWeight={600}
         >
-          {exercise.name}
+          {isVariant ? exercise?.variant?.name : exercise?.name}
         </Typography>
       </Box>
       <AddVariantForm

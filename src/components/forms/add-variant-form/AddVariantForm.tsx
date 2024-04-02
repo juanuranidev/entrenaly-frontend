@@ -7,13 +7,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useFormik } from "formik";
-import BaseDrawer from "components/common/base-drawer/BaseDrawer";
-import PageTitle from "components/common/page-title/PageTitle";
-import { useState } from "react";
+import {
+  createVariantService,
+  updateVariantService,
+} from "services/exercise/exercise.services";
+import { useGetExerciseCategories } from "hooks/useGetExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
-import { createVariantService } from "services/exercise/exercise.services";
 import { useAuthContext } from "contexts/Auth";
+import { useFormik } from "formik";
+import { useState } from "react";
+import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 
 type Props = {
   open: boolean;
@@ -31,17 +34,36 @@ export default function AddVariantForm({
   exerciseSelected,
 }: Props) {
   const theme: any = useTheme();
+  const isVariant = exerciseSelected?.variant;
+
   const { userData } = useAuthContext();
+  const { exercisesCategories } = useGetExerciseCategories();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const handleFormatInitialExerciseValues = () => {
+    if (!exerciseSelected) return {};
+
+    if (isVariant) {
+      return {
+        name: exerciseSelected?.variant?.name || "",
+        video: exerciseSelected?.variant?.video || "",
+        format: exerciseSelected?.variant?.format || "",
+        variantId: exerciseSelected?.variant?.id || "",
+      };
+    } else {
+      return {
+        name: exerciseSelected?.name || "",
+        video: exerciseSelected?.video || "",
+        format: exerciseSelected?.format || "",
+      };
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
-      name: exerciseSelected?.name ?? "",
-      video: exerciseSelected?.video ?? "",
-      format: exerciseSelected?.format ?? "",
-      // categoryId: exerciseSelected?.categoryId ?? "",
-      categoryId: 2,
+      ...handleFormatInitialExerciseValues(),
+      categoryId: exerciseSelected?.category?.id || "",
       exerciseId: exerciseId,
       userId: userData?.id,
     },
@@ -49,8 +71,11 @@ export default function AddVariantForm({
     async onSubmit(values) {
       setIsLoading(true);
       try {
-        const response = await createVariantService(values);
-        console.log(response);
+        if (isVariant) {
+          await updateVariantService(values);
+        } else {
+          await createVariantService(values);
+        }
 
         onSubmit();
         onClose();
@@ -66,9 +91,11 @@ export default function AddVariantForm({
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
-      <Grid container spacing={3} height="100%">
+      <Grid container height="100%">
         <Grid item xs={12}>
-          <PageTitle title="Añadir variante de ejercicio" />
+          <Typography fontWeight={800} fontSize={20}>
+            Editar ejercicio
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={3}>
@@ -77,7 +104,7 @@ export default function AddVariantForm({
                 Informacion principal
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 name="name"
@@ -93,12 +120,13 @@ export default function AddVariantForm({
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 select
                 fullWidth
                 name="categoryId"
                 label="Categoria"
+                disabled={exerciseSelected}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.categoryId}
@@ -111,42 +139,15 @@ export default function AddVariantForm({
                   Boolean(formik.errors.categoryId)
                 }
               >
-                <MenuItem value="Pecho">Pecho</MenuItem>
-                <MenuItem value="Espalda">Espalda</MenuItem>
-                <MenuItem value="Hombro">Hombro</MenuItem>
-                <MenuItem value="Brazos">Brazos</MenuItem>
-                <MenuItem value="Piernas">Piernas</MenuItem>
-                <MenuItem value="Abdomen">Abdomen</MenuItem>
-                <MenuItem value="Cardio">Cardio</MenuItem>
+                {exercisesCategories.length
+                  ? exercisesCategories.map((exerciseCategory: any) => (
+                      <MenuItem value={exerciseCategory?.id}>
+                        {exerciseCategory?.name}
+                      </MenuItem>
+                    ))
+                  : null}
               </TextField>
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                select
-                fullWidth
-                name="format"
-                label="Formato"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.format}
-                error={
-                  Boolean(formik.touched.format) &&
-                  Boolean(formik.errors.format)
-                }
-                helperText={
-                  Boolean(formik.touched.format) &&
-                  Boolean(formik.errors.format)
-                }
-              >
-                <MenuItem value="Repeticiones">Repeticiones</MenuItem>
-                <MenuItem value="Tiempo">Tiempo</MenuItem>
-                <MenuItem value="Distancia">Distancia</MenuItem>
-                <MenuItem value="Brazos">Brazos</MenuItem>
-                <MenuItem value="Piernas">Piernas</MenuItem>
-                <MenuItem value="Abdomen">Abdomen</MenuItem>
-                <MenuItem value="Cardio">Cardio</MenuItem>
-              </TextField>
-            </Grid> */}
             <Grid item xs={12}>
               <Typography fontWeight={600} fontSize={15} mb={-1}>
                 Video
@@ -166,6 +167,18 @@ export default function AddVariantForm({
                 helperText={
                   Boolean(formik.touched.video) && Boolean(formik.errors.video)
                 }
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <img
+                src={formik?.values?.video}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "auto",
+                  objectFit: "contain",
+                  aspectRatio: "16/12",
+                }}
               />
             </Grid>
           </Grid>
