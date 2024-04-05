@@ -8,12 +8,16 @@ import {
   Typography,
   IconButton,
   InputAdornment,
+  CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import PageTitle from "components/common/page-title/PageTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useEffect, useState } from "react";
+import { getInviteService } from "services/client/client.services";
+import ENV from "lib/utils/env";
 
 export const DrawerStyled = styled(Drawer)(() => ({
   padding: "20rem",
@@ -21,6 +25,42 @@ export const DrawerStyled = styled(Drawer)(() => ({
 
 export default function AddClientForm({ open, onClose, onSubmit }: any) {
   const theme: any = useTheme();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [inviteLink, setInviteLink] = useState("");
+
+  const handleGetInvite = async () => {
+    try {
+      const response = await getInviteService();
+
+      console.log(response);
+      setInviteLink(response.id);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (open) {
+      handleGetInvite();
+    }
+  }, [open]);
+
+  if (isLoading) {
+    return (
+      <BaseDrawer open={open} onClose={onClose}>
+        <Box
+          height="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <CircularProgress />
+        </Box>
+      </BaseDrawer>
+    );
+  }
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
@@ -36,7 +76,7 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
           <TextField
             fullWidth
             style={{ paddingTop: 20 }}
-            value="odinadidaodnoinion1io2nion12"
+            value={`${ENV.VITE_FRONTEND_BASE_URL}?invite=${inviteLink}`}
             variant="outlined"
             InputProps={{
               endAdornment: (
