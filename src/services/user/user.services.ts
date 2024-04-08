@@ -2,6 +2,7 @@ import request from "services/request";
 import {
   getAuth,
   signOut,
+  deleteUser,
   getRedirectResult,
   onAuthStateChanged,
   signInWithRedirect,
@@ -19,23 +20,27 @@ const auth = getAuth();
 
 // Auth provider
 export const registerWithEmailService = async (data: any) => {
+  let userCreated;
   try {
     const registerInformation = await createUserWithEmailAndPassword(
       auth,
       data.email,
       data.password
     );
+    userCreated = registerInformation.user;
 
     const userFormatted = {
       name: data.name,
-      email: registerInformation.user.email,
-      authId: registerInformation.user.uid,
+      email: userCreated.email,
+      authId: userCreated.uid,
+      invite: data.invite,
     };
 
     const response = await registerUserService(userFormatted);
 
     return response;
   } catch (error) {
+    await deleteUserByIdService(userCreated);
     throw error;
   }
 };
@@ -72,25 +77,33 @@ export const googleAuthService = async () => {
   }
 };
 
-export const verifyGoogleAuthService = async () => {
+export const verifyGoogleAuthService = async (invite: string) => {
+  console.log("AAAAAAAAAAAA");
+
+  let userInformation;
   try {
     const signInInformation = await getRedirectResult(auth);
-
+    console.log("SIGN IN INFORMATION", signInInformation);
     if (!signInInformation) {
       return null;
     }
 
+    userInformation = signInInformation.user;
     const userFormatted = {
-      name: signInInformation.user.displayName,
-      email: signInInformation.user.email,
-      image: signInInformation.user.photoURL,
-      authId: signInInformation.user.uid,
+      name: userInformation.displayName,
+      email: userInformation.email,
+      image: userInformation.photoURL,
+      authId: userInformation.uid,
+      invite: invite ?? null,
     };
 
     const response = await gooogleAuthService(userFormatted);
-
+    console.log("RESPONSE GOOGLE AUTH", response);
     return response;
   } catch (error) {
+    console.log("ERROOOOR", error);
+    await deleteUserByIdService(userInformation);
+
     throw error;
   }
 };
@@ -114,6 +127,16 @@ export const getUserSessionService = () => {
     // Retornar la función de limpieza del efecto
     return unsubscribe;
   });
+};
+
+export const deleteUserByIdService = async (user: any) => {
+  try {
+    const response = await deleteUser(user);
+    console.log({ response });
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // Server

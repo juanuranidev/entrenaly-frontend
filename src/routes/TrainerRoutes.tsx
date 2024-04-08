@@ -3,7 +3,9 @@ import Loadable from "components/common/Loadable";
 import TrainerLayout from "layout/trainer/TrainerLayout";
 
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
-const Clients = Loadable(lazy(() => import("pages/trainer/clients/Clients")));
+const Clients = Loadable(
+  lazy(() => import("pages/trainer/clients/index/Clients"))
+);
 const Dashboard = Loadable(
   lazy(() => import("pages/trainer/dashboard/Dashboard"))
 );
