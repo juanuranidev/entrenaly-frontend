@@ -22,7 +22,7 @@ import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-export default function RegisterForm() {
+export default function RegisterForm({ invite }: any) {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +33,7 @@ export default function RegisterForm() {
       name: "",
       email: "",
       password: "",
+      invite: invite ?? "",
     },
     validationSchema: registerFormValidation,
     onSubmit(values) {

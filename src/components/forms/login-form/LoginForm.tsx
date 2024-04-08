@@ -62,24 +62,6 @@ export default function LoginForm() {
     }
   };
 
-  const handleVerifyGoogleAuth = async () => {
-    setIsLoading(true);
-    try {
-      const response = await verifyGoogleAuthService();
-
-      if (response) {
-        navigate("/clients");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    handleVerifyGoogleAuth();
-  }, []);
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
