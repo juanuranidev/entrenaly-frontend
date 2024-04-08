@@ -1,6 +1,9 @@
 import { useEffect, useState, createContext, useContext } from "react";
-import { getUserSessionService } from "services/user/user.services";
-import { useNavigate, useLocation } from "react-router-dom";
+import {
+  getUserSessionService,
+  verifyGoogleAuthService,
+} from "services/user/user.services";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const initialContextValue = {
@@ -13,6 +16,8 @@ export const useAuthContext = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }: any) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [params] = useSearchParams();
+  const invite = params.get("invite");
 
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,10 +36,28 @@ export const AuthContextProvider = ({ children }: any) => {
 
       setUserData(response);
     } catch (error) {
-      navigate("");
+      navigate(invite ? `?invite=${invite}` : "");
     }
     setIsLoading(false);
   };
+
+  const handleVerifyGoogleAuth = async () => {
+    setIsLoading(true);
+    try {
+      const response = await verifyGoogleAuthService(String(invite));
+
+      if (response) {
+        navigate("/clients");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    handleVerifyGoogleAuth();
+  }, []);
 
   useEffect(() => {
     handleManageSession();

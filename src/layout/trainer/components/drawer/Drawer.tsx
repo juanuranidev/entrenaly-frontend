@@ -59,7 +59,6 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
         sx={{
           height: "100%",
           display: "flex",
-          overflowY: "scroll",
           flexDirection: "column",
           justifyContent: "space-between",
         }}

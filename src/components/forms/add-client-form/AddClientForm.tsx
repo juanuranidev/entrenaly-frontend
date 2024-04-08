@@ -18,14 +18,17 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useEffect, useState } from "react";
 import { getInviteService } from "services/client/client.services";
 import ENV from "lib/utils/env";
+import { successToast } from "lib/utils/toast";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 export const DrawerStyled = styled(Drawer)(() => ({
   padding: "20rem",
 }));
 
-export default function AddClientForm({ open, onClose, onSubmit }: any) {
+export default function AddClientForm({ open, onClose }: any) {
   const theme: any = useTheme();
 
+  const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [inviteLink, setInviteLink] = useState("");
 
@@ -33,7 +36,6 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
     try {
       const response = await getInviteService();
 
-      console.log(response);
       setInviteLink(response.id);
       setIsLoading(false);
     } catch (error) {
@@ -41,8 +43,44 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
     }
   };
 
+  const handleCopyInvite = async (invite: string) => {
+    try {
+      await navigator.clipboard.writeText(invite);
+
+      successToast("Invitación copiada");
+      setCopied(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleRenderEndAdornment = () => {
+    if (copied) {
+      return (
+        <InputAdornment position="start">
+          <CheckCircleIcon color="primary" />
+        </InputAdornment>
+      );
+    }
+
+    return (
+      <InputAdornment position="start">
+        <IconButton
+          onClick={() =>
+            handleCopyInvite(
+              `${ENV.VITE_FRONTEND_BASE_URL}?invite=${inviteLink}`
+            )
+          }
+        >
+          <ContentCopyIcon />
+        </IconButton>
+      </InputAdornment>
+    );
+  };
+
   useEffect(() => {
     if (open) {
+      setCopied(false);
       handleGetInvite();
     }
   }, [open]);
@@ -74,18 +112,13 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
             cuenta
           </Typography>
           <TextField
+            disabled
             fullWidth
             style={{ paddingTop: 20 }}
             value={`${ENV.VITE_FRONTEND_BASE_URL}?invite=${inviteLink}`}
             variant="outlined"
             InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <ContentCopyIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
+              endAdornment: handleRenderEndAdornment(),
             }}
           />
         </Grid>
@@ -106,7 +139,7 @@ export default function AddClientForm({ open, onClose, onSubmit }: any) {
             fullWidth
             color="primary"
             variant="contained"
-            onClick={onSubmit}
+            onClick={onClose}
           >
             Aceptar
           </Button>
