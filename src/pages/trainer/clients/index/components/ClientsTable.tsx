@@ -37,8 +37,8 @@ export default function ClientsTable({ clients }: Props) {
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
-              <TableCell align="center">Categoria</TableCell>
-              <TableCell align="center">Categoria</TableCell>
+              {/* <TableCell align="center">Categoria</TableCell>
+              <TableCell align="center">Categoria</TableCell> */}
               <TableCell align="right">
                 <MoreHorizIcon sx={{ marginRight: 1 }} />
               </TableCell>

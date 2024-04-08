@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Menu,
   Stack,
+  Avatar,
   MenuItem,
   TableRow,
   TableCell,
@@ -37,12 +38,16 @@ export default function ClientRow({ client }: Props) {
     >
       <TableCell align="left">
         <Stack direction="row" alignItems="center" gap={1}>
-          <PersonIcon />
+          <Avatar
+            alt={client?.name}
+            src={client?.image}
+            sx={{ width: 30, height: 30 }}
+          />
           <Typography>{client.name}</Typography>
         </Stack>
       </TableCell>
-      <TableCell align="center">Musculacion</TableCell>
-      <TableCell align="center">Musculacion Diciembre</TableCell>
+      {/* <TableCell align="center">Musculacion</TableCell>
+      <TableCell align="center">Musculacion Diciembre</TableCell> */}
       <TableCell align="right">
         <IconButton
           id="basic-button"
