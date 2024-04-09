@@ -20,6 +20,7 @@ import { getInviteService } from "services/client/client.services";
 import ENV from "lib/utils/env";
 import { successToast } from "lib/utils/toast";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Icons from "lib/utils/icons";
 
 export const DrawerStyled = styled(Drawer)(() => ({
   padding: "20rem",
@@ -102,15 +103,21 @@ export default function AddClientForm({ open, onClose }: any) {
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
-      <Grid container spacing={3} height="100%">
+      <Grid container height="100%">
         <Grid item xs={12}>
           <PageTitle title="Añadir nuevo cliente" action={<CloseIcon />} />
         </Grid>
-        <Grid item xs={12}>
-          <Typography pt={4}>
+        <Grid item xs={12} bgcolor={theme?.colors?.background?.secondary} p={2}>
+          <Typography fontWeight={600}>
             Comparte el siguiente enlace a tu cliente para que pueda crearse una
-            cuenta
+            cuenta, ingresar a la plataforma y completar su ficha médica y datos
+            importantes.
           </Typography>
+          <Typography pt={2}>Con la aplicación tu cliente podrá:</Typography>
+          <Box display="flex" alignItems="center">
+            <Icons.checkBox color="primary" />
+            <Typography>Ver todos los planes que le asignes</Typography>
+          </Box>
           <TextField
             disabled
             fullWidth
