@@ -9,7 +9,6 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 type Props = {
@@ -46,8 +45,6 @@ export default function ClientRow({ client }: Props) {
           <Typography>{client.name}</Typography>
         </Stack>
       </TableCell>
-      {/* <TableCell align="center">Musculacion</TableCell>
-      <TableCell align="center">Musculacion Diciembre</TableCell> */}
       <TableCell align="right">
         <IconButton
           id="basic-button"

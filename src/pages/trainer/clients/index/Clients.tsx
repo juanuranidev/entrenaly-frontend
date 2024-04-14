@@ -1,21 +1,14 @@
-import {
-  Box,
-  Typography,
-  useTheme,
-  Card,
-  Grid,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import MainTitle from "./components/MainTitle";
+import ClientsTable from "./components/ClientsTable";
+import ClientsTableLoading from "./components/ClientsTableLoading";
 import { useEffect, useState } from "react";
 import { getClientsByUserIdService } from "services/client/client.services";
-import ClientsTable from "./components/ClientsTable";
-import MainTitle from "./components/MainTitle";
+import { Box, Typography, useTheme, Card, Grid, Alert } from "@mui/material";
 
 export default function Clients() {
   const theme: any = useTheme();
   const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleGetClients = async () => {
     setIsLoading(true);
@@ -26,6 +19,24 @@ export default function Clients() {
       console.log(error);
     }
     setIsLoading(false);
+  };
+
+  const handleRenderContent = () => {
+    if (isLoading) {
+      return <ClientsTableLoading />;
+    }
+
+    if (!isLoading && !clients.length) {
+      return (
+        <Box display="flex" justifyContent="center" py={theme?.spacing(35)}>
+          <Typography fontSize={25} fontWeight={400}>
+            ¡No tienes clientes!
+          </Typography>
+        </Box>
+      );
+    }
+
+    return <ClientsTable clients={clients} />;
   };
 
   useEffect(() => {
@@ -47,19 +58,7 @@ export default function Clients() {
             </Alert>
           </Grid>
           <Grid item xs={12}>
-            {isLoading ? (
-              <Box
-                width="100%"
-                height="20rem"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <CircularProgress />
-              </Box>
-            ) : (
-              <ClientsTable clients={clients} />
-            )}
+            {handleRenderContent()}
           </Grid>
         </Grid>
       </Card>
