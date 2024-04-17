@@ -24,8 +24,16 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
       color="primary"
       key={item.url}
       sx={{
+        marginY: theme?.spacing(1),
+        backgroundColor: currentView
+          ? theme?.colors?.backgroundHover?.secondary
+          : theme?.colors?.background?.primary,
         "& .MuiListItemIcon-root, & .MuiTypography-root": {
-          color: currentView ? theme.colors.brand.primary : "",
+          fontSize: 15,
+          fontWeight: 500,
+          color: currentView
+            ? theme?.colors?.text?.primary
+            : theme?.colors.text.secondary,
         },
       }}
       onClick={() => {
@@ -36,7 +44,7 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
       <ListItemIcon>{item.icon}</ListItemIcon>
       <ListItemText
         primary={
-          <Typography variant="h6" fontSize={18} sx={{ fontWeight: 600 }}>
+          <Typography fontSize={18} sx={{ fontWeight: 600 }}>
             {item.title}
           </Typography>
         }

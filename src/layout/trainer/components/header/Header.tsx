@@ -1,23 +1,18 @@
-import { IconButton, useMediaQuery } from "@mui/material";
-import { HeaderStyled } from "./Styles";
-import { useTheme } from "@mui/material/styles";
-import MenuIcon from "@mui/icons-material/Menu";
+import Icons from "lib/utils/icons";
 import Profile from "../profile/Profile";
+import { useTheme } from "@mui/material/styles";
+import { HeaderStyled } from "./Styles";
+import { IconButton, useMediaQuery } from "@mui/material";
 
 export default function Header({ setIsDrawerOpen }: any) {
-  const theme = useTheme();
+  const theme: any = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <HeaderStyled
-      theme={theme}
-      style={{
-        justifyContent: isLargeScreen ? "flex-end" : "space-between",
-      }}
-    >
+    <HeaderStyled theme={theme} isLargeScreen={isLargeScreen}>
       {!isLargeScreen ? (
         <IconButton onClick={() => setIsDrawerOpen(true)}>
-          <MenuIcon />
+          <Icons.menu />
         </IconButton>
       ) : null}
       <Profile />

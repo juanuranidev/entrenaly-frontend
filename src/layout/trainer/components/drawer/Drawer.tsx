@@ -1,14 +1,8 @@
 import { useTheme } from "@mui/material/styles";
 import { DrawerStyles } from "./Styles";
-import {
-  Box,
-  Chip,
-  List,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, List, useMediaQuery } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import PersonIcon from "@mui/icons-material/Person";
 import NavbarItem from "../navbar-item/NavbarItem";
 import HomeIcon from "@mui/icons-material/Home";
@@ -26,11 +20,6 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
   };
 
   const navbarItems = [
-    // {
-    //   title: "Inicio",
-    //   url: "/dashboard",
-    //   icon: icons.home,
-    // },
     {
       title: "Clientes",
       url: "/clients",
@@ -63,29 +52,9 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
           justifyContent: "space-between",
         }}
       >
-        <Stack
-          mt={2}
-          py={2}
-          spacing={1}
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Typography fontWeight={700} fontSize={20}>
-            Entrenaly
-          </Typography>
-          <Chip
-            label="v1.0.0"
-            size="small"
-            sx={{
-              height: 20,
-              fontWeight: 800,
-              color: theme.colors.general.white,
-              backgroundColor: theme.colors.brand.primary,
-              "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
-            }}
-          />
-        </Stack>
+        <Box display="flex" justifyContent="center" p={theme?.spacing(2)}>
+          <LogoWithVersion />
+        </Box>
         <List>
           {navbarItems.map((item) => (
             <NavbarItem

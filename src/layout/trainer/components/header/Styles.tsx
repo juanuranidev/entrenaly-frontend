@@ -1,11 +1,18 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const HeaderStyled = styled(Box)(({ theme }) => ({
-  display: "flex",
-  height: "5rem",
-  alignItems: "center",
-  padding: theme.spacing(3),
-  backgroundColor: "#ffffff",
-  borderBottom: `1px solid ${theme.palette.divider}`,
-}));
+type HeaderStyledProps = {
+  theme: any;
+  isLargeScreen: boolean;
+};
+
+export const HeaderStyled = styled(Box)<HeaderStyledProps>(
+  ({ theme, isLargeScreen }) => ({
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(1.5),
+    backgroundColor: "#ffffff",
+    borderBottom: `1px solid ${theme?.colors?.border?.primary}`,
+    justifyContent: isLargeScreen ? "flex-end" : "space-between",
+  })
+);
