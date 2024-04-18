@@ -1,6 +1,10 @@
 import { Chip, Stack, Typography, useTheme } from "@mui/material";
 
-export default function LogoWithVersion() {
+type Props = {
+  hideVersion?: boolean;
+};
+
+export default function LogoWithVersion({ hideVersion = false }: Props) {
   const theme: any = useTheme();
 
   return (
@@ -8,17 +12,19 @@ export default function LogoWithVersion() {
       <Typography fontWeight={700} fontSize={20}>
         Entrenaly
       </Typography>
-      <Chip
-        label="v1.0.0"
-        size="small"
-        sx={{
-          height: 20,
-          fontWeight: 800,
-          color: theme.colors.general.white,
-          backgroundColor: theme.colors.brand.primary,
-          "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
-        }}
-      />
+      {!hideVersion ? (
+        <Chip
+          label="v1.0.0"
+          size="small"
+          sx={{
+            height: 25,
+            fontWeight: 600,
+            color: theme?.colors?.text?.primary,
+            backgroundColor: theme.colors.background.tertiary,
+            "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
+          }}
+        />
+      ) : null}
     </Stack>
   );
 }

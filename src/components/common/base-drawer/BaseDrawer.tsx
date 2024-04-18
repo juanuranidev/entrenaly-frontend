@@ -1,14 +1,20 @@
 import { BottomDrawerStyled, RightDrawerStyled } from "./Styles";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme, Box, CircularProgress } from "@mui/material";
 import Puller from "../puller/Puller";
 
 type Props = {
   open: boolean;
   children: any;
+  isLoading: boolean;
   onClose: () => void;
 };
 
-export default function BaseDrawer({ open, onClose, children }: Props) {
+export default function BaseDrawer({
+  open,
+  onClose,
+  children,
+  isLoading,
+}: Props) {
   const theme: any = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -22,7 +28,18 @@ export default function BaseDrawer({ open, onClose, children }: Props) {
         onClose={onClose}
       >
         <Puller />
-        {children}
+        {isLoading ? (
+          <Box
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          children
+        )}
       </BottomDrawerStyled>
     );
   }
@@ -34,7 +51,18 @@ export default function BaseDrawer({ open, onClose, children }: Props) {
       anchor="right"
       onClose={onClose}
     >
-      {children}
+      {isLoading ? (
+        <Box
+          height="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        children
+      )}
     </RightDrawerStyled>
   );
 }
