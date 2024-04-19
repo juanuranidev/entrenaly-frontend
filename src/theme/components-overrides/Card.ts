@@ -3,9 +3,11 @@ export default function Card(theme: any) {
     MuiCard: {
       styleOverrides: {
         root: {
+          boxShadow: "none",
           padding: theme.spacing(3),
-          boxShadow: theme.customShadows.card,
-          border: `1px solid ${theme.palette.divider}`,
+          backgroundColor: "#ffffff",
+          borderRadius: theme?.spacing(2),
+          border: `1px solid ${theme?.colors?.border?.primary}`,
         },
       },
     },

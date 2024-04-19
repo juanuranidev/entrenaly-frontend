@@ -8,15 +8,17 @@ import TableCell from "./TableCell";
 import IconButton from "./IconButton";
 import ListItemButton from "./ListItemButton";
 import ButtonBase from "./ButtonBase";
+import Alert from "./Alert";
 
 export default function ComponentsOverrides(theme: any) {
   return merge(
     Link(),
     Tabs(),
-    Button(),
     Tab(theme),
     Card(theme),
     ButtonBase(),
+    Alert(theme),
+    Button(theme),
     TableCell(theme),
     IconButton(theme),
     ListItemButton(theme)

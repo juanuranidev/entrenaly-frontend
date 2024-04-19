@@ -1,4 +1,4 @@
-export default function Button() {
+export default function Button(theme: any) {
   const disabledStyle = {
     "&.Mui-disabled": {
       backgroundColor: "#eeeeee",
@@ -13,6 +13,10 @@ export default function Button() {
       styleOverrides: {
         root: {
           fontWeight: 600,
+          backgroundColor: theme?.colors?.background?.tertiary,
+          "&:hover": {
+            backgroundColor: theme?.colors?.backgroundHover?.tertiary,
+          },
         },
         contained: {
           ...disabledStyle,
