@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }: any) => {
   const handleVerifyGoogleAuth = async () => {
     setIsLoading(true);
     try {
-      const response = await verifyGoogleAuthService(String(invite));
+      const response = await verifyGoogleAuthService(invite);
 
       if (response) {
         navigate("/clients");
@@ -63,17 +63,19 @@ export const AuthContextProvider = ({ children }: any) => {
     handleManageSession();
   }, [location.pathname]);
 
-  if (isLoading) {
+  if (isLoading && !userData) {
     return <p>loading...</p>;
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        userData,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  if (userData) {
+    return (
+      <AuthContext.Provider
+        value={{
+          userData,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    );
+  }
 };
