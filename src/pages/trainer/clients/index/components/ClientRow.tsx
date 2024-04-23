@@ -9,7 +9,8 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router-dom";
+import Icons from "lib/utils/icons";
 
 type Props = {
   client: any;
@@ -18,6 +19,7 @@ type Props = {
 export default function ClientRow({ client }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,8 +32,8 @@ export default function ClientRow({ client }: Props) {
   return (
     <TableRow
       hover
-      role="checkbox"
       tabIndex={-1}
+      role="checkbox"
       key={client.name}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
@@ -42,18 +44,18 @@ export default function ClientRow({ client }: Props) {
             src={client?.image}
             sx={{ width: 30, height: 30 }}
           />
-          <Typography>{client.name}</Typography>
+          <Typography>{client?.name}</Typography>
         </Stack>
       </TableCell>
       <TableCell align="right">
         <IconButton
           id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
+          aria-expanded={open ? "true" : undefined}
+          aria-controls={open ? "basic-menu" : undefined}
         >
-          <MoreHorizIcon />
+          <Icons.more />
         </IconButton>
         <Menu
           elevation={2}
@@ -65,7 +67,9 @@ export default function ClientRow({ client }: Props) {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Ver perfil</MenuItem>
+          <MenuItem onClick={() => navigate(`/clients/profile/${client?.id}`)}>
+            Ver perfil
+          </MenuItem>
           <MenuItem onClick={handleClose}>Editar</MenuItem>
           <MenuItem onClick={handleClose}>Eliminar</MenuItem>
         </Menu>

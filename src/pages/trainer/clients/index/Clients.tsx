@@ -50,11 +50,9 @@ export default function Clients() {
         <Grid container spacing={theme.spacing(3)}>
           <Grid item xs={12}>
             <Alert severity="info">
-              <Typography fontSize={15}>
-                En esta sección podrás ver todos tus clientes y la información
-                de cada uno de ellos, presiona en "Agregar Nuevo" para generar
-                un link de invitación y agregar nuevos clientes.
-              </Typography>
+              En esta sección podrás ver todos tus clientes y la información de
+              cada uno de ellos, presiona en "Agregar Nuevo" para generar un
+              link de invitación y agregar nuevos clientes.
             </Alert>
           </Grid>
           <Grid item xs={12}>

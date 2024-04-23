@@ -7,7 +7,7 @@ import {
   TableHead,
   TableContainer,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Icons from "lib/utils/icons";
 import ClientRow from "./ClientRow";
 
 type Props = {
@@ -26,10 +26,10 @@ export default function ClientsTable({ clients }: Props) {
       <TableContainer
         sx={{
           width: "100%",
-          overflowX: "auto",
-          position: "relative",
           display: "block",
           maxWidth: "100%",
+          overflowX: "auto",
+          position: "relative",
           "& td, & th": { whiteSpace: "nowrap" },
         }}
       >
@@ -37,9 +37,8 @@ export default function ClientsTable({ clients }: Props) {
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
-
               <TableCell align="right">
-                <MoreHorizIcon sx={{ marginRight: 1 }} />
+                <Icons.more sx={{ marginRight: 1 }} />
               </TableCell>
             </TableRow>
           </TableHead>
