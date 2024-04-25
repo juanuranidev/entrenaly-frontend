@@ -7,7 +7,7 @@ export default function Card(theme: any) {
           padding: theme.spacing(3),
           backgroundColor: "#ffffff",
           borderRadius: theme?.spacing(2),
-          border: `1px solid ${theme?.colors?.border?.primary}`,
+          border: `2px solid ${theme?.colors?.border?.primary}`,
         },
       },
     },
