@@ -77,7 +77,7 @@ export const googleAuthService = async () => {
   }
 };
 
-export const verifyGoogleAuthService = async (invite: string) => {
+export const verifyGoogleAuthService = async (invite: string | null) => {
   console.log("AAAAAAAAAAAA");
 
   let userInformation;
@@ -97,6 +97,7 @@ export const verifyGoogleAuthService = async (invite: string) => {
       invite: invite ?? null,
     };
 
+    console.log({ userFormatted });
     const response = await gooogleAuthService(userFormatted);
     console.log("RESPONSE GOOGLE AUTH", response);
     return response;

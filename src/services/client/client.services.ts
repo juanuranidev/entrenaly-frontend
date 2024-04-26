@@ -25,3 +25,37 @@ export const getClientsByUserIdService = async () => {
     throw error;
   }
 };
+
+export const getClientByIdService = async (clientId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/client/v1/get-client-by-id",
+      params: {
+        clientId,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateClientMedicalInformationService = async (
+  clientMedicalInformation: any
+) => {
+  try {
+    const response = await request({
+      method: "POST",
+      url: "/client/v1/update-client-medical-information",
+      data: {
+        data: clientMedicalInformation,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
