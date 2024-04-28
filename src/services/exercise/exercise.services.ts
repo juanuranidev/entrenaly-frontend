@@ -1,6 +1,6 @@
 import request from "services/request";
 
-export const getAllExercisesService = async (name: string) => {
+export const getAllExercisesService = async (name?: string) => {
   try {
     const response = await request({
       method: "GET",
