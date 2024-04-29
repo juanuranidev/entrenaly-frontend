@@ -60,3 +60,32 @@ export const getAllExercisesCategoriesService = async () => {
     throw error;
   }
 };
+
+export const getAllExercisesDescriptionsService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/exercise/v1/get/exercises-descriptions",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const postExerciseDescriptionService = async (description: string) => {
+  try {
+    const response = await request({
+      method: "POST",
+      url: "/exercise/v1/post/exercise-description",
+      data: {
+        data: description,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
