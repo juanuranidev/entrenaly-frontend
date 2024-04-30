@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons";
+import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 
 type Props = {
   client: any;
@@ -18,6 +19,8 @@ type Props = {
 
 export default function ClientRow({ client }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =
+    useState<boolean>(false);
 
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
@@ -70,10 +73,21 @@ export default function ClientRow({ client }: Props) {
           <MenuItem onClick={() => navigate(`/clients/profile/${client?.id}`)}>
             Ver perfil
           </MenuItem>
-          <MenuItem onClick={handleClose}>Editar</MenuItem>
-          <MenuItem onClick={handleClose}>Eliminar</MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              setModalUpdateMedicalInformation(true);
+            }}
+          >
+            Editar ficha médica
+          </MenuItem>
         </Menu>
       </TableCell>
+      <UpdateMedicalInformationForm
+        clientSelected={client}
+        open={modalUpdateMedicalInformation}
+        onClose={() => setModalUpdateMedicalInformation(false)}
+      />
     </TableRow>
   );
 }

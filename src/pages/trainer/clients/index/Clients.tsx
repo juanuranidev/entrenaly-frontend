@@ -47,7 +47,7 @@ export default function Clients() {
     <Box>
       <MainTitle />
       <Card>
-        <Grid container spacing={theme.spacing(3)}>
+        <Grid container spacing={theme?.spacing(3)}>
           <Grid item xs={12}>
             <Alert severity="info">
               En esta sección podrás ver todos tus clientes y la información de
