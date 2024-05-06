@@ -70,3 +70,32 @@ export const getAllPlansByClientIdService = async (clientId: string) => {
     throw error;
   }
 };
+
+export const getPlansTypesService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/plan/v1/get/plans-types",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getPlanByIdService = async (planId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/plan/v1/get/plan-by-id",
+      params: {
+        planId,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

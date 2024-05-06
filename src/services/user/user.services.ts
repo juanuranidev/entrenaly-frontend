@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 
 type DataForLogin = {
@@ -67,23 +68,33 @@ export const signOutService = async () => {
   }
 };
 
-export const googleAuthService = async () => {
+export const googleAuthService = async (invite: string | undefined) => {
   try {
     const provider = new GoogleAuthProvider();
 
-    await signInWithRedirect(auth, provider);
+    const response: any = await signInWithPopup(auth, provider);
+    console.log(response);
+    const userFormatted = {
+      name: response.user.displayName,
+      email: response.user.email,
+      image: response.user.photoURL,
+      authId: response.user.uid,
+      invite: invite ?? null,
+    };
+    console.log({ userFormatted });
+
+    const user = await gooogleAuthService(userFormatted);
+
+    return user;
   } catch (error) {
     console.error("Error durante el inicio de sesión:", error);
   }
 };
 
 export const verifyGoogleAuthService = async (invite: string | null) => {
-  console.log("AAAAAAAAAAAA");
-
   let userInformation;
   try {
     const signInInformation = await getRedirectResult(auth);
-    console.log("SIGN IN INFORMATION", signInInformation);
     if (!signInInformation) {
       return null;
     }
@@ -97,12 +108,10 @@ export const verifyGoogleAuthService = async (invite: string | null) => {
       invite: invite ?? null,
     };
 
-    console.log({ userFormatted });
     const response = await gooogleAuthService(userFormatted);
     console.log("RESPONSE GOOGLE AUTH", response);
     return response;
   } catch (error) {
-    console.log("ERROOOOR", error);
     await deleteUserByIdService(userInformation);
 
     throw error;
@@ -166,7 +175,7 @@ export const gooogleAuthService = async (user: any) => {
         data: user,
       },
     });
-
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response);
     return response;
   } catch (error) {
     throw error;
