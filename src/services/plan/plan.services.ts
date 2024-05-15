@@ -99,3 +99,19 @@ export const getPlanByIdService = async (planId: string) => {
     throw error;
   }
 };
+
+export const updateWeeklyPlanService = async (data: any) => {
+  try {
+    const response = await request({
+      method: "POST",
+      url: "/plan/v1/update/weekly-plan",
+      data: {
+        data,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
