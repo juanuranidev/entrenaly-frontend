@@ -27,7 +27,7 @@
       "@css/*": ["src/css/*"],
       "@pages/*": ["src/pages/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@layout/*": ["src/layout/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@routes/*": ["src/routes/*"],
       "@services/*": ["src/services/*"],
       "@components/*": ["src/components/*"]
