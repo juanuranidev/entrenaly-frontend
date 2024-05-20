@@ -1,6 +1,5 @@
 const colors = {
   brand: {
-    // primary: "#1976d2",
     primary: "#376EFF",
     primaryHover: "#eaf6ff",
     test: "#A8B0BD",

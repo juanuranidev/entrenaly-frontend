@@ -62,7 +62,7 @@ const Typography = (fontFamily: string) => ({
     lineHeight: 1.66,
   },
   button: {
-    textTransform: "capitalize",
+    textTransform: "capitalize" as const,
   },
 });
 

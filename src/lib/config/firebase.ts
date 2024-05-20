@@ -3,7 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import ENV from "lib/utils/env";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
   authDomain: ENV.FIREBASE_AUTH_DOMAIN,
   projectId: ENV.FIREBASE_PROJECT_ID,
@@ -13,8 +13,8 @@ const firebaseConfig = {
   measurementId: ENV.FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
 const initializeFirebaseApp = () => {
+  const app = initializeApp(firebaseConfig);
   getAnalytics(app);
   getAuth(app);
 };
