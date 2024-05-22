@@ -1,9 +1,6 @@
 import { useEffect, useState, createContext, useContext } from "react";
-import {
-  getUserSessionService,
-  verifyGoogleAuthService,
-} from "services/user/user.services";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { getUserSessionService } from "services/user/user.services";
 import axios from "axios";
 
 const initialContextValue = {
@@ -27,6 +24,7 @@ export const AuthContextProvider = ({ children }: any) => {
     try {
       const response: any = await getUserSessionService();
       if (!response) {
+        navigate("");
         throw "Not an user in session";
       }
 
@@ -41,24 +39,6 @@ export const AuthContextProvider = ({ children }: any) => {
     setIsLoading(false);
   };
 
-  const handleVerifyGoogleAuth = async () => {
-    setIsLoading(true);
-    try {
-      const response = await verifyGoogleAuthService(invite);
-
-      if (response) {
-        navigate("/clients");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    handleVerifyGoogleAuth();
-  }, []);
-
   useEffect(() => {
     handleManageSession();
   }, [location.pathname]);
@@ -67,15 +47,14 @@ export const AuthContextProvider = ({ children }: any) => {
     return <p>loading...</p>;
   }
 
-  if (userData) {
-    return (
-      <AuthContext.Provider
-        value={{
-          userData,
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    );
-  }
+  return (
+    <AuthContext.Provider
+      value={{
+        userData,
+        setUserData,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
