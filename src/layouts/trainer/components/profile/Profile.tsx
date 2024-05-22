@@ -1,12 +1,11 @@
 import {
   Box,
   List,
-  Paper,
+  Card,
   Stack,
   Avatar,
   Popper,
   Divider,
-  useTheme,
   ButtonBase,
   Typography,
   ListItemIcon,
@@ -15,35 +14,27 @@ import {
   ClickAwayListener,
 } from "@mui/material";
 import { useRef, useState } from "react";
+import { useThemeContext } from "contexts/Theme";
 import { useAuthContext } from "contexts/Auth";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons";
 
 export default function Profile() {
-  const theme: any = useTheme();
   const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
-  const { userData } = useAuthContext();
+
+  const { theme } = useThemeContext();
+  const { userData, setUserData } = useAuthContext();
 
   const [open, setOpen] = useState(false);
-
-  const handleClose = (event: any) => {
-    if (!anchorRef) {
-      return;
-    }
-
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpen(false);
-  };
 
   const handleSignOut = async () => {
     try {
       await signOutService();
 
       navigate("/");
+      setUserData(null);
     } catch (error) {
       console.log(error);
     }
@@ -55,12 +46,9 @@ export default function Profile() {
         <Divider orientation="vertical" flexItem />
         <ButtonBase
           ref={anchorRef}
-          aria-haspopup="true"
-          aria-label="open profile"
           onClick={() => setOpen((prevOpen) => !prevOpen)}
-          aria-controls={open ? "profile-grow" : undefined}
           sx={{
-            p: theme.spacing(1),
+            p: theme?.spacing(1),
             borderRadius: theme?.spacing(1),
             "&:hover": {
               backgroundColor: theme?.colors?.backgroundHover?.primary,
@@ -81,27 +69,21 @@ export default function Profile() {
           />
         </ButtonBase>
       </Stack>
-      <Popper
-        open={open}
-        disablePortal
-        role={undefined}
-        placement="bottom"
-        sx={{ zIndex: 10000 }}
-        anchorEl={anchorRef.current}
-      >
-        <Paper
+      <Popper open={open} placement="bottom" anchorEl={anchorRef?.current}>
+        <Card
           sx={{
             width: 200,
-            boxShadow: theme.shadows[1],
+            padding: 0,
+            borderRadius: theme?.spacing(1),
           }}
         >
-          <ClickAwayListener onClickAway={handleClose}>
-            <List sx={{ padding: theme?.spacing(1) }} dense>
+          <ClickAwayListener onClickAway={() => setOpen(false)}>
+            <List sx={{ padding: theme?.spacing(1) }}>
               <ListItemButton
+                disabled
                 sx={{
                   "& .MuiListItemIcon-root, & .MuiTypography-root": {
                     fontSize: 12,
-                    fontWeight: 500,
                   },
                 }}
                 onClick={() => {}}
@@ -116,7 +98,6 @@ export default function Profile() {
                 sx={{
                   "& .MuiListItemIcon-root, & .MuiTypography-root": {
                     fontSize: 12,
-                    fontWeight: 500,
                   },
                 }}
               >
@@ -127,7 +108,7 @@ export default function Profile() {
               </ListItemButton>
             </List>
           </ClickAwayListener>
-        </Paper>
+        </Card>
       </Popper>
     </Box>
   );

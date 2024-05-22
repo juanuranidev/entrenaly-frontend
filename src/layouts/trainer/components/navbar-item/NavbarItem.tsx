@@ -1,11 +1,6 @@
-import {
-  useTheme,
-  Typography,
-  ListItemIcon,
-  ListItemText,
-  ListItemButton,
-} from "@mui/material";
+import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useThemeContext } from "contexts/Theme";
 
 type Props = {
   item: any;
@@ -13,11 +8,12 @@ type Props = {
 };
 
 export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentView = location.pathname === item.url;
+  const currentView = location.pathname.includes(item.url);
 
   return (
     <ListItemButton
@@ -26,29 +22,21 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
       sx={{
         marginY: theme?.spacing(1),
         backgroundColor: currentView
-          ? theme?.colors?.backgroundHover?.secondary
+          ? theme?.colors?.backgroundHover?.tertiary
           : theme?.colors?.background?.primary,
         "& .MuiListItemIcon-root, & .MuiTypography-root": {
-          fontSize: 15,
-          fontWeight: 500,
           color: currentView
             ? theme?.colors?.text?.primary
-            : theme?.colors.text.secondary,
+            : theme?.colors.text?.secondary,
         },
       }}
       onClick={() => {
         setIsDrawerOpen(false);
-        navigate(item.url);
+        navigate(item?.url);
       }}
     >
-      <ListItemIcon>{item.icon}</ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography fontSize={18} sx={{ fontWeight: 600 }}>
-            {item.title}
-          </Typography>
-        }
-      />
+      <ListItemIcon>{item?.icon}</ListItemIcon>
+      <ListItemText>{item?.title}</ListItemText>
     </ListItemButton>
   );
 }

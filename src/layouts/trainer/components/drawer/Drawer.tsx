@@ -1,39 +1,34 @@
-import { useTheme } from "@mui/material/styles";
 import { DrawerStyles } from "./Styles";
+import { useThemeContext } from "contexts/Theme";
 import { Box, List, useMediaQuery } from "@mui/material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
-import PersonIcon from "@mui/icons-material/Person";
 import NavbarItem from "../navbar-item/NavbarItem";
-import HomeIcon from "@mui/icons-material/Home";
-import FeedIcon from "@mui/icons-material/Feed";
+import Icons from "lib/utils/icons";
 
-export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
-  const theme: any = useTheme();
+type Props = {
+  isDrawerOpen: boolean;
+  setIsDrawerOpen: (value: boolean) => void;
+};
+
+export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: Props) {
+  const { theme } = useThemeContext();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
-
-  const icons = {
-    home: <HomeIcon fontSize="medium" />,
-    person: <PersonIcon fontSize="medium" />,
-    feed: <FeedIcon fontSize="medium" />,
-    fitness: <FitnessCenterIcon fontSize="medium" />,
-  };
 
   const navbarItems = [
     {
       title: "Clientes",
-      url: "/clients",
-      icon: icons.person,
+      url: "/trainer/clients",
+      icon: <Icons.person fontSize="medium" />,
     },
     {
       title: "Planes",
-      url: "/plans",
-      icon: icons.feed,
+      url: "/trainer/plans",
+      icon: <Icons.plans fontSize="medium" />,
     },
     {
       title: "Ejercicios",
-      url: "/exercises",
-      icon: icons.fitness,
+      url: "/trainer/exercises",
+      icon: <Icons.dumbbell fontSize="medium" />,
     },
   ];
 
@@ -59,7 +54,7 @@ export default function Drawer({ isDrawerOpen, setIsDrawerOpen }: any) {
           {navbarItems.map((item) => (
             <NavbarItem
               item={item}
-              key={item.url}
+              key={item?.title}
               setIsDrawerOpen={setIsDrawerOpen}
             />
           ))}

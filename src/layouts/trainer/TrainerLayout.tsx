@@ -1,3 +1,4 @@
+import { useThemeContext } from "contexts/Theme";
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -5,6 +6,7 @@ import Drawer from "./components/drawer/Drawer";
 import Header from "./components/header/Header";
 
 export default function TrainerLayout() {
+  const { theme } = useThemeContext();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
@@ -13,11 +15,12 @@ export default function TrainerLayout() {
       <Box width="100%">
         <Header setIsDrawerOpen={setIsDrawerOpen} />
         <Box
-          p={3}
+          py={theme?.spacing(4)}
+          px={{ base: theme?.spacing(0), md: theme?.spacing(4) }}
           sx={{
-            overflow: "scroll",
+            overflowY: "scroll",
             backgroundColor: "#F7F8FA",
-            height: "calc(100vh - 5rem)",
+            height: "calc(100dvh - 5rem)",
           }}
         >
           <Outlet />
