@@ -13,7 +13,7 @@ import {
 import { useFormik } from "formik";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import AddExercisesDrawer from "./components/AddExercisesDrawer";
+import AddExercisesDrawer from "../weekly-plan-form/components/add-exercises-form/AddExercisesForm";
 
 type Props = {
   onSubmit: (values: any) => any;

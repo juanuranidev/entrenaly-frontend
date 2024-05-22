@@ -1,48 +1,32 @@
 import {
   Box,
   Grid,
+  Stack,
+  Avatar,
   Button,
-  Drawer,
-  useTheme,
   TextField,
   Typography,
   IconButton,
   InputAdornment,
-  CircularProgress,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import CloseIcon from "@mui/icons-material/Close";
-import PageTitle from "components/common/page-title/PageTitle";
-import BaseDrawer from "components/common/base-drawer/BaseDrawer";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useEffect, useState } from "react";
-import { getInviteService } from "services/client/client.services";
-import ENV from "lib/utils/env";
+import { useThemeContext } from "contexts/Theme";
+import { useAuthContext } from "contexts/Auth";
+import { useGetInvite } from "hooks/useGetInvite";
 import { successToast } from "lib/utils/toast";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ModalTitle from "components/common/modal-title/ModalTitle";
+import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons";
-
-export const DrawerStyled = styled(Drawer)(() => ({
-  padding: "20rem",
-}));
+import ENV from "lib/utils/env";
 
 export default function AddClientForm({ open, onClose }: any) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
+  const { userData } = useAuthContext();
+  const { invite, isLoading } = useGetInvite();
 
   const [copied, setCopied] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [inviteLink, setInviteLink] = useState("");
-
-  const handleGetInvite = async () => {
-    try {
-      const response = await getInviteService();
-
-      setInviteLink(response.id);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleCopyInvite = async (invite: string) => {
     try {
@@ -68,9 +52,7 @@ export default function AddClientForm({ open, onClose }: any) {
       <InputAdornment position="start">
         <IconButton
           onClick={() =>
-            handleCopyInvite(
-              `${ENV.VITE_FRONTEND_BASE_URL}?invite=${inviteLink}`
-            )
+            handleCopyInvite(`${ENV.FRONTEND_BASE_URL}?invite=${invite}`)
           }
         >
           <ContentCopyIcon />
@@ -82,76 +64,115 @@ export default function AddClientForm({ open, onClose }: any) {
   useEffect(() => {
     if (open) {
       setCopied(false);
-      handleGetInvite();
     }
   }, [open]);
 
-  if (isLoading) {
-    return (
-      <BaseDrawer open={open} onClose={onClose}>
-        <Box
-          height="100%"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <CircularProgress />
-        </Box>
-      </BaseDrawer>
-    );
-  }
-
   return (
-    <BaseDrawer open={open} onClose={onClose}>
-      <Grid container height="100%">
-        <Grid item xs={12}>
-          <PageTitle title="Añadir nuevo cliente" action={<CloseIcon />} />
+    <BaseDrawer open={open} onClose={onClose} isLoading={isLoading}>
+      <ModalTitle
+        title="Añadir nuevo cliente"
+        action={
+          <IconButton onClick={onClose}>
+            <Icons.close />
+          </IconButton>
+        }
+      />
+      <Box height="calc(100% - 10rem)" overflow="auto">
+        <Grid container>
+          <Grid item xs={12}>
+            <Stack
+              width="100%"
+              flexDirection="row"
+              alignItems="center"
+              mb={theme?.spacing(2)}
+              justifyContent="space-between"
+            >
+              <Box>
+                <Typography
+                  fontSize={18}
+                  mr={theme?.spacing(1)}
+                  sx={{ fontWeight: 600 }}
+                >
+                  {userData?.name}
+                </Typography>
+                <Typography
+                  fontSize={14}
+                  mr={theme?.spacing(1)}
+                  sx={{ fontWeight: 500 }}
+                >
+                  Entrenador
+                </Typography>
+              </Box>
+              <Avatar
+                alt={userData?.name}
+                src={userData?.image}
+                sx={{ width: 45, height: 45 }}
+              />
+            </Stack>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography fontWeight={500} fontSize={13}>
+              Comparte el siguiente enlace a tu cliente para que pueda crearse
+              una cuenta, ingresar a la plataforma y completar su ficha médica y
+              datos importantes.
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              disabled
+              fullWidth
+              variant="outlined"
+              value={`${ENV.FRONTEND_BASE_URL}?invite=${invite}`}
+              style={{
+                marginTop: theme?.spacing(5),
+                marginBottom: theme?.spacing(5),
+              }}
+              InputProps={{
+                endAdornment: handleRenderEndAdornment(),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography mb={theme?.spacing(1)} fontWeight={500}>
+              Tu cliente podrá:
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Stack
+              flexDirection="row"
+              alignItems="center"
+              gap={theme?.spacing(1)}
+            >
+              <Icons.checkBox color="primary" />
+              <Typography fontWeight={500}>
+                Ver sus planes asignados.
+              </Typography>
+            </Stack>
+          </Grid>
+          <Grid item xs={12}>
+            <Stack
+              flexDirection="row"
+              alignItems="center"
+              gap={theme?.spacing(1)}
+            >
+              <Icons.checkBox color="primary" />
+              <Typography fontWeight={500}>
+                Ver imágenes de los ejericios.
+              </Typography>
+            </Stack>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography fontWeight={500} mt={theme?.spacing(1)} fontSize={13}>
+              ¡Próximamente muchas cosas más!
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={12} bgcolor={theme?.colors?.background?.secondary} p={2}>
-          <Typography fontWeight={600}>
-            Comparte el siguiente enlace a tu cliente para que pueda crearse una
-            cuenta, ingresar a la plataforma y completar su ficha médica y datos
-            importantes.
-          </Typography>
-          <Typography pt={2}>Con la aplicación tu cliente podrá:</Typography>
-          <Box display="flex" alignItems="center">
-            <Icons.checkBox color="primary" />
-            <Typography>Ver todos los planes que le asignes</Typography>
-          </Box>
-          <TextField
-            disabled
-            fullWidth
-            style={{ paddingTop: 20 }}
-            value={`${ENV.VITE_FRONTEND_BASE_URL}?invite=${inviteLink}`}
-            variant="outlined"
-            InputProps={{
-              endAdornment: handleRenderEndAdornment(),
-            }}
-          />
-        </Grid>
-        <Box
-          zIndex={10}
-          width="100%"
-          display="flex"
-          position="sticky"
-          alignItems="flex-end"
-          mt={theme.spacing(3)}
-          justifyContent="center"
-          paddingY={theme.spacing(2)}
-          paddingLeft={theme.spacing(3)}
-          bottom={theme.spacing(0)}
-          bgcolor={theme.colors.background.primary}
-        >
-          <Button
-            fullWidth
-            color="primary"
-            variant="contained"
-            onClick={onClose}
-          >
-            Aceptar
-          </Button>
-        </Box>
-      </Grid>
+      </Box>
+      <Box py={theme?.spacing(3)} bgcolor={theme?.colors?.background?.primary}>
+        <Button fullWidth color="primary" onClick={onClose} variant="contained">
+          Aceptar
+        </Button>
+      </Box>
     </BaseDrawer>
   );
 }

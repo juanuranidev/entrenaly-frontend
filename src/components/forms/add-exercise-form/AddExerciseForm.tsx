@@ -36,7 +36,6 @@ export default function AddExerciseForm({
     enableReinitialize: true,
     onSubmit(values) {
       try {
-        console.log(values);
         onSubmit();
         onClose();
       } catch (error) {
