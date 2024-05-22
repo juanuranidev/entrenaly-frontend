@@ -15,6 +15,7 @@ import {
 } from "services/user/user.services";
 import { errorToast, successToast } from "lib/utils/toast";
 import { registerFormValidation } from "./validations";
+import { useAuthContext } from "contexts/Auth";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -24,6 +25,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function RegisterForm({ invite }: any) {
   const navigate = useNavigate();
+  const { setUserData } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -47,7 +49,7 @@ export default function RegisterForm({ invite }: any) {
       await registerWithEmailService(data);
 
       successToast("Registrado con éxito");
-      navigate("/clients");
+      navigate("/trainer/clients");
     } catch (error: any) {
       console.log(error);
       handleManageRegisterWithEmailError(error);
@@ -66,10 +68,15 @@ export default function RegisterForm({ invite }: any) {
     }
   };
 
-  const handleRegisterWithGoogle = () => {
+  const handleRegisterWithGoogle = async () => {
     setIsLoading(true);
     try {
-      googleAuthService();
+      const response = await googleAuthService(invite);
+
+      if (response) {
+        navigate("/trainer/clients");
+        setUserData(response);
+      }
     } catch (error) {
       console.log(error);
       errorToast("Error en el servidor");

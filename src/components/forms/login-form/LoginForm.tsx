@@ -12,19 +12,23 @@ import {
 import {
   googleAuthService,
   loginWithEmailService,
-  verifyGoogleAuthService,
 } from "services/user/user.services";
-import { useEffect, useState } from "react";
 import { loginFormValidation } from "./validations";
+import { useAuthContext } from "contexts/Auth";
 import { useNavigate } from "react-router-dom";
 import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
+import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Icons from "lib/utils/icons";
 
-export default function LoginForm() {
+type Props = {
+  invite: any;
+};
+
+export default function LoginForm({ invite }: Props) {
   const navigate = useNavigate();
+  const { setUserData } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +48,7 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       await loginWithEmailService(data);
-      navigate("/clients");
+      navigate("/trainer/clients");
     } catch (error: any) {
       console.log(error);
       errorToast("Credenciales inválidas");
@@ -52,10 +56,15 @@ export default function LoginForm() {
     setIsLoading(false);
   };
 
-  const handleLoginWithGoogle = () => {
+  const handleLoginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      googleAuthService();
+      const response = await googleAuthService(invite);
+
+      if (response) {
+        navigate("/trainer/clients");
+        setUserData(response);
+      }
     } catch (error) {
       console.log(error);
       errorToast("Error en el servidor");
@@ -70,15 +79,20 @@ export default function LoginForm() {
         </InputLabel>
         <TextField
           fullWidth
-          value={formik.values.email}
+          value={formik?.values.email}
           name="email"
           size="small"
           placeholder="juan@gmail.com"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
+          onBlur={formik?.handleBlur}
+          onChange={formik?.handleChange}
+          error={
+            Boolean(formik?.touched?.email) && Boolean(formik?.errors?.email)
+          }
           helperText={
-            Boolean(formik.touched.email) && <span>{formik.errors.email}</span>
+            Boolean(formik?.touched?.email) &&
+            Boolean(formik?.errors?.email) && (
+              <span>{formik?.errors?.email}</span>
+            )
           }
         />
       </Grid>
@@ -92,18 +106,19 @@ export default function LoginForm() {
           id="password"
           name="password"
           placeholder="**********"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
+          onBlur={formik?.handleBlur}
+          onChange={formik?.handleChange}
+          value={formik?.values.password}
           type={showPassword ? "text" : "password"}
           error={
-            Boolean(formik.touched.password) && Boolean(formik.errors.password)
+            Boolean(formik?.touched.password) &&
+            Boolean(formik?.errors.password)
           }
           helperText={
-            Boolean(formik.touched.password) &&
-            Boolean(formik.errors.password) &&
-            formik.errors.password === "Mínimo 6 caracteres" && (
-              <span>{formik.errors.password}</span>
+            Boolean(formik?.touched.password) &&
+            Boolean(formik?.errors.password) &&
+            formik?.errors.password === "Mínimo 6 caracteres" && (
+              <span>{formik?.errors.password}</span>
             )
           }
           InputProps={{
@@ -116,7 +131,11 @@ export default function LoginForm() {
                   aria-label="toggle password visibility"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  {showPassword ? (
+                    <Icons.visibilityOn />
+                  ) : (
+                    <Icons.visibilityOff />
+                  )}
                 </IconButton>
               </InputAdornment>
             ),
@@ -128,7 +147,7 @@ export default function LoginForm() {
           fullWidth
           variant="contained"
           disabled={isLoading}
-          onClick={() => formik.handleSubmit()}
+          onClick={() => formik?.handleSubmit()}
           endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Ingresar
