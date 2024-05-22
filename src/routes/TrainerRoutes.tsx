@@ -1,8 +1,18 @@
-import { lazy } from "react";
-import Loadable from "components/common/Loadable";
-import TrainerLayout from "layout/trainer/TrainerLayout";
+import { lazy, Suspense } from "react";
+import { CircularProgress } from "@mui/material";
+import TrainerLayout from "layouts/trainer/TrainerLayout";
+
+const Loadable = (Component: any) => (props: any) =>
+  (
+    <Suspense fallback={<CircularProgress />}>
+      <Component {...props} />
+    </Suspense>
+  );
 
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
+const ViewWeeklyPlan = Loadable(
+  lazy(() => import("pages/trainer/plans/view-weekly-plan/ViewWeeklyPlan"))
+);
 const Clients = Loadable(
   lazy(() => import("pages/trainer/clients/index/Clients"))
 );
@@ -18,33 +28,62 @@ const NewWeeklyPlan = Loadable(
 const NewCircuitPlan = Loadable(
   lazy(() => import("pages/trainer/plans/new-circuit-plan/NewCircuitPlan"))
 );
+const ClientProfile = Loadable(
+  lazy(() => import("pages/trainer/clients/profile/ClientProfile"))
+);
+const EditWeeklyPlan = Loadable(
+  lazy(() => import("pages/trainer/plans/edit-weekly-plan/EditWeeklyPlan"))
+);
+const NotFound = Loadable(
+  lazy(() => import("pages/trainer/not-found/NotFound"))
+);
 
 const TrainerRoutes = {
   element: <TrainerLayout />,
   children: [
     {
-      path: "/dashboard",
+      path: "/trainer/dashboard",
       element: <Dashboard />,
     },
     {
-      path: "/clients",
+      path: "/",
       element: <Clients />,
     },
     {
-      path: "/plans",
+      path: "/trainer/clients",
+      element: <Clients />,
+    },
+    {
+      path: "/trainer/clients/profile/:id",
+      element: <ClientProfile />,
+    },
+    {
+      path: "/trainer/plans",
       element: <Plans />,
     },
     {
-      path: "/plans/new/weekly",
+      path: "/trainer/plans/new/weekly",
       element: <NewWeeklyPlan />,
     },
     {
-      path: "/plans/new/circuit",
+      path: "/trainer/plans/edit/weekly/:id",
+      element: <EditWeeklyPlan />,
+    },
+    {
+      path: "/trainer/plans/new/circuit",
       element: <NewCircuitPlan />,
     },
     {
-      path: "/exercises",
+      path: "/trainer/plans/view/weekly/:planId",
+      element: <ViewWeeklyPlan />,
+    },
+    {
+      path: "/trainer/exercises",
       element: <Exercises />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ],
 };
