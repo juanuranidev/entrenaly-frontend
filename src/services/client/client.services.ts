@@ -59,3 +59,17 @@ export const updateClientMedicalInformationService = async (
     throw error;
   }
 };
+
+export const readInviteInformationService = async (inviteId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/client/v1/read/invite-information",
+      params: { inviteId },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

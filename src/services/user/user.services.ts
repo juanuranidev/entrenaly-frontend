@@ -5,19 +5,20 @@ import {
   deleteUser,
   getRedirectResult,
   onAuthStateChanged,
-  signInWithRedirect,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "lib/config/firebase";
 
 type DataForLogin = {
   email: string;
   password: string;
 };
-
-const auth = getAuth();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 // Auth provider
 export const registerWithEmailService = async (data: any) => {
