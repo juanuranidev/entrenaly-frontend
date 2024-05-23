@@ -21,6 +21,18 @@ export default function Button(theme: any) {
             backgroundColor: theme?.colors?.backgroundHover?.tertiary,
           },
           ...disabledStyle,
+          "&.MuiButton-containedSuccess": {
+            backgroundColor: theme.palette.success.main,
+            "&:hover": {
+              backgroundColor: theme.palette.success.dark,
+            },
+          },
+          "&.MuiButton-containedError": {
+            backgroundColor: theme.palette.error.main,
+            "&:hover": {
+              backgroundColor: theme.palette.error.dark,
+            },
+          },
         },
         outlined: {
           color: theme?.colors?.text?.tertiary,
