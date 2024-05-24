@@ -1,15 +1,17 @@
-import { Link, Stack, Typography, useTheme } from "@mui/material";
+import { Link, Stack, Typography } from "@mui/material";
+import { useThemeContext } from "contexts/Theme";
 
 export default function Footer() {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
 
   return (
     <Stack
+      alignItems="center"
       p={theme.spacing(4)}
-      spacing={2}
-      direction={"row"}
       textAlign={"inherit"}
-      justifyContent={"space-between"}
+      gap={theme?.spacing(2)}
+      justifyContent="space-between"
+      direction={{ base: "column", md: "row" }}
     >
       <Typography variant="subtitle2" component="span">
         &copy; Entrenaly todos los derechos reservados. By&nbsp;
@@ -24,8 +26,7 @@ export default function Footer() {
           Juan
         </Typography>
       </Typography>
-
-      <Stack direction={"row"} spacing={3} textAlign={"inherit"}>
+      <Stack direction="row" gap={theme?.spacing(4)}>
         <Typography
           href=""
           target="_blank"
