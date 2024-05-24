@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Chip,
-  Grid,
-  useTheme,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import Icons from "lib/utils/icons";
 import AddVariantForm from "components/forms/add-variant-form/AddVariantForm";
+import { useThemeContext } from "contexts/Theme";
+import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 
 type Props = {
   exercise: any;
-  handleGetExercises: () => void;
+  handleRefetchGetAllExercises: () => void;
 };
 
-export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
+export default function ExerciseCard({
+  exercise,
+  handleRefetchGetAllExercises,
+}: Props) {
   const isVariant = exercise.variant;
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
 
   const [exerciseSelected, setExerciseSelected] = useState(null);
   const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
@@ -32,19 +29,21 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
       <Box
         display="flex"
         key={exercise?.name}
-        p={theme.spacing(2)}
+        p={theme?.spacing(2)}
         flexDirection="column"
         justifyContent="center"
-        margin={theme.spacing(1)}
+        borderRadius={theme?.spacing(2)}
+        boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px;"
+        border={`2px solid ${theme?.colors?.border.primary}`}
         width={{
-          base: `calc(100% - ${theme.spacing(2)})`,
-          sm: `calc(50% - ${theme.spacing(2)})`,
-          md: `calc(25% - ${theme.spacing(2)})`,
-          lg: `calc(20% - ${theme.spacing(2)})`,
+          base: `calc(100% - ${theme.spacing(3)})`,
+          sm: `calc(50% - ${theme.spacing(3)})`,
+          md: `calc(50% - ${theme.spacing(3)})`,
+          lg: `calc(25% - ${theme.spacing(3)})`,
+          xl: `calc(20% - ${theme.spacing(3)})`,
         }}
-        boxShadow={theme.customShadows.secondary}
       >
-        <Grid container mt={1} direction="row" alignItems="center">
+        <Grid container alignItems="center">
           <Grid item xs={10}>
             <Chip
               size="small"
@@ -52,13 +51,22 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
               variant="outlined"
               label={exercise?.category?.name}
             />
-            {exercise.variant ? (
+            {exercise?.variant ? (
               <Chip
-                style={{ marginLeft: theme.spacing(1) }}
                 size="small"
                 color="success"
+                label="Variante"
                 variant="outlined"
-                label="Editado"
+                style={{ marginLeft: theme?.spacing(1) }}
+              />
+            ) : null}
+            {exercise?.userId ? (
+              <Chip
+                size="small"
+                color="success"
+                label="Creado"
+                variant="outlined"
+                style={{ marginLeft: theme?.spacing(1) }}
               />
             ) : null}
           </Grid>
@@ -67,26 +75,28 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
               size="small"
               onClick={() => handleOpenFormEditExercise(exercise)}
             >
-              <EditIcon color="primary" fontSize="small" />
+              <Icons.edit color="primary" fontSize="small" />
             </IconButton>
           </Grid>
         </Grid>
         <img
-          src={isVariant ? exercise?.variant?.video : exercise?.video}
+          src={isVariant ? exercise?.variant?.image : exercise?.image}
           style={{
             width: "100%",
             height: "100%",
             margin: "auto",
-            objectFit: "contain",
             aspectRatio: "16/12",
+            objectFit: "contain",
+            marginTop: theme?.spacing(1),
+            marginBottom: theme?.spacing(1),
           }}
         />
         <Typography
-          mt={1}
-          lineHeight="1.2"
           align="left"
           fontSize={16}
+          lineHeight="1.2"
           fontWeight={600}
+          mt={theme?.spacing(1)}
         >
           {isVariant ? exercise?.variant?.name : exercise?.name}
         </Typography>
@@ -96,7 +106,7 @@ export default function ExerciseCard({ exercise, handleGetExercises }: Props) {
         open={openFormAddVariant}
         exerciseSelected={exerciseSelected}
         onClose={() => setOpenFormAddVariant(false)}
-        onSubmit={() => handleGetExercises()}
+        onSubmit={() => handleRefetchGetAllExercises()}
       />
     </React.Fragment>
   );

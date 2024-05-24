@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Button, Tooltip } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Button } from "@mui/material";
+import Icons from "lib/utils/icons";
 import PageTitle from "components/common/page-title/PageTitle";
 import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
 
-export default function MainTitle() {
+type Props = {
+  handleRefetchGetAllExercises: () => Promise<void>;
+};
+
+export default function MainTitle({ handleRefetchGetAllExercises }: Props) {
   const [openDrawerAddExercise, setOpenDrawerAddExercise] = useState(false);
 
   return (
@@ -12,22 +16,19 @@ export default function MainTitle() {
       <PageTitle
         title="Ejercicios"
         action={
-          <Tooltip title="Próximamente">
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              // onClick={() => setOpenDrawerAddExercise(true)}
-              onClick={() => {}}
-            >
-              Agregar nuevo
-            </Button>
-          </Tooltip>
+          <Button
+            variant="contained"
+            startIcon={<Icons.add />}
+            onClick={() => setOpenDrawerAddExercise(true)}
+          >
+            Agregar nuevo
+          </Button>
         }
       />
       <AddExerciseForm
         open={openDrawerAddExercise}
+        onSubmit={() => handleRefetchGetAllExercises()}
         onClose={() => setOpenDrawerAddExercise(false)}
-        onSubmit={() => console.log("first")}
       />
     </React.Fragment>
   );

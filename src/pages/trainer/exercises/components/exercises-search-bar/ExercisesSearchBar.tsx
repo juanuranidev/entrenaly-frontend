@@ -1,6 +1,5 @@
 import { TextField, IconButton } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
+import Icons from "lib/utils/icons";
 
 type Props = {
   searchValue: string;
@@ -18,10 +17,10 @@ export default function ExercisesSearchBar({
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
       InputProps={{
-        startAdornment: <SearchIcon />,
+        startAdornment: <Icons.search />,
         endAdornment: searchValue ? (
           <IconButton size="small" onClick={() => setSearchValue("")}>
-            <CloseIcon fontSize="small" />
+            <Icons.close fontSize="small" />
           </IconButton>
         ) : null,
       }}
