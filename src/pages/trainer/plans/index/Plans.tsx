@@ -1,76 +1,34 @@
-import {
-  Box,
-  Card,
-  Grid,
-  Table,
-  Alert,
-  TableRow,
-  useTheme,
-  TableBody,
-  TableCell,
-  TableHead,
-  Typography,
-  TableContainer,
-} from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useGetAllPlansByUserId } from "hooks/useGetAllPlansByUserId";
+import { Card, Grid, Alert } from "@mui/material";
+import { useThemeContext } from "contexts/Theme";
+import PlansTable from "components/common/plans-table/PlansTable";
 import MainTitle from "./components/MainTitle";
-import PlanRow from "./components/PlanRow";
 
 export default function Plans() {
-  const theme: any = useTheme();
-  const plans = [
-    {
-      createdAt: "12/11/22",
-      name: "Musculacion Diciembre",
-      clientsWithIt: 5,
-    },
-  ];
+  const { theme } = useThemeContext();
+  const { plans, isLoading } = useGetAllPlansByUserId();
 
   return (
-    <Box>
-      <MainTitle />
-      <Card>
-        <Grid container spacing={theme.spacing(3)}>
-          <Grid item xs={12}>
-            <Alert severity="info">
-              <Typography fontSize={15}>
-                Acá podrás ver y crear crear tanto planes semanales como de tipo
-                circuito asi como también asignarlos a tus clientes
-              </Typography>
-            </Alert>
+    <Grid container spacing={theme?.spacing(3)}>
+      <Grid item xs={12}>
+        <MainTitle />
+      </Grid>
+      <Grid item xs={12}>
+        <Card>
+          <Grid container spacing={theme?.spacing(3)}>
+            <Grid item xs={12}>
+              <Alert severity="info">
+                Acá podrás crear nuevos planes de entrenamiento tanto de tipo
+                semanal como de circuito. Además podrás verlos, editarlos y
+                asignarlos a tus clientes.
+              </Alert>
+            </Grid>
+            <Grid item xs={12}>
+              <PlansTable plans={plans} isLoading={isLoading} />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TableContainer
-              sx={{
-                width: "100%",
-                overflowX: "auto",
-                position: "relative",
-                display: "block",
-                maxWidth: "100%",
-                "& td, & th": { whiteSpace: "nowrap" },
-              }}
-            >
-              <Table size="medium" aria-labelledby="{lanes">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Nombre</TableCell>
-                    <TableCell align="center">Fecha</TableCell>
-                    <TableCell align="center">Clientes asignados</TableCell>
-                    <TableCell align="right">
-                      <MoreHorizIcon sx={{ marginRight: 1 }} />
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {plans.map((plan: any) => (
-                    <PlanRow plan={plan} key={plan.name} />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-        </Grid>
-      </Card>
-    </Box>
+        </Card>
+      </Grid>
+    </Grid>
   );
 }

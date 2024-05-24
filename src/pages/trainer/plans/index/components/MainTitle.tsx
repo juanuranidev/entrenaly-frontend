@@ -1,27 +1,35 @@
-import React, { useState } from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
+import React, { useState, useRef } from "react";
+import {
+  List,
+  Card,
+  Button,
+  Popper,
+  ListItemIcon,
+  ListItemText,
+  ListItemButton,
+  ClickAwayListener,
+} from "@mui/material";
+import { useGetAllPlansTypes } from "hooks/useGetAllPlansTypes";
+import { PLANS_CONSTANTS } from "lib/constants/plans.constants";
+import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
 import PageTitle from "components/common/page-title/PageTitle";
+import Icons from "lib/utils/icons";
 
-type Props = {};
-
-const icons = {
-  add: AddIcon,
-};
-
-export default function MainTitle({}: Props) {
+export default function MainTitle() {
   const navigate = useNavigate();
+  const anchorRef = useRef<any>(null);
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
 
-  const open = Boolean(anchorEl);
+  const { theme } = useThemeContext();
+  const { plansTypes } = useGetAllPlansTypes();
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleGetUrlByPlanType = (planType: string) => {
+    if (planType === PLANS_CONSTANTS.TYPES.WEEKLY) {
+      return "/trainer/plans/new/weekly";
+    }
+    return "";
   };
 
   return (
@@ -30,33 +38,44 @@ export default function MainTitle({}: Props) {
       action={
         <React.Fragment>
           <Button
-            id="basic-button"
+            ref={anchorRef}
             variant="contained"
-            aria-haspopup="true"
-            onClick={handleClick}
-            startIcon={<icons.add />}
-            aria-expanded={open ? "true" : undefined}
-            aria-controls={open ? "basic-menu" : undefined}
+            startIcon={<Icons.add />}
+            onClick={() => setOpen((prevOpen) => !prevOpen)}
           >
             Agregar nuevo
           </Button>
-          <Menu
-            open={open}
-            elevation={2}
-            id="basic-menu"
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            <MenuItem onClick={() => navigate("/plans/new/weekly")}>
-              Plan mensual
-            </MenuItem>
-            <MenuItem onClick={() => navigate("/plans/new/circuit")}>
-              Circuito
-            </MenuItem>
-          </Menu>
+          <Popper open={open} placement="bottom" anchorEl={anchorRef?.current}>
+            <Card
+              sx={{ width: 200, padding: 0, borderRadius: theme?.spacing(1) }}
+            >
+              <ClickAwayListener onClickAway={() => setOpen(false)}>
+                <List sx={{ padding: theme?.spacing(1) }}>
+                  {plansTypes.map((planType: any) => (
+                    <ListItemButton
+                      key={planType?.id}
+                      disabled={
+                        planType?.name === PLANS_CONSTANTS.TYPES.CIRCUIT
+                      }
+                      onClick={() =>
+                        navigate(handleGetUrlByPlanType(planType?.name))
+                      }
+                      sx={{
+                        "& .MuiListItemIcon-root, & .MuiTypography-root": {
+                          fontSize: 12,
+                        },
+                      }}
+                    >
+                      <ListItemIcon>
+                        <Icons.pdfs style={{ fontSize: 20 }} />
+                      </ListItemIcon>
+                      <ListItemText>{planType?.name}</ListItemText>
+                    </ListItemButton>
+                  ))}
+                </List>
+              </ClickAwayListener>
+            </Card>
+          </Popper>
         </React.Fragment>
       }
     />

@@ -89,3 +89,19 @@ export const postExerciseDescriptionService = async (description: string) => {
     throw error;
   }
 };
+
+export const createExerciseService = async (exercise: any) => {
+  try {
+    const response = await request({
+      method: "POST",
+      url: "/exercise/v1/create",
+      data: {
+        data: exercise,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

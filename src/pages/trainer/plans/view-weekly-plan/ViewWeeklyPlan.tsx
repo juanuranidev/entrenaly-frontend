@@ -1,19 +1,23 @@
-import { Button, Card, Grid } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 import { useThemeContext } from "contexts/Theme";
-import { useNavigate } from "react-router-dom";
-import WeeklyPlanForm from "components/forms/weekly-plan-form/WeeklyPlanForm";
+import { useGetPlanById } from "hooks/useGetPlanById";
+import { Button, Grid } from "@mui/material";
 import PageTitle from "components/common/page-title/PageTitle";
+import PlanDay from "./components/plan-day/PlanDay";
 import Icons from "lib/utils/icons";
 
-export default function NewWeeklyPlan() {
+export default function ViewWeeklyPlan() {
+  const { planId } = useParams();
   const { theme } = useThemeContext();
+  const { plan }: any = useGetPlanById(planId);
+
   const navigate = useNavigate();
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
         <PageTitle
-          title="Nuevo plan semanal"
+          title={plan?.name}
           action={
             <Button
               variant="outlined"
@@ -25,11 +29,9 @@ export default function NewWeeklyPlan() {
           }
         />
       </Grid>
-      <Grid item xs={12}>
-        <Card>
-          <WeeklyPlanForm />
-        </Card>
-      </Grid>
+      {plan?.days?.map((day: any) => (
+        <PlanDay key={day?.dayOfWeekId} day={day} />
+      ))}
     </Grid>
   );
 }
