@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { getAllExercisesService } from "services/exercise/exercise.services";
 
-export const useGetAllExercises = () => {
+export const useGetAllExercises = (name?: string) => {
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleGetClientsByUserId = async () => {
+  const handleGetAllExercises = async () => {
     setIsLoading(true);
     try {
-      const response = await getAllExercisesService();
+      const response = await getAllExercisesService(name);
 
       setExercises(response);
     } catch (error) {
@@ -17,9 +17,13 @@ export const useGetAllExercises = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    handleGetClientsByUserId();
-  }, []);
+  const handleRefetchGetAllExercises = async () => {
+    await handleGetAllExercises();
+  };
 
-  return { exercises, isLoading };
+  useEffect(() => {
+    handleGetAllExercises();
+  }, [name]);
+
+  return { exercises, isLoading, handleRefetchGetAllExercises };
 };
