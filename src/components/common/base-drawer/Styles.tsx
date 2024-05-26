@@ -3,19 +3,16 @@ import { styled } from "@mui/material/styles";
 
 type PageTitleProps = {
   theme: any;
+  largeDrawer?: boolean;
 };
 
 export const RightDrawerStyled = styled(Drawer)<PageTitleProps>(
-  ({ theme }) => ({
+  ({ theme, largeDrawer }) => ({
     "& .MuiDrawer-paper": {
-      paddingRight: theme?.spacing(2),
-      paddingTop: theme?.spacing(2),
-      paddingLeft: theme?.spacing(2),
-      minWidth: 400,
-      maxWidth: 400,
-    },
-    "& .MuiBackdrop-root": {
-      // zIndex: theme.zIndex.drawer + 100, // Establece un zIndex más bajo que el del Drawer
+      minWidth: largeDrawer ? 650 : 500,
+      maxWidth: largeDrawer ? 650 : 500,
+      padding: theme?.spacing(3),
+      paddingBottom: theme?.spacing(0),
     },
   })
 );
@@ -23,12 +20,8 @@ export const RightDrawerStyled = styled(Drawer)<PageTitleProps>(
 export const BottomDrawerStyled = styled(SwipeableDrawer)<PageTitleProps>(
   ({ theme }) => ({
     "& .MuiDrawer-paper": {
-      paddingRight: theme?.spacing(2),
-      paddingTop: theme?.spacing(2),
-      paddingLeft: theme?.spacing(2),
-    },
-    "& .MuiBackdrop-root": {
-      // zIndex: theme.zIndex.drawer + 100, // Establece un zIndex más bajo que el del Drawer
+      padding: theme?.spacing(3),
+      paddingBottom: theme?.spacing(0),
     },
   })
 );

@@ -1,12 +1,15 @@
 import { BottomDrawerStyled, RightDrawerStyled } from "./Styles";
-import { useMediaQuery, useTheme, Box, CircularProgress } from "@mui/material";
+import { useMediaQuery, Box, CircularProgress } from "@mui/material";
+import { useThemeContext } from "contexts/Theme";
 import Puller from "../puller/Puller";
 
 type Props = {
   open: boolean;
   children: any;
-  isLoading: boolean;
+  isLoading?: boolean;
   onClose: () => void;
+  styles?: any;
+  largeDrawer?: boolean;
 };
 
 export default function BaseDrawer({
@@ -14,8 +17,9 @@ export default function BaseDrawer({
   onClose,
   children,
   isLoading,
+  largeDrawer,
 }: Props) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   if (isSmallScreen) {
@@ -50,13 +54,14 @@ export default function BaseDrawer({
       theme={theme}
       anchor="right"
       onClose={onClose}
+      largeDrawer={largeDrawer}
     >
       {isLoading ? (
         <Box
           height="100%"
           display="flex"
-          alignItems="center"
-          justifyContent="center"
+          alignItems="flex-start"
+          justifyContent="flex-start"
         >
           <CircularProgress />
         </Box>

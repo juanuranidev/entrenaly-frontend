@@ -1,27 +1,27 @@
-import { Chip, Stack, Typography, useTheme } from "@mui/material";
+import ENV from "lib/utils/env";
+import Logo from "../../../assets/icons/Logo.png";
+import { Chip, Stack } from "@mui/material";
+import { useThemeContext } from "contexts/Theme";
 
 type Props = {
   hideVersion?: boolean;
 };
 
 export default function LogoWithVersion({ hideVersion = false }: Props) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
 
   return (
-    <Stack spacing={1} direction="row" alignItems="center">
-      <Typography fontWeight={700} fontSize={20}>
-        Entrenaly
-      </Typography>
+    <Stack spacing={theme?.spacing(1)} direction="row" alignItems="center">
+      <img src={Logo} width={60} height="100%" />
       {!hideVersion ? (
         <Chip
-          label="v1.0.0"
           size="small"
+          label={`v${ENV.APP_VERSION}`}
           sx={{
-            height: 25,
-            fontWeight: 600,
+            fontWeight: 500,
             color: theme?.colors?.text?.primary,
-            backgroundColor: theme.colors.background.tertiary,
-            "& .MuiChip-label": { fontSize: "0.625rem", py: 0.25 },
+            backgroundColor: theme?.colors?.background?.tertiary,
+            "& .MuiChip-label": { fontSize: "0.55rem" },
           }}
         />
       ) : null}

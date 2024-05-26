@@ -10,15 +10,16 @@ const Loadable = (Component: any) => (props: any) =>
   );
 
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
+const Profile = Loadable(
+  lazy(() => import("pages/trainer/user/profile/Profile"))
+);
 const ViewWeeklyPlan = Loadable(
   lazy(() => import("pages/trainer/plans/view-weekly-plan/ViewWeeklyPlan"))
 );
 const Clients = Loadable(
   lazy(() => import("pages/trainer/clients/index/Clients"))
 );
-const Dashboard = Loadable(
-  lazy(() => import("pages/trainer/dashboard/Dashboard"))
-);
+
 const Exercises = Loadable(
   lazy(() => import("pages/trainer/exercises/Exercises"))
 );
@@ -41,10 +42,6 @@ const NotFound = Loadable(
 const TrainerRoutes = {
   element: <TrainerLayout />,
   children: [
-    {
-      path: "/trainer/dashboard",
-      element: <Dashboard />,
-    },
     {
       path: "/",
       element: <Clients />,
@@ -80,6 +77,10 @@ const TrainerRoutes = {
     {
       path: "/trainer/exercises",
       element: <Exercises />,
+    },
+    {
+      path: "/trainer/profile",
+      element: <Profile />,
     },
     {
       path: "*",
