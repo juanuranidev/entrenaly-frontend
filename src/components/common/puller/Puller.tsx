@@ -1,8 +1,9 @@
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { PullerStyled } from "./Styles";
+import { useThemeContext } from "contexts/Theme";
 
 export default function Puller() {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
 
   return (
     <Box display="flex" justifyContent="center" m={1}>

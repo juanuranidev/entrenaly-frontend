@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { useThemeContext } from "contexts/Theme";
 import { ModalTitleStyled } from "./Styles";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function ModalTitle({ title, action }: Props) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (

@@ -1,6 +1,5 @@
-import { useTheme } from "@emotion/react";
-import { PageTitleStyled } from "./Styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
+import { useThemeContext } from "contexts/Theme";
 
 type Props = {
   title: string;
@@ -8,14 +7,22 @@ type Props = {
 };
 
 export default function PageTitle({ title, action }: Props) {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <PageTitleStyled theme={theme}>
-      <Typography fontWeight={800} fontSize={20}>
+    <Box
+      display="flex"
+      alignItems="center"
+      flexDirection="row"
+      justifyContent="space-between"
+      paddingLeft={isLargeScreen ? theme?.spacing(0) : theme?.spacing(4)}
+      paddingRight={isLargeScreen ? theme?.spacing(0) : theme?.spacing(4)}
+    >
+      <Typography fontWeight={700} fontSize={20}>
         {title}
       </Typography>
       {action ? <Box>{action}</Box> : null}
-    </PageTitleStyled>
+    </Box>
   );
 }

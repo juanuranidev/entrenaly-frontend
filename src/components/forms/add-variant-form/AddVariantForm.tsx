@@ -48,14 +48,14 @@ export default function AddVariantForm({
     if (isVariant) {
       return {
         name: exerciseSelected?.variant?.name ?? "",
-        video: exerciseSelected?.variant?.video ?? "",
+        image: exerciseSelected?.variant?.image ?? "",
         format: exerciseSelected?.variant?.format ?? "",
         variantId: exerciseSelected?.variant?.id ?? "",
       };
     } else {
       return {
         name: exerciseSelected?.name ?? "",
-        video: exerciseSelected?.video ?? "",
+        image: exerciseSelected?.image ?? "",
         format: exerciseSelected?.format ?? "",
       };
     }
@@ -155,30 +155,30 @@ export default function AddVariantForm({
           </Grid>
           <Grid item xs={12}>
             <Typography fontWeight={600} fontSize={15} mb={-1}>
-              Video
+              Imágen/GIF
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              name="video"
+              name="image"
               label="Link del video"
               onBlur={formik?.handleBlur}
-              value={formik?.values?.video}
+              value={formik?.values?.image}
               onChange={formik?.handleChange}
               error={
-                Boolean(formik?.touched?.video) &&
-                Boolean(formik?.errors?.video)
+                Boolean(formik?.touched?.image) &&
+                Boolean(formik?.errors?.image)
               }
               helperText={
-                Boolean(formik?.touched?.video) &&
-                Boolean(formik?.errors?.video)
+                Boolean(formik?.touched?.image) &&
+                Boolean(formik?.errors?.image)
               }
             />
           </Grid>
           <Grid item xs={12}>
             <img
-              src={formik?.values?.video}
+              src={formik?.values?.image}
               style={{
                 width: "100%",
                 height: "100%",
