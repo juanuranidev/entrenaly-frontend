@@ -198,3 +198,16 @@ export const getUserByAuthIdService = async (authId: string) => {
     throw error;
   }
 };
+
+export const getUserService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: `users/v1/get`,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
