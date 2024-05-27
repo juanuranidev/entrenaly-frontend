@@ -80,13 +80,12 @@ export default function Profile() {
           <ClickAwayListener onClickAway={() => setOpen(false)}>
             <List sx={{ padding: theme?.spacing(1) }}>
               <ListItemButton
-                disabled
                 sx={{
                   "& .MuiListItemIcon-root, & .MuiTypography-root": {
                     fontSize: 12,
                   },
                 }}
-                onClick={() => {}}
+                onClick={() => navigate("/trainer/profile")}
               >
                 <ListItemIcon>
                   <Icons.person style={{ fontSize: 20 }} />

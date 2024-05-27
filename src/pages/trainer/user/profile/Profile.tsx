@@ -1,18 +1,24 @@
-import { handleRenderNavbarItems } from "./components/Utils";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  profileNavbarItems,
+  PROFILE_NAVBAR_ITEMS_NAMES,
+} from "./components/Utils";
 import { Grid, Card, Button } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CustomTab from "components/common/custom-tab/CustomTab";
 import PageTitle from "components/common/page-title/PageTitle";
-import ViewTab from "./components/view-tab/ViewTab";
 import Icons from "lib/utils/icons";
 
-export default function ClientProfile() {
+type Props = {};
+
+export default function Profile({}: Props) {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
-  const { id: clientId } = useParams();
 
-  const [currentView, setCurrentView] = useState("Perfil");
+  const [currentView, setCurrentView] = useState(
+    PROFILE_NAVBAR_ITEMS_NAMES.PROFILE
+  );
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
@@ -42,8 +48,8 @@ export default function ClientProfile() {
               spacing={theme?.spacing(3)}
               mt={{ base: theme?.spacing(0), md: theme?.spacing(4) }}
             >
-              {handleRenderNavbarItems({ clientId }).map((navbarItem) => (
-                <ViewTab
+              {profileNavbarItems().map((navbarItem) => (
+                <CustomTab
                   key={navbarItem.name}
                   navbarItem={navbarItem}
                   currentView={currentView}
@@ -52,7 +58,7 @@ export default function ClientProfile() {
               ))}
             </Grid>
             {
-              handleRenderNavbarItems({ clientId }).find(
+              profileNavbarItems().find(
                 (navbarItem: any) => navbarItem.name === currentView
               )?.view
             }
