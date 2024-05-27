@@ -38,13 +38,14 @@ export default function WeeklyPlanForm({ plan }: Props) {
 
   const formik = useFormik({
     initialValues: {
-      name: plan?.name || "",
       days: [],
       clients: [],
-      categoryId: plan?.category?.id || "",
+      name: plan?.name || "",
       planId: plan?.id || null,
+      categoryId: plan?.category?.id || "",
     },
     async onSubmit(values) {
+      // console.log(values);
       if (editPlan) {
         handleUpdateWeeklyPlan(values);
       } else {
@@ -57,6 +58,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
 
   const handlePostWeeklyPlan = async (data: any) => {
     setIsLoading(true);
+    handleVerifyDescriptions(data.days);
     try {
       await postWeeklyPlanService(toPostWeeklyPlanDataAdapter(data));
 
@@ -71,6 +73,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
 
   const handleUpdateWeeklyPlan = async (data: any) => {
     setIsLoading(true);
+    handleVerifyDescriptions(data.days);
     try {
       await updateWeeklyPlanService(toPutWeeklyPlanDataAdapter(data));
 
@@ -107,6 +110,18 @@ export default function WeeklyPlanForm({ plan }: Props) {
     formik.setFieldValue("days", days);
   };
 
+  const handleVerifyDescriptions = (days: any) => {
+    for (const day of days) {
+      for (const exercise of day.exercises) {
+        if (!exercise.description) {
+          errorToast("Hay ejercicios sin descripción");
+          setIsLoading(false);
+          throw "";
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     handleFormatInitialData();
   }, [plan]);
@@ -124,9 +139,11 @@ export default function WeeklyPlanForm({ plan }: Props) {
           Agregar día
         </Button>
       </Grid>
-      {formik?.values?.days?.map((day: any) => (
-        <AccordionDay key={day?.dayOfWeekId} day={day} formik={formik} />
-      ))}
+      {formik?.values?.days
+        ?.sort((a: any, b: any) => a.dayOfWeekId - b.dayOfWeekId)
+        .map((day: any) => (
+          <AccordionDay key={day?.dayOfWeekId} day={day} formik={formik} />
+        ))}
       <Grid item xs={12} display="flex" justifyContent="flex-end">
         <Button
           color="primary"

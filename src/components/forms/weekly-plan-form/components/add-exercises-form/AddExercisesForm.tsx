@@ -1,17 +1,11 @@
-import {
-  Box,
-  Stack,
-  Button,
-  IconButton,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { defaultExercises } from "../../../../lib/utils/defaultExercises";
+import { Box, Stack, Button, IconButton, Typography } from "@mui/material";
+import { useGetAllExercises } from "hooks/useGetAllExercises";
+import { useThemeContext } from "contexts/Theme";
 import { useState } from "react";
-import PageTitle from "components/common/page-title/PageTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
-import ExerciseCard from "../../../common/ExerciseCard";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
+import ModalTitle from "components/common/modal-title/ModalTitle";
+import Icons from "lib/utils/icons";
 
 type Exercise = {
   name: string;
@@ -24,8 +18,9 @@ type Props = {
   onSubmit: (day: any) => void;
 };
 
-export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
-  const theme: any = useTheme();
+export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
+  const { theme } = useThemeContext();
+  const { exercises } = useGetAllExercises();
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
 
   const toggleExerciseSelection = (exercise: Exercise) => {
@@ -51,28 +46,29 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
   };
 
   return (
-    <BaseDrawer open={open} onClose={onClose}>
-      <PageTitle
+    <BaseDrawer open={open} onClose={onClose} largeDrawer>
+      <ModalTitle
         title="Agregar ejercicios"
         action={
           <IconButton onClick={onClose}>
-            <HighlightOffIcon />
+            <Icons.close />
           </IconButton>
         }
       />
-      <Typography fontWeight={600} fontSize={15} pb={2}>
+      <Typography fontWeight={600} fontSize={15}>
         Selecciona los ejercicios que quieres agregar
       </Typography>
-      <Box height="calc(100% - 10rem)" overflow="auto">
+      <Box height="calc(100% - 10rem)" overflow="auto" pt={theme?.spacing(4)}>
         <Stack
-          width="100%"
+          width="95%"
+          margin="auto"
           direction="row"
           flexWrap="wrap"
           alignItems="center"
-          gap={theme.spacing(2)}
+          gap={theme?.spacing(2)}
           justifyContent="center"
         >
-          {defaultExercises.map((exercise) => (
+          {exercises.map((exercise: any) => (
             <ExerciseCard
               key={exercise.name}
               exercise={exercise}
@@ -82,7 +78,7 @@ export default function AddExercisesDrawer({ open, onClose, onSubmit }: Props) {
           ))}
         </Stack>
       </Box>
-      <Box p={theme.spacing(2)} bgcolor={theme.colors.background.primary}>
+      <Box py={theme?.spacing(3)} bgcolor={theme.colors.background.primary}>
         <Button
           fullWidth
           variant="contained"

@@ -21,6 +21,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
 import Icons from "lib/utils/icons";
+import { USER_CONSTANTS } from "lib/constants/user.constants";
 
 type Props = {
   invite: any;
@@ -48,6 +49,7 @@ export default function LoginForm({ invite }: Props) {
     setIsLoading(true);
     try {
       await loginWithEmailService(data);
+
       navigate("/trainer/clients");
     } catch (error: any) {
       console.log(error);
@@ -60,9 +62,21 @@ export default function LoginForm({ invite }: Props) {
     setIsLoading(true);
     try {
       const response = await googleAuthService(invite);
+      console.log(response);
 
-      if (response) {
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
+      ) {
         navigate("/trainer/clients");
+        setUserData(response);
+      }
+
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
+      ) {
+        navigate("/client/plans");
         setUserData(response);
       }
     } catch (error) {
