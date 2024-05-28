@@ -39,7 +39,7 @@ const NotFound = Loadable(
   lazy(() => import("pages/trainer/not-found/NotFound"))
 );
 
-const TrainerRoutes = {
+const UserRoutes = {
   element: <TrainerLayout />,
   children: [
     {
@@ -89,4 +89,4 @@ const TrainerRoutes = {
   ],
 };
 
-export default TrainerRoutes;
+export default UserRoutes;
