@@ -3,7 +3,7 @@ import { useThemeContext } from "contexts/Theme";
 import { Box, List, useMediaQuery } from "@mui/material";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import NavbarItem from "../navbar-item/NavbarItem";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   isDrawerOpen: boolean;

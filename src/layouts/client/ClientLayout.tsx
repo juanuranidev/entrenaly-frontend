@@ -1,5 +1,5 @@
 import BaseLayout from "components/common/base-layout/BaseLayout";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function ClientLayout() {
   const navbarItems = [

@@ -1,4 +1,4 @@
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import moment from "moment";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";

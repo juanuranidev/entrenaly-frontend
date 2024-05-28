@@ -11,7 +11,7 @@ import {
 import { useGetAllExercisesDescriptions } from "hooks/useGetAllExercisesDescriptions";
 import { useThemeContext } from "contexts/Theme";
 import { useState } from "react";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";
 import ExerciseInput from "../exercise-input/ExerciseInput";
 

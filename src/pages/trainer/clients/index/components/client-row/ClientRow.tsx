@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useThemeContext } from "contexts/Theme";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import moment from "moment";
 
 type Props = {

@@ -4,7 +4,7 @@ import { useGetPlanById } from "hooks/useGetPlanById";
 import { Button, Grid } from "@mui/material";
 import PageTitle from "components/common/page-title/PageTitle";
 import PlanDay from "./components/plan-day/PlanDay";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function ViewWeeklyPlan() {
   const { planId } = useParams();

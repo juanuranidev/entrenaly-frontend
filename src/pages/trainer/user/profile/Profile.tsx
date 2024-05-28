@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CustomTab from "components/common/custom-tab/CustomTab";
 import PageTitle from "components/common/page-title/PageTitle";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {};
 

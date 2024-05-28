@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;

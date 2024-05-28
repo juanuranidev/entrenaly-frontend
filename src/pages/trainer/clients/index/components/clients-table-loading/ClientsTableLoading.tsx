@@ -10,7 +10,7 @@ import {
   TableContainer,
 } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function ClientsTableLoading() {
   const { theme } = useThemeContext();

@@ -5,7 +5,7 @@ import { useState } from "react";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
 import ModalTitle from "components/common/modal-title/ModalTitle";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Exercise = {
   name: string;

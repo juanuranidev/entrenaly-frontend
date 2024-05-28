@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
 import ClientRow from "../client-row/ClientRow";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   clients: any;

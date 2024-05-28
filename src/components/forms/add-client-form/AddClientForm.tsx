@@ -18,7 +18,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import ENV from "lib/utils/env";
 
 export default function AddClientForm({ open, onClose }: any) {

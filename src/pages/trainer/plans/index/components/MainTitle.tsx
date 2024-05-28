@@ -14,7 +14,7 @@ import { PLANS_CONSTANTS } from "lib/constants/plans.constants";
 import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "components/common/page-title/PageTitle";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function MainTitle() {
   const navigate = useNavigate();

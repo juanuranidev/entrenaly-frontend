@@ -20,7 +20,7 @@ import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import { USER_CONSTANTS } from "lib/constants/user.constants";
 
 type Props = {

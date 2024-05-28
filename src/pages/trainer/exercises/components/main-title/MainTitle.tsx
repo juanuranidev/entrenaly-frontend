@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import PageTitle from "components/common/page-title/PageTitle";
 import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
 

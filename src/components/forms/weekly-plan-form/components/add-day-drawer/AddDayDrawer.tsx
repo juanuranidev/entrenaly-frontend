@@ -4,7 +4,7 @@ import { useThemeContext } from "contexts/Theme";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import DayCard from "../day-card/DayCard";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;

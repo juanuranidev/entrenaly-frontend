@@ -18,7 +18,7 @@ import { useThemeContext } from "contexts/Theme";
 import { useAuthContext } from "contexts/Auth";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function Profile() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function NotFound() {
   const navigate = useNavigate();

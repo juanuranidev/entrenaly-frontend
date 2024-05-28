@@ -1,5 +1,5 @@
 import { TextField, IconButton } from "@mui/material";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   searchValue: string;

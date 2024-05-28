@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import AddVariantForm from "components/forms/add-variant-form/AddVariantForm";
 import { useThemeContext } from "contexts/Theme";
 import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";

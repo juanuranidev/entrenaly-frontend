@@ -1,4 +1,4 @@
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 import Profile from "../profile/Profile";
 import { HeaderStyled } from "./Styles";
 import { useThemeContext } from "contexts/Theme";

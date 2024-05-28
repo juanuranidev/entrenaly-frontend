@@ -11,7 +11,7 @@ import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import moment from "moment";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   plan: any;

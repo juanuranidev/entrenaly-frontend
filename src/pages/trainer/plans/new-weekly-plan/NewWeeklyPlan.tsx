@@ -3,7 +3,7 @@ import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
 import WeeklyPlanForm from "components/forms/weekly-plan-form/WeeklyPlanForm";
 import PageTitle from "components/common/page-title/PageTitle";
-import Icons from "lib/utils/icons";
+import Icons from "lib/utils/icons/icons";
 
 export default function NewWeeklyPlan() {
   const { theme } = useThemeContext();
