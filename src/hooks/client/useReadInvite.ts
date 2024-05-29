@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getInviteService } from "services/client/client.services";
 
-export const useGetInvite = () => {
+export const useReadInvite = () => {
   const [invite, setInvite] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 

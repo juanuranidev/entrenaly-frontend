@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUserService } from "services/user/user.services";
 
-export const useGetUser = () => {
+export const useReadUser = () => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
