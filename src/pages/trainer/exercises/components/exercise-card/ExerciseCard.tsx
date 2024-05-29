@@ -6,12 +6,12 @@ import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 
 type Props = {
   exercise: any;
-  handleRefetchGetAllExercises: () => void;
+  handleRefetchReadExercises: () => void;
 };
 
 export default function ExerciseCard({
   exercise,
-  handleRefetchGetAllExercises,
+  handleRefetchReadExercises,
 }: Props) {
   const isVariant = exercise.variant;
   const { theme } = useThemeContext();
@@ -106,7 +106,7 @@ export default function ExerciseCard({
         open={openFormAddVariant}
         exerciseSelected={exerciseSelected}
         onClose={() => setOpenFormAddVariant(false)}
-        onSubmit={() => handleRefetchGetAllExercises()}
+        onSubmit={() => handleRefetchReadExercises()}
       />
     </React.Fragment>
   );

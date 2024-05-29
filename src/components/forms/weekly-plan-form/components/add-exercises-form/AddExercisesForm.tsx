@@ -1,5 +1,5 @@
 import { Box, Stack, Button, IconButton, Typography } from "@mui/material";
-import { useGetAllExercises } from "hooks/useGetAllExercises";
+import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/Theme";
 import { useState } from "react";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
@@ -20,7 +20,7 @@ type Props = {
 
 export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
   const { theme } = useThemeContext();
-  const { exercises } = useGetAllExercises();
+  const { exercises } = useReadExercises();
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
 
   const toggleExerciseSelection = (exercise: Exercise) => {

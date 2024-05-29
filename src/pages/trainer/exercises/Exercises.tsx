@@ -1,5 +1,5 @@
 import { Card, Grid, Alert, CircularProgress } from "@mui/material";
-import { useGetAllExercises } from "hooks/useGetAllExercises";
+import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/Theme";
 import { useDebounce } from "hooks/useDebounce";
 import { useState } from "react";
@@ -12,15 +12,13 @@ export default function Exercises() {
   const [searchValue, setSearchValue] = useState("");
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
-  const { exercises, isLoading, handleRefetchGetAllExercises } =
-    useGetAllExercises(debouncedSearchValue);
+  const { exercises, isLoading, handleRefetchReadExercises } =
+    useReadExercises(debouncedSearchValue);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
-        <MainTitle
-          handleRefetchGetAllExercises={handleRefetchGetAllExercises}
-        />
+        <MainTitle handleRefetchReadExercises={handleRefetchReadExercises} />
       </Grid>
       <Grid item xs={12}>
         <Card>
@@ -64,9 +62,7 @@ export default function Exercises() {
                     <ExerciseCard
                       key={exercise.id}
                       exercise={exercise}
-                      handleRefetchGetAllExercises={
-                        handleRefetchGetAllExercises
-                      }
+                      handleRefetchReadExercises={handleRefetchReadExercises}
                     />
                   ))
                 : null}
