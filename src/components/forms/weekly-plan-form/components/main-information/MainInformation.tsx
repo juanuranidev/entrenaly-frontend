@@ -11,8 +11,8 @@ import {
   FormControl,
   OutlinedInput,
 } from "@mui/material";
-import { useGetClientsByUserId } from "hooks/useGetClientsByUserId";
-import { useGetPlansCategories } from "hooks/useGetPlansCategories";
+import { useReadClients } from "hooks/client/useReadClients";
+import { useReadPlansCategories } from "hooks/plan/useReadPlansCategories";
 import { useThemeContext } from "contexts/Theme";
 import { useEffect } from "react";
 
@@ -23,8 +23,8 @@ type Props = {
 
 export default function MainInformation({ formik, plan }: Props) {
   const { theme } = useThemeContext();
-  const { clients }: any = useGetClientsByUserId();
-  const { plansCategories } = useGetPlansCategories();
+  const { clients }: any = useReadClients();
+  const { plansCategories } = useReadPlansCategories();
 
   const handleSetInitialClients = () => {
     if (!plan) return;

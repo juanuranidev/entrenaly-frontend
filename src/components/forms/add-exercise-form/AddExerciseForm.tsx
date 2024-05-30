@@ -7,7 +7,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { useGetExerciseCategories } from "hooks/useGetExercisesCategories";
+import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
 import { createExerciseService } from "services/exercise/exercise.services";
 import { useThemeContext } from "contexts/Theme";
@@ -27,7 +27,7 @@ type Props = {
 export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
   const { theme } = useThemeContext();
   const { exercisesCategories, isLoading: isCategoriesLoading } =
-    useGetExerciseCategories();
+    useReadExercisesCategories();
 
   const [isLoading, setIsLoading] = useState(false);
 

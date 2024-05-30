@@ -1,5 +1,5 @@
 import { IconButton, Typography, Grid } from "@mui/material";
-import { useGetAllDaysOfWeek } from "hooks/useGetAllDaysOfWeek";
+import { useReadDaysOfWeek } from "hooks/plan/useReadDaysOfWeek";
 import { useThemeContext } from "contexts/Theme";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
@@ -20,7 +20,7 @@ export default function AddDayDrawer({
   daysAlreadyAdded,
 }: Props) {
   const { theme } = useThemeContext();
-  const { daysOfWeek } = useGetAllDaysOfWeek();
+  const { daysOfWeek } = useReadDaysOfWeek();
 
   const handleSelectDay = (day: string) => {
     onSubmit(day);

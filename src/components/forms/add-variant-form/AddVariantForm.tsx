@@ -11,7 +11,7 @@ import {
   createVariantService,
   updateVariantService,
 } from "services/exercise/exercise.services";
-import { useGetExerciseCategories } from "hooks/useGetExercisesCategories";
+import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
 import { useThemeContext } from "contexts/Theme";
 import { useFormik } from "formik";
@@ -36,7 +36,7 @@ export default function AddVariantForm({
   exerciseSelected,
 }: Props) {
   const { theme } = useThemeContext();
-  const { exercisesCategories } = useGetExerciseCategories();
+  const { exercisesCategories } = useReadExercisesCategories();
 
   const isVariant = exerciseSelected?.variant;
 
