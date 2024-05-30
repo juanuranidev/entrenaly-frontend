@@ -2,11 +2,11 @@ import MainTitle from "./components/main-title/MainTitle";
 import ClientsTable from "./components/clients-table/ClientsTable";
 import ClientsTableLoading from "./components/clients-table-loading/ClientsTableLoading";
 import { Box, Typography, useTheme, Card, Grid, Alert } from "@mui/material";
-import { useGetClientsByUserId } from "hooks/useGetClientsByUserId";
+import { useReadClients } from "hooks/client/useReadClients";
 
 export default function Clients() {
   const theme: any = useTheme();
-  const { clients, isLoading } = useGetClientsByUserId();
+  const { clients, isLoading } = useReadClients();
 
   const handleRenderContent = () => {
     if (isLoading) {

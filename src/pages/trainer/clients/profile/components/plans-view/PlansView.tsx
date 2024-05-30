@@ -1,7 +1,7 @@
 import PlansTable from "components/common/plans-table/PlansTable";
 import { useThemeContext } from "contexts/Theme";
 import { Grid, Typography } from "@mui/material";
-import { useGetAllPlansByClientId } from "hooks/useGetAllPlansByClientId";
+import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
 
 type Props = {
   clientId: any;
@@ -9,7 +9,7 @@ type Props = {
 
 export default function PlansView({ clientId }: Props) {
   const { theme } = useThemeContext();
-  const { plans, isLoading } = useGetAllPlansByClientId(clientId);
+  const { plans, isLoading } = useReadPlansByClientId(clientId);
 
   return (
     <Grid item container xs={12} sm={10} spacing={theme?.spacing(3)}>

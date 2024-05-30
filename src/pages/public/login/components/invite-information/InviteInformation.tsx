@@ -1,4 +1,4 @@
-import { useReadInviteInformation } from "hooks/useReadInviteInformation";
+import { useReadInviteInformation } from "hooks/client/useReadInviteInformation";
 import {
   Avatar,
   CircularProgress,

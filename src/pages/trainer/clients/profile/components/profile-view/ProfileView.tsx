@@ -2,7 +2,7 @@ import Icons from "lib/utils/icons/icons";
 import moment from "moment";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";
-import { useGetClientById } from "hooks/useGetClientById";
+import { useReadClient } from "hooks/client/useReadClient";
 import { useThemeContext } from "contexts/Theme";
 import { useState } from "react";
 
@@ -12,8 +12,7 @@ type Props = {
 
 export default function ProfileView({ clientId }: Props) {
   const { theme } = useThemeContext();
-  const { client, handleRefetchGetClientById }: any =
-    useGetClientById(clientId);
+  const { client, handleRefetchGetClientById }: any = useReadClient(clientId);
 
   const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =
     useState<boolean>(false);

@@ -9,7 +9,7 @@ import {
   ListItemButton,
   ClickAwayListener,
 } from "@mui/material";
-import { useGetAllPlansTypes } from "hooks/useGetAllPlansTypes";
+import { useReadPlansTypes } from "hooks/plan/useReadPlansTypes";
 import { PLANS_CONSTANTS } from "lib/constants/plans.constants";
 import { useThemeContext } from "contexts/Theme";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function MainTitle() {
   const [open, setOpen] = useState(false);
 
   const { theme } = useThemeContext();
-  const { plansTypes } = useGetAllPlansTypes();
+  const { plansTypes } = useReadPlansTypes();
 
   const handleGetUrlByPlanType = (planType: string) => {
     if (planType === PLANS_CONSTANTS.TYPES.WEEKLY) {

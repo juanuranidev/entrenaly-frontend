@@ -1,4 +1,4 @@
-import { useGetAllPlansByClientId } from "hooks/useGetAllPlansByClientId";
+import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
 import { Card, Grid, Alert } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
 import { useAuthContext } from "contexts/Auth";
@@ -8,9 +8,7 @@ import MainTitle from "./components/MainTitle";
 export default function Plans() {
   const { userData } = useAuthContext();
   const { theme } = useThemeContext();
-  const { plans, isLoading } = useGetAllPlansByClientId(
-    userData?.clientInfo?.id
-  );
+  const { plans, isLoading } = useReadPlansByClientId(userData?.clientInfo?.id);
   console.log(plans);
   console.log(userData?.clientInfo?.id);
 
