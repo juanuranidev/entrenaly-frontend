@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAllPlansByClientIdService } from "services/plan/plan.services";
 
 export const useReadPlansByClientId = (clientId: string) => {
-  const [plans, setPlans] = useState();
+  const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleGetClientById = async () => {

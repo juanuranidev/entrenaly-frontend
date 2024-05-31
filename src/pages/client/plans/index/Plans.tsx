@@ -1,34 +1,43 @@
 import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
-import { Card, Grid, Alert } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
 import { useAuthContext } from "contexts/Auth";
-import PlansTable from "components/common/plans-table/PlansTable";
-import MainTitle from "./components/MainTitle";
+import { Card, Grid } from "@mui/material";
+import PageTitle from "components/common/page-title/PageTitle";
+import PlanCard from "./components/plan-card/PlanCard";
 
 export default function Plans() {
   const { userData } = useAuthContext();
   const { theme } = useThemeContext();
-  const { plans, isLoading } = useReadPlansByClientId(userData?.clientInfo?.id);
+  const { plans }: any = useReadPlansByClientId(userData?.clientInfo?.id);
   console.log(plans);
   console.log(userData?.clientInfo?.id);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
-        <MainTitle />
+        <PageTitle title="Planes" />
       </Grid>
       <Grid item xs={12}>
-        <Card>
+        <Card
+          style={{
+            minHeight: "50dvh",
+          }}
+        >
           <Grid container spacing={theme?.spacing(3)}>
-            <Grid item xs={12}>
-              <Alert severity="info">
-                Acá podrás crear nuevos planes de entrenamiento tanto de tipo
-                semanal como de circuito. Además podrás verlos, editarlos y
-                asignarlos a tus clientes.
-              </Alert>
-            </Grid>
-            <Grid item xs={12}>
-              <PlansTable plans={plans} isLoading={isLoading} />
+            <Grid
+              item
+              xs={12}
+              display="flex"
+              flexWrap="wrap"
+              flexDirection="row"
+              alignItems="center"
+              gap={theme?.spacing(3)}
+            >
+              {plans.length
+                ? plans.map((plan: any) => (
+                    <PlanCard plan={plan} key={plan.id} />
+                  ))
+                : null}
             </Grid>
           </Grid>
         </Card>
