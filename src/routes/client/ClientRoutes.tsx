@@ -13,12 +13,20 @@ const Loadable = (Component: any) => (props: any) =>
 const NotFound = Loadable(
   lazy(() => import("pages/trainer/not-found/NotFound"))
 );
+const ViewWeeklyPlan = Loadable(
+  lazy(() => import("pages/client/plans/view-weekly-plan/ViewWeeklyPlan"))
+);
+
 const ClientRoutes = {
   element: <ClientLayout />,
   children: [
     {
       path: "/client/plans",
       element: <Plans />,
+    },
+    {
+      path: "/client/plans/view/weekly/:planId",
+      element: <ViewWeeklyPlan />,
     },
     {
       path: "*",

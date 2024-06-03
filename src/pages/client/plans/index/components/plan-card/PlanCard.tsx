@@ -1,13 +1,14 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
+import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons/icons";
-import React from "react";
 
 type Props = {
   plan: any;
 };
 
 export default function PlanCard({ plan }: Props) {
+  const navigate = useNavigate();
   const { theme } = useThemeContext();
   console.log(plan);
 
@@ -20,6 +21,7 @@ export default function PlanCard({ plan }: Props) {
       sx={{ cursor: "pointer" }}
       borderRadius={theme?.spacing(1)}
       bgcolor={theme?.colors?.background?.secondary}
+      onClick={() => navigate(`/client/plans/view/weekly/${plan?.id}`)}
     >
       <Icons.pdfs color="error" />
       <Typography fontWeight={500} fontSize={14}>
