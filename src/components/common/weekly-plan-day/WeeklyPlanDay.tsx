@@ -7,14 +7,14 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
-import ExerciseView from "../../../../../../components/common/weekly-plan-day/components/exercise-view/ExerciseView";
+import ExerciseView from "./components/exercise-view/ExerciseView";
 import Icons from "lib/utils/icons/icons";
 
 type Props = {
   day: any;
 };
 
-export default function PlanDay({ day }: Props) {
+export default function WeeklyPlanDay({ day }: Props) {
   const { theme } = useThemeContext();
 
   return (
