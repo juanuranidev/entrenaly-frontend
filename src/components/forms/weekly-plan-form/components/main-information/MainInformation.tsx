@@ -52,7 +52,7 @@ export default function MainInformation({ formik, plan }: Props) {
         <TextField
           fullWidth
           name="name"
-          label="Nombre del plan"
+          label="Nombre del plan*"
           value={formik?.values?.name}
           onBlur={formik?.handleBlur}
           onChange={formik?.handleChange}
@@ -66,7 +66,7 @@ export default function MainInformation({ formik, plan }: Props) {
           select
           fullWidth
           name="categoryId"
-          label="Categoria del plan"
+          label="Categoria del plan*"
           onBlur={formik?.handleBlur}
           onChange={formik?.handleChange}
           value={formik?.values?.categoryId}

@@ -16,7 +16,7 @@ export default function Clients() {
     if (!isLoading && !clients.length) {
       return (
         <Box display="flex" justifyContent="center" py={theme?.spacing(35)}>
-          <Typography fontSize={25} fontWeight={400}>
+          <Typography fontSize={25} fontWeight={500}>
             ¡No tienes clientes!
           </Typography>
         </Box>
@@ -36,9 +36,9 @@ export default function Clients() {
           <Grid container spacing={theme?.spacing(3)}>
             <Grid item xs={12}>
               <Alert severity="info">
-                En esta sección podrás ver todos tus clientes y la información
-                de cada uno de ellos, presiona en "Agregar Nuevo" para generar
-                un link de invitación y agregar nuevos clientes.
+                Acá podrás ver todos tus clientes y la información de cada uno
+                de ellos, presiona en "Agregar Nuevo" para generar un link de
+                invitación y agregar nuevos clientes.
               </Alert>
             </Grid>
             <Grid item xs={12}>

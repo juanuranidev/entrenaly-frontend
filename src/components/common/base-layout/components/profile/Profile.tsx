@@ -86,7 +86,10 @@ export default function Profile({ profileItems }: any) {
                       fontSize: 12,
                     },
                   }}
-                  onClick={() => navigate(item.url)}
+                  onClick={() => {
+                    navigate(item.url);
+                    setOpen(false);
+                  }}
                 >
                   <ListItemIcon>
                     <Icons.person style={{ fontSize: 20 }} />

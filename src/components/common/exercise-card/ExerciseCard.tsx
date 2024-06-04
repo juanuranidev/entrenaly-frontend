@@ -38,6 +38,16 @@ export default function ExerciseCard({
       }`}
     >
       <Grid item xs={10}>
+        <Chip
+          size="small"
+          color="primary"
+          label={exercise?.category?.name}
+          variant="outlined"
+          sx={{
+            mr: theme?.spacing(1),
+          }}
+        />
+
         {isVariant ? (
           <Chip
             size="small"

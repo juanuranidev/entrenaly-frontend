@@ -3,14 +3,6 @@ import * as yup from "yup";
 export const weeklyPlanFormValidations = yup.object({
   name: yup.string().required(),
   categoryId: yup.string().required(),
-  clients: yup
-    .array()
-    .of(
-      yup.object({
-        id: yup.string().required(),
-      })
-    )
-    .min(1),
 });
 
 // WeeklyPlanForm.tsx

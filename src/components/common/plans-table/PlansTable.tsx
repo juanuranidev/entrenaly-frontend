@@ -29,8 +29,8 @@ export default function PlansTable({ plans, isLoading, withBorder }: Props) {
   if (!isLoading && !plans.length) {
     return (
       <Box display="flex" justifyContent="center" py={theme?.spacing(35)}>
-        <Typography fontSize={25} fontWeight={400}>
-          ¡No tienes planes!
+        <Typography fontSize={25} fontWeight={500}>
+          ¡No hay planes!
         </Typography>
       </Box>
     );

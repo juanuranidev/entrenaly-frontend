@@ -22,6 +22,7 @@ import { useState } from "react";
 import Google from "../../../assets/icons/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { USER_CONSTANTS } from "lib/constants/user.constants";
 
 export default function RegisterForm({ invite }: any) {
   const navigate = useNavigate();
@@ -46,10 +47,24 @@ export default function RegisterForm({ invite }: any) {
   const handleRegisterWithEmail = async (data: any) => {
     setIsLoading(true);
     try {
-      await registerWithEmailService(data);
+      const response = await registerWithEmailService(data);
+      console.log({ response });
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
+      ) {
+        navigate("/trainer/clients");
+        setUserData(response);
+      }
 
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
+      ) {
+        navigate("/client/plans");
+        setUserData(response);
+      }
       successToast("Registrado con éxito");
-      navigate("/trainer/clients");
     } catch (error: any) {
       console.log(error);
       handleManageRegisterWithEmailError(error);
@@ -73,8 +88,19 @@ export default function RegisterForm({ invite }: any) {
     try {
       const response = await googleAuthService(invite);
 
-      if (response) {
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
+      ) {
         navigate("/trainer/clients");
+        setUserData(response);
+      }
+
+      if (
+        response &&
+        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
+      ) {
+        navigate("/client/plans");
         setUserData(response);
       }
     } catch (error) {

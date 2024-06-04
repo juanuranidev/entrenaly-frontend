@@ -1,4 +1,11 @@
-import { Box, Stack, Button, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Button,
+  IconButton,
+  Typography,
+  TextField,
+} from "@mui/material";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/Theme";
 import { useState } from "react";
@@ -6,6 +13,7 @@ import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
+import { useDebounce } from "hooks/useDebounce";
 
 type Exercise = {
   name: string;
@@ -19,9 +27,13 @@ type Props = {
 };
 
 export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
-  const { theme } = useThemeContext();
-  const { exercises } = useReadExercises();
+  const [searchValue, setSearchValue] = useState("");
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
+
+  const debouncedSearchValue = useDebounce(searchValue, 500);
+
+  const { theme } = useThemeContext();
+  const { exercises } = useReadExercises(debouncedSearchValue);
 
   const toggleExerciseSelection = (exercise: Exercise) => {
     setExercisesSelected((prevSelected) => {
@@ -55,9 +67,23 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           </IconButton>
         }
       />
-      <Typography fontWeight={600} fontSize={15}>
+      <Typography fontWeight={600} fontSize={15} mb={theme?.spacing(2)}>
         Selecciona los ejercicios que quieres agregar
       </Typography>
+      <TextField
+        fullWidth
+        label="Buscar"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        InputProps={{
+          startAdornment: <Icons.search />,
+          endAdornment: searchValue ? (
+            <IconButton size="small" onClick={() => setSearchValue("")}>
+              <Icons.close fontSize="small" />
+            </IconButton>
+          ) : null,
+        }}
+      />
       <Box height="calc(100% - 10rem)" overflow="auto" pt={theme?.spacing(4)}>
         <Stack
           width="95%"

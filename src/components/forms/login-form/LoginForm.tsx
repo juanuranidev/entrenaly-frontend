@@ -48,9 +48,16 @@ export default function LoginForm({ invite }: Props) {
   const handleLoginWithEmail = async (data: any) => {
     setIsLoading(true);
     try {
-      await loginWithEmailService(data);
+      const response: any = await loginWithEmailService(data);
+      if (response?.role?.name === USER_CONSTANTS.ROLES.TRAINER) {
+        navigate("/trainer/clients");
+        setUserData(response);
+      }
 
-      navigate("/trainer/clients");
+      if (response?.role?.name === USER_CONSTANTS.ROLES.CLIENT) {
+        navigate("/client/plans");
+        setUserData(response);
+      }
     } catch (error: any) {
       console.log(error);
       errorToast("Credenciales inválidas");

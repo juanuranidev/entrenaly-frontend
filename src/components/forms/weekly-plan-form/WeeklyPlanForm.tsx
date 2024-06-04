@@ -45,7 +45,6 @@ export default function WeeklyPlanForm({ plan }: Props) {
       categoryId: plan?.category?.id || "",
     },
     async onSubmit(values) {
-      // console.log(values);
       if (editPlan) {
         handleUpdateWeeklyPlan(values);
       } else {
