@@ -10,7 +10,6 @@ type Props = {
 export default function PlanCard({ plan }: Props) {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
-  console.log(plan);
 
   return (
     <Box

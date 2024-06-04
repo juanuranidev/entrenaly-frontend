@@ -55,7 +55,10 @@ export const loginWithEmailService = async (data: DataForLogin) => {
       data.password
     );
 
-    return response;
+    const user = await getUserByAuthIdService(response.user.uid);
+    console.log({ response });
+
+    return user;
   } catch (error) {
     throw error;
   }
