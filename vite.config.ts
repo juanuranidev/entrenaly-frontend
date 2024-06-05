@@ -2,29 +2,50 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig({
-  plugins: [
-    react(),
-    VitePWA({
-      manifest: {
-        name: "Entrenaly",
-        short_name: "Entrenaly",
-        icons: [
-          {
-            src: "/logo512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-        start_url: "/",
-        display: "standalone",
-        theme_color: "#000000",
-        background_color: "#ffffff",
-        description: "Una aplicación de entrenamiento personal",
-        lang: "es-AR",
+const manifestForPlugIn: any = {
+  registerType: "prompt",
+  includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+  manifest: {
+    name: "React-vite-app",
+    short_name: "react-vite-app",
+    description: "I am a simple vite app",
+    icons: [
+      {
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "favicon",
       },
-    }),
-  ],
+      {
+        src: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "favicon",
+      },
+      {
+        src: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+        purpose: "apple touch icon",
+      },
+      {
+        src: "/maskable_icon.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any maskable",
+      },
+    ],
+    theme_color: "#171717",
+    background_color: "#f0e7db",
+    display: "standalone",
+    scope: "/",
+    start_url: "/",
+    orientation: "portrait",
+  },
+};
+
+export default defineConfig({
+  plugins: [react(), VitePWA(manifestForPlugIn)],
   resolve: {
     alias: {
       "@": "/src",
