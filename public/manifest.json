@@ -3,22 +3,24 @@
   "short_name": "Entrenaly",
   "icons": [
     {
-      "src": "./Logo.png",
+      "src": "Logo.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "64x64 32x32 24x24 16x16"
     },
     {
-      "src": "./Logo.png",
+      "src": "Logo.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
-      "src": "./Logo.png",
+      "src": "Logo.png",
       "type": "image/png",
-      "sizes": "1024x1024",
-      "purpose": "any maskable"
+      "sizes": "512x512"
+    },
+    {
+      "src": "Logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
     }
   ],
   "start_url": ".",
