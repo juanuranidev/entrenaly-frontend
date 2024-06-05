@@ -5,7 +5,6 @@ import { AuthContextProvider } from "contexts/Auth";
 import { ThemeContextProvider } from "contexts/Theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import initializeFirebaseApp from "./lib/config/firebase";
-import * as serviceWorkerRegistration from "./lib/config/serviceWorkerRegistration";
 import ReactDOM from "react-dom/client";
 import Routes from "routes";
 import Theme from "./lib/theme/Theme";
@@ -33,5 +32,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </>
   </React.StrictMode>
 );
-
-serviceWorkerRegistration.register();
