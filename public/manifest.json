@@ -1,0 +1,32 @@
+{
+  "name": "Entrenaly",
+  "short_name": "Entrenaly",
+  "icons": [
+    {
+      "src": "./Logo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./Logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./Logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "https://entrenaly.vercel.app/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "description": "Una aplicación de entrenamiento personal",
+  "lang": "es-AR"
+}
