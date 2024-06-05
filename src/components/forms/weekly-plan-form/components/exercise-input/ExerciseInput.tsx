@@ -126,12 +126,12 @@ export default function ExerciseInput({
           </Typography>
           <Autocomplete
             value={autocompleteValue}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null) => {
               setAutocompleteValue(newValue);
             }}
             inputValue={inputValue}
             getOptionLabel={(option) => option?.description || ""}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_event, newInputValue) => {
               setInputValue(newInputValue);
               handleChangeDescripcion(newInputValue);
             }}
