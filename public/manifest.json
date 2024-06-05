@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "https://entrenaly.vercel.app/",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
