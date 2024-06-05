@@ -6,12 +6,15 @@ import LoginForm from "components/forms/login-form/LoginForm";
 import RegisterForm from "components/forms/register-form/RegisterForm";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import InviteInformation from "./components/invite-information/InviteInformation";
+import ENV from "lib/utils/env";
 
 export default function Login() {
   const theme: any = useTheme();
   const [params] = useSearchParams();
   const invite: any = params.get("invite");
 
+  console.log(window.location.origin);
+  console.log(ENV.FRONTEND_BASE_URL);
   const [registerView, setRegisterView] = useState(invite ? true : false);
 
   return (
