@@ -15,7 +15,7 @@ export default function ExerciseCard({
 }: Props) {
   const isVariant = exercise.variant;
   const { theme } = useThemeContext();
-
+  console.log(exercise);
   const [exerciseSelected, setExerciseSelected] = useState(null);
   const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
 
@@ -60,7 +60,7 @@ export default function ExerciseCard({
                 style={{ marginLeft: theme?.spacing(1) }}
               />
             ) : null}
-            {exercise?.userId ? (
+            {exercise?.hasUser ? (
               <Chip
                 size="small"
                 color="success"
@@ -70,14 +70,16 @@ export default function ExerciseCard({
               />
             ) : null}
           </Grid>
-          <Grid item xs={2}>
-            <IconButton
-              size="small"
-              onClick={() => handleOpenFormEditExercise(exercise)}
-            >
-              <Icons.edit color="primary" fontSize="small" />
-            </IconButton>
-          </Grid>
+          {!exercise?.hasUser ? (
+            <Grid item xs={2}>
+              <IconButton
+                size="small"
+                onClick={() => handleOpenFormEditExercise(exercise)}
+              >
+                <Icons.edit color="primary" fontSize="small" />
+              </IconButton>
+            </Grid>
+          ) : null}
         </Grid>
         <img
           src={isVariant ? exercise?.variant?.image : exercise?.image}

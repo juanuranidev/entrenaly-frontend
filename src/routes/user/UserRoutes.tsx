@@ -21,13 +21,10 @@ const Clients = Loadable(
 );
 
 const Exercises = Loadable(
-  lazy(() => import("pages/trainer/exercises/Exercises"))
+  lazy(() => import("pages/trainer/exercises/index/Exercises"))
 );
 const NewWeeklyPlan = Loadable(
   lazy(() => import("pages/trainer/plans/new-weekly-plan/NewWeeklyPlan"))
-);
-const NewCircuitPlan = Loadable(
-  lazy(() => import("pages/trainer/plans/new-circuit-plan/NewCircuitPlan"))
 );
 const ClientProfile = Loadable(
   lazy(() => import("pages/trainer/clients/profile/ClientProfile"))
@@ -65,10 +62,6 @@ const UserRoutes = {
     {
       path: "/trainer/plans/edit/weekly/:id",
       element: <EditWeeklyPlan />,
-    },
-    {
-      path: "/trainer/plans/new/circuit",
-      element: <NewCircuitPlan />,
     },
     {
       path: "/trainer/plans/view/weekly/:planId",

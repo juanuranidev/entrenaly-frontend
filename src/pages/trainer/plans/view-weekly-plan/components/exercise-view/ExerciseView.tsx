@@ -7,7 +7,7 @@ type Props = { exercise: any };
 
 export default function ExerciseView({ exercise }: Props) {
   const { theme } = useThemeContext();
-  console.log(exercise);
+
   const isVariant = exercise?.exerciseVariant;
   const [openExerciseImageDialog, setOpenExerciseImageDialog] = useState(false);
 
