@@ -23,7 +23,7 @@ export default function TrainerLayout() {
   const profileItems = [
     {
       title: "Perfil",
-      url: "/client/profile",
+      url: "/trainer/profile",
       icon: <Icons.person fontSize="medium" />,
     },
   ];
