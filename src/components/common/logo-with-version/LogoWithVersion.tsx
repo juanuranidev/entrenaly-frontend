@@ -1,5 +1,5 @@
 import ENV from "lib/utils/env";
-import Logo from "../../../assets/icons/Logo.png";
+import Logo from "../../../../public/Logo.png";
 import { Chip, Stack } from "@mui/material";
 import { useThemeContext } from "contexts/Theme";
 

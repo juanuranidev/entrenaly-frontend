@@ -16,13 +16,13 @@ import {
 import { errorToast, successToast } from "lib/utils/toast";
 import { registerFormValidation } from "./validations";
 import { useAuthContext } from "contexts/Auth";
+import { USER_CONSTANTS } from "lib/constants/user.constants";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
-import Google from "../../../assets/icons/google.svg";
+import Google from "../../../../public/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
 
 export default function RegisterForm({ invite }: any) {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function RegisterForm({ invite }: any) {
     setIsLoading(true);
     try {
       const response = await registerWithEmailService(data);
-      console.log({ response });
+
       if (
         response &&
         response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER

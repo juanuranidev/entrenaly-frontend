@@ -113,7 +113,7 @@ export default function ExerciseInput({
               variant="outlined"
             />
           ) : null}
-          {exercise?.userId ? (
+          {exercise?.hasUser ? (
             <Chip
               size="small"
               color="success"

@@ -9,8 +9,6 @@ export default function Plans() {
   const { userData } = useAuthContext();
   const { theme } = useThemeContext();
   const { plans }: any = useReadPlansByClientId(userData?.clientInfo?.id);
-  console.log(plans);
-  console.log(userData?.clientInfo?.id);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>

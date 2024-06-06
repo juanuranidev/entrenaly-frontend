@@ -56,7 +56,7 @@ export default function ExerciseCard({
             variant="outlined"
           />
         ) : null}
-        {exercise?.userId ? (
+        {exercise?.hasUser ? (
           <Chip
             size="small"
             color="success"
