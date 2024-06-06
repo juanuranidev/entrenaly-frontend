@@ -1,5 +1,5 @@
 import PlansTable from "components/common/plans-table/PlansTable";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { Grid, Typography } from "@mui/material";
 import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
 

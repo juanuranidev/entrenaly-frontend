@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 import Icons from "lib/utils/icons/icons";
 import moment from "moment";

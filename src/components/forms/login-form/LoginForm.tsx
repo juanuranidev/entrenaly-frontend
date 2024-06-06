@@ -14,7 +14,7 @@ import {
   loginWithEmailService,
 } from "services/user/user.services";
 import { loginFormValidation } from "./validations";
-import { useAuthContext } from "contexts/Auth";
+import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { errorToast } from "lib/utils/toast";
 import { useFormik } from "formik";

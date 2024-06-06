@@ -1,7 +1,7 @@
 import ENV from "lib/utils/env";
 import Logo from "../../../../public/Logo.png";
 import { Chip, Stack } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   hideVersion?: boolean;

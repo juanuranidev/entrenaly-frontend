@@ -8,7 +8,7 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import React, { useEffect, useState } from "react";
 import { postExerciseDescriptionService } from "services/exercise/exercise.services";
 

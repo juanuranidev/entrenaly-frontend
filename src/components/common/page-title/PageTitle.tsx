@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   title: string;

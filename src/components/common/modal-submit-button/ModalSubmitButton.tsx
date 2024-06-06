@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { ModalSubmitButtonBoxStyled } from "./Styles";
 
 type Props = {

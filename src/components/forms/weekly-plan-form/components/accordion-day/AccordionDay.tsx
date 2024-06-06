@@ -9,7 +9,7 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 import Icons from "lib/utils/icons/icons";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";

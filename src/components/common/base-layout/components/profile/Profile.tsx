@@ -14,8 +14,8 @@ import {
   ClickAwayListener,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useThemeContext } from "contexts/Theme";
-import { useAuthContext } from "contexts/Auth";
+import { useThemeContext } from "contexts/theme/Theme";
+import { useAuthContext } from "contexts/auth/Auth";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons/icons";

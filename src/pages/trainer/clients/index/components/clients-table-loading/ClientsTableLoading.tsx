@@ -9,7 +9,7 @@ import {
   TableHead,
   TableContainer,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import Icons from "lib/utils/icons/icons";
 
 export default function ClientsTableLoading() {

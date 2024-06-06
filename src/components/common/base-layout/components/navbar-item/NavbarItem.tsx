@@ -1,6 +1,6 @@
 import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   item: any;

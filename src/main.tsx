@@ -1,8 +1,8 @@
 import React from "react";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
-import { AuthContextProvider } from "contexts/Auth";
-import { ThemeContextProvider } from "contexts/Theme";
+import { AuthContextProvider } from "contexts/auth/Auth";
+import { ThemeContextProvider } from "contexts/theme/Theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import initializeFirebaseApp from "./lib/config/firebase";
 import ReactDOM from "react-dom/client";

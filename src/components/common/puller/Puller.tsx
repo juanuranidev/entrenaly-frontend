@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { PullerStyled } from "./Styles";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 export default function Puller() {
   const { theme } = useThemeContext();

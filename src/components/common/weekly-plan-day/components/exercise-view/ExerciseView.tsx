@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Typography } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import ExerciseImageDialog from "components/dialogs/exercise-image-dialog/ExerciseImageDialog";
 
 type Props = { exercise: any };

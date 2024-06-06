@@ -13,7 +13,7 @@ import {
 import { Grid, Button, Typography } from "@mui/material";
 import { errorToast, successToast } from "lib/utils/toast";
 import { useEffect, useState } from "react";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import AddIcon from "@mui/icons-material/Add";

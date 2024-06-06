@@ -6,7 +6,7 @@ import {
   TableHead,
   TableContainer,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import ClientRow from "../client-row/ClientRow";
 import Icons from "lib/utils/icons/icons";
 

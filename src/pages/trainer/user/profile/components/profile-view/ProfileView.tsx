@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useReadUser } from "hooks/user/useReadUser";
 import UserInformation from "components/common/user-information/UserInformation";
 

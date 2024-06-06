@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";

@@ -1,6 +1,6 @@
 import { BottomDrawerStyled, RightDrawerStyled } from "./Styles";
 import { useMediaQuery, Box, CircularProgress } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import Puller from "../puller/Puller";
 
 type Props = {

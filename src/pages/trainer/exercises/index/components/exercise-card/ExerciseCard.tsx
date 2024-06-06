@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Icons from "lib/utils/icons/icons";
 import AddVariantForm from "components/forms/add-variant-form/AddVariantForm";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 
 type Props = {

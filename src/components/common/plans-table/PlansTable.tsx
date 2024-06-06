@@ -8,7 +8,7 @@ import {
   Typography,
   TableContainer,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import PlansTableLoading from "./components/plans-table-loading/PlansTableLoading";
 import PlanRow from "./components/plan-row/PlanRow";
 import Icons from "lib/utils/icons/icons";

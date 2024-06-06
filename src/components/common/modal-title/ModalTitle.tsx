@@ -1,4 +1,4 @@
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { ModalTitleStyled } from "./Styles";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 

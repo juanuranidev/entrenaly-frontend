@@ -6,7 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import ExerciseView from "./components/exercise-view/ExerciseView";
 import Icons from "lib/utils/icons/icons";
 

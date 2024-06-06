@@ -1,6 +1,6 @@
 import { Card, Grid, Alert, CircularProgress } from "@mui/material";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useDebounce } from "hooks/useDebounce";
 import { useState } from "react";
 import ExerciseCard from "./components/exercise-card/ExerciseCard";

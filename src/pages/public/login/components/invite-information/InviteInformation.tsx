@@ -6,7 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   invite: string;

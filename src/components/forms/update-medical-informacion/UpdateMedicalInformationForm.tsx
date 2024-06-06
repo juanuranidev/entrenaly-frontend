@@ -1,6 +1,6 @@
 import { Box, Grid, Button, TextField, IconButton } from "@mui/material";
 import { updateClientMedicalInformationService } from "services/client/client.services";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { successToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";

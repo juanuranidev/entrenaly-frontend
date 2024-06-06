@@ -1,5 +1,5 @@
 import { Link, Stack, Typography } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 export default function Footer() {
   const { theme } = useThemeContext();

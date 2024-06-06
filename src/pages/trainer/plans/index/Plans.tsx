@@ -1,6 +1,6 @@
 import { useReadPlans } from "hooks/plan/useReadPlans";
 import { Card, Grid, Alert } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import PlansTable from "components/common/plans-table/PlansTable";
 import MainTitle from "./components/MainTitle";
 

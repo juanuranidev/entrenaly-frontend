@@ -1,5 +1,5 @@
 import { DrawerStyles } from "./Styles";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { Box, List, useMediaQuery } from "@mui/material";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import NavbarItem from "../navbar-item/NavbarItem";

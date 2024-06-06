@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useReadPlansTypes } from "hooks/plan/useReadPlansTypes";
 import { PLANS_CONSTANTS } from "lib/constants/plans.constants";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "components/common/page-title/PageTitle";
 import Icons from "lib/utils/icons/icons";

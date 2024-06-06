@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons/icons";
 

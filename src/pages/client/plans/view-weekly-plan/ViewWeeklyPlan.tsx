@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { Button, Grid } from "@mui/material";
 import { useReadPlan } from "hooks/plan/useReadPlan";
 import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";

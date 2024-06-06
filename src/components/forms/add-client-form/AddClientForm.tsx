@@ -10,8 +10,8 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useThemeContext } from "contexts/Theme";
-import { useAuthContext } from "contexts/Auth";
+import { useThemeContext } from "contexts/theme/Theme";
+import { useAuthContext } from "contexts/auth/Auth";
 import { useReadInvite } from "hooks/client/useReadInvite";
 import { successToast } from "lib/utils/toast";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";

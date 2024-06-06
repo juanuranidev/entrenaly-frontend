@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Card, Grid } from "@mui/material";
 import { useReadPlan } from "hooks/plan/useReadPlan";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import WeeklyPlanForm from "components/forms/weekly-plan-form/WeeklyPlanForm";
 import PageTitle from "components/common/page-title/PageTitle";
 

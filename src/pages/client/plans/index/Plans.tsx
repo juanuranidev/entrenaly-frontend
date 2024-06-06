@@ -1,6 +1,6 @@
 import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
-import { useThemeContext } from "contexts/Theme";
-import { useAuthContext } from "contexts/Auth";
+import { useThemeContext } from "contexts/theme/Theme";
+import { useAuthContext } from "contexts/auth/Auth";
 import { Card, Grid } from "@mui/material";
 import PageTitle from "components/common/page-title/PageTitle";
 import PlanCard from "./components/plan-card/PlanCard";

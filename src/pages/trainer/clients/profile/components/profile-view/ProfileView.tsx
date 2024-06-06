@@ -3,7 +3,7 @@ import moment from "moment";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";
 import { useReadClient } from "hooks/client/useReadClient";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 
 type Props = {

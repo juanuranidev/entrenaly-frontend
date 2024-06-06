@@ -1,7 +1,7 @@
 import Icons from "lib/utils/icons/icons";
 import Profile from "../profile/Profile";
 import { HeaderStyled } from "./Styles";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { IconButton, useMediaQuery } from "@mui/material";
 
 export default function Header({ setIsDrawerOpen, profileItems }: any) {

@@ -10,7 +10,7 @@ import {
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
 import { createExerciseService } from "services/exercise/exercise.services";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
 import { useState } from "react";
 import ModalTitle from "components/common/modal-title/ModalTitle";

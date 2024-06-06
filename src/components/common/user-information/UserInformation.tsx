@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Box, Card, Grid, Avatar, Typography } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   user: any;

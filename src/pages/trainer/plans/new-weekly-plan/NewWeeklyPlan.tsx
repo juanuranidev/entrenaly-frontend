@@ -1,5 +1,5 @@
 import { Button, Card, Grid } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import WeeklyPlanForm from "components/forms/weekly-plan-form/WeeklyPlanForm";
 import PageTitle from "components/common/page-title/PageTitle";

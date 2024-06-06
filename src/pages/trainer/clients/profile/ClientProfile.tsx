@@ -1,7 +1,7 @@
 import { handleRenderNavbarItems } from "./components/Utils";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Card, Button } from "@mui/material";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 import PageTitle from "components/common/page-title/PageTitle";
 import ViewTab from "./components/view-tab/ViewTab";

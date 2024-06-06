@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useReadClients } from "hooks/client/useReadClients";
 import { useReadPlansCategories } from "hooks/plan/useReadPlansCategories";
-import { useThemeContext } from "contexts/Theme";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useEffect } from "react";
 
 type Props = {
