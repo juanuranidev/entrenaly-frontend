@@ -25,7 +25,7 @@ export const handleFormatDays = (data: any) => {
         id: exercise.exerciseId,
         name: exercise.exerciseName,
         image: exercise.exerciseImage,
-        variant: null,
+        variant: exercise.exerciseVariant,
         description: exercise.exerciseDescription,
       };
 

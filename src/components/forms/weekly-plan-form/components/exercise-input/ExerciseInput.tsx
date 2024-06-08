@@ -28,7 +28,7 @@ export default function ExerciseInput({
   handleRefetchGetExercisesDescriptions,
 }: Props) {
   const isVariant = exercise?.variant;
-
+  console.log(exercise);
   const { theme } = useThemeContext();
   const [inputValue, setInputValue] = useState("");
   const [autocompleteValue, setAutocompleteValue] = useState<any>("");

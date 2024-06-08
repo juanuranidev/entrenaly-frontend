@@ -49,6 +49,7 @@ export default function LoginForm({ invite }: Props) {
     setIsLoading(true);
     try {
       const response: any = await loginWithEmailService(data);
+      alert(response);
       if (response?.role?.name === USER_CONSTANTS.ROLES.TRAINER) {
         navigate("/trainer/clients");
         setUserData(response);
@@ -70,7 +71,8 @@ export default function LoginForm({ invite }: Props) {
     try {
       const response = await googleAuthService(invite);
       console.log(response);
-
+      errorToast("test");
+      alert(response);
       if (
         response &&
         response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
