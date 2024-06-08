@@ -4,7 +4,7 @@ export const getAllExercisesService = async (name?: string) => {
   try {
     const response = await request({
       method: "GET",
-      url: "/exercise/v1/get-all",
+      url: "/exercise/v1/get",
       params: {
         name,
       },
@@ -20,7 +20,7 @@ export const createVariantService = async (variant: any) => {
   try {
     const response = await request({
       method: "POST",
-      url: "/exercise/v1/create-variant",
+      url: "/exercise/v1/create/variant",
       data: {
         data: variant,
       },
@@ -36,7 +36,7 @@ export const updateVariantService = async (variant: any) => {
   try {
     const response = await request({
       method: "POST",
-      url: "/exercise/v1/update-variant",
+      url: "/exercise/v1/update/variant",
       data: {
         data: variant,
       },
@@ -52,7 +52,7 @@ export const getAllExercisesCategoriesService = async () => {
   try {
     const response = await request({
       method: "GET",
-      url: "/exercise/v1/get-categories",
+      url: "/exercise/v1/get/categories",
     });
 
     return response.data;

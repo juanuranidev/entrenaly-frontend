@@ -54,9 +54,9 @@ export const loginWithEmailService = async (data: DataForLogin) => {
       data.email,
       data.password
     );
-
+    // alert(response.user.uid);
     const user = await getUserByAuthIdService(response.user.uid);
-    console.log({ response });
+    alert(user.name);
 
     return user;
   } catch (error) {
@@ -158,7 +158,7 @@ export const registerUserService = async (user: any) => {
   try {
     const response = await request({
       method: "POST",
-      url: "users/v1/register",
+      url: "users/v1/post",
       data: {
         data: user,
       },
@@ -174,12 +174,11 @@ export const gooogleAuthService = async (user: any) => {
   try {
     const response = await request({
       method: "POST",
-      url: "users/v1/google/auth",
+      url: "users/v1/post/google",
       data: {
         data: user,
       },
     });
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response);
     return response;
   } catch (error) {
     throw error;
@@ -195,7 +194,6 @@ export const getUserByAuthIdService = async (authId: string) => {
         authId: authId,
       },
     });
-
     return response.data;
   } catch (error) {
     throw error;

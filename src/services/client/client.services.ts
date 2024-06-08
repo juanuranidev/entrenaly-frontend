@@ -4,7 +4,7 @@ export const getInviteService = async () => {
   try {
     const response = await request({
       method: "GET",
-      url: "/client/v1/get-invite",
+      url: "/client/v1/get/invite",
     });
 
     return response.data;
@@ -17,7 +17,7 @@ export const getClientsByUserIdService = async () => {
   try {
     const response = await request({
       method: "GET",
-      url: "/client/v1/get-clients-by-user-id",
+      url: "/client/v1/get/clients",
     });
 
     return response.data;
@@ -30,7 +30,7 @@ export const getClientByIdService = async (clientId: string) => {
   try {
     const response = await request({
       method: "GET",
-      url: "/client/v1/get-client-by-id",
+      url: "/client/v1/get/client",
       params: {
         clientId,
       },
@@ -48,7 +48,7 @@ export const updateClientMedicalInformationService = async (
   try {
     const response = await request({
       method: "POST",
-      url: "/client/v1/update-client-medical-information",
+      url: "/client/v1/update/client-medical-information",
       data: {
         data: clientMedicalInformation,
       },
@@ -64,7 +64,7 @@ export const readInviteInformationService = async (inviteId: string) => {
   try {
     const response = await request({
       method: "GET",
-      url: "/client/v1/read/invite-information",
+      url: "/client/v1/read/invite",
       params: { inviteId },
     });
 
