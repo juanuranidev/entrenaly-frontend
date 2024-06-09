@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlanByIdService } from "services/plan/plan.services";
+import { readWeeklyPlanService } from "services/plan/plan.services";
 
 export const useReadPlan = (planId: string | undefined) => {
   const [plan, setPlan] = useState(null);
@@ -10,7 +10,7 @@ export const useReadPlan = (planId: string | undefined) => {
 
     setIsLoading(true);
     try {
-      const response = await getPlanByIdService(planId);
+      const response = await readWeeklyPlanService(planId);
 
       setPlan(response);
     } catch (error) {

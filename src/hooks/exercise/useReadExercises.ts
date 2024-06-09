@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllExercisesService } from "services/exercise/exercise.services";
+import { readExercisesService } from "services/exercise/exercise.services";
 
 export const useReadExercises = (name?: string) => {
   const [exercises, setExercises] = useState([]);
@@ -8,7 +8,7 @@ export const useReadExercises = (name?: string) => {
   const handleReadExercises = async () => {
     setIsLoading(true);
     try {
-      const response = await getAllExercisesService(name);
+      const response = await readExercisesService(name);
 
       setExercises(response);
     } catch (error) {

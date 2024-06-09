@@ -20,5 +20,6 @@ export const useReadInviteInformation = (inviteId: string) => {
   useEffect(() => {
     handleReadInviteInformation();
   }, []);
+
   return { inviteInformation, isLoading };
 };

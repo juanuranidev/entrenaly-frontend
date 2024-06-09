@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllPlansByUserIdService } from "services/plan/plan.services";
+import { readPlansByUserIdService } from "services/plan/plan.services";
 
 export const useReadPlans = () => {
   const [plans, setPlans] = useState([]);
@@ -8,7 +8,7 @@ export const useReadPlans = () => {
   const handleGetPlansByUserId = async () => {
     setIsLoading(true);
     try {
-      const response = await getAllPlansByUserIdService();
+      const response = await readPlansByUserIdService();
 
       setPlans(response);
     } catch (error) {

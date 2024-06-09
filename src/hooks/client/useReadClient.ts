@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getClientByIdService } from "services/client/client.services";
+import { readClientService } from "services/client/client.services";
 
 export const useReadClient = (clientId: string) => {
   const [client, setClient] = useState();
@@ -10,7 +10,7 @@ export const useReadClient = (clientId: string) => {
 
     setIsLoading(true);
     try {
-      const response = await getClientByIdService(clientId);
+      const response = await readClientService(clientId);
 
       setClient(response);
     } catch (error) {

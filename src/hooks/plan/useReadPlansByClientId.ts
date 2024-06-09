@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllPlansByClientIdService } from "services/plan/plan.services";
+import { readPlansByClientIdService } from "services/plan/plan.services";
 
 export const useReadPlansByClientId = (clientId: string) => {
   const [plans, setPlans] = useState([]);
@@ -10,7 +10,7 @@ export const useReadPlansByClientId = (clientId: string) => {
 
     setIsLoading(true);
     try {
-      const response = await getAllPlansByClientIdService(clientId);
+      const response = await readPlansByClientIdService(clientId);
 
       setPlans(response);
     } catch (error) {

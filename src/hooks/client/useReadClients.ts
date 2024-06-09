@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getClientsByUserIdService } from "services/client/client.services";
+import { readClientsService } from "services/client/client.services";
 
 export const useReadClients = () => {
   const [clients, setClients] = useState([]);
@@ -8,7 +8,7 @@ export const useReadClients = () => {
   const handleGetClientsByUserId = async () => {
     setIsLoading(true);
     try {
-      const response = await getClientsByUserIdService();
+      const response = await readClientsService();
 
       setClients(response);
     } catch (error) {

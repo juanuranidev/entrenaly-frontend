@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getInviteService } from "services/client/client.services";
+import { readInviteService } from "services/client/client.services";
 
 export const useReadInvite = () => {
   const [invite, setInvite] = useState(null);
@@ -8,7 +8,7 @@ export const useReadInvite = () => {
   const handleGetInvite = async () => {
     setIsLoading(true);
     try {
-      const response = await getInviteService();
+      const response = await readInviteService();
 
       setInvite(response.id);
     } catch (error) {
