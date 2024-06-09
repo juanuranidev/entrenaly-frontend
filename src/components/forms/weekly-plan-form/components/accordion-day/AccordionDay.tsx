@@ -8,7 +8,6 @@ import {
   AccordionDetails,
   AccordionSummary,
 } from "@mui/material";
-import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 import Icons from "lib/utils/icons/icons";
@@ -18,12 +17,17 @@ import ExerciseInput from "../exercise-input/ExerciseInput";
 type Props = {
   day: any;
   formik: any;
+  exercisesDescriptions: any;
+  handleRefetchGetExercisesDescriptions: any;
 };
 
-export default function AccordionDay({ day, formik }: Props) {
+export default function AccordionDay({
+  day,
+  formik,
+  exercisesDescriptions,
+  handleRefetchGetExercisesDescriptions,
+}: Props) {
   const { theme } = useThemeContext();
-  const { exercisesDescriptions, handleRefetchGetExercisesDescriptions } =
-    useReadExercisesDescriptions();
 
   const [openModalConfirm, setOpenModalConfirm] = useState(false);
 

@@ -1,12 +1,12 @@
 import request from "services/request";
 
-export const getAllExercisesService = async (name?: string) => {
+export const createExerciseService = async (exercise: any) => {
   try {
     const response = await request({
-      method: "GET",
-      url: "/exercise/v1/get",
-      params: {
-        name,
+      method: "POST",
+      url: "/exercise/v1/create",
+      data: {
+        data: exercise,
       },
     });
 
@@ -15,7 +15,6 @@ export const getAllExercisesService = async (name?: string) => {
     throw error;
   }
 };
-
 export const createVariantService = async (variant: any) => {
   try {
     const response = await request({
@@ -31,50 +30,7 @@ export const createVariantService = async (variant: any) => {
     throw error;
   }
 };
-
-export const updateVariantService = async (variant: any) => {
-  try {
-    const response = await request({
-      method: "POST",
-      url: "/exercise/v1/update/variant",
-      data: {
-        data: variant,
-      },
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getAllExercisesCategoriesService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/exercise/v1/get/categories",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getAllExercisesDescriptionsService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/exercise/v1/get/exercises-descriptions",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const postExerciseDescriptionService = async (description: string) => {
+export const createExerciseDescriptionService = async (description: string) => {
   try {
     const response = await request({
       method: "POST",
@@ -89,14 +45,52 @@ export const postExerciseDescriptionService = async (description: string) => {
     throw error;
   }
 };
+export const readExercisesService = async (name?: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/exercise/v1/get",
+      params: {
+        name,
+      },
+    });
 
-export const createExerciseService = async (exercise: any) => {
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readExercisesCategoriesService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/exercise/v1/get/categories",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readExercisesDescriptionsService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/exercise/v1/get/exercises-descriptions",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const updateVariantService = async (variant: any) => {
   try {
     const response = await request({
       method: "POST",
-      url: "/exercise/v1/create",
+      url: "/exercise/v1/update/variant",
       data: {
-        data: exercise,
+        data: variant,
       },
     });
 

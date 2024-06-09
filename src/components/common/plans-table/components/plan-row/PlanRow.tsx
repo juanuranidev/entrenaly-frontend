@@ -34,8 +34,8 @@ export default function PlanRow({ plan }: Props) {
       <TableCell align="center">
         {moment(plan?.createdAt).format("DD/MM/YYYY")}
       </TableCell>
-      <TableCell align="center">{plan?.type}</TableCell>
-      <TableCell align="center">{plan?.category}</TableCell>
+      <TableCell align="center">{plan?.type?.name}</TableCell>
+      <TableCell align="center">{plan?.category?.name}</TableCell>
       <TableCell align="right">
         <IconButton onClick={(e: any) => setAnchorEl(e.currentTarget)}>
           <Icons.more />

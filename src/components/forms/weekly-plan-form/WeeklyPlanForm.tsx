@@ -3,7 +3,7 @@ import {
   weeklyPlanFormValidations,
 } from "./components/Utils";
 import {
-  postWeeklyPlanService,
+  createWeeklyPlanService,
   updateWeeklyPlanService,
 } from "services/plan/plan.services";
 import {
@@ -21,6 +21,7 @@ import AddDayDrawer from "./components/add-day-drawer/AddDayDrawer";
 import AccordionDay from "./components/accordion-day/AccordionDay";
 import MainInformation from "./components/main-information/MainInformation";
 import AddExercisesForm from "./components/add-exercises-form/AddExercisesForm";
+import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
 
 type Props = {
   plan?: any;
@@ -30,6 +31,9 @@ export default function WeeklyPlanForm({ plan }: Props) {
   const editPlan = plan ? true : false;
   const { theme } = useThemeContext();
   const navigate = useNavigate();
+
+  const { exercisesDescriptions, handleRefetchGetExercisesDescriptions } =
+    useReadExercisesDescriptions();
 
   const [isLoading, setIsLoading] = useState(false);
   const [daySelected, setDaySelected] = useState<any>(null);
@@ -59,7 +63,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setIsLoading(true);
     handleVerifyDescriptions(data.days);
     try {
-      await postWeeklyPlanService(toPostWeeklyPlanDataAdapter(data));
+      await createWeeklyPlanService(toPostWeeklyPlanDataAdapter(data));
 
       successToast("Plan creado con éxito");
       navigate("/trainer/plans");
@@ -141,7 +145,15 @@ export default function WeeklyPlanForm({ plan }: Props) {
       {formik?.values?.days
         ?.sort((a: any, b: any) => a.dayOfWeekId - b.dayOfWeekId)
         .map((day: any) => (
-          <AccordionDay key={day?.dayOfWeekId} day={day} formik={formik} />
+          <AccordionDay
+            key={day?.dayOfWeekId}
+            day={day}
+            formik={formik}
+            exercisesDescriptions={exercisesDescriptions}
+            handleRefetchGetExercisesDescriptions={
+              handleRefetchGetExercisesDescriptions
+            }
+          />
         ))}
       <Grid item xs={12} display="flex" justifyContent="flex-end">
         <Button

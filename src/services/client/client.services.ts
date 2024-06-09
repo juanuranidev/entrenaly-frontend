@@ -1,36 +1,10 @@
 import request from "services/request";
 
-export const getInviteService = async () => {
+export const readClientService = async (clientId: string) => {
   try {
     const response = await request({
       method: "GET",
-      url: "/client/v1/get/invite",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getClientsByUserIdService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/client/v1/get/clients",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getClientByIdService = async (clientId: string) => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/client/v1/get/client",
+      url: "/client/v1/read/client",
       params: {
         clientId,
       },
@@ -41,7 +15,43 @@ export const getClientByIdService = async (clientId: string) => {
     throw error;
   }
 };
+export const readClientsService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/client/v1/read/clients",
+    });
 
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readInviteService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/client/v1/read/invite",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readInviteInformationService = async (inviteId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/client/v1/read/invite-information",
+      params: { inviteId },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const updateClientMedicalInformationService = async (
   clientMedicalInformation: any
 ) => {
@@ -52,20 +62,6 @@ export const updateClientMedicalInformationService = async (
       data: {
         data: clientMedicalInformation,
       },
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const readInviteInformationService = async (inviteId: string) => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/client/v1/read/invite",
-      params: { inviteId },
     });
 
     return response.data;

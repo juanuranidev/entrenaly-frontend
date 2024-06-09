@@ -11,6 +11,7 @@ import {
   createVariantService,
   updateVariantService,
 } from "services/exercise/exercise.services";
+import { addOrUpdateVariantFormValidations } from "./utils/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -24,39 +25,43 @@ type Props = {
   open: boolean;
   exerciseId: number;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => Promise<void>;
   exerciseSelected?: any;
 };
 
-export default function AddVariantForm({
+export default function AddOrUpdateVariantForm({
   open,
   onClose,
   onSubmit,
   exerciseId,
   exerciseSelected,
 }: Props) {
-  const { theme } = useThemeContext();
-  const { exercisesCategories } = useReadExercisesCategories();
-
-  const isVariant = exerciseSelected?.variant;
-
+  const updateVariant = exerciseSelected?.variant;
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { theme } = useThemeContext();
+  const { exercisesCategories, isLoading: isCategoriesLoading } =
+    useReadExercisesCategories();
 
   const handleFormatInitialExerciseValues = () => {
     if (!exerciseSelected) return { name: "", video: "", format: "" };
 
-    if (isVariant) {
+    if (updateVariant) {
       return {
         name: exerciseSelected?.variant?.name ?? "",
         image: exerciseSelected?.variant?.image ?? "",
         format: exerciseSelected?.variant?.format ?? "",
         variantId: exerciseSelected?.variant?.id ?? "",
+        categoryId: exerciseSelected?.category?.id ?? "",
+        exerciseId: exerciseId,
       };
     } else {
       return {
         name: exerciseSelected?.name ?? "",
         image: exerciseSelected?.image ?? "",
         format: exerciseSelected?.format ?? "",
+        categoryId: exerciseSelected?.category?.id ?? "",
+        exerciseId: exerciseId,
       };
     }
   };
@@ -64,35 +69,43 @@ export default function AddVariantForm({
   const formik = useFormik({
     initialValues: {
       ...handleFormatInitialExerciseValues(),
-      categoryId: exerciseSelected?.category?.id ?? "",
-      exerciseId: exerciseId,
     },
     enableReinitialize: true,
+    validationSchema: addOrUpdateVariantFormValidations,
     async onSubmit(values) {
-      setIsLoading(true);
-      try {
-        if (isVariant) {
-          await updateVariantService(values);
-        } else {
-          await createVariantService(values);
-        }
-
-        onSubmit();
-        onClose();
-
-        successToast("Variante creada con éxito");
-      } catch (error) {
-        console.log(error);
-        errorToast("Error al crear variante intente nuevamente");
-      }
-      setIsLoading(false);
+      handleCreateOrUpdateVariant(values);
     },
   });
+
+  const handleCreateOrUpdateVariant = async (variant: any) => {
+    setIsLoading(true);
+    try {
+      if (updateVariant) {
+        await updateVariantService(variant);
+      } else {
+        await createVariantService(variant);
+      }
+
+      if (onSubmit) {
+        await onSubmit();
+      }
+      onClose();
+
+      successToast(
+        `Variante ${updateVariant ? "actualizada" : "creada"} con éxito`
+      );
+    } catch (error) {
+      console.log(error);
+      const action = updateVariant ? "actualizar" : "crear";
+      errorToast(`Error al ${action} variante intente nuevamente`);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
       <ModalTitle
-        title="Agregar variante"
+        title={`${updateVariant ? "Editar" : "Agregar"} variante`}
         action={
           <IconButton onClick={onClose}>
             <Icons.close />
@@ -117,9 +130,6 @@ export default function AddVariantForm({
               error={
                 Boolean(formik?.touched?.name) && Boolean(formik?.errors?.name)
               }
-              helperText={
-                Boolean(formik?.touched?.name) && Boolean(formik?.errors?.name)
-              }
             />
           </Grid>
           <Grid item xs={12}>
@@ -128,15 +138,11 @@ export default function AddVariantForm({
               fullWidth
               name="categoryId"
               label="Categoria"
-              disabled={Boolean(exerciseSelected)}
+              disabled={Boolean(exerciseSelected) || isCategoriesLoading}
               onBlur={formik?.handleBlur}
               onChange={formik?.handleChange}
               value={formik?.values?.categoryId}
               error={
-                Boolean(formik?.touched?.categoryId) &&
-                Boolean(formik?.errors?.categoryId)
-              }
-              helperText={
                 Boolean(formik?.touched?.categoryId) &&
                 Boolean(formik?.errors?.categoryId)
               }
@@ -167,10 +173,6 @@ export default function AddVariantForm({
               value={formik?.values?.image}
               onChange={formik?.handleChange}
               error={
-                Boolean(formik?.touched?.image) &&
-                Boolean(formik?.errors?.image)
-              }
-              helperText={
                 Boolean(formik?.touched?.image) &&
                 Boolean(formik?.errors?.image)
               }

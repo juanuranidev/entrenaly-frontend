@@ -81,6 +81,7 @@ export default function Profile({ profileItems }: any) {
             <List sx={{ padding: theme?.spacing(1) }}>
               {profileItems.map((item: any) => (
                 <ListItemButton
+                  key={item?.title}
                   sx={{
                     "& .MuiListItemIcon-root, & .MuiTypography-root": {
                       fontSize: 12,
@@ -94,7 +95,7 @@ export default function Profile({ profileItems }: any) {
                   <ListItemIcon>
                     <Icons.person style={{ fontSize: 20 }} />
                   </ListItemIcon>
-                  <ListItemText>{item.title}</ListItemText>
+                  <ListItemText>{item?.title}</ListItemText>
                 </ListItemButton>
               ))}
               <ListItemButton

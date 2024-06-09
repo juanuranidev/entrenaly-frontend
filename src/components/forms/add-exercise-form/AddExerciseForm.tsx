@@ -7,12 +7,13 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import { addExerciseFormValidations } from "./utils/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { errorToast, successToast } from "lib/utils/toast";
 import { createExerciseService } from "services/exercise/exercise.services";
+import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
-import { useState } from "react";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
@@ -25,11 +26,11 @@ type Props = {
 };
 
 export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { theme } = useThemeContext();
   const { exercisesCategories, isLoading: isCategoriesLoading } =
     useReadExercisesCategories();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +38,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
       image: "",
       categoryId: "",
     },
-    enableReinitialize: true,
+    validationSchema: addExerciseFormValidations,
     onSubmit(values) {
       handleCreateExercise(values);
     },
@@ -60,6 +61,18 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
     }
     setIsLoading(false);
   };
+
+  const handleSetInitialValues = () => {
+    formik.setFieldValue("name", "");
+    formik.setFieldValue("image", "");
+    formik.setFieldValue("categoryId", "");
+  };
+
+  useEffect(() => {
+    if (open) {
+      handleSetInitialValues();
+    }
+  }, [open]);
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
@@ -84,7 +97,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
               name="name"
               label="Nombre del circuito"
               onBlur={formik?.handleBlur}
-              value={formik?.values?.name}
+              value={formik?.values?.name || ""}
               onChange={formik?.handleChange}
               error={
                 Boolean(formik?.touched?.name) && Boolean(formik?.errors?.name)
@@ -100,15 +113,17 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
               onBlur={formik?.handleBlur}
               disabled={isCategoriesLoading}
               onChange={formik?.handleChange}
-              value={formik?.values?.categoryId}
+              value={formik?.values?.categoryId || ""}
               error={
                 Boolean(formik?.touched?.categoryId) &&
                 Boolean(formik?.errors?.categoryId)
               }
             >
-              {exercisesCategories?.length
+              {exercisesCategories?.length > 0
                 ? exercisesCategories?.map((category: any) => (
-                    <MenuItem value={category?.id}>{category?.name}</MenuItem>
+                    <MenuItem key={category?.id} value={category?.id}>
+                      {category?.name}
+                    </MenuItem>
                   ))
                 : null}
             </TextField>
@@ -124,7 +139,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
               name="image"
               label="Link de la imágen o gif"
               onBlur={formik?.handleBlur}
-              value={formik?.values?.image}
+              value={formik?.values?.image || ""}
               onChange={formik?.handleChange}
               error={
                 Boolean(formik?.touched?.image) &&
@@ -134,6 +149,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
           </Grid>
           <Grid item xs={12} sm={12}>
             <img
+              alt="Ejercicio"
               src={formik?.values?.image}
               style={{
                 width: "100%",

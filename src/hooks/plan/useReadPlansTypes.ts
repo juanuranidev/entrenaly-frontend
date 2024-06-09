@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlansTypesService } from "services/plan/plan.services";
+import { readPlansTypesService } from "services/plan/plan.services";
 
 export const useReadPlansTypes = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,7 +8,7 @@ export const useReadPlansTypes = () => {
   const handleGetAllPlansTypes = async () => {
     setIsLoading(true);
     try {
-      const response = await getPlansTypesService();
+      const response = await readPlansTypesService();
 
       setPlansTypes(response);
     } catch (error) {

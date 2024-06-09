@@ -1,32 +1,6 @@
 import request from "services/request";
 
-export const getAllPlansCategoriesService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/get/plan-categories",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getAllDaysOfWeekService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/get/days-of-week",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const postWeeklyPlanService = async (data: any) => {
+export const createWeeklyPlanService = async (data: any) => {
   try {
     const response = await request({
       method: "POST",
@@ -41,12 +15,11 @@ export const postWeeklyPlanService = async (data: any) => {
     throw error;
   }
 };
-
-export const getAllPlansByUserIdService = async () => {
+export const readPlansTypesService = async () => {
   try {
     const response = await request({
       method: "GET",
-      url: "/plan/v1/get/plans-by-user-id",
+      url: "/plan/v1/read/plans-types",
     });
 
     return response.data;
@@ -54,12 +27,47 @@ export const getAllPlansByUserIdService = async () => {
     throw error;
   }
 };
-
-export const getAllPlansByClientIdService = async (clientId: string) => {
+export const readDaysOfWeekService = async () => {
   try {
     const response = await request({
       method: "GET",
-      url: "/plan/v1/get/plans-by-client-id",
+      url: "/plan/v1/read/days-of-week",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readPlansCategoriesService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/plan/v1/read/plan-categories",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readPlansByUserIdService = async () => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/plan/v1/read/plans-by-user-id",
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const readPlansByClientIdService = async (clientId: string) => {
+  try {
+    const response = await request({
+      method: "GET",
+      url: "/plan/v1/read/plans-by-client-id",
       params: {
         clientId,
       },
@@ -70,25 +78,11 @@ export const getAllPlansByClientIdService = async (clientId: string) => {
     throw error;
   }
 };
-
-export const getPlansTypesService = async () => {
+export const readWeeklyPlanService = async (planId: string) => {
   try {
     const response = await request({
       method: "GET",
-      url: "/plan/v1/get/plans-types",
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getPlanByIdService = async (planId: string) => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/get/plan-by-id",
+      url: "/plan/v1/read/weekly-plan",
       params: {
         planId,
       },
@@ -99,7 +93,6 @@ export const getPlanByIdService = async (planId: string) => {
     throw error;
   }
 };
-
 export const updateWeeklyPlanService = async (data: any) => {
   try {
     const response = await request({

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Icons from "lib/utils/icons/icons";
-import AddVariantForm from "components/forms/add-variant-form/AddVariantForm";
+import AddOrUpdateVariantForm from "components/forms/add-or-update-variant-form/AddOrUpdateVariantForm";
 import { useThemeContext } from "contexts/theme/Theme";
 import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 
 type Props = {
   exercise: any;
-  handleRefetchReadExercises: () => void;
+  handleRefetchReadExercises: () => Promise<void>;
 };
 
 export default function ExerciseCard({
@@ -15,7 +15,7 @@ export default function ExerciseCard({
 }: Props) {
   const isVariant = exercise.variant;
   const { theme } = useThemeContext();
-  console.log(exercise);
+
   const [exerciseSelected, setExerciseSelected] = useState(null);
   const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
 
@@ -103,7 +103,7 @@ export default function ExerciseCard({
           {isVariant ? exercise?.variant?.name : exercise?.name}
         </Typography>
       </Box>
-      <AddVariantForm
+      <AddOrUpdateVariantForm
         exerciseId={exercise?.id}
         open={openFormAddVariant}
         exerciseSelected={exerciseSelected}

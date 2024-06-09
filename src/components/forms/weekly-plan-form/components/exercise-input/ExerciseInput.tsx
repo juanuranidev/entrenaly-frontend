@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import React, { useEffect, useState } from "react";
-import { postExerciseDescriptionService } from "services/exercise/exercise.services";
+import { createExerciseDescriptionService } from "services/exercise/exercise.services";
 
 type Props = {
   day: any;
@@ -28,10 +28,22 @@ export default function ExerciseInput({
   handleRefetchGetExercisesDescriptions,
 }: Props) {
   const isVariant = exercise?.variant;
-  console.log(exercise);
+
   const { theme } = useThemeContext();
   const [inputValue, setInputValue] = useState("");
   const [autocompleteValue, setAutocompleteValue] = useState<any>("");
+
+  const handlePostExerciseDescription = async () => {
+    try {
+      const response = await createExerciseDescriptionService(inputValue);
+
+      await handleRefetchGetExercisesDescriptions();
+      setAutocompleteValue(response);
+      handleChangeDescripcion(response?.description);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleChangeDescripcion = (description: string) => {
     const exerciseFormatted = {
@@ -58,20 +70,8 @@ export default function ExerciseInput({
     formik.setFieldValue("days", newDays);
   };
 
-  const handlePostExerciseDescription = async () => {
-    try {
-      const response = await postExerciseDescriptionService(inputValue);
-
-      await handleRefetchGetExercisesDescriptions();
-      setAutocompleteValue(response);
-      handleChangeDescripcion(response?.description);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleManageDefaultValues = () => {
-    if (!exercise) return;
+    if (!exercise || !exercisesDescriptions.length) return;
 
     setInputValue(exercise?.description);
 
@@ -84,7 +84,7 @@ export default function ExerciseInput({
 
   useEffect(() => {
     handleManageDefaultValues();
-  }, [exercise]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -135,7 +135,7 @@ export default function ExerciseInput({
               setInputValue(newInputValue);
               handleChangeDescripcion(newInputValue);
             }}
-            id="controllable-states-demo"
+            autoFocus={false}
             options={exercisesDescriptions}
             renderInput={(params) => (
               <TextField
@@ -150,13 +150,17 @@ export default function ExerciseInput({
             renderOption={(props, option) => (
               <MenuItem {...props}>{option?.description}</MenuItem>
             )}
+            autoSelect={false}
             noOptionsText={
-              <MenuItem
-                sx={{ margin: 0 }}
-                onClick={handlePostExerciseDescription}
-              >
-                {`Guardar: ${inputValue}`}
-              </MenuItem>
+              inputValue ? (
+                <MenuItem
+                  autoFocus={false}
+                  sx={{ margin: 0 }}
+                  onClick={handlePostExerciseDescription}
+                >
+                  {`Guardar: ${inputValue}`}
+                </MenuItem>
+              ) : null
             }
           />
         </Box>

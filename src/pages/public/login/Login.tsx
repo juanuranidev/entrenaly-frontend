@@ -1,20 +1,18 @@
-import { Box, Card, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
+import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
 import Footer from "./components/footer/Footer";
 import LoginForm from "components/forms/login-form/LoginForm";
 import RegisterForm from "components/forms/register-form/RegisterForm";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import InviteInformation from "./components/invite-information/InviteInformation";
-import ENV from "lib/utils/env";
 
 export default function Login() {
-  const theme: any = useTheme();
+  const { theme } = useThemeContext();
   const [params] = useSearchParams();
   const invite: any = params.get("invite");
 
-  console.log(window.location.origin);
-  console.log(ENV.FRONTEND_BASE_URL);
   const [registerView, setRegisterView] = useState(invite ? true : false);
 
   return (
