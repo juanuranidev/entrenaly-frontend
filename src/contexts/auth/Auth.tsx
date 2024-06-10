@@ -25,10 +25,7 @@ export const AuthContextProvider = ({ children }: any) => {
     setIsLoading(true);
     try {
       const response: any = await getUserSessionService();
-      if (!response) {
-        navigate("");
-        throw "Not an user in session";
-      }
+      if (!response) throw "Not an user in session";
 
       axios.defaults.headers.common[
         "Authorization"
