@@ -1,6 +1,7 @@
 import {
   Menu,
   Stack,
+  Avatar,
   TableRow,
   MenuItem,
   TableCell,
@@ -12,30 +13,35 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import moment from "moment";
 import Icons from "lib/utils/icons/icons";
+import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 
 type Props = {
-  plan: any;
+  client: any;
 };
 
-export default function PlanRow({ plan }: Props) {
+export default function ClientRow({ client }: Props) {
   const { theme } = useThemeContext();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =
+    useState<boolean>(false);
 
   return (
     <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell align="left">
-        <Stack direction="row" alignItems="center" gap={theme?.spacing(1)}>
-          <Icons.pdfs color="error" />
-          <Typography>{plan?.name}</Typography>
+        <Stack direction="row" alignItems="center" gap={theme?.spacing(2)}>
+          <Avatar
+            alt={client?.name}
+            src={client?.image}
+            sx={{ width: 30, height: 30 }}
+          />
+          <Typography>{client?.name}</Typography>
         </Stack>
       </TableCell>
       <TableCell align="center">
-        {moment(plan?.createdAt).format("DD/MM/YYYY")}
+        {moment(client?.createdAt).format("DD/MM/YYYY")}
       </TableCell>
-      <TableCell align="center">{plan?.type?.name}</TableCell>
-      <TableCell align="center">{plan?.category?.name}</TableCell>
       <TableCell align="right">
         <IconButton onClick={(e: any) => setAnchorEl(e.currentTarget)}>
           <Icons.more />
@@ -47,17 +53,25 @@ export default function PlanRow({ plan }: Props) {
           onClose={() => setAnchorEl(null)}
         >
           <MenuItem
-            onClick={() => navigate(`/trainer/plans/view/weekly/${plan?.id}`)}
+            onClick={() => navigate(`/trainer/clients/profile/${client?.id}`)}
           >
-            Ver plan
+            Ver perfil
           </MenuItem>
           <MenuItem
-            onClick={() => navigate(`/trainer/plans/edit/weekly/${plan?.id}`)}
+            onClick={() => {
+              setAnchorEl(null);
+              setModalUpdateMedicalInformation(true);
+            }}
           >
-            Editar
+            Editar ficha médica
           </MenuItem>
         </Menu>
       </TableCell>
+      <UpdateMedicalInformationForm
+        clientSelected={client}
+        open={modalUpdateMedicalInformation}
+        onClose={() => setModalUpdateMedicalInformation(false)}
+      />
     </TableRow>
   );
 }

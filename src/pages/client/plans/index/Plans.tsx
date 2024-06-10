@@ -1,14 +1,14 @@
 import { useReadPlansByClientId } from "hooks/plan/useReadPlansByClientId";
+import { Card, Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
-import { Card, Grid } from "@mui/material";
 import PageTitle from "components/common/page-title/PageTitle";
 import PlanCard from "./components/plan-card/PlanCard";
 
 export default function Plans() {
   const { userData } = useAuthContext();
   const { theme } = useThemeContext();
-  const { plans }: any = useReadPlansByClientId(userData?.clientInfo?.id);
+  const { plans } = useReadPlansByClientId(userData?.clientInfo?.id);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
@@ -31,11 +31,13 @@ export default function Plans() {
               alignItems="center"
               gap={theme?.spacing(3)}
             >
-              {plans.length
-                ? plans.map((plan: any) => (
-                    <PlanCard plan={plan} key={plan.id} />
-                  ))
-                : null}
+              {plans.length ? (
+                plans.map((plan: any) => <PlanCard plan={plan} key={plan.id} />)
+              ) : (
+                <Typography fontWeight={600} fontSize={20}>
+                  ¡No tienes planes todavía!
+                </Typography>
+              )}
             </Grid>
           </Grid>
         </Card>

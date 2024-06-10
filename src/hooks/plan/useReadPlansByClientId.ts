@@ -5,7 +5,7 @@ export const useReadPlansByClientId = (clientId: string) => {
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleGetClientById = async () => {
+  const handleReadPlansByClientId = async () => {
     if (!clientId) return;
 
     setIsLoading(true);
@@ -20,7 +20,7 @@ export const useReadPlansByClientId = (clientId: string) => {
   };
 
   useEffect(() => {
-    handleGetClientById();
+    handleReadPlansByClientId();
   }, []);
 
   return { plans, isLoading };

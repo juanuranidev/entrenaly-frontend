@@ -14,12 +14,12 @@ export default function PlanCard({ plan }: Props) {
   return (
     <Box
       display="flex"
-      boxShadow={"rgba(0, 0, 0, 0.3) 0px 20px 20px -20px;"}
       p={theme?.spacing(3)}
       gap={theme?.spacing(2)}
       sx={{ cursor: "pointer" }}
       borderRadius={theme?.spacing(1)}
       bgcolor={theme?.colors?.background?.secondary}
+      boxShadow={"rgba(0, 0, 0, 0.3) 0px 20px 20px -20px;"}
       onClick={() => navigate(`/client/plans/view/weekly/${plan?.id}`)}
     >
       <Icons.pdfs color="error" />

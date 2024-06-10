@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { readClientService } from "services/client/client.services";
 
-export const useReadClient = (clientId: string) => {
+export const useReadClient = (clientId: any) => {
   const [client, setClient] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
