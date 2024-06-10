@@ -13,7 +13,10 @@ import {
   googleAuthService,
   registerWithEmailService,
 } from "services/user/user.services";
-import { errorToast, successToast } from "lib/utils/toast";
+import {
+  handleCreateErrorToast,
+  handleCreateSuccessToast,
+} from "lib/utils/toast";
 import { registerFormValidation } from "./validations";
 import { useAuthContext } from "contexts/auth/Auth";
 import { USER_CONSTANTS } from "lib/constants/user.constants";
@@ -64,7 +67,7 @@ export default function RegisterForm({ invite }: any) {
         navigate("/client/plans");
         setUserData(response);
       }
-      successToast("Registrado con éxito");
+      handleCreateSuccessToast("Registrado con éxito");
     } catch (error: any) {
       console.log(error);
       handleManageRegisterWithEmailError(error);
@@ -77,9 +80,9 @@ export default function RegisterForm({ invite }: any) {
 
     switch (true) {
       case errorInString.includes("email-already-in-use"):
-        return errorToast("Email ya en uso");
+        return handleCreateErrorToast("Email ya en uso");
       default:
-        return errorToast("Error en el servidor");
+        return handleCreateErrorToast("Error en el servidor");
     }
   };
 
@@ -105,7 +108,7 @@ export default function RegisterForm({ invite }: any) {
       }
     } catch (error) {
       console.log(error);
-      errorToast("Error en el servidor");
+      handleCreateErrorToast("Error en el servidor");
     }
   };
 

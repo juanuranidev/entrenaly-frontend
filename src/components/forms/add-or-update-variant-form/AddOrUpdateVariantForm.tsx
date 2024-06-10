@@ -13,7 +13,10 @@ import {
 } from "services/exercise/exercise.services";
 import { addOrUpdateVariantFormValidations } from "./utils/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
-import { errorToast, successToast } from "lib/utils/toast";
+import {
+  handleCreateErrorToast,
+  handleCreateSuccessToast,
+} from "lib/utils/toast";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -91,13 +94,13 @@ export default function AddOrUpdateVariantForm({
       }
       onClose();
 
-      successToast(
+      handleCreateSuccessToast(
         `Variante ${updateVariant ? "actualizada" : "creada"} con éxito`
       );
     } catch (error) {
       console.log(error);
       const action = updateVariant ? "actualizar" : "crear";
-      errorToast(`Error al ${action} variante intente nuevamente`);
+      handleCreateErrorToast(`Error al ${action} variante intente nuevamente`);
     }
     setIsLoading(false);
   };

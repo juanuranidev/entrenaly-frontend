@@ -1,7 +1,7 @@
 import { Box, Grid, Button, TextField, IconButton } from "@mui/material";
 import { updateClientMedicalInformationService } from "services/client/client.services";
 import { useThemeContext } from "contexts/theme/Theme";
-import { successToast } from "lib/utils/toast";
+import { handleCreateSuccessToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
@@ -43,7 +43,7 @@ export default function UpdateMedicalInformationForm({
           await onSubmit();
         }
 
-        successToast("Cliente actualizado con éxito");
+        handleCreateSuccessToast("Cliente actualizado con éxito");
         onClose();
       } catch (error) {
         console.log(error);

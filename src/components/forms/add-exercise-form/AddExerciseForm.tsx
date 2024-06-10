@@ -9,7 +9,10 @@ import {
 } from "@mui/material";
 import { addExerciseFormValidations } from "./utils/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
-import { errorToast, successToast } from "lib/utils/toast";
+import {
+  handleCreateErrorToast,
+  handleCreateSuccessToast,
+} from "lib/utils/toast";
 import { createExerciseService } from "services/exercise/exercise.services";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -53,11 +56,11 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
         await onSubmit();
       }
 
-      successToast("Ejercicio creado con éxito");
+      handleCreateSuccessToast("Ejercicio creado con éxito");
       onClose();
     } catch (error) {
       console.log(error);
-      errorToast("Error al crear ejercicio");
+      handleCreateErrorToast("Error al crear ejercicio");
     }
     setIsLoading(false);
   };

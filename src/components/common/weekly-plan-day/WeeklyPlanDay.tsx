@@ -9,6 +9,7 @@ import {
 import { useThemeContext } from "contexts/theme/Theme";
 import ExerciseView from "./components/exercise-view/ExerciseView";
 import Icons from "lib/utils/icons/icons";
+import ExercisesImagesSumary from "../exercises-images-summary/ExercisesImagesSumary";
 
 type Props = {
   day: any;
@@ -37,32 +38,7 @@ export default function WeeklyPlanDay({ day }: Props) {
             <Typography fontWeight={600} fontSize={16}>
               {day?.dayOfWeekName}
             </Typography>
-            <Stack
-              direction="row"
-              mr={theme?.spacing(1)}
-              gap={theme?.spacing(1.5)}
-            >
-              {day?.exercises
-                ?.slice(0, 3)
-                .map((exercise: any, index: number) => (
-                  <img
-                    key={index}
-                    alt={exercise?.exerciseName}
-                    src={
-                      exercise?.exerciseVariant
-                        ? exercise?.exerciseVariant?.image
-                        : exercise?.exerciseImage
-                    }
-                    style={{
-                      width: 40,
-                      height: 40,
-                      objectFit: "contain",
-                      borderRadius: theme?.spacing(1),
-                      border: `2px solid ${theme?.colors?.border?.primary}`,
-                    }}
-                  />
-                ))}
-            </Stack>
+            <ExercisesImagesSumary exercises={day?.exercises} />
           </Stack>
         </AccordionSummary>
         <AccordionDetails>

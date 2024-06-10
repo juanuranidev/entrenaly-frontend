@@ -16,7 +16,7 @@ import {
 import { loginFormValidation } from "./validations";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
-import { errorToast } from "lib/utils/toast";
+import { handleCreateErrorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Google from "../../../../public/google.svg";
@@ -61,7 +61,7 @@ export default function LoginForm({ invite }: Props) {
       }
     } catch (error: any) {
       console.log(error);
-      errorToast("Credenciales inválidas");
+      handleCreateErrorToast("Credenciales inválidas");
     }
     setIsLoading(false);
   };
@@ -71,7 +71,7 @@ export default function LoginForm({ invite }: Props) {
     try {
       const response = await googleAuthService(invite);
       console.log(response);
-      errorToast("test");
+      handleCreateErrorToast("test");
       alert(response);
       if (
         response &&
@@ -90,7 +90,7 @@ export default function LoginForm({ invite }: Props) {
       }
     } catch (error) {
       console.log(error);
-      errorToast("Error en el servidor");
+      handleCreateErrorToast("Error en el servidor");
     }
   };
 

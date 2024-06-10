@@ -1,9 +1,9 @@
 import { toast } from "sonner";
 
-export const successToast = (message: string) => {
+export const handleCreateSuccessToast = (message: string) => {
   return toast.success(message);
 };
 
-export const errorToast = (message: string) => {
+export const handleCreateErrorToast = (message: string) => {
   return toast.error(message);
 };

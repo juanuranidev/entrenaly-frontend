@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useReadInvite } from "hooks/client/useReadInvite";
-import { successToast } from "lib/utils/toast";
+import { handleCreateSuccessToast } from "lib/utils/toast";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ModalTitle from "components/common/modal-title/ModalTitle";
@@ -32,7 +32,7 @@ export default function AddClientForm({ open, onClose }: any) {
     try {
       await navigator.clipboard.writeText(invite);
 
-      successToast("Invitación copiada");
+      handleCreateSuccessToast("Invitación copiada");
       setCopied(true);
     } catch (error) {
       console.error(error);

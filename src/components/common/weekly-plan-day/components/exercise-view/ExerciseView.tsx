@@ -3,13 +3,16 @@ import { Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import ExerciseImageDialog from "components/dialogs/exercise-image-dialog/ExerciseImageDialog";
 
-type Props = { exercise: any };
+type Props = {
+  exercise: any;
+};
 
 export default function ExerciseView({ exercise }: Props) {
   const { theme } = useThemeContext();
 
-  const isVariant = exercise?.exerciseVariant;
-  const [openExerciseImageDialog, setOpenExerciseImageDialog] = useState(false);
+  const isVariant: boolean = exercise?.exerciseVariant;
+  const [openExerciseImageDialog, setOpenExerciseImageDialog] =
+    useState<boolean>(false);
 
   return (
     <React.Fragment>

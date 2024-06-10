@@ -11,7 +11,10 @@ import {
   toPostWeeklyPlanDataAdapter,
 } from "./adapters";
 import { Grid, Button, Typography } from "@mui/material";
-import { errorToast, successToast } from "lib/utils/toast";
+import {
+  handleCreateErrorToast,
+  handleCreateSuccessToast,
+} from "lib/utils/toast";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
@@ -65,11 +68,11 @@ export default function WeeklyPlanForm({ plan }: Props) {
     try {
       await createWeeklyPlanService(toPostWeeklyPlanDataAdapter(data));
 
-      successToast("Plan creado con éxito");
+      handleCreateSuccessToast("Plan creado con éxito");
       navigate("/trainer/plans");
     } catch (error) {
       console.log(error);
-      errorToast("Error al crear el plan");
+      handleCreateErrorToast("Error al crear el plan");
     }
     setIsLoading(false);
   };
@@ -80,11 +83,11 @@ export default function WeeklyPlanForm({ plan }: Props) {
     try {
       await updateWeeklyPlanService(toPutWeeklyPlanDataAdapter(data));
 
-      successToast("Plan actualizado con éxito");
+      handleCreateSuccessToast("Plan actualizado con éxito");
       navigate("/trainer/plans");
     } catch (error) {
       console.log(error);
-      errorToast("Error al actualizar el plan");
+      handleCreateErrorToast("Error al actualizar el plan");
     }
     setIsLoading(false);
   };
@@ -117,7 +120,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
     for (const day of days) {
       for (const exercise of day.exercises) {
         if (!exercise.description) {
-          errorToast("Hay ejercicios sin descripción");
+          handleCreateErrorToast("Hay ejercicios sin descripción");
           setIsLoading(false);
           throw "";
         }
