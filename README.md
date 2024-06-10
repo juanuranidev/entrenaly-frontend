@@ -133,7 +133,7 @@ Antes de realizar la instalación, asegúrate de tener las siguientes herramient
    ```
 2. Navega hasta el directorio:
    ```bash
-   cd codersrace
+   cd entrenaly-frontend
    ```
 3. Instala las dependencias:
    ```bash
@@ -201,17 +201,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Arquitectura
-
-The main technology used for the coders race frontend is Next.js. Also, in addition to the libraries automatically installed at startup, these are some of the most important libraries used:
-
-- @mantine/core ^6.0.19
-- @mantine/hooks ^6.0.19
-- @types/luxon ^3.3.2
-- axios ^1.5.1
-- eslint 8.47.0
-- framer-motion ^10.16.1
-- luxon ^3.4.2
-- next-auth ^4.23.2
-- react-hot-toast ^2.4.1
