@@ -3,22 +3,22 @@ import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useDebounce } from "hooks/useDebounce";
 import { useState } from "react";
-import ExerciseCard from "./components/exercise-card/ExerciseCard";
-import Searchbar from "./components/exercises-search-bar/ExercisesSearchBar";
 import MainTitle from "./components/main-title/MainTitle";
+import ExerciseCard from "./components/exercise-card/ExerciseCard";
+import ExercisesSearchBar from "./components/exercises-search-bar/ExercisesSearchBar";
 
 export default function Exercises() {
   const { theme } = useThemeContext();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
-  const { exercises, isLoading, handleRefetchReadExercises } =
+  const { exercises, isLoading, handleRefetchExercises } =
     useReadExercises(debouncedSearchValue);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
-        <MainTitle handleRefetchReadExercises={handleRefetchReadExercises} />
+        <MainTitle handleRefetchExercises={handleRefetchExercises} />
       </Grid>
       <Grid item xs={12}>
         <Card>
@@ -31,7 +31,7 @@ export default function Exercises() {
               </Alert>
             </Grid>
             <Grid item xs={12}>
-              <Searchbar
+              <ExercisesSearchBar
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
               />
@@ -47,26 +47,27 @@ export default function Exercises() {
               >
                 <CircularProgress />
               </Grid>
-            ) : null}
-            <Grid
-              item
-              xs={12}
-              display="flex"
-              flexWrap="wrap"
-              flexDirection="row"
-              gap={theme?.spacing(3)}
-              justifyContent={{ xs: "center", md: "flex-start" }}
-            >
-              {exercises.length
-                ? exercises?.map((exercise: any) => (
-                    <ExerciseCard
-                      key={exercise.id}
-                      exercise={exercise}
-                      handleRefetchReadExercises={handleRefetchReadExercises}
-                    />
-                  ))
-                : null}
-            </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                display="flex"
+                flexWrap="wrap"
+                flexDirection="row"
+                gap={theme?.spacing(3)}
+                justifyContent={{ xs: "center", md: "flex-start" }}
+              >
+                {exercises.length
+                  ? exercises?.map((exercise: any) => (
+                      <ExerciseCard
+                        key={exercise.id}
+                        exercise={exercise}
+                        handleRefetchExercises={handleRefetchExercises}
+                      />
+                    ))
+                  : null}
+              </Grid>
+            )}
           </Grid>
         </Card>
       </Grid>

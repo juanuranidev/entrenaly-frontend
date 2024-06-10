@@ -20,7 +20,7 @@ export default function MainTitle() {
   const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const { theme } = useThemeContext();
   const { plansTypes } = useReadPlansTypes();

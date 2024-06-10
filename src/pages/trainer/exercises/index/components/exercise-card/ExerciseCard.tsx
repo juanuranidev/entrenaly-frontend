@@ -6,23 +6,17 @@ import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
 
 type Props = {
   exercise: any;
-  handleRefetchReadExercises: () => Promise<void>;
+  handleRefetchExercises: () => Promise<void>;
 };
 
 export default function ExerciseCard({
   exercise,
-  handleRefetchReadExercises,
+  handleRefetchExercises,
 }: Props) {
   const isVariant = exercise.variant;
   const { theme } = useThemeContext();
 
-  const [exerciseSelected, setExerciseSelected] = useState(null);
   const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
-
-  const handleOpenFormEditExercise = (exercise: any) => {
-    setExerciseSelected(exercise);
-    setOpenFormAddVariant(true);
-  };
 
   return (
     <React.Fragment>
@@ -74,7 +68,7 @@ export default function ExerciseCard({
             <Grid item xs={2}>
               <IconButton
                 size="small"
-                onClick={() => handleOpenFormEditExercise(exercise)}
+                onClick={() => setOpenFormAddVariant(true)}
               >
                 <Icons.edit color="primary" fontSize="small" />
               </IconButton>
@@ -106,9 +100,9 @@ export default function ExerciseCard({
       <AddOrUpdateVariantForm
         exerciseId={exercise?.id}
         open={openFormAddVariant}
-        exerciseSelected={exerciseSelected}
+        exerciseSelected={exercise}
         onClose={() => setOpenFormAddVariant(false)}
-        onSubmit={() => handleRefetchReadExercises()}
+        onSubmit={() => handleRefetchExercises()}
       />
     </React.Fragment>
   );

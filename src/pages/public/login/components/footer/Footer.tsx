@@ -26,26 +26,15 @@ export default function Footer() {
           Juan
         </Typography>
       </Typography>
-      <Stack direction="row" gap={theme?.spacing(4)}>
-        <Typography
-          href=""
-          target="_blank"
-          component={Link}
-          underline="hover"
-          variant="subtitle2"
-        >
-          Política de privacidad
-        </Typography>
-        <Typography
-          href=""
-          target="_blank"
-          component={Link}
-          underline="hover"
-          variant="subtitle2"
-        >
-          Soporte
-        </Typography>
-      </Stack>
+      <Typography
+        target="_blank"
+        component={Link}
+        underline="hover"
+        variant="subtitle2"
+        href="https://juanurani.vercel.app/"
+      >
+        Soporte
+      </Typography>
     </Stack>
   );
 }

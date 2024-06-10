@@ -32,7 +32,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
   const { theme } = useThemeContext();
   const navigate = useNavigate();
 
-  const { exercisesDescriptions, handleRefetchGetExercisesDescriptions } =
+  const { exercisesDescriptions, handleRefetchExercisesDescriptions } =
     useReadExercisesDescriptions();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -151,7 +151,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
             formik={formik}
             exercisesDescriptions={exercisesDescriptions}
             handleRefetchGetExercisesDescriptions={
-              handleRefetchGetExercisesDescriptions
+              handleRefetchExercisesDescriptions
             }
           />
         ))}

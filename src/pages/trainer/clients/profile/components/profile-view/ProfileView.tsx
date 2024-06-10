@@ -10,7 +10,7 @@ import UpdateMedicalInformationForm from "components/forms/update-medical-inform
 export default function ProfileView() {
   const { theme } = useThemeContext();
   const { clientId } = useParams();
-  const { client, handleRefetchGetClientById }: any = useReadClient(clientId);
+  const { client, handleRefetchClient }: any = useReadClient(clientId);
 
   const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =
     useState<boolean>(false);
@@ -168,7 +168,7 @@ export default function ProfileView() {
       <UpdateMedicalInformationForm
         clientSelected={client}
         open={modalUpdateMedicalInformation}
-        onSubmit={() => handleRefetchGetClientById()}
+        onSubmit={() => handleRefetchClient()}
         onClose={() => setModalUpdateMedicalInformation(false)}
       />
     </Grid>

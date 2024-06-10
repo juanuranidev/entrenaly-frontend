@@ -5,11 +5,12 @@ import PageTitle from "components/common/page-title/PageTitle";
 import AddExerciseForm from "components/forms/add-exercise-form/AddExerciseForm";
 
 type Props = {
-  handleRefetchReadExercises: () => Promise<void>;
+  handleRefetchExercises: () => Promise<void>;
 };
 
-export default function MainTitle({ handleRefetchReadExercises }: Props) {
-  const [openDrawerAddExercise, setOpenDrawerAddExercise] = useState(false);
+export default function MainTitle({ handleRefetchExercises }: Props) {
+  const [openDrawerAddExercise, setOpenDrawerAddExercise] =
+    useState<boolean>(false);
 
   return (
     <React.Fragment>
@@ -27,7 +28,7 @@ export default function MainTitle({ handleRefetchReadExercises }: Props) {
       />
       <AddExerciseForm
         open={openDrawerAddExercise}
-        onSubmit={() => handleRefetchReadExercises()}
+        onSubmit={() => handleRefetchExercises()}
         onClose={() => setOpenDrawerAddExercise(false)}
       />
     </React.Fragment>

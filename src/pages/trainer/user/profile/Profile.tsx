@@ -14,7 +14,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
-  const [currentView, setCurrentView] = useState(
+  const [currentView, setCurrentView] = useState<string>(
     PROFILE_NAVBAR_ITEMS_NAMES.PROFILE
   );
 

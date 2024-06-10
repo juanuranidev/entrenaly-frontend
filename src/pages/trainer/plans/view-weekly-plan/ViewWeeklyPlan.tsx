@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useThemeContext } from "contexts/theme/Theme";
-import { useReadPlan } from "hooks/plan/useReadPlan";
+import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
 import { Button, Grid } from "@mui/material";
+import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";
 import PageTitle from "components/common/page-title/PageTitle";
-import PlanDay from "./components/plan-day/PlanDay";
 import Icons from "lib/utils/icons/icons";
 
 export default function ViewWeeklyPlan() {
   const { planId } = useParams();
   const { theme } = useThemeContext();
-  const { plan }: any = useReadPlan(planId);
+  const { plan }: any = useReadWeeklyPlan(planId);
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function ViewWeeklyPlan() {
         />
       </Grid>
       {plan?.days?.map((day: any) => (
-        <PlanDay key={day?.dayOfWeekId} day={day} />
+        <WeeklyPlanDay key={day?.dayOfWeekId} day={day} />
       ))}
     </Grid>
   );

@@ -1,4 +1,4 @@
-import { useReadPlans } from "hooks/plan/useReadPlans";
+import { useReadPlansByUserId } from "hooks/plan/useReadPlansByUserId";
 import { Card, Grid, Alert } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import PlansTable from "components/common/plans-table/PlansTable";
@@ -6,7 +6,7 @@ import MainTitle from "./components/MainTitle";
 
 export default function Plans() {
   const { theme } = useThemeContext();
-  const { plans, isLoading } = useReadPlans();
+  const { plans, isLoading } = useReadPlansByUserId();
 
   return (
     <Grid container spacing={theme?.spacing(3)}>

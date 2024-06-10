@@ -1,7 +1,9 @@
+import SubscriptionView from "./subscription-view/SubscriptionView";
 import ProfileView from "./profile-view/ProfileView";
 
 export const PROFILE_NAVBAR_ITEMS_NAMES = {
   PROFILE: "Perfil",
+  SUBSCRIPTION: "Suscripción",
 };
 
 export const profileNavbarItems = () => {
@@ -9,6 +11,10 @@ export const profileNavbarItems = () => {
     {
       name: PROFILE_NAVBAR_ITEMS_NAMES.PROFILE,
       view: <ProfileView />,
+    },
+    {
+      name: PROFILE_NAVBAR_ITEMS_NAMES.SUBSCRIPTION,
+      view: <SubscriptionView />,
     },
   ];
 };
