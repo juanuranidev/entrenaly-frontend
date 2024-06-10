@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { readDaysOfWeekService } from "services/plan/plan.services";
 
 export const useReadDaysOfWeek = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [daysOfWeek, setDaysOfWeek] = useState([]);
 
-  const handleGetExercisesCategories = async () => {
+  const handleReadDaysOfWeek = async () => {
     setIsLoading(true);
     try {
       const response = await readDaysOfWeekService();
@@ -18,7 +18,7 @@ export const useReadDaysOfWeek = () => {
   };
 
   useEffect(() => {
-    handleGetExercisesCategories();
+    handleReadDaysOfWeek();
   }, []);
 
   return { daysOfWeek, isLoading };

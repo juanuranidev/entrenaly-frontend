@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { readExercisesCategoriesService } from "services/exercise/exercise.services";
 
 export const useReadExercisesCategories = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [exercisesCategories, setExercisesCategories] = useState([]);
 
-  const handleGetExercisesCategories = async () => {
+  const handleReadExercisesCategories = async () => {
     setIsLoading(true);
     try {
       const response = await readExercisesCategoriesService();
@@ -18,7 +18,7 @@ export const useReadExercisesCategories = () => {
   };
 
   useEffect(() => {
-    handleGetExercisesCategories();
+    handleReadExercisesCategories();
   }, []);
 
   return { exercisesCategories, isLoading };

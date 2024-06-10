@@ -3,9 +3,9 @@ import { readInviteService } from "services/client/client.services";
 
 export const useReadInvite = () => {
   const [invite, setInvite] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleGetInvite = async () => {
+  const handleReadInvite = async () => {
     setIsLoading(true);
     try {
       const response = await readInviteService();
@@ -18,7 +18,7 @@ export const useReadInvite = () => {
   };
 
   useEffect(() => {
-    handleGetInvite();
+    handleReadInvite();
   }, []);
 
   return { invite, isLoading };

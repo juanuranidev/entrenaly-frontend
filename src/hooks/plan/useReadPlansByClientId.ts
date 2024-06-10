@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { readPlansByClientIdService } from "services/plan/plan.services";
 
-export const useReadPlansByClientId = (clientId: string) => {
+export const useReadPlansByClientId = (clientId: string | undefined) => {
   const [plans, setPlans] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

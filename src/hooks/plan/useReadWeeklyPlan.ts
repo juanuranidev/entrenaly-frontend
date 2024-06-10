@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { readWeeklyPlanService } from "services/plan/plan.services";
 
-export const useReadPlan = (planId: string | undefined) => {
+export const useReadWeeklyPlan = (planId: any) => {
   const [plan, setPlan] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleGetPlanById = async () => {
+  const handleReadWeeklyPlan = async () => {
     if (!planId) return;
 
     setIsLoading(true);
@@ -20,7 +20,7 @@ export const useReadPlan = (planId: string | undefined) => {
   };
 
   useEffect(() => {
-    handleGetPlanById();
+    handleReadWeeklyPlan();
   }, []);
 
   return { plan, isLoading };

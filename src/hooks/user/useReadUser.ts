@@ -5,7 +5,7 @@ export const useReadUser = () => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleGetUser = async () => {
+  const handleReadUser = async () => {
     setIsLoading(true);
     try {
       const response = await getUserService();
@@ -18,7 +18,7 @@ export const useReadUser = () => {
   };
 
   useEffect(() => {
-    handleGetUser();
+    handleReadUser();
   }, []);
 
   return { user, isLoading };

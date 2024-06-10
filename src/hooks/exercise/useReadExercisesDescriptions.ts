@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { readExercisesDescriptionsService } from "services/exercise/exercise.services";
 
 export const useReadExercisesDescriptions = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [exercisesDescriptions, setExercisesDescriptions] = useState([]);
 
   const handleReadExercisesDescriptions = async () => {
@@ -17,7 +17,7 @@ export const useReadExercisesDescriptions = () => {
     setIsLoading(false);
   };
 
-  const handleRefetchGetExercisesDescriptions = async () => {
+  const handleRefetchExercisesDescriptions = async () => {
     await handleReadExercisesDescriptions();
   };
 
@@ -28,6 +28,6 @@ export const useReadExercisesDescriptions = () => {
   return {
     isLoading,
     exercisesDescriptions,
-    handleRefetchGetExercisesDescriptions,
+    handleRefetchExercisesDescriptions,
   };
 };

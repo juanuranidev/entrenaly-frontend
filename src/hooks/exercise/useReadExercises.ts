@@ -3,7 +3,7 @@ import { readExercisesService } from "services/exercise/exercise.services";
 
 export const useReadExercises = (name?: string) => {
   const [exercises, setExercises] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleReadExercises = async () => {
     setIsLoading(true);
@@ -17,7 +17,7 @@ export const useReadExercises = (name?: string) => {
     setIsLoading(false);
   };
 
-  const handleRefetchReadExercises = async () => {
+  const handleRefetchExercises = async () => {
     await handleReadExercises();
   };
 
@@ -25,5 +25,5 @@ export const useReadExercises = (name?: string) => {
     handleReadExercises();
   }, [name]);
 
-  return { exercises, isLoading, handleRefetchReadExercises };
+  return { exercises, isLoading, handleRefetchExercises };
 };

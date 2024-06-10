@@ -3,9 +3,9 @@ import { readClientService } from "services/client/client.services";
 
 export const useReadClient = (clientId: any) => {
   const [client, setClient] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleGetClientById = async () => {
+  const handleReadClient = async () => {
     if (!clientId) return;
 
     setIsLoading(true);
@@ -19,13 +19,13 @@ export const useReadClient = (clientId: any) => {
     setIsLoading(false);
   };
 
-  const handleRefetchGetClientById = async () => {
-    await handleGetClientById();
+  const handleRefetchClient = async () => {
+    await handleReadClient();
   };
 
   useEffect(() => {
-    handleGetClientById();
+    handleReadClient();
   }, []);
 
-  return { client, isLoading, handleRefetchGetClientById };
+  return { client, isLoading, handleRefetchClient };
 };
