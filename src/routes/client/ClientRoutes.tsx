@@ -1,14 +1,15 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
 import ClientLayout from "layouts/client/ClientLayout";
 import Plans from "pages/client/plans/index/Plans";
 
-const Loadable = (Component: any) => (props: any) =>
-  (
-    <Suspense fallback={<CircularProgress />}>
-      <Component {...props} />
-    </Suspense>
-  );
+const Loadable =
+  (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
+    (
+      <Suspense fallback={<CircularProgress />}>
+        <Component {...props} />
+      </Suspense>
+    );
 
 const NotFound = Loadable(
   lazy(() => import("pages/trainer/not-found/NotFound"))

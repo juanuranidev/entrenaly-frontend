@@ -1,13 +1,14 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
 import TrainerLayout from "layouts/trainer/TrainerLayout";
 
-const Loadable = (Component: any) => (props: any) =>
-  (
-    <Suspense fallback={<CircularProgress />}>
-      <Component {...props} />
-    </Suspense>
-  );
+const Loadable =
+  (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
+    (
+      <Suspense fallback={<CircularProgress />}>
+        <Component {...props} />
+      </Suspense>
+    );
 
 const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
 const Profile = Loadable(
@@ -19,7 +20,6 @@ const ViewWeeklyPlan = Loadable(
 const Clients = Loadable(
   lazy(() => import("pages/trainer/clients/index/Clients"))
 );
-
 const Exercises = Loadable(
   lazy(() => import("pages/trainer/exercises/index/Exercises"))
 );
@@ -48,7 +48,7 @@ const UserRoutes = {
       element: <Clients />,
     },
     {
-      path: "/trainer/clients/profile/:id",
+      path: "/trainer/clients/profile/:clientId",
       element: <ClientProfile />,
     },
     {
@@ -60,7 +60,7 @@ const UserRoutes = {
       element: <NewWeeklyPlan />,
     },
     {
-      path: "/trainer/plans/edit/weekly/:id",
+      path: "/trainer/plans/edit/weekly/:planId",
       element: <EditWeeklyPlan />,
     },
     {
