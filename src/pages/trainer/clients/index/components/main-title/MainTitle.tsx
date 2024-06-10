@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import Icons from "lib/utils/icons/icons";
-import PageTitle from "components/common/page-title/PageTitle";
 import AddClientForm from "components/forms/add-client-form/AddClientForm";
+import PageTitle from "components/common/page-title/PageTitle";
+import Icons from "lib/utils/icons/icons";
 
 export default function MainTitle() {
   const [openClientDrawer, setOpenClientDrawer] = useState<boolean>(false);

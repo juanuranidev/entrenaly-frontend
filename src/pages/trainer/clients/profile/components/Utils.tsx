@@ -1,15 +1,20 @@
 import PlansView from "./plans-view/PlansView";
 import ProfileView from "./profile-view/ProfileView";
 
-export const handleRenderNavbarItems = ({ clientId }: any) => {
+export const PROFILE_NAVBAR_ITEMS_NAMES = {
+  PROFILE: "Perfil",
+  PLANS: "Planes",
+};
+
+export const profileNavbarItems = () => {
   return [
     {
-      name: "Perfil",
-      view: <ProfileView clientId={clientId} />,
+      name: PROFILE_NAVBAR_ITEMS_NAMES.PROFILE,
+      view: <ProfileView />,
     },
     {
-      name: "Planes",
-      view: <PlansView clientId={clientId} />,
+      name: PROFILE_NAVBAR_ITEMS_NAMES.PLANS,
+      view: <PlansView />,
     },
   ];
 };

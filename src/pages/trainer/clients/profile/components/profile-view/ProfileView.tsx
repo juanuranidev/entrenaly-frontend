@@ -1,17 +1,15 @@
+import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";
+import { useThemeContext } from "contexts/theme/Theme";
+import { useReadClient } from "hooks/client/useReadClient";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 import Icons from "lib/utils/icons/icons";
 import moment from "moment";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
-import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";
-import { useReadClient } from "hooks/client/useReadClient";
-import { useThemeContext } from "contexts/theme/Theme";
-import { useState } from "react";
 
-type Props = {
-  clientId: string;
-};
-
-export default function ProfileView({ clientId }: Props) {
+export default function ProfileView() {
   const { theme } = useThemeContext();
+  const { clientId } = useParams();
   const { client, handleRefetchGetClientById }: any = useReadClient(clientId);
 
   const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =

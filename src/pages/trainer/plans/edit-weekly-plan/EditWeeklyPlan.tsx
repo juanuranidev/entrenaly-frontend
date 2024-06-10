@@ -8,7 +8,7 @@ import PageTitle from "components/common/page-title/PageTitle";
 type Props = {};
 
 export default function EditWeeklyPlan({}: Props) {
-  const { id: planId } = useParams();
+  const { planId } = useParams();
   const { theme } = useThemeContext();
   const { plan }: any = useReadPlan(planId);
 
