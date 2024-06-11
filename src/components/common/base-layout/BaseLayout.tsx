@@ -17,9 +17,9 @@ export default function BaseLayout({ navbarItems, profileItems }: Props) {
   return (
     <Stack direction="row" height="100dvh">
       <Drawer
+        navbarItems={navbarItems}
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
-        navbarItems={navbarItems}
       />
       <Box width="100%">
         <Header setIsDrawerOpen={setIsDrawerOpen} profileItems={profileItems} />

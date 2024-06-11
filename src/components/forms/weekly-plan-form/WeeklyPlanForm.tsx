@@ -10,11 +10,12 @@ import {
   toPutWeeklyPlanDataAdapter,
   toPostWeeklyPlanDataAdapter,
 } from "./adapters";
-import { Grid, Button, Typography } from "@mui/material";
 import {
   handleCreateErrorToast,
   handleCreateSuccessToast,
 } from "lib/utils/toast";
+import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
+import { Grid, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
@@ -24,24 +25,24 @@ import AddDayDrawer from "./components/add-day-drawer/AddDayDrawer";
 import AccordionDay from "./components/accordion-day/AccordionDay";
 import MainInformation from "./components/main-information/MainInformation";
 import AddExercisesForm from "./components/add-exercises-form/AddExercisesForm";
-import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
 
 type Props = {
   plan?: any;
 };
 
 export default function WeeklyPlanForm({ plan }: Props) {
-  const editPlan = plan ? true : false;
-  const { theme } = useThemeContext();
+  const editPlan: boolean = Boolean(plan);
   const navigate = useNavigate();
 
+  const { theme } = useThemeContext();
   const { exercisesDescriptions, handleRefetchExercisesDescriptions } =
     useReadExercisesDescriptions();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [daySelected, setDaySelected] = useState<any>(null);
-  const [openDrawerDays, setOpenDrawerDays] = useState(false);
-  const [openExercisesDrawer, setOpenExercisesDrawer] = useState(false);
+  const [openDrawerDays, setOpenDrawerDays] = useState<boolean>(false);
+  const [openExercisesDrawer, setOpenExercisesDrawer] =
+    useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {

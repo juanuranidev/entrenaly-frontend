@@ -9,11 +9,11 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
+import { handleCreateSuccessToast } from "lib/utils/toast";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useReadInvite } from "hooks/client/useReadInvite";
-import { handleCreateSuccessToast } from "lib/utils/toast";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ModalTitle from "components/common/modal-title/ModalTitle";
@@ -21,12 +21,17 @@ import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
 import ENV from "lib/utils/env";
 
-export default function AddClientForm({ open, onClose }: any) {
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
+
+export default function AddClientForm({ open, onClose }: Props) {
   const { theme } = useThemeContext();
   const { userData } = useAuthContext();
   const { invite, isLoading } = useReadInvite();
 
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const handleCopyInvite = async (invite: string) => {
     try {

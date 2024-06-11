@@ -7,7 +7,6 @@ type Props = {
 
 export default function ExercisesImagesSumary({ exercises }: Props) {
   const { theme } = useThemeContext();
-  console.log(exercises);
 
   return (
     <Stack direction="row" mr={theme?.spacing(1)} gap={theme?.spacing(1.5)}>

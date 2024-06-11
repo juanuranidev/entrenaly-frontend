@@ -22,7 +22,7 @@ export default function UpdateMedicalInformationForm({
   clientSelected,
 }: Props) {
   const { theme } = useThemeContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {

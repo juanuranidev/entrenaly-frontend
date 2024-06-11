@@ -8,7 +8,7 @@ type Props = {
 
 export default function PageTitle({ title, action }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Box

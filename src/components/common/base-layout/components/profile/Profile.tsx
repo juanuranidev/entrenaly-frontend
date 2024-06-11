@@ -27,7 +27,7 @@ export default function Profile({ profileItems }: any) {
   const { theme } = useThemeContext();
   const { userData, setUserData } = useAuthContext();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleSignOut = async () => {
     try {

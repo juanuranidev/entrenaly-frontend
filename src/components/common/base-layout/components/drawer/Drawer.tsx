@@ -16,7 +16,7 @@ export default function Drawer({
   navbarItems,
 }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <DrawerStyles

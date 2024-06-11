@@ -6,7 +6,7 @@ import { IconButton, useMediaQuery } from "@mui/material";
 
 export default function Header({ setIsDrawerOpen, profileItems }: any) {
   const { theme } = useThemeContext();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <HeaderStyled

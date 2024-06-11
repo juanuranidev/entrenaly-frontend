@@ -9,7 +9,7 @@ type Props = {
 
 export default function ModalTitle({ title, action }: Props) {
   const { theme } = useThemeContext();
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobileScreen: boolean = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <ModalTitleStyled theme={theme}>

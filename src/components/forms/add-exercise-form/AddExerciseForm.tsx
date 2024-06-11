@@ -7,12 +7,12 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { addExerciseFormValidations } from "./utils/validations";
-import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import {
   handleCreateErrorToast,
   handleCreateSuccessToast,
 } from "lib/utils/toast";
+import { addExerciseFormValidations } from "./utils/validations";
+import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { createExerciseService } from "services/exercise/exercise.services";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -29,7 +29,7 @@ type Props = {
 };
 
 export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { theme } = useThemeContext();
   const { exercisesCategories, isLoading: isCategoriesLoading } =

@@ -14,7 +14,7 @@ export default function ExerciseCard({
 }: Props) {
   const { theme } = useThemeContext();
 
-  const isVariant = exercise?.variant;
+  const isVariant: boolean = Boolean(exercise?.variant);
   const isSelected = exercisesSelected.some(
     (obj: any) => obj.name === exercise.name
   );
@@ -47,7 +47,6 @@ export default function ExerciseCard({
             mr: theme?.spacing(1),
           }}
         />
-
         {isVariant ? (
           <Chip
             size="small"

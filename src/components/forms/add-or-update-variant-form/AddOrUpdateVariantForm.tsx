@@ -11,12 +11,12 @@ import {
   createVariantService,
   updateVariantService,
 } from "services/exercise/exercise.services";
-import { addOrUpdateVariantFormValidations } from "./utils/validations";
-import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import {
   handleCreateErrorToast,
   handleCreateSuccessToast,
 } from "lib/utils/toast";
+import { addOrUpdateVariantFormValidations } from "./utils/validations";
+import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
 import { useState } from "react";

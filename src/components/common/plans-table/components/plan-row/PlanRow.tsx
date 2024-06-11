@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import moment from "moment";
 import Icons from "lib/utils/icons/icons";
+import React from "react";
 
 type Props = {
   plan: any;
@@ -37,7 +38,11 @@ export default function PlanRow({ plan }: Props) {
       <TableCell align="center">{plan?.type?.name}</TableCell>
       <TableCell align="center">{plan?.category?.name}</TableCell>
       <TableCell align="right">
-        <IconButton onClick={(e: any) => setAnchorEl(e.currentTarget)}>
+        <IconButton
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+            setAnchorEl(e.currentTarget)
+          }
+        >
           <Icons.more />
         </IconButton>
         <Menu

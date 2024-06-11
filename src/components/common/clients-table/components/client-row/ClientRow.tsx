@@ -12,6 +12,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import moment from "moment";
+import React from "react";
 import Icons from "lib/utils/icons/icons";
 import UpdateMedicalInformationForm from "components/forms/update-medical-informacion/UpdateMedicalInformationForm";
 
@@ -43,7 +44,11 @@ export default function ClientRow({ client }: Props) {
         {moment(client?.createdAt).format("DD/MM/YYYY")}
       </TableCell>
       <TableCell align="right">
-        <IconButton onClick={(e: any) => setAnchorEl(e.currentTarget)}>
+        <IconButton
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+            setAnchorEl(e.currentTarget)
+          }
+        >
           <Icons.more />
         </IconButton>
         <Menu
