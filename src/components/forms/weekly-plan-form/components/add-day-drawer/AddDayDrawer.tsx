@@ -1,4 +1,4 @@
-import { IconButton, Typography, Grid } from "@mui/material";
+import { IconButton, Typography, Box, Stack } from "@mui/material";
 import { useReadDaysOfWeek } from "hooks/plan/useReadDaysOfWeek";
 import { useThemeContext } from "contexts/theme/Theme";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
@@ -29,23 +29,21 @@ export default function AddDayDrawer({
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
-      <Grid container spacing={theme?.spacing(3)}>
-        <Grid item xs={12}>
-          <ModalTitle
-            title="Agregar día"
-            action={
-              <IconButton>
-                <Icons.close />
-              </IconButton>
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography fontWeight={500} fontSize={15}>
-            Selecciona el día
-          </Typography>
-        </Grid>
-        <Grid item container xs={12} display="flex" spacing={theme?.spacing(3)}>
+      <ModalTitle
+        title="Agregar día"
+        action={
+          <IconButton>
+            <Icons.close />
+          </IconButton>
+        }
+      />
+
+      <Typography fontWeight={600} fontSize={15} mb={theme?.spacing(2)}>
+        Selecciona el día
+      </Typography>
+
+      <Box height="calc(100% - 10rem)" overflow="auto" py={theme?.spacing(3)}>
+        <Stack gap={theme?.spacing(3)}>
           {daysOfWeek.length
             ? daysOfWeek?.map((day: any) => (
                 <DayCard
@@ -56,8 +54,8 @@ export default function AddDayDrawer({
                 />
               ))
             : null}
-        </Grid>
-      </Grid>
+        </Stack>
+      </Box>
     </BaseDrawer>
   );
 }

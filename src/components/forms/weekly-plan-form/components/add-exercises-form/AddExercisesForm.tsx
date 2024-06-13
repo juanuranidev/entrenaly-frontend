@@ -6,14 +6,14 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/theme/Theme";
-import { useState } from "react";
-import BaseDrawer from "components/common/base-drawer/BaseDrawer";
+import { useDebounce } from "hooks/useDebounce";
 import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
+import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
-import { useDebounce } from "hooks/useDebounce";
 
 type Exercise = {
   name: string;
@@ -57,6 +57,12 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
     onClose();
   };
 
+  useEffect(() => {
+    if (!open) {
+      setSearchValue("");
+    }
+  }, [open]);
+
   return (
     <BaseDrawer open={open} onClose={onClose} largeDrawer>
       <ModalTitle
@@ -84,7 +90,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           ) : null,
         }}
       />
-      <Box height="calc(100% - 10rem)" overflow="auto" pt={theme?.spacing(4)}>
+      <Box overflow="auto" pt={theme?.spacing(4)} height="calc(100% - 10rem)">
         <Stack
           width="95%"
           margin="auto"
@@ -94,14 +100,20 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           gap={theme?.spacing(2)}
           justifyContent="center"
         >
-          {exercises.map((exercise: any) => (
-            <ExerciseCard
-              key={exercise.name}
-              exercise={exercise}
-              exercisesSelected={exercisesSelected}
-              toggleExerciseSelection={toggleExerciseSelection}
-            />
-          ))}
+          {exercises.length ? (
+            exercises.map((exercise: any) => (
+              <ExerciseCard
+                key={exercise.name}
+                exercise={exercise}
+                exercisesSelected={exercisesSelected}
+                toggleExerciseSelection={toggleExerciseSelection}
+              />
+            ))
+          ) : (
+            <Typography fontWeight={600} fontSize={15} my={theme?.spacing(20)}>
+              ¡No hay ejercicios!
+            </Typography>
+          )}
         </Stack>
       </Box>
       <Box py={theme?.spacing(3)} bgcolor={theme.colors.background.primary}>
