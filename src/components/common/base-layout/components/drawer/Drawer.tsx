@@ -1,8 +1,11 @@
 import { DrawerStyles } from "./Styles";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Box, List, useMediaQuery } from "@mui/material";
+import { Box, List, useMediaQuery, IconButton } from "@mui/material";
 import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
 import NavbarItem from "../navbar-item/NavbarItem";
+import Icons from "lib/utils/icons/icons";
+import { useState } from "react";
+import InstallAppDialog from "components/dialogs/install-app-dialog/InstallAppDialog";
 
 type Props = {
   isDrawerOpen: boolean;
@@ -17,6 +20,8 @@ export default function Drawer({
 }: Props) {
   const { theme } = useThemeContext();
   const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
+
+  const [installAppDialog, setInstallAppDialog] = useState(false);
 
   return (
     <DrawerStyles
@@ -45,8 +50,16 @@ export default function Drawer({
             />
           ))}
         </List>
-        <Box />
+        <Box display="flex" justifyContent="flex-end">
+          <IconButton onClick={() => setInstallAppDialog(true)}>
+            <Icons.download />
+          </IconButton>
+        </Box>
       </Box>
+      <InstallAppDialog
+        open={installAppDialog}
+        close={() => setInstallAppDialog(false)}
+      />
     </DrawerStyles>
   );
 }

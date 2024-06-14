@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import DownloadIcon from "@mui/icons-material/Download";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -38,6 +39,7 @@ const Icons = {
   dumbbell: (props: any) => <FitnessCenterIcon {...props} />,
   visibilityOn: (props: any) => <VisibilityIcon {...props} />,
   visibilityOff: (props: any) => <VisibilityOffIcon {...props} />,
+  download: (props: any) => <DownloadIcon {...props} />,
 };
 
 export default Icons;
