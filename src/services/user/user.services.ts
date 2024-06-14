@@ -54,9 +54,7 @@ export const loginWithEmailService = async (data: DataForLogin) => {
       data.email,
       data.password
     );
-    // alert(response.user.uid);
     const user = await getUserByAuthIdService(response.user.uid);
-    alert(user.name);
 
     return user;
   } catch (error) {
@@ -77,7 +75,7 @@ export const googleAuthService = async (invite: string | undefined) => {
     const provider = new GoogleAuthProvider();
 
     const response: any = await signInWithPopup(auth, provider);
-    console.log(response);
+
     const userFormatted = {
       name: response.user.displayName,
       email: response.user.email,
@@ -85,13 +83,12 @@ export const googleAuthService = async (invite: string | undefined) => {
       authId: response.user.uid,
       invite: invite ?? null,
     };
-    console.log({ userFormatted });
 
     const user = await gooogleAuthService(userFormatted);
 
     return user;
   } catch (error) {
-    console.error("Error durante el inicio de sesión:", error);
+    throw error;
   }
 };
 

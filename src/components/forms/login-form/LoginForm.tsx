@@ -13,15 +13,15 @@ import {
   googleAuthService,
   loginWithEmailService,
 } from "services/user/user.services";
+import { handleCreateErrorToast } from "lib/utils/toast";
 import { loginFormValidation } from "./validations";
+import { USER_CONSTANTS } from "lib/constants/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
-import { handleCreateErrorToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
 import Google from "../../../../public/google.svg";
 import Icons from "lib/utils/icons/icons";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
 
 type Props = {
   invite: any;
@@ -88,6 +88,7 @@ export default function LoginForm({ invite }: Props) {
       console.log(error);
       handleCreateErrorToast("Error en el servidor");
     }
+    setIsLoading(false);
   };
 
   return (
