@@ -1,16 +1,19 @@
+import { Invite } from "lib/types/client/client.types";
 import { useEffect, useState } from "react";
 import { readInviteInformationService } from "services/client/client.services";
 
-export const useReadInviteInformation = (inviteId: any) => {
+export const useReadInviteInformation = (inviteId: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [inviteInformation, setInviteInformation] = useState(null);
+  const [inviteInformation, setInviteInformation] = useState<Invite | null>(
+    null
+  );
 
-  const handleReadInviteInformation = async () => {
+  const handleReadInviteInformation = async (): Promise<void> => {
     if (!inviteId) return;
 
     setIsLoading(true);
     try {
-      const response = await readInviteInformationService(inviteId);
+      const response: Invite = await readInviteInformationService(inviteId);
 
       setInviteInformation(response);
     } catch (error) {

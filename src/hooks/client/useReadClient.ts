@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { Client } from "lib/types/client/client.types";
 import { readClientService } from "services/client/client.services";
+import { useState, useEffect } from "react";
 
-export const useReadClient = (clientId: any) => {
-  const [client, setClient] = useState();
+export const useReadClient = (clientId: string) => {
+  const [client, setClient] = useState<Client | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleReadClient = async () => {
+  const handleReadClient = async (): Promise<void> => {
     if (!clientId) return;
 
     setIsLoading(true);
     try {
-      const response = await readClientService(clientId);
+      const response: Client = await readClientService(clientId);
 
       setClient(response);
     } catch (error) {
@@ -19,7 +20,7 @@ export const useReadClient = (clientId: any) => {
     setIsLoading(false);
   };
 
-  const handleRefetchClient = async () => {
+  const handleRefetchClient = async (): Promise<void> => {
     await handleReadClient();
   };
 

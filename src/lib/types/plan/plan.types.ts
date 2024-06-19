@@ -1,5 +1,5 @@
-import { Exercise } from "./exercises.types";
-import { User } from "./user.types";
+import { Exercise } from "../exercise/exercise.types";
+import { User } from "../user/user.types";
 
 export type Plan = {
   id: string;

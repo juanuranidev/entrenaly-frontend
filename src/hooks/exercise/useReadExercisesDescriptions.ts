@@ -1,14 +1,18 @@
+import { ExerciseDescription } from "lib/types/exercise/exercise.types";
 import { useState, useEffect } from "react";
 import { readExercisesDescriptionsService } from "services/exercise/exercise.services";
 
 export const useReadExercisesDescriptions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [exercisesDescriptions, setExercisesDescriptions] = useState([]);
+  const [exercisesDescriptions, setExercisesDescriptions] = useState<
+    ExerciseDescription[] | []
+  >([]);
 
-  const handleReadExercisesDescriptions = async () => {
+  const handleReadExercisesDescriptions = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readExercisesDescriptionsService();
+      const response: ExerciseDescription[] =
+        await readExercisesDescriptionsService();
 
       setExercisesDescriptions(response);
     } catch (error) {
@@ -17,7 +21,7 @@ export const useReadExercisesDescriptions = () => {
     setIsLoading(false);
   };
 
-  const handleRefetchExercisesDescriptions = async () => {
+  const handleRefetchExercisesDescriptions = async (): Promise<void> => {
     await handleReadExercisesDescriptions();
   };
 

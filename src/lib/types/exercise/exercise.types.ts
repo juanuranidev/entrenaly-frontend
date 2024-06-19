@@ -1,4 +1,4 @@
-import { User } from "./user.types";
+import { User } from "../user/user.types";
 
 export type Exercise = {
   id: string;

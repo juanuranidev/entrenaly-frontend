@@ -1,14 +1,18 @@
+import { ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useState, useEffect } from "react";
 import { readExercisesCategoriesService } from "services/exercise/exercise.services";
 
 export const useReadExercisesCategories = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [exercisesCategories, setExercisesCategories] = useState([]);
+  const [exercisesCategories, setExercisesCategories] = useState<
+    ExerciseCategory[] | []
+  >([]);
 
-  const handleReadExercisesCategories = async () => {
+  const handleReadExercisesCategories = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readExercisesCategoriesService();
+      const response: ExerciseCategory[] =
+        await readExercisesCategoriesService();
 
       setExercisesCategories(response);
     } catch (error) {

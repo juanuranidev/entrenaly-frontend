@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { Client } from "lib/types/client/client.types";
 import { readClientsService } from "services/client/client.services";
+import { useState, useEffect } from "react";
 
 export const useReadClients = () => {
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState<Client[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleReadClients = async () => {
+  const handleReadClients = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readClientsService();
+      const response: Client[] = await readClientsService();
 
       setClients(response);
     } catch (error) {
