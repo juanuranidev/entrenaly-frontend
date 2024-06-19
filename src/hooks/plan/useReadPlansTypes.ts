@@ -1,14 +1,15 @@
+import { PlanType } from "lib/types/plan/plan.types";
 import { useState, useEffect } from "react";
 import { readPlansTypesService } from "services/plan/plan.services";
 
 export const useReadPlansTypes = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [plansTypes, setPlansTypes] = useState([]);
+  const [plansTypes, setPlansTypes] = useState<PlanType[] | []>([]);
 
-  const handleReadPlansTypes = async () => {
+  const handleReadPlansTypes = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readPlansTypesService();
+      const response: PlanType[] = await readPlansTypesService();
 
       setPlansTypes(response);
     } catch (error) {
