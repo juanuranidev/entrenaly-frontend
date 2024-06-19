@@ -15,7 +15,7 @@ import {
 } from "services/user/user.services";
 import { handleCreateErrorToast } from "lib/utils/toast";
 import { loginFormValidation } from "./validations";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
+import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";

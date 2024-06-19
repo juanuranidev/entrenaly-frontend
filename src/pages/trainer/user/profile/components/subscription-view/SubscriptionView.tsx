@@ -1,6 +1,6 @@
 import { Card, Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
+import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 
 export default function SubscriptionView() {
   const { theme } = useThemeContext();

@@ -19,7 +19,7 @@ import {
 } from "lib/utils/toast";
 import { registerFormValidation } from "./validations";
 import { useAuthContext } from "contexts/auth/Auth";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
+import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";

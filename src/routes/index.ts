@@ -1,5 +1,5 @@
 import { useAuthContext } from "contexts/auth/Auth";
-import { USER_CONSTANTS } from "lib/constants/user.constants";
+import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useRoutes } from "react-router-dom";
 import ClientRoutes from "./client/ClientRoutes";
 import PublicRoutes from "./public/PublicRoutes";
