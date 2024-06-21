@@ -3,6 +3,7 @@ import {
   PROFILE_NAVBAR_ITEMS_NAMES,
 } from "./components/Utils";
 import { Grid, Card, Button } from "@mui/material";
+import { ProfileNavbarItem } from "./types";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -14,7 +15,7 @@ export default function ClientProfile() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
-  const [currentView, setCurrentView] = useState(
+  const [currentView, setCurrentView] = useState<string>(
     PROFILE_NAVBAR_ITEMS_NAMES.PROFILE
   );
 
@@ -46,7 +47,7 @@ export default function ClientProfile() {
               spacing={theme?.spacing(3)}
               mt={{ base: theme?.spacing(0), md: theme?.spacing(4) }}
             >
-              {profileNavbarItems().map((navbarItem) => (
+              {profileNavbarItems().map((navbarItem: ProfileNavbarItem) => (
                 <CustomTab
                   key={navbarItem.name}
                   navbarItem={navbarItem}
@@ -57,7 +58,8 @@ export default function ClientProfile() {
             </Grid>
             {
               profileNavbarItems().find(
-                (navbarItem: any) => navbarItem.name === currentView
+                (navbarItem: ProfileNavbarItem) =>
+                  navbarItem.name === currentView
               )?.view
             }
           </Grid>

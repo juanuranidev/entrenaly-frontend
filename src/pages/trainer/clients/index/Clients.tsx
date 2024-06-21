@@ -3,10 +3,16 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { useReadClients } from "hooks/client/useReadClients";
 import ClientsTable from "components/common/clients-table/ClientsTable";
 import MainTitle from "./components/main-title/MainTitle";
+import { Client } from "lib/types/client/client.types";
+
+type UseReadClients = {
+  clients: Client[];
+  isLoading: boolean;
+};
 
 export default function Clients() {
   const { theme } = useThemeContext();
-  const { clients, isLoading } = useReadClients();
+  const { clients, isLoading }: UseReadClients = useReadClients();
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
