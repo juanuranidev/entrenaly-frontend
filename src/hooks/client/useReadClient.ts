@@ -2,6 +2,12 @@ import { Client } from "lib/types/client/client.types";
 import { readClientService } from "services/client/client.services";
 import { useState, useEffect } from "react";
 
+export type UseReadClient = {
+  client: Client | null;
+  isLoading: boolean;
+  handleRefetchClient: () => Promise<void>;
+};
+
 export const useReadClient = (clientId: string | undefined) => {
   const [client, setClient] = useState<Client | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
