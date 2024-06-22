@@ -1,6 +1,10 @@
 import PlansView from "./plans-view/PlansView";
 import ProfileView from "./profile-view/ProfileView";
-import { ProfileNavbarItem } from "../types";
+
+export type ProfileNavbarItem = {
+  name: string;
+  view: JSX.Element;
+};
 
 export const PROFILE_NAVBAR_ITEMS_NAMES = {
   PROFILE: "Perfil",

@@ -3,7 +3,7 @@ import Icons from "lib/utils/icons/icons";
 
 type Props = {
   searchValue: string;
-  setSearchValue: (e: any) => void;
+  setSearchValue: (value: string) => void;
 };
 
 export default function ExercisesSearchBar({

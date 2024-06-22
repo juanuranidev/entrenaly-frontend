@@ -3,9 +3,10 @@ import Icons from "lib/utils/icons/icons";
 import AddOrUpdateVariantForm from "components/forms/add-or-update-variant-form/AddOrUpdateVariantForm";
 import { useThemeContext } from "contexts/theme/Theme";
 import { Box, Chip, Grid, IconButton, Typography } from "@mui/material";
+import { Exercise } from "lib/types/exercise/exercise.types";
 
 type Props = {
-  exercise: any;
+  exercise: Exercise;
   handleRefetchExercises: () => Promise<void>;
 };
 
@@ -13,10 +14,10 @@ export default function ExerciseCard({
   exercise,
   handleRefetchExercises,
 }: Props) {
-  const isVariant = exercise.variant;
+  const isVariant: boolean = Boolean(exercise.variant);
   const { theme } = useThemeContext();
 
-  const [openFormAddVariant, setOpenFormAddVariant] = useState(false);
+  const [openFormAddVariant, setOpenFormAddVariant] = useState<boolean>(false);
 
   return (
     <React.Fragment>

@@ -1,6 +1,6 @@
 import { Box, Card, Grid, Button, Avatar, Typography } from "@mui/material";
-import { useReadClient, UseReadClient } from "hooks/client/useReadClient";
 import { useThemeContext } from "contexts/theme/Theme";
+import { useReadClient } from "hooks/client/useReadClient";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import Icons from "lib/utils/icons/icons";
@@ -10,8 +10,7 @@ import UpdateMedicalInformationForm from "components/forms/update-medical-inform
 export default function ProfileView() {
   const { theme } = useThemeContext();
   const { clientId } = useParams();
-  const { client, handleRefetchClient }: UseReadClient =
-    useReadClient(clientId);
+  const { client, handleRefetchClient } = useReadClient(clientId);
 
   const [modalUpdateMedicalInformation, setModalUpdateMedicalInformation] =
     useState<boolean>(false);

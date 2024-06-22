@@ -2,6 +2,7 @@ import { Card, Grid, Alert, CircularProgress } from "@mui/material";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useDebounce } from "hooks/useDebounce";
+import { Exercise } from "lib/types/exercise/exercise.types";
 import { useState } from "react";
 import MainTitle from "./components/main-title/MainTitle";
 import ExerciseCard from "./components/exercise-card/ExerciseCard";
@@ -58,7 +59,7 @@ export default function Exercises() {
                 justifyContent={{ xs: "center", md: "flex-start" }}
               >
                 {exercises.length
-                  ? exercises?.map((exercise: any) => (
+                  ? exercises?.map((exercise: Exercise) => (
                       <ExerciseCard
                         key={exercise.id}
                         exercise={exercise}
