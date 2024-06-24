@@ -4,7 +4,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   item: any;
-  setIsDrawerOpen: (boolean: boolean) => void;
+  setIsDrawerOpen: (value: boolean) => void;
 };
 
 export default function NavbarItem({ item, setIsDrawerOpen }: Props) {

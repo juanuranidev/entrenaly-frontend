@@ -31,8 +31,8 @@ export default function RegisterForm({ invite }: any) {
   const navigate = useNavigate();
   const { setUserData } = useAuthContext();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {

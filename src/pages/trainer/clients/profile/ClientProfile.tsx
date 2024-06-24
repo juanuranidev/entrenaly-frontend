@@ -37,7 +37,7 @@ export default function ClientProfile() {
       </Grid>
       <Grid item xs={12}>
         <Card>
-          <Grid container spacing={theme.spacing(3)}>
+          <Grid container spacing={theme?.spacing(3)}>
             <Grid
               item
               sm={2}

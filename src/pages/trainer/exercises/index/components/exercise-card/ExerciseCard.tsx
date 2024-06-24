@@ -31,11 +31,11 @@ export default function ExerciseCard({
         boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px;"
         border={`2px solid ${theme?.colors?.border.primary}`}
         width={{
-          base: `calc(100% - ${theme.spacing(3)})`,
-          sm: `calc(50% - ${theme.spacing(3)})`,
-          md: `calc(50% - ${theme.spacing(3)})`,
-          lg: `calc(25% - ${theme.spacing(3)})`,
-          xl: `calc(20% - ${theme.spacing(3)})`,
+          base: `calc(100% - ${theme?.spacing(3)})`,
+          sm: `calc(50% - ${theme?.spacing(3)})`,
+          md: `calc(50% - ${theme?.spacing(3)})`,
+          lg: `calc(25% - ${theme?.spacing(3)})`,
+          xl: `calc(20% - ${theme?.spacing(3)})`,
         }}
       >
         <Grid container alignItems="center">

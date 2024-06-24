@@ -13,6 +13,7 @@ import { useReadPlansTypes } from "hooks/plan/useReadPlansTypes";
 import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
+import { PlanType } from "lib/types/plan/plan.types";
 import PageTitle from "components/common/page-title/PageTitle";
 import Icons from "lib/utils/icons/icons";
 
@@ -25,7 +26,7 @@ export default function MainTitle() {
   const { theme } = useThemeContext();
   const { plansTypes } = useReadPlansTypes();
 
-  const handleGetUrlByPlanType = (planType: string) => {
+  const handleGetUrlByPlanType = (planType: string): string => {
     if (planType === PLAN_CONSTANTS.TYPES.WEEKLY) {
       return "/trainer/plans/new/weekly";
     }
@@ -51,7 +52,7 @@ export default function MainTitle() {
             >
               <ClickAwayListener onClickAway={() => setOpen(false)}>
                 <List sx={{ padding: theme?.spacing(1) }}>
-                  {plansTypes.map((planType: any) => (
+                  {plansTypes.map((planType: PlanType) => (
                     <ListItemButton
                       key={planType?.id}
                       disabled={planType?.name === PLAN_CONSTANTS.TYPES.CIRCUIT}

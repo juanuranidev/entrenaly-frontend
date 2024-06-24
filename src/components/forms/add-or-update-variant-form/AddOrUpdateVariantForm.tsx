@@ -16,6 +16,7 @@ import {
   handleCreateSuccessToast,
 } from "lib/utils/toast";
 import { addOrUpdateVariantFormValidations } from "./utils/validations";
+import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
@@ -29,7 +30,7 @@ type Props = {
   exerciseId: number;
   onClose: () => void;
   onSubmit?: () => Promise<void>;
-  exerciseSelected?: any;
+  exerciseSelected?: Exercise;
 };
 
 export default function AddOrUpdateVariantForm({
@@ -53,7 +54,6 @@ export default function AddOrUpdateVariantForm({
       return {
         name: exerciseSelected?.variant?.name ?? "",
         image: exerciseSelected?.variant?.image ?? "",
-        format: exerciseSelected?.variant?.format ?? "",
         variantId: exerciseSelected?.variant?.id ?? "",
         categoryId: exerciseSelected?.category?.id ?? "",
         exerciseId: exerciseId,
@@ -62,7 +62,6 @@ export default function AddOrUpdateVariantForm({
       return {
         name: exerciseSelected?.name ?? "",
         image: exerciseSelected?.image ?? "",
-        format: exerciseSelected?.format ?? "",
         categoryId: exerciseSelected?.category?.id ?? "",
         exerciseId: exerciseId,
       };
@@ -151,14 +150,16 @@ export default function AddOrUpdateVariantForm({
               }
             >
               {exercisesCategories?.length
-                ? exercisesCategories?.map((exerciseCategory: any) => (
-                    <MenuItem
-                      key={exerciseCategory?.id}
-                      value={exerciseCategory?.id}
-                    >
-                      {exerciseCategory?.name}
-                    </MenuItem>
-                  ))
+                ? exercisesCategories?.map(
+                    (exerciseCategory: ExerciseCategory) => (
+                      <MenuItem
+                        key={exerciseCategory?.id}
+                        value={exerciseCategory?.id}
+                      >
+                        {exerciseCategory?.name}
+                      </MenuItem>
+                    )
+                  )
                 : null}
             </TextField>
           </Grid>

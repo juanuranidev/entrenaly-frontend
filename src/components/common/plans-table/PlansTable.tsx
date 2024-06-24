@@ -9,12 +9,13 @@ import {
   TableContainer,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { Plan } from "lib/types/plan/plan.types";
 import PlansTableLoading from "./components/plans-table-loading/PlansTableLoading";
 import PlanRow from "./components/plan-row/PlanRow";
 import Icons from "lib/utils/icons/icons";
 
 type Props = {
-  plans: any;
+  plans: Plan[] | [];
   isLoading: boolean;
   withBorder?: boolean;
 };
@@ -57,8 +58,8 @@ export default function PlansTable({ plans, isLoading, withBorder }: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {plans.map((plan: any) => (
-            <PlanRow key={plan.id} plan={plan} />
+          {plans.map((plan: Plan) => (
+            <PlanRow key={plan?.id} plan={plan} />
           ))}
         </TableBody>
       </Table>

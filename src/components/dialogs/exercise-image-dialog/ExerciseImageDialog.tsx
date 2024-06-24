@@ -1,7 +1,7 @@
 import { Dialog } from "@mui/material";
 
 type Props = {
-  image: string;
+  image: string | undefined;
   open: boolean;
   close: () => void;
 };

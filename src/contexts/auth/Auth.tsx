@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { getUserSessionService } from "services/user/user.services";
 import { Box } from "@mui/material";
 import axios from "axios";
-import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
+import Logo from "components/common/logo/Logo";
 
 const initialContextValue = {
   userData: null,
@@ -51,7 +51,7 @@ export const AuthContextProvider = ({ children }: any) => {
         alignItems="center"
         justifyContent="center"
       >
-        <LogoWithVersion hideVersion />
+        <Logo />
       </Box>
     );
   }

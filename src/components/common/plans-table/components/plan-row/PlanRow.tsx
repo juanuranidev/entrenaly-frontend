@@ -10,12 +10,13 @@ import {
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Plan } from "lib/types/plan/plan.types";
 import moment from "moment";
 import Icons from "lib/utils/icons/icons";
 import React from "react";
 
 type Props = {
-  plan: any;
+  plan: Plan;
 };
 
 export default function PlanRow({ plan }: Props) {

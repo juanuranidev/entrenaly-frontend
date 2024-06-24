@@ -17,6 +17,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PowerSettingsNewSharpIcon from "@mui/icons-material/PowerSettingsNewSharp";
 
 const Icons = {
@@ -40,6 +41,7 @@ const Icons = {
   visibilityOn: (props: any) => <VisibilityIcon {...props} />,
   visibilityOff: (props: any) => <VisibilityOffIcon {...props} />,
   download: (props: any) => <DownloadIcon {...props} />,
+  down: (props: any) => <KeyboardArrowDownIcon {...props} />,
 };
 
 export default Icons;

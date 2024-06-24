@@ -12,6 +12,7 @@ import {
   ListItemText,
   ListItemButton,
   ClickAwayListener,
+  IconButton,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -19,6 +20,7 @@ import { useAuthContext } from "contexts/auth/Auth";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons/icons";
+import InstallAppDialog from "components/dialogs/install-app-dialog/InstallAppDialog";
 
 export default function Profile({ profileItems }: any) {
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ export default function Profile({ profileItems }: any) {
   const { userData, setUserData } = useAuthContext();
 
   const [open, setOpen] = useState<boolean>(false);
+  const [installAppDialog, setInstallAppDialog] = useState<boolean>(false);
 
   const handleSignOut = async () => {
     try {
@@ -43,11 +46,15 @@ export default function Profile({ profileItems }: any) {
   return (
     <Box>
       <Stack direction="row" spacing={theme?.spacing(1)} alignItems="center">
+        <IconButton onClick={() => setInstallAppDialog(true)}>
+          <Icons.download />
+        </IconButton>
         <Divider orientation="vertical" flexItem />
         <ButtonBase
           ref={anchorRef}
           onClick={() => setOpen((prevOpen) => !prevOpen)}
           sx={{
+            // display: "flex",
             p: theme?.spacing(1),
             borderRadius: theme?.spacing(1),
             "&:hover": {
@@ -55,6 +62,7 @@ export default function Profile({ profileItems }: any) {
             },
           }}
         >
+          <Icons.down />
           <Typography
             fontSize={15}
             mr={theme?.spacing(1)}
@@ -115,6 +123,10 @@ export default function Profile({ profileItems }: any) {
           </ClickAwayListener>
         </Card>
       </Popper>
+      <InstallAppDialog
+        open={installAppDialog}
+        close={() => setInstallAppDialog(false)}
+      />
     </Box>
   );
 }

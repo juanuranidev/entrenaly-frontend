@@ -12,9 +12,9 @@ export default function Exercises() {
   const { theme } = useThemeContext();
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const debouncedSearchValue = useDebounce(searchValue, 500);
+  const { debouncedValue } = useDebounce(searchValue, 500);
   const { exercises, isLoading, handleRefetchExercises } =
-    useReadExercises(debouncedSearchValue);
+    useReadExercises(debouncedValue);
 
   return (
     <Grid container spacing={theme?.spacing(3)}>

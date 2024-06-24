@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { Exercise } from "lib/types/exercise/exercise.types";
 import ExerciseImageDialog from "components/dialogs/exercise-image-dialog/ExerciseImageDialog";
 
 type Props = {
-  exercise: any;
+  exercise: Exercise;
 };
 
 export default function ExerciseView({ exercise }: Props) {
   const { theme } = useThemeContext();
 
-  const isVariant: boolean = exercise?.exerciseVariant;
+  const isVariant: boolean = Boolean(exercise?.variant);
   const [openExerciseImageDialog, setOpenExerciseImageDialog] =
     useState<boolean>(false);
 
@@ -19,26 +20,16 @@ export default function ExerciseView({ exercise }: Props) {
       <Grid item container>
         <Grid item xs={11}>
           <Typography fontWeight={600} fontSize={14}>
-            {isVariant
-              ? exercise?.exerciseVariant?.name
-              : exercise?.exerciseName}
+            {isVariant ? exercise?.variant?.name : exercise?.name}
           </Typography>
           <Typography fontWeight={400} fontSize={13}>
-            {exercise?.exerciseDescription}
+            {exercise?.description}
           </Typography>
         </Grid>
         <Grid item xs={1} display="flex" justifyContent="flex-end">
           <img
-            alt={
-              isVariant
-                ? exercise?.exerciseVariant?.name
-                : exercise?.exerciseName
-            }
-            src={
-              isVariant
-                ? exercise?.exerciseVariant?.image
-                : exercise?.exerciseImage
-            }
+            alt={isVariant ? exercise?.variant?.name : exercise?.name}
+            src={isVariant ? exercise?.variant?.image : exercise?.image}
             onClick={() => setOpenExerciseImageDialog(true)}
             style={{
               width: 40,
@@ -52,11 +43,9 @@ export default function ExerciseView({ exercise }: Props) {
         </Grid>
       </Grid>
       <ExerciseImageDialog
-        image={
-          isVariant ? exercise?.exerciseVariant?.image : exercise?.exerciseImage
-        }
         open={openExerciseImageDialog}
         close={() => setOpenExerciseImageDialog(false)}
+        image={isVariant ? exercise?.variant?.image : exercise?.image}
       />
     </React.Fragment>
   );

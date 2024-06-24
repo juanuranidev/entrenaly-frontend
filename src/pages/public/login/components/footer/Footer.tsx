@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <Stack
       alignItems="center"
-      p={theme.spacing(4)}
+      p={theme?.spacing(4)}
       textAlign={"inherit"}
       gap={theme?.spacing(2)}
       justifyContent="space-between"

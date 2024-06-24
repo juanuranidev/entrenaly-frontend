@@ -8,7 +8,9 @@ type Props = {
 
 export default function PageTitle({ title, action }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen: boolean = useMediaQuery(
+    theme?.breakpoints.up("md") || "(min-width:900px)"
+  );
 
   return (
     <Box

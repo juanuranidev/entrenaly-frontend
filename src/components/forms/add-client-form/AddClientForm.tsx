@@ -118,8 +118,7 @@ export default function AddClientForm({ open, onClose }: Props) {
           <Grid item xs={12}>
             <Typography fontWeight={500} fontSize={13}>
               Comparte el siguiente enlace a tu cliente para que pueda crearse
-              una cuenta, ingresar a la plataforma y completar su ficha médica y
-              datos importantes.
+              una cuenta, ingresar a la plataforma y completar su ficha médica.
             </Typography>
           </Grid>
           <Grid item xs={12}>

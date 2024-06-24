@@ -1,10 +1,11 @@
 import { Typography, Grid, Chip } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { Exercise } from "lib/types/exercise/exercise.types";
 
 type Props = {
-  exercise: any;
-  exercisesSelected: any;
-  toggleExerciseSelection: (exercise: any) => void;
+  exercise: Exercise;
+  exercisesSelected: Exercise[];
+  toggleExerciseSelection: (exercise: Exercise) => void;
 };
 
 export default function ExerciseCard({
@@ -16,7 +17,7 @@ export default function ExerciseCard({
 
   const isVariant: boolean = Boolean(exercise?.variant);
   const isSelected = exercisesSelected.some(
-    (obj: any) => obj.name === exercise.name
+    (obj: Exercise) => obj.name === exercise.name
   );
 
   return (

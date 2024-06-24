@@ -1,4 +1,5 @@
 import {
+  ProfileNavbarItem,
   profileNavbarItems,
   PROFILE_NAVBAR_ITEMS_NAMES,
 } from "./components/Utils";
@@ -36,7 +37,7 @@ export default function Profile() {
       </Grid>
       <Grid item xs={12}>
         <Card>
-          <Grid container spacing={theme.spacing(3)}>
+          <Grid container spacing={theme?.spacing(3)}>
             <Grid
               item
               sm={2}
@@ -46,7 +47,7 @@ export default function Profile() {
               spacing={theme?.spacing(3)}
               mt={{ base: theme?.spacing(0), md: theme?.spacing(4) }}
             >
-              {profileNavbarItems().map((navbarItem) => (
+              {profileNavbarItems().map((navbarItem: ProfileNavbarItem) => (
                 <CustomTab
                   key={navbarItem.name}
                   navbarItem={navbarItem}
@@ -57,7 +58,8 @@ export default function Profile() {
             </Grid>
             {
               profileNavbarItems().find(
-                (navbarItem: any) => navbarItem.name === currentView
+                (navbarItem: ProfileNavbarItem) =>
+                  navbarItem.name === currentView
               )?.view
             }
           </Grid>

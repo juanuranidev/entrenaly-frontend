@@ -7,12 +7,14 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
-import ExerciseView from "./components/exercise-view/ExerciseView";
+import { Exercise } from "lib/types/exercise/exercise.types";
+import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
+import ExerciseView from "./components/exercise-view/ExerciseView";
 import ExercisesImagesSumary from "../exercises-images-summary/ExercisesImagesSumary";
 
 type Props = {
-  day: any;
+  day: PlanDay;
 };
 
 export default function WeeklyPlanDay({ day }: Props) {
@@ -36,14 +38,14 @@ export default function WeeklyPlanDay({ day }: Props) {
             justifyContent="space-between"
           >
             <Typography fontWeight={600} fontSize={16}>
-              {day?.dayOfWeekName}
+              {day?.dayOfWeek?.name}
             </Typography>
             <ExercisesImagesSumary exercises={day?.exercises} />
           </Stack>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={theme?.spacing(3)}>
-            {day?.exercises?.map((exercise: any, index: number) => (
+            {day?.exercises?.map((exercise: Exercise, index: number) => (
               <ExerciseView exercise={exercise} key={index} />
             ))}
           </Grid>

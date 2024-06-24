@@ -9,15 +9,20 @@ import {
   Autocomplete,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import {
+  Exercise,
+  ExerciseDescription,
+} from "lib/types/exercise/exercise.types";
 import React, { useEffect, useState } from "react";
 import { createExerciseDescriptionService } from "services/exercise/exercise.services";
+import { PlanDay } from "lib/types/plan/plan.types";
 
 type Props = {
-  day: any;
+  day: PlanDay;
   formik: any;
-  exercise: any;
-  exercisesDescriptions: any;
-  handleRefetchGetExercisesDescriptions: any;
+  exercise: Exercise;
+  exercisesDescriptions: ExerciseDescription[];
+  handleRefetchGetExercisesDescriptions: () => Promise<void>;
 };
 
 export default function ExerciseInput({
@@ -30,8 +35,8 @@ export default function ExerciseInput({
   const isVariant = exercise?.variant;
 
   const { theme } = useThemeContext();
-  const [inputValue, setInputValue] = useState("");
-  const [autocompleteValue, setAutocompleteValue] = useState<any>("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [autocompleteValue, setAutocompleteValue] = useState<any>(null);
 
   const handlePostExerciseDescription = async () => {
     try {
@@ -51,7 +56,7 @@ export default function ExerciseInput({
       description,
     };
 
-    const newExercises = day?.exercises?.map((e: any) => {
+    const newExercises = day?.exercises?.map((e: Exercise) => {
       if (e.name === exercise.name) {
         return exerciseFormatted;
       }
@@ -59,8 +64,8 @@ export default function ExerciseInput({
       return e;
     });
 
-    const newDays = formik?.values?.days?.map((d: any) => {
-      if (d.dayOfWeekId === day?.dayOfWeekId) {
+    const newDays = formik?.values?.days?.map((d: PlanDay) => {
+      if (d.dayOfWeek?.id === day?.dayOfWeek?.id) {
         return { ...day, exercises: newExercises };
       }
 
@@ -73,12 +78,11 @@ export default function ExerciseInput({
   const handleManageDefaultValues = () => {
     if (!exercise || !exercisesDescriptions.length) return;
 
-    setInputValue(exercise?.description);
+    setInputValue(exercise?.description ?? "");
 
     const exerciseDescription = exercisesDescriptions.find(
-      (obj: any) => obj.description === exercise.description
+      (obj: ExerciseDescription) => obj.description === exercise.description
     );
-
     setAutocompleteValue(exerciseDescription);
   };
 

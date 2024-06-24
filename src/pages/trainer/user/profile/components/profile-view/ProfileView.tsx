@@ -1,11 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
-import { useReadUser } from "hooks/user/useReadUser";
 import UserInformation from "components/common/user-information/UserInformation";
 
 export default function ProfileView() {
   const { theme } = useThemeContext();
-  const { user } = useReadUser();
 
   return (
     <Grid item container xs={12} sm={10} spacing={theme?.spacing(3)}>
@@ -14,7 +12,7 @@ export default function ProfileView() {
           Perfil
         </Typography>
       </Grid>
-      <UserInformation user={user} />
+      <UserInformation />
     </Grid>
   );
 }

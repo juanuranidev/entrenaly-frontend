@@ -1,19 +1,19 @@
 import ENV from "lib/utils/env";
-import Logo from "../../../../public/Logo.png";
+import LogoImage from "../../../../public/Logo.png";
 import { Chip, Stack } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
-  hideVersion?: boolean;
+  showVersion?: boolean;
 };
 
-export default function LogoWithVersion({ hideVersion = false }: Props) {
+export default function Logo({ showVersion = false }: Props) {
   const { theme } = useThemeContext();
 
   return (
     <Stack spacing={theme?.spacing(1)} direction="row" alignItems="center">
-      <img src={Logo} width={60} height="100%" />
-      {!hideVersion ? (
+      <img src={LogoImage} width={60} height="100%" />
+      {showVersion ? (
         <Chip
           size="small"
           label={`v${ENV.APP_VERSION}`}

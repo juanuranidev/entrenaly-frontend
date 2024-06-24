@@ -1,10 +1,11 @@
 import { Grid, ListItemButton, ListItemText } from "@mui/material";
+import { DayOfWeek, PlanDay } from "lib/types/plan/plan.types";
 import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
-  day: any;
-  daysAlreadyAdded: any;
-  handleSelectDay: any;
+  day: DayOfWeek;
+  daysAlreadyAdded: PlanDay[] | [];
+  handleSelectDay: (value: DayOfWeek) => void;
 };
 
 export default function DayCard({
@@ -14,7 +15,7 @@ export default function DayCard({
 }: Props) {
   const { theme } = useThemeContext();
   const isDayAlreadyAdded = daysAlreadyAdded.find(
-    (obj: any) => obj.dayOfWeekId === day.id
+    (obj: PlanDay) => obj.dayOfWeek.id === day.id
   );
 
   return (

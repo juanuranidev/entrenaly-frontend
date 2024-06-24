@@ -17,6 +17,7 @@ import { createExerciseService } from "services/exercise/exercise.services";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
+import { Exercise } from "lib/types/exercise/exercise.types";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
@@ -25,7 +26,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit?: () => Promise<void>;
-  exerciseSelected?: any;
+  exerciseSelected?: Exercise | null;
 };
 
 export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {

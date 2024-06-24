@@ -1,5 +1,4 @@
 import { useThemeContext } from "contexts/theme/Theme";
-import { ModalTitleStyled } from "./Styles";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 
 type Props = {
@@ -9,14 +8,24 @@ type Props = {
 
 export default function ModalTitle({ title, action }: Props) {
   const { theme } = useThemeContext();
-  const isMobileScreen: boolean = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmallScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.down("md") || "(max-width:900px)"
+  );
 
   return (
-    <ModalTitleStyled theme={theme}>
+    <Box
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: theme?.spacing(3),
+      }}
+    >
       <Typography fontSize={16} fontWeight={600}>
         {title}
       </Typography>
-      {action && !isMobileScreen ? <Box>{action}</Box> : null}
-    </ModalTitleStyled>
+      {action && !isSmallScreen ? <Box>{action}</Box> : null}
+    </Box>
   );
 }

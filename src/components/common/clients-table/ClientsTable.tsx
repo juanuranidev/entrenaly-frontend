@@ -9,12 +9,13 @@ import {
   TableContainer,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { Client } from "lib/types/client/client.types";
 import Icons from "lib/utils/icons/icons";
-import ClientsTableLoading from "./components/clients-table-loading/ClientsTableLoading";
 import ClientRow from "./components/client-row/ClientRow";
+import ClientsTableLoading from "./components/clients-table-loading/ClientsTableLoading";
 
 type Props = {
-  clients: any;
+  clients: Client[] | [];
   isLoading: boolean;
   withBorder?: boolean;
 };
@@ -59,8 +60,8 @@ export default function ClientsTable({
           </TableRow>
         </TableHead>
         <TableBody>
-          {clients.map((client: any) => (
-            <ClientRow key={client.id} client={client} />
+          {clients.map((client: Client) => (
+            <ClientRow key={client?.id} client={client} />
           ))}
         </TableBody>
       </Table>

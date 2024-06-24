@@ -1,25 +1,20 @@
-import {
-  handleFormatDays,
-  weeklyPlanFormValidations,
-} from "./components/Utils";
+import { weeklyPlanFormValidations } from "./components/Utils";
 import {
   createWeeklyPlanService,
   updateWeeklyPlanService,
 } from "services/plan/plan.services";
 import {
-  toPutWeeklyPlanDataAdapter,
-  toPostWeeklyPlanDataAdapter,
-} from "./adapters";
-import {
   handleCreateErrorToast,
   handleCreateSuccessToast,
 } from "lib/utils/toast";
 import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
+import { DayOfWeek, Plan, PlanDay } from "lib/types/plan/plan.types";
 import { Grid, Button, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { Exercise } from "lib/types/exercise/exercise.types";
+import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddDayDrawer from "./components/add-day-drawer/AddDayDrawer";
 import AccordionDay from "./components/accordion-day/AccordionDay";
@@ -27,7 +22,7 @@ import MainInformation from "./components/main-information/MainInformation";
 import AddExercisesForm from "./components/add-exercises-form/AddExercisesForm";
 
 type Props = {
-  plan?: any;
+  plan?: Plan | null;
 };
 
 export default function WeeklyPlanForm({ plan }: Props) {
@@ -46,7 +41,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
 
   const formik = useFormik({
     initialValues: {
-      days: [],
+      days: plan?.days || [],
       clients: [],
       name: plan?.name || "",
       planId: plan?.id || null,
@@ -67,7 +62,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setIsLoading(true);
     handleVerifyDescriptions(data.days);
     try {
-      await createWeeklyPlanService(toPostWeeklyPlanDataAdapter(data));
+      await createWeeklyPlanService(data);
 
       handleCreateSuccessToast("Plan creado con éxito");
       navigate("/trainer/plans");
@@ -82,7 +77,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setIsLoading(true);
     handleVerifyDescriptions(data.days);
     try {
-      await updateWeeklyPlanService(toPutWeeklyPlanDataAdapter(data));
+      await updateWeeklyPlanService(data);
 
       handleCreateSuccessToast("Plan actualizado con éxito");
       navigate("/trainer/plans");
@@ -93,28 +88,21 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setIsLoading(false);
   };
 
-  const handleOnSubmitDrawerDays = (day: any) => {
+  const handleOnSubmitDrawerDays = (day: DayOfWeek) => {
     setDaySelected(day);
     setOpenExercisesDrawer(true);
   };
 
-  const handleSubmitExercisesDrawer = (selectedExercises: any) => {
-    const dayWithExercises = {
-      dayOfWeekId: daySelected?.id,
-      dayOfWeekName: daySelected?.name,
-      exercises: selectedExercises,
-    };
-
-    formik.setFieldValue("days", [...formik.values.days, dayWithExercises]);
+  const handleSubmitExercisesDrawer = (selectedExercises: Exercise[]) => {
+    formik.setFieldValue("days", [
+      ...formik.values.days,
+      {
+        dayOfWeek: daySelected,
+        exercises: selectedExercises,
+      },
+    ]);
 
     setOpenExercisesDrawer(false);
-  };
-
-  const handleFormatInitialData = () => {
-    if (!editPlan) return;
-
-    const days = handleFormatDays(plan?.days);
-    formik.setFieldValue("days", days);
   };
 
   const handleVerifyDescriptions = (days: any) => {
@@ -128,10 +116,6 @@ export default function WeeklyPlanForm({ plan }: Props) {
       }
     }
   };
-
-  useEffect(() => {
-    handleFormatInitialData();
-  }, [plan]);
 
   return (
     <Grid container spacing={theme?.spacing(4)}>
@@ -148,11 +132,11 @@ export default function WeeklyPlanForm({ plan }: Props) {
       </Grid>
       {formik?.values?.days
         ?.sort((a: any, b: any) => a.dayOfWeekId - b.dayOfWeekId)
-        .map((day: any) => (
+        .map((day: PlanDay) => (
           <AccordionDay
-            key={day?.dayOfWeekId}
             day={day}
             formik={formik}
+            key={day?.dayOfWeek?.id}
             exercisesDescriptions={exercisesDescriptions}
             handleRefetchGetExercisesDescriptions={
               handleRefetchExercisesDescriptions

@@ -14,36 +14,34 @@ import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
-
-type Exercise = {
-  name: string;
-  video: string;
-};
+import { Exercise } from "lib/types/exercise/exercise.types";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSubmit: (day: any) => void;
+  onSubmit: (value: Exercise[]) => void;
 };
 
 export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
   const [searchValue, setSearchValue] = useState("");
-  const [exercisesSelected, setExercisesSelected] = useState<Exercise[]>([]);
-
-  const debouncedSearchValue = useDebounce(searchValue, 500);
+  const [exercisesSelected, setExercisesSelected] = useState<Exercise[] | []>(
+    []
+  );
 
   const { theme } = useThemeContext();
-  const { exercises } = useReadExercises(debouncedSearchValue);
+  const { debouncedValue } = useDebounce(searchValue, 500);
+  const { exercises } = useReadExercises(debouncedValue);
 
   const toggleExerciseSelection = (exercise: Exercise) => {
     setExercisesSelected((prevSelected) => {
       const isExerciseSelected = prevSelected.some(
-        (selectedExercise) => selectedExercise.name === exercise.name
+        (selectedExercise: Exercise) => selectedExercise.name === exercise.name
       );
 
       if (isExerciseSelected) {
         return prevSelected.filter(
-          (selectedExercise) => selectedExercise.name !== exercise.name
+          (selectedExercise: Exercise) =>
+            selectedExercise.name !== exercise.name
         );
       } else {
         return [...prevSelected, exercise];
@@ -101,7 +99,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           justifyContent="center"
         >
           {exercises.length ? (
-            exercises.map((exercise: any) => (
+            exercises.map((exercise: Exercise) => (
               <ExerciseCard
                 key={exercise.name}
                 exercise={exercise}
@@ -116,7 +114,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           )}
         </Stack>
       </Box>
-      <Box py={theme?.spacing(3)} bgcolor={theme.colors.background.primary}>
+      <Box py={theme?.spacing(3)} bgcolor={theme?.colors?.background?.primary}>
         <Button
           fullWidth
           variant="contained"

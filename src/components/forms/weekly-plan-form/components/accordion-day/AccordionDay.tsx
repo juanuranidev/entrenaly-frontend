@@ -8,17 +8,22 @@ import {
   AccordionDetails,
   AccordionSummary,
 } from "@mui/material";
+import {
+  Exercise,
+  ExerciseDescription,
+} from "lib/types/exercise/exercise.types";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
+import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";
 import ExerciseInput from "../exercise-input/ExerciseInput";
 
 type Props = {
-  day: any;
+  day: PlanDay;
   formik: any;
-  exercisesDescriptions: any;
-  handleRefetchGetExercisesDescriptions: any;
+  exercisesDescriptions: ExerciseDescription[];
+  handleRefetchGetExercisesDescriptions: () => Promise<void>;
 };
 
 export default function AccordionDay({
@@ -33,7 +38,7 @@ export default function AccordionDay({
 
   const handleDeleteDay = () => {
     const newDays = formik.values.days.filter(
-      (obj: any) => obj.dayOfWeekName !== day.dayOfWeekName
+      (obj: PlanDay) => obj.dayOfWeek.id !== day.dayOfWeek.id
     );
 
     formik.setFieldValue("days", newDays);
@@ -57,7 +62,7 @@ export default function AccordionDay({
             justifyContent="space-between"
           >
             <Typography fontWeight={600} fontSize={16}>
-              {day?.dayOfWeekName}
+              {day?.dayOfWeek?.name}
             </Typography>
             <Stack
               direction="row"
@@ -87,7 +92,7 @@ export default function AccordionDay({
         </AccordionSummary>
         <AccordionDetails>
           <Stack direction="column" gap={theme?.spacing(4)}>
-            {day?.exercises.map((exercise: any) => (
+            {day?.exercises.map((exercise: Exercise) => (
               <ExerciseInput
                 day={day}
                 key={exercise?.id}

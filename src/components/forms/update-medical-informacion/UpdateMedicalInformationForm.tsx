@@ -4,6 +4,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { handleCreateSuccessToast } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { Client } from "lib/types/client/client.types";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
@@ -12,7 +13,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit?: () => Promise<void>;
-  clientSelected: any;
+  clientSelected: Client | null;
 };
 
 export default function UpdateMedicalInformationForm({

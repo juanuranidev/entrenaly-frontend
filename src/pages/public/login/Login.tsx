@@ -5,7 +5,7 @@ import { useState } from "react";
 import Footer from "./components/footer/Footer";
 import LoginForm from "components/forms/login-form/LoginForm";
 import RegisterForm from "components/forms/register-form/RegisterForm";
-import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
+import Logo from "components/common/logo/Logo";
 import InviteInformation from "./components/invite-information/InviteInformation";
 
 export default function Login() {
@@ -22,7 +22,7 @@ export default function Login() {
       minHeight="100dvh"
       flexDirection="column"
       justifyContent="space-between"
-      bgcolor={theme.colors.background.secondary}
+      bgcolor={theme?.colors?.background?.secondary}
     >
       <Stack
         alignItems="center"
@@ -31,17 +31,17 @@ export default function Login() {
         flexDirection={{ base: "column", sm: "row" }}
         justifyContent={invite ? "space-between" : "center"}
       >
-        <LogoWithVersion />
+        <Logo />
         {invite ? <InviteInformation invite={invite} /> : null}
       </Stack>
       <Box width="100%" display="flex" justifyContent="center" margin="auto">
         <Card
           sx={{
             display: "flex",
-            gap: theme.spacing(4),
+            gap: theme?.spacing(4),
             flexDirection: "column",
             maxWidth: { base: "100%", sm: "30rem" },
-            padding: { base: theme.spacing(4), sm: theme.spacing(5) },
+            padding: { base: theme?.spacing(4), sm: theme?.spacing(5) },
           }}
         >
           <Typography textAlign="left" fontWeight={600} fontSize={25}>

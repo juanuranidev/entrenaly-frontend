@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { PullerStyled } from "./Styles";
 import { useThemeContext } from "contexts/theme/Theme";
 
 export default function Puller() {
@@ -7,7 +6,14 @@ export default function Puller() {
 
   return (
     <Box display="flex" justifyContent="center" m={1}>
-      <PullerStyled theme={theme} />
+      <Box
+        style={{
+          width: 30,
+          height: 10,
+          borderRadius: 3,
+          backgroundColor: theme?.palette.divider,
+        }}
+      />
     </Box>
   );
 }

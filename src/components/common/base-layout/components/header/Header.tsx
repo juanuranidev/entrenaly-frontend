@@ -1,17 +1,29 @@
 import Icons from "lib/utils/icons/icons";
 import Profile from "../profile/Profile";
-import { HeaderStyled } from "./Styles";
 import { useThemeContext } from "contexts/theme/Theme";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { IconButton, useMediaQuery, Box } from "@mui/material";
 
-export default function Header({ setIsDrawerOpen, profileItems }: any) {
+type Props = {
+  setIsDrawerOpen: (value: boolean) => void;
+  profileItems: any;
+};
+
+export default function Header({ setIsDrawerOpen, profileItems }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.up("md") || "(min-width:900px)"
+  );
 
   return (
-    <HeaderStyled
-      theme={theme}
-      justifyContent={isLargeScreen ? "flex-end" : "space-between"}
+    <Box
+      style={{
+        display: "flex",
+        alignItems: "center",
+        padding: theme?.spacing(1.5),
+        backgroundColor: theme?.colors?.background?.primary,
+        borderBottom: `2px solid ${theme?.colors?.border?.primary}`,
+        justifyContent: isLargeScreen ? "flex-end" : "space-between",
+      }}
     >
       {!isLargeScreen ? (
         <IconButton onClick={() => setIsDrawerOpen(true)}>
@@ -19,6 +31,6 @@ export default function Header({ setIsDrawerOpen, profileItems }: any) {
         </IconButton>
       ) : null}
       <Profile profileItems={profileItems} />
-    </HeaderStyled>
+    </Box>
   );
 }

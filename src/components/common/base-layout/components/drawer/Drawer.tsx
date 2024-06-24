@@ -1,11 +1,7 @@
-import { DrawerStyles } from "./Styles";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Box, List, useMediaQuery, IconButton } from "@mui/material";
-import LogoWithVersion from "components/common/logo-with-version/LogoWithVersion";
+import { Box, List, useMediaQuery, Drawer as MUIDrawer } from "@mui/material";
+import Logo from "components/common/logo/Logo";
 import NavbarItem from "../navbar-item/NavbarItem";
-import Icons from "lib/utils/icons/icons";
-import { useState } from "react";
-import InstallAppDialog from "components/dialogs/install-app-dialog/InstallAppDialog";
 
 type Props = {
   isDrawerOpen: boolean;
@@ -19,16 +15,27 @@ export default function Drawer({
   navbarItems,
 }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen: boolean = useMediaQuery(theme.breakpoints.up("md"));
-
-  const [installAppDialog, setInstallAppDialog] = useState(false);
+  const isLargeScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.up("md") || "(min-width:900px)"
+  );
 
   return (
-    <DrawerStyles
-      theme={theme}
+    <MUIDrawer
       open={isDrawerOpen}
       onClose={() => setIsDrawerOpen(false)}
       variant={isLargeScreen ? "permanent" : "temporary"}
+      style={{
+        width: "14rem",
+        padding: theme?.spacing(1),
+        borderRight: `2px solid ${theme?.colors?.border?.primary}`,
+      }}
+      PaperProps={{
+        style: {
+          width: "14rem",
+          padding: theme?.spacing(1),
+          borderRight: `2px solid ${theme?.colors?.border?.primary}`,
+        },
+      }}
     >
       <Box
         sx={{
@@ -39,7 +46,7 @@ export default function Drawer({
         }}
       >
         <Box display="flex" justifyContent="center" p={theme?.spacing(2)}>
-          <LogoWithVersion />
+          <Logo showVersion />
         </Box>
         <List>
           {navbarItems.map((item: any) => (
@@ -50,16 +57,8 @@ export default function Drawer({
             />
           ))}
         </List>
-        <Box display="flex" justifyContent="flex-end">
-          <IconButton onClick={() => setInstallAppDialog(true)}>
-            <Icons.download />
-          </IconButton>
-        </Box>
+        <Box />
       </Box>
-      <InstallAppDialog
-        open={installAppDialog}
-        close={() => setInstallAppDialog(false)}
-      />
-    </DrawerStyles>
+    </MUIDrawer>
   );
 }

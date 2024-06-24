@@ -1,6 +1,11 @@
 import SubscriptionView from "./subscription-view/SubscriptionView";
 import ProfileView from "./profile-view/ProfileView";
 
+export type ProfileNavbarItem = {
+  name: string;
+  view: JSX.Element;
+};
+
 export const PROFILE_NAVBAR_ITEMS_NAMES = {
   PROFILE: "Perfil",
   SUBSCRIPTION: "Suscripción",

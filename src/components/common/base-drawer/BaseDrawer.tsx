@@ -1,5 +1,10 @@
-import { BottomDrawerStyled, RightDrawerStyled } from "./Styles";
-import { useMediaQuery, Box, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  CircularProgress,
+  useMediaQuery,
+  SwipeableDrawer,
+} from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import Puller from "../puller/Puller";
 
@@ -20,16 +25,23 @@ export default function BaseDrawer({
   largeDrawer,
 }: Props) {
   const { theme } = useThemeContext();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmallScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.down("md") || "(max-width:900px)"
+  );
 
   if (isSmallScreen) {
     return (
-      <BottomDrawerStyled
+      <SwipeableDrawer
         open={open}
-        theme={theme}
         anchor="bottom"
         onOpen={onClose}
         onClose={onClose}
+        PaperProps={{
+          style: {
+            padding: theme?.spacing(3),
+            paddingBottom: theme?.spacing(0),
+          },
+        }}
       >
         <Puller />
         {isLoading ? (
@@ -44,17 +56,23 @@ export default function BaseDrawer({
         ) : (
           children
         )}
-      </BottomDrawerStyled>
+      </SwipeableDrawer>
     );
   }
 
   return (
-    <RightDrawerStyled
+    <Drawer
       open={open}
-      theme={theme}
       anchor="right"
       onClose={onClose}
-      largeDrawer={largeDrawer}
+      PaperProps={{
+        style: {
+          minWidth: largeDrawer ? 650 : 500,
+          maxWidth: largeDrawer ? 650 : 500,
+          padding: theme?.spacing(3),
+          paddingBottom: theme?.spacing(0),
+        },
+      }}
     >
       {isLoading ? (
         <Box
@@ -68,6 +86,6 @@ export default function BaseDrawer({
       ) : (
         children
       )}
-    </RightDrawerStyled>
+    </Drawer>
   );
 }

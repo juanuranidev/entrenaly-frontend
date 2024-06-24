@@ -12,23 +12,26 @@ export default function SubscriptionView() {
           Suscripción
         </Typography>
       </Grid>
-      {USER_CONSTANTS.SUBSCRIPTION_PLANS.ARRAY.map((subscriptionPlan) => (
-        <Grid item xs={12} lg={4} key={subscriptionPlan.NAME}>
-          <Card
-            sx={{
-              padding: theme?.spacing(2),
-              border:
-                subscriptionPlan.NAME === "Inicial"
-                  ? `2px solid ${theme?.colors?.brand?.primary}`
-                  : `2px solid ${theme?.colors?.border?.primary}`,
-            }}
-          >
-            <Typography fontSize={18} fontWeight={600}>
-              {subscriptionPlan?.NAME}
-            </Typography>
-          </Card>
-        </Grid>
-      ))}
+      {USER_CONSTANTS.SUBSCRIPTION_PLANS.ARRAY.map(
+        (subscriptionPlan: { NAME: string }) => (
+          <Grid item xs={12} lg={4} key={subscriptionPlan.NAME}>
+            <Card
+              sx={{
+                padding: theme?.spacing(2),
+                border:
+                  subscriptionPlan.NAME ===
+                  USER_CONSTANTS.SUBSCRIPTION_PLANS.NAMES.INITIAL
+                    ? `2px solid ${theme?.colors?.brand?.primary}`
+                    : `2px solid ${theme?.colors?.border?.primary}`,
+              }}
+            >
+              <Typography fontSize={18} fontWeight={600}>
+                {subscriptionPlan?.NAME}
+              </Typography>
+            </Card>
+          </Grid>
+        )
+      )}
     </Grid>
   );
 }

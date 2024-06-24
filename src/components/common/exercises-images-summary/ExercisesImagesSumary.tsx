@@ -1,8 +1,9 @@
 import { Stack } from "@mui/material";
+import { Exercise } from "lib/types/exercise/exercise.types";
 import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
-  exercises: any;
+  exercises: Exercise[];
 };
 
 export default function ExercisesImagesSumary({ exercises }: Props) {
@@ -16,12 +17,8 @@ export default function ExercisesImagesSumary({ exercises }: Props) {
         return (
           <img
             key={index}
-            alt={exercise?.exerciseName}
-            src={
-              isVariant
-                ? exercise?.exerciseVariant?.image
-                : exercise?.exerciseImage
-            }
+            alt={exercise?.name}
+            src={isVariant ? exercise?.variant?.image : exercise?.image}
             style={{
               width: 40,
               height: 40,

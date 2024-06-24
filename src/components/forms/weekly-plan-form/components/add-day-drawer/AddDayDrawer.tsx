@@ -1,6 +1,7 @@
 import { IconButton, Typography, Box, Stack } from "@mui/material";
 import { useReadDaysOfWeek } from "hooks/plan/useReadDaysOfWeek";
 import { useThemeContext } from "contexts/theme/Theme";
+import { DayOfWeek, PlanDay } from "lib/types/plan/plan.types";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import DayCard from "../day-card/DayCard";
@@ -10,7 +11,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit: (day: any) => void;
-  daysAlreadyAdded: any;
+  daysAlreadyAdded: PlanDay[];
 };
 
 export default function AddDayDrawer({
@@ -22,7 +23,7 @@ export default function AddDayDrawer({
   const { theme } = useThemeContext();
   const { daysOfWeek } = useReadDaysOfWeek();
 
-  const handleSelectDay = (day: string) => {
+  const handleSelectDay = (day: DayOfWeek) => {
     onSubmit(day);
     onClose();
   };
@@ -37,15 +38,13 @@ export default function AddDayDrawer({
           </IconButton>
         }
       />
-
       <Typography fontWeight={600} fontSize={15} mb={theme?.spacing(2)}>
         Selecciona el día
       </Typography>
-
       <Box height="calc(100% - 10rem)" overflow="auto" py={theme?.spacing(3)}>
         <Stack gap={theme?.spacing(3)}>
           {daysOfWeek.length
-            ? daysOfWeek?.map((day: any) => (
+            ? daysOfWeek?.map((day: DayOfWeek) => (
                 <DayCard
                   day={day}
                   key={day?.id}
