@@ -2,7 +2,14 @@ import { Invite } from "lib/types/client/client.types";
 import { useEffect, useState } from "react";
 import { readInviteInformationService } from "services/client/client.services";
 
-export const useReadInviteInformation = (inviteId: string) => {
+type UseReadInviteInformation = {
+  inviteInformation: Invite | null;
+  isLoading: boolean;
+};
+
+export const useReadInviteInformation = (
+  inviteId: string | undefined
+): UseReadInviteInformation => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inviteInformation, setInviteInformation] = useState<Invite | null>(
     null

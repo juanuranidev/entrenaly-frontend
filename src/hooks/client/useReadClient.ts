@@ -8,7 +8,7 @@ export type UseReadClient = {
   handleRefetchClient: () => Promise<void>;
 };
 
-export const useReadClient = (clientId: string | undefined) => {
+export const useReadClient = (clientId: string | undefined): UseReadClient => {
   const [client, setClient] = useState<Client | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

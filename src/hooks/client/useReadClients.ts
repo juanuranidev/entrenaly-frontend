@@ -2,7 +2,12 @@ import { Client } from "lib/types/client/client.types";
 import { readClientsService } from "services/client/client.services";
 import { useState, useEffect } from "react";
 
-export const useReadClients = () => {
+type UseReadClients = {
+  clients: Client[] | [];
+  isLoading: boolean;
+};
+
+export const useReadClients = (): UseReadClients => {
   const [clients, setClients] = useState<Client[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

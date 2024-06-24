@@ -1,15 +1,20 @@
 import { User } from "lib/types/user/user.types";
-import { getUserService } from "services/user/user.services";
+import { readUserService } from "services/user/user.services";
 import { useState, useEffect } from "react";
 
-export const useReadUser = () => {
+type UseReadUser = {
+  user: User | null;
+  isLoading: boolean;
+};
+
+export const useReadUser = (): UseReadUser => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleReadUser = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response: User = await getUserService();
+      const response = await readUserService();
 
       setUser(response);
     } catch (error) {

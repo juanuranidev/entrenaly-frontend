@@ -2,7 +2,12 @@ import { ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useState, useEffect } from "react";
 import { readExercisesCategoriesService } from "services/exercise/exercise.services";
 
-export const useReadExercisesCategories = () => {
+type UseReadExercisesCategories = {
+  exercisesCategories: ExerciseCategory[] | [];
+  isLoading: boolean;
+};
+
+export const useReadExercisesCategories = (): UseReadExercisesCategories => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [exercisesCategories, setExercisesCategories] = useState<
     ExerciseCategory[] | []

@@ -2,7 +2,14 @@ import { Plan } from "lib/types/plan/plan.types";
 import { useState, useEffect } from "react";
 import { readWeeklyPlanService } from "services/plan/plan.services";
 
-export const useReadWeeklyPlan = (planId: any) => {
+type UseReadWeeklyPlan = {
+  plan: Plan | null;
+  isLoading: boolean;
+};
+
+export const useReadWeeklyPlan = (
+  planId: string | undefined
+): UseReadWeeklyPlan => {
   const [plan, setPlan] = useState<Plan | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -11,7 +18,7 @@ export const useReadWeeklyPlan = (planId: any) => {
 
     setIsLoading(true);
     try {
-      const response: Plan = await readWeeklyPlanService(planId);
+      const response = await readWeeklyPlanService(planId);
 
       setPlan(response);
     } catch (error) {

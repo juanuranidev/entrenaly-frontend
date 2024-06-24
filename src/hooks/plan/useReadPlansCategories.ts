@@ -2,7 +2,12 @@ import { PlanCategory } from "lib/types/plan/plan.types";
 import { useState, useEffect } from "react";
 import { readPlansCategoriesService } from "services/plan/plan.services";
 
-export const useReadPlansCategories = () => {
+type UseReadPlansCategories = {
+  plansCategories: PlanCategory[] | [];
+  isLoading: boolean;
+};
+
+export const useReadPlansCategories = (): UseReadPlansCategories => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [plansCategories, setPlansCategories] = useState<PlanCategory[] | []>(
     []
@@ -11,7 +16,7 @@ export const useReadPlansCategories = () => {
   const handleReadPlansCategories = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response: PlanCategory[] = await readPlansCategoriesService();
+      const response = await readPlansCategoriesService();
 
       setPlansCategories(response);
     } catch (error) {
