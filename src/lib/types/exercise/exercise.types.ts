@@ -1,24 +1,20 @@
-import { User } from "../user/user.types";
-
 export type Exercise = {
-  id: string;
+  id: number;
   name: string;
+  category: ExerciseCategory;
+  hasUser?: boolean;
   video?: string;
   image?: string;
-  category: ExerciseCategory;
-  user?: User;
-  isActive: boolean;
+  variant?: Variant | null;
+  description?: string | null;
 };
 
 export type Variant = {
-  id: string;
+  id: number;
   name: string;
+  category: ExerciseCategory;
   video?: string;
   image?: string;
-  category: ExerciseCategory;
-  exercise: Exercise;
-  user?: User;
-  isActive: boolean;
 };
 
 export type ExerciseCategory = {
@@ -29,5 +25,4 @@ export type ExerciseCategory = {
 export type ExerciseDescription = {
   id: number;
   description: string;
-  user: null;
 };

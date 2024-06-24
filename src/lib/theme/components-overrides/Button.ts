@@ -1,4 +1,6 @@
-export default function Button(theme: any) {
+import { Theme } from "lib/types/theme.types";
+
+export default function Button(theme: Theme) {
   const disabledStyle = {
     "&.Mui-disabled": {
       backgroundColor: "#eeeeee",
@@ -22,15 +24,15 @@ export default function Button(theme: any) {
           },
           ...disabledStyle,
           "&.MuiButton-containedSuccess": {
-            backgroundColor: theme.palette.success.main,
+            backgroundColor: theme?.palette.success.main,
             "&:hover": {
-              backgroundColor: theme.palette.success.dark,
+              backgroundColor: theme?.palette.success.dark,
             },
           },
           "&.MuiButton-containedError": {
-            backgroundColor: theme.palette.error.main,
+            backgroundColor: theme?.palette.error.main,
             "&:hover": {
-              backgroundColor: theme.palette.error.dark,
+              backgroundColor: theme?.palette.error.dark,
             },
           },
         },

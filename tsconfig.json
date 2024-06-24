@@ -25,6 +25,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@css/*": ["src/css/*"],
+      "@lib/*": ["src/lib/*"],
       "@pages/*": ["src/pages/*"],
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
@@ -33,6 +34,5 @@
       "@components/*": ["src/components/*"]
     }
   },
-  "include": ["./src/**/**/*"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["./src"]
 }

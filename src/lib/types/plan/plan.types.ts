@@ -3,13 +3,13 @@ import { User } from "../user/user.types";
 
 export type Plan = {
   id: string;
-  createdAt: string;
-  isActive: boolean;
-  updatedAt: string;
   name: string;
-  category: PlanCategory;
   type: PlanType;
+  category: PlanCategory;
+  createdAt: string;
+  clients: any;
   user?: User;
+  days?: PlanDay[] | null;
 };
 
 export type PlanCategory = {
@@ -30,9 +30,9 @@ export type DayOfWeek = {
 
 export type PlanDay = {
   id: number;
-  plan: Plan | number;
+  planId: string;
   dayOfWeek: DayOfWeek;
-  isActive: boolean;
+  exercises: Exercise[];
 };
 
 export type PlanExercise = {
