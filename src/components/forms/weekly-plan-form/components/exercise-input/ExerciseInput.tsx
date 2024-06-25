@@ -37,8 +37,10 @@ export default function ExerciseInput({
   const { theme } = useThemeContext();
   const [inputValue, setInputValue] = useState<string>("");
   const [autocompleteValue, setAutocompleteValue] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handlePostExerciseDescription = async () => {
+    setIsLoading(true);
     try {
       const response = await createExerciseDescriptionService(inputValue);
 
@@ -48,6 +50,7 @@ export default function ExerciseInput({
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const handleChangeDescripcion = (description: string) => {
@@ -158,6 +161,7 @@ export default function ExerciseInput({
             noOptionsText={
               inputValue ? (
                 <MenuItem
+                  disabled={isLoading}
                   autoFocus={false}
                   sx={{ margin: 0 }}
                   onClick={handlePostExerciseDescription}
