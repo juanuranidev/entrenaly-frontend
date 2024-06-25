@@ -6,6 +6,9 @@ La aplicación también permite a los entrenadores añadir sus propios ejercicio
 
 Cada cliente tiene acceso a la aplicación donde puede ver todos sus planes asignados, facilitando así un seguimiento detallado y eficaz de su progreso.
 
+![entrenalt-exercises view](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/dd4e706c-6e1d-4ac8-91d5-07fda6245003)
+
+
 ## Arquitectura del proyecto
 
 Para la arquitectura del frontend dividí la aplicación en "capas", algo parecido a la "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios, estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
@@ -21,12 +24,7 @@ Las entidades del Entrenaly son:
 
 El siguiente gráfico muestra cómo están compuestas las capas de la estructura del proyecto:
 
-g
-flechasf
-flechasff
-flechasff
-flechasfff
-flechasf
+![entrenaly-layers](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/26fbc9c7-ae3b-4be4-a54b-a3b66af89f12)
 
 Podemos observar que mientras más lejos del centro se encuentra una capa, más se utiliza dentro del sistema por lo que es fundamental que sea fácil manipular, modificar y reemplazar de ser necesario, ya que si no genera un impacto negativo en todo el software.
 
@@ -53,7 +51,6 @@ Hace referencia a las rutas de nuestra aplicación, ya sea para el administrados
 Hace referencia a las páginas de nuestra aplicación, las que van a ser llamadas dentro de las rutas.
 
 #### Layout:
-
 Hace referencia a la plantilla por defecto que van a tener todas las páginas de nuestra aplicación, el mismo va a ser llamado dentro de las páginas.
 
 #### Context:
