@@ -7,14 +7,15 @@ import {
   TextField,
   Typography,
   Autocomplete,
+  CircularProgress,
 } from "@mui/material";
-import { useThemeContext } from "contexts/theme/Theme";
 import {
   Exercise,
   ExerciseDescription,
 } from "lib/types/exercise/exercise.types";
 import React, { useEffect, useState } from "react";
 import { createExerciseDescriptionService } from "services/exercise/exercise.services";
+import { useThemeContext } from "contexts/theme/Theme";
 import { PlanDay } from "lib/types/plan/plan.types";
 
 type Props = {
@@ -89,6 +90,27 @@ export default function ExerciseInput({
     setAutocompleteValue(exerciseDescription);
   };
 
+  const handleRenderNoOptionsText = () => {
+    if (isLoading) {
+      return <CircularProgress size={15} />;
+    }
+
+    if (inputValue) {
+      return (
+        <MenuItem
+          disabled={isLoading}
+          autoFocus={false}
+          sx={{ margin: 0 }}
+          onClick={handlePostExerciseDescription}
+        >
+          {`Guardar: ${inputValue}`}
+        </MenuItem>
+      );
+    }
+
+    return null;
+  };
+
   useEffect(() => {
     handleManageDefaultValues();
   }, []);
@@ -158,18 +180,7 @@ export default function ExerciseInput({
               <MenuItem {...props}>{option?.description}</MenuItem>
             )}
             autoSelect={false}
-            noOptionsText={
-              inputValue ? (
-                <MenuItem
-                  disabled={isLoading}
-                  autoFocus={false}
-                  sx={{ margin: 0 }}
-                  onClick={handlePostExerciseDescription}
-                >
-                  {`Guardar: ${inputValue}`}
-                </MenuItem>
-              ) : null
-            }
+            noOptionsText={handleRenderNoOptionsText()}
           />
         </Box>
       </Stack>
