@@ -10,33 +10,35 @@ const Loadable =
       </Suspense>
     );
 
-const Plans = Loadable(lazy(() => import("pages/trainer/plans/index/Plans")));
+const Plans = Loadable(
+  lazy(() => import("pages/user/trainer/plans/index/Plans"))
+);
 const Profile = Loadable(
-  lazy(() => import("pages/trainer/user/profile/Profile"))
+  lazy(() => import("pages/user/trainer/user/profile/Profile"))
 );
 const ViewWeeklyPlan = Loadable(
-  lazy(() => import("pages/trainer/plans/view-weekly-plan/ViewWeeklyPlan"))
+  lazy(() => import("pages/user/trainer/plans/view-weekly-plan/ViewWeeklyPlan"))
 );
 const Clients = Loadable(
-  lazy(() => import("pages/trainer/clients/index/Clients"))
+  lazy(() => import("pages/user/trainer/clients/index/Clients"))
 );
 const Exercises = Loadable(
-  lazy(() => import("pages/trainer/exercises/index/Exercises"))
+  lazy(() => import("pages/user/trainer/exercises/index/Exercises"))
 );
 const NewWeeklyPlan = Loadable(
-  lazy(() => import("pages/trainer/plans/new-weekly-plan/NewWeeklyPlan"))
+  lazy(() => import("pages/user/trainer/plans/new-weekly-plan/NewWeeklyPlan"))
 );
 const ClientProfile = Loadable(
-  lazy(() => import("pages/trainer/clients/profile/ClientProfile"))
+  lazy(() => import("pages/user/trainer/clients/profile/ClientProfile"))
 );
 const EditWeeklyPlan = Loadable(
-  lazy(() => import("pages/trainer/plans/edit-weekly-plan/EditWeeklyPlan"))
+  lazy(() => import("pages/user/trainer/plans/edit-weekly-plan/EditWeeklyPlan"))
 );
 const NotFound = Loadable(
-  lazy(() => import("pages/trainer/not-found/NotFound"))
+  lazy(() => import("pages/user/trainer/not-found/NotFound"))
 );
 
-const UserRoutes = {
+const TrainerRoutes = {
   element: <TrainerLayout />,
   children: [
     {
@@ -82,4 +84,4 @@ const UserRoutes = {
   ],
 };
 
-export default UserRoutes;
+export default TrainerRoutes;

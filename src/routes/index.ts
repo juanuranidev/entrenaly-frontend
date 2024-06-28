@@ -1,15 +1,15 @@
 import { useAuthContext } from "contexts/auth/Auth";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useRoutes } from "react-router-dom";
-import ClientRoutes from "./client/ClientRoutes";
+import ClientRoutes from "./user/client/ClientRoutes";
 import PublicRoutes from "./public/PublicRoutes";
-import UserRoutes from "./user/UserRoutes";
+import TrainerRoutes from "./user/trainer/TrainerRoutes";
 
 export default function Routes() {
   const { userData } = useAuthContext();
 
   if (userData?.role?.name === USER_CONSTANTS.ROLES.TRAINER) {
-    return useRoutes([UserRoutes]);
+    return useRoutes([TrainerRoutes]);
   }
 
   if (userData?.role?.name === USER_CONSTANTS.ROLES.CLIENT) {

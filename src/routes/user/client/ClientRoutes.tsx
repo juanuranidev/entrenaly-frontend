@@ -1,7 +1,7 @@
 import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
 import ClientLayout from "layouts/client/ClientLayout";
-import Plans from "pages/client/plans/index/Plans";
+import Plans from "pages/user/client/plans/index/Plans";
 
 const Loadable =
   (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
@@ -12,10 +12,10 @@ const Loadable =
     );
 
 const NotFound = Loadable(
-  lazy(() => import("pages/trainer/not-found/NotFound"))
+  lazy(() => import("pages/user/trainer/not-found/NotFound"))
 );
 const ViewWeeklyPlan = Loadable(
-  lazy(() => import("pages/client/plans/view-weekly-plan/ViewWeeklyPlan"))
+  lazy(() => import("pages/user/client/plans/view-weekly-plan/ViewWeeklyPlan"))
 );
 
 const ClientRoutes = {
