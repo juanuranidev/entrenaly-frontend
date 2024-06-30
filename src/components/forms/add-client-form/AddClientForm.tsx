@@ -57,7 +57,9 @@ export default function AddClientForm({ open, onClose }: Props) {
       <InputAdornment position="start">
         <IconButton
           onClick={() =>
-            handleCopyInvite(`${ENV.FRONTEND_BASE_URL}?invite=${invite}`)
+            handleCopyInvite(
+              `${ENV.FRONTEND_BASE_URL}register?invite=${invite}`
+            )
           }
         >
           <ContentCopyIcon />
@@ -126,7 +128,7 @@ export default function AddClientForm({ open, onClose }: Props) {
               disabled
               fullWidth
               variant="outlined"
-              value={`${ENV.FRONTEND_BASE_URL}?invite=${invite}`}
+              value={`${ENV.FRONTEND_BASE_URL}register?invite=${invite}`}
               style={{
                 marginTop: theme?.spacing(5),
                 marginBottom: theme?.spacing(5),

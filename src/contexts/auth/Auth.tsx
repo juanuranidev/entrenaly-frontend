@@ -1,6 +1,6 @@
 import { useEffect, useState, createContext, useContext } from "react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { getUserSessionService } from "services/user/user.services";
+import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import axios from "axios";
 import Logo from "components/common/logo/Logo";
@@ -13,10 +13,7 @@ export const AuthContext = createContext<any>(initialContextValue);
 export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }: any) => {
-  const navigate = useNavigate();
   const location = useLocation();
-  const [params] = useSearchParams();
-  const invite = params.get("invite");
 
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,7 +30,7 @@ export const AuthContextProvider = ({ children }: any) => {
 
       setUserData(response);
     } catch (error) {
-      navigate(invite ? `?invite=${invite}` : "");
+      console.log(error);
     }
     setIsLoading(false);
   };
