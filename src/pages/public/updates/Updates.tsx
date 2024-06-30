@@ -7,9 +7,9 @@ const updates = [
   {
     version: "1.0.0",
     features: [
-      "Nueva pantalla para agregar clientes, ver su información y editar su ficha médica.",
-      "Nueva pantalla para crear planes de tipo semanal, verlos, editarlos y asignarlos a clientes.",
-      "Nueva pantalla para ver ejercicios, crearlos y agregar variantes.",
+      "Nueva vista para agregar clientes, ver su información y editar su ficha médica.",
+      "Nueva vista para crear planes de tipo semanal, verlos, editarlos y asignarlos a clientes.",
+      "Nueva vista para ver ejercicios, crear nuevos y agregar variantes a los existentes.",
     ],
   },
 ];
