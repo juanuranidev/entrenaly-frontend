@@ -2,8 +2,8 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Drawer from "./components/drawer/Drawer";
-import Header from "./components/header/Header";
+import Drawer from "../drawer/Drawer";
+import Header from "../header/Header";
 
 type Props = {
   navbarItems: any;
