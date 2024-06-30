@@ -1,6 +1,16 @@
-import { Dialog, Box, Tabs, Tab, Typography, Grid } from "@mui/material";
+import {
+  Box,
+  Tab,
+  Grid,
+  Tabs,
+  Dialog,
+  IconButton,
+  Typography,
+  DialogTitle,
+} from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
+import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;
@@ -50,6 +60,11 @@ export default function InstallAppDialog({ open, close }: Props) {
 
   return (
     <Dialog open={open} onClose={close} maxWidth="sm">
+      <DialogTitle display="flex" justifyContent="flex-end">
+        <IconButton onClick={close}>
+          <Icons.close />
+        </IconButton>
+      </DialogTitle>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}

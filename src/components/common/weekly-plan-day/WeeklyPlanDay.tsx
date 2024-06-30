@@ -11,7 +11,7 @@ import { Exercise } from "lib/types/exercise/exercise.types";
 import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import ExerciseView from "./components/exercise-view/ExerciseView";
-import ExercisesImagesSumary from "../exercises-images-summary/ExercisesImagesSumary";
+import ExercisesImagesSumary from "./components/exercises-images-summary/ExercisesImagesSumary";
 
 type Props = {
   day: PlanDay;
@@ -37,7 +37,7 @@ export default function WeeklyPlanDay({ day }: Props) {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography fontWeight={600} fontSize={16}>
+            <Typography fontWeight={600} fontSize={26}>
               {day?.dayOfWeek?.name}
             </Typography>
             <ExercisesImagesSumary exercises={day?.exercises} />
