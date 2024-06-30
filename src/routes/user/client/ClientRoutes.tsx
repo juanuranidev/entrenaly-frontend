@@ -1,6 +1,6 @@
 import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
-import ClientLayout from "layouts/client/ClientLayout";
+import ClientLayout from "layouts/user/client/ClientLayout";
 import Plans from "pages/user/client/plans/index/Plans";
 
 const Loadable =

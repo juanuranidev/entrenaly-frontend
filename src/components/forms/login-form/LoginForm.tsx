@@ -166,7 +166,7 @@ export default function LoginForm() {
       </Grid>
       <Grid item xs={12}>
         <Divider>
-          <Typography variant="caption">Ingresar con</Typography>
+          <Typography variant="caption"> Ingresar con</Typography>
         </Divider>
       </Grid>
       <Grid item xs={12}>

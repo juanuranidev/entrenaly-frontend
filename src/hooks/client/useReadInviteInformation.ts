@@ -8,7 +8,7 @@ type UseReadInviteInformation = {
 };
 
 export const useReadInviteInformation = (
-  inviteId: string | undefined
+  inviteId: string | null
 ): UseReadInviteInformation => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inviteInformation, setInviteInformation] = useState<Invite | null>(

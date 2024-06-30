@@ -1,6 +1,6 @@
 import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
-import TrainerLayout from "layouts/trainer/TrainerLayout";
+import TrainerLayout from "layouts/user/trainer/TrainerLayout";
 
 const Loadable =
   (Component: ComponentType<any>) => (props: { [key: string]: any }) =>

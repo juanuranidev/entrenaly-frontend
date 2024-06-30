@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <>
       <Analytics />
-      <Toaster richColors />
+      <Toaster richColors position="bottom-left" />
       <Theme>
         {initializeFirebaseApp()}
         <Router>

@@ -1,5 +1,6 @@
 import { lazy, Suspense, ComponentType } from "react";
 import { CircularProgress } from "@mui/material";
+import PublicLayout from "layouts/public/PublicLayout";
 
 const Loadable =
   (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
@@ -10,11 +11,15 @@ const Loadable =
     );
 
 const LoginView = Loadable(lazy(() => import("pages/public/login/Login")));
+const UpdatesView = Loadable(
+  lazy(() => import("pages/public/updates/Updates"))
+);
 const RegisterView = Loadable(
   lazy(() => import("pages/public/register/Register"))
 );
 
 const PublicRoutes = {
+  element: <PublicLayout />,
   children: [
     {
       path: "/",
@@ -23,6 +28,10 @@ const PublicRoutes = {
     {
       path: "/register",
       element: <RegisterView />,
+    },
+    {
+      path: "/updates",
+      element: <UpdatesView />,
     },
   ],
 };
