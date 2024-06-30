@@ -14,7 +14,9 @@ export default function PlanCard({ plan }: Props) {
   return (
     <Box
       display="flex"
-      p={theme?.spacing(3)}
+      flexDirection="column"
+      px={theme?.spacing(6)}
+      pt={theme?.spacing(4)}
       gap={theme?.spacing(2)}
       sx={{ cursor: "pointer" }}
       borderRadius={theme?.spacing(1)}
@@ -22,9 +24,17 @@ export default function PlanCard({ plan }: Props) {
       boxShadow={"rgba(0, 0, 0, 0.3) 0px 20px 20px -20px;"}
       onClick={() => navigate(`/client/plans/view/weekly/${plan?.id}`)}
     >
-      <Icons.pdfs color="error" />
-      <Typography fontWeight={500} fontSize={14}>
+      <Icons.pdfs color="error" style={{ fontSize: 100 }} />
+      <Typography fontWeight={500} fontSize={14} textAlign="center">
         {plan?.name}
+      </Typography>
+      <Typography
+        fontWeight={700}
+        fontSize={16}
+        textAlign="center"
+        mb={theme?.spacing(3)}
+      >
+        Ver Plan
       </Typography>
     </Box>
   );

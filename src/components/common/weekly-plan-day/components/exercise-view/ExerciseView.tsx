@@ -17,8 +17,8 @@ export default function ExerciseView({ exercise }: Props) {
 
   return (
     <React.Fragment>
-      <Grid item container>
-        <Grid item xs={11}>
+      <Grid item container spacing={theme?.spacing(2)}>
+        <Grid item xs={10}>
           <Typography fontWeight={600} fontSize={14}>
             {isVariant ? exercise?.variant?.name : exercise?.name}
           </Typography>
@@ -26,20 +26,28 @@ export default function ExerciseView({ exercise }: Props) {
             {exercise?.description}
           </Typography>
         </Grid>
-        <Grid item xs={1} display="flex" justifyContent="flex-end">
+        <Grid
+          item
+          xs={2}
+          display="flex"
+          alignItems="flex-end"
+          flexDirection="column"
+          justifyContent="center"
+        >
           <img
             alt={isVariant ? exercise?.variant?.name : exercise?.name}
             src={isVariant ? exercise?.variant?.image : exercise?.image}
             onClick={() => setOpenExerciseImageDialog(true)}
             style={{
-              width: 40,
-              height: 40,
+              width: 60,
+              height: 60,
               cursor: "pointer",
               objectFit: "contain",
               borderRadius: theme?.spacing(1),
               border: `2px solid ${theme?.colors?.border?.primary}`,
             }}
           />
+          <Typography fontSize={10}>Ver imágen</Typography>
         </Grid>
       </Grid>
       <ExerciseImageDialog
