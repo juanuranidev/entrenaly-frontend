@@ -8,19 +8,17 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  UserCredential,
 } from "firebase/auth";
-import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "lib/config/firebase";
+import { initializeApp } from "firebase/app";
+import { User } from "lib/types/user/user.types";
 
-type DataForLogin = {
-  email: string;
-  password: string;
-};
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // Server
-export const createUserService = async (user: any) => {
+export const createUserService = async (user: any): Promise<User> => {
   try {
     const response = await request({
       method: "POST",
@@ -30,13 +28,13 @@ export const createUserService = async (user: any) => {
       },
     });
 
-    return response;
+    return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const createUserWithGoogleService = async (user: any) => {
+export const createUserWithGoogleService = async (user: any): Promise<User> => {
   try {
     const response = await request({
       method: "POST",
@@ -45,13 +43,15 @@ export const createUserWithGoogleService = async (user: any) => {
         data: user,
       },
     });
-    return response;
+    return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const readUserByAuthIdService = async (authId: string) => {
+export const readUserByAuthIdService = async (
+  authId: string
+): Promise<User> => {
   try {
     const response = await request({
       method: "GET",
@@ -60,6 +60,7 @@ export const readUserByAuthIdService = async (authId: string) => {
         authId: authId,
       },
     });
+
     return response.data;
   } catch (error) {
     throw error;
@@ -80,54 +81,61 @@ export const readUserService = async () => {
 };
 
 // Auth provider
-export const registerWithEmailService = async (data: any) => {
-  let userCreated;
+export const registerWithEmailService = async (data: any): Promise<User> => {
+  let googleUser: any;
   try {
-    const registerInformation = await createUserWithEmailAndPassword(
+    const response: UserCredential = await createUserWithEmailAndPassword(
       auth,
       data.email,
       data.password
     );
-    userCreated = registerInformation.user;
 
-    const userFormatted = {
+    googleUser = {
+      user: response.user,
       name: data.name,
-      email: userCreated.email,
-      authId: userCreated.uid,
+      email: response.user.email,
+      authId: response.user.uid,
       invite: data.invite,
     };
 
-    const response = await createUserService(userFormatted);
-
-    return response;
+    const user: User = await createUserService(googleUser);
+    return user;
   } catch (error) {
-    await deleteUserByIdService(userCreated);
+    await deleteUserByIdService(googleUser.user);
     throw error;
   }
 };
 
-export const loginWithEmailService = async (data: DataForLogin) => {
+export const loginWithEmailService = async (data: {
+  email: string;
+  password: string;
+}): Promise<User> => {
   try {
     const response = await signInWithEmailAndPassword(
       auth,
       data.email,
       data.password
     );
-    const user = await readUserByAuthIdService(response.user.uid);
+    const { uid } = response.user;
 
+    const user: User = await readUserByAuthIdService(uid);
     return user;
   } catch (error) {
     throw error;
   }
 };
 
-export const googleAuthService = async (invite: string | undefined) => {
+export const googleAuthService = async (
+  invite?: string | undefined | null
+): Promise<User> => {
+  let googleUser: any;
   try {
     const provider = new GoogleAuthProvider();
 
-    const response: any = await signInWithPopup(auth, provider);
+    const response: UserCredential = await signInWithPopup(auth, provider);
 
-    const userFormatted = {
+    googleUser = {
+      user: response.user,
       name: response.user.displayName,
       email: response.user.email,
       image: response.user.photoURL,
@@ -135,15 +143,15 @@ export const googleAuthService = async (invite: string | undefined) => {
       invite: invite ?? null,
     };
 
-    const user = await createUserWithGoogleService(userFormatted);
-
+    const user: User = await createUserWithGoogleService(googleUser);
     return user;
   } catch (error) {
+    await deleteUserByIdService(googleUser.user);
     throw error;
   }
 };
 
-export const getUserSessionService = () => {
+export const getUserSessionService = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
@@ -152,7 +160,7 @@ export const getUserSessionService = () => {
       }
 
       try {
-        const response = await readUserByAuthIdService(user.uid);
+        const response: User = await readUserByAuthIdService(user.uid);
 
         resolve(response);
       } catch (error) {
@@ -160,7 +168,6 @@ export const getUserSessionService = () => {
       }
     });
 
-    // Retornar la función de limpieza del efecto
     return unsubscribe;
   });
 };

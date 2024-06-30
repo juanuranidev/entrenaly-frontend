@@ -23,6 +23,7 @@ import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { User } from "lib/types/user/user.types";
 import Google from "../../../../public/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -51,35 +52,20 @@ export default function RegisterForm({ invite }: any) {
     setIsLoading(true);
     try {
       const response = await registerWithEmailService(data);
-
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
-      ) {
-        navigate("/trainer/clients");
-        setUserData(response);
-      }
-
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
-      ) {
-        navigate("/client/plans");
-        setUserData(response);
-      }
+      handleRedirectUser(response);
       handleCreateSuccessToast("Registrado con éxito");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
       handleManageRegisterWithEmailError(error);
     }
     setIsLoading(false);
   };
 
-  const handleManageRegisterWithEmailError = (error: Error) => {
-    const errorInString = String(error);
+  const handleManageRegisterWithEmailError = (error: unknown) => {
+    const errorString = String(error);
 
     switch (true) {
-      case errorInString.includes("email-already-in-use"):
+      case errorString.includes("email-already-in-use"):
         return handleCreateErrorToast("Email ya en uso");
       default:
         return handleCreateErrorToast("Error en el servidor");
@@ -90,25 +76,25 @@ export default function RegisterForm({ invite }: any) {
     setIsLoading(true);
     try {
       const response = await googleAuthService(invite);
-
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
-      ) {
-        navigate("/trainer/clients");
-        setUserData(response);
-      }
-
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
-      ) {
-        navigate("/client/plans");
-        setUserData(response);
-      }
-    } catch (error) {
+      handleRedirectUser(response);
+    } catch (error: unknown) {
       console.log(error);
       handleCreateErrorToast("Error en el servidor");
+    }
+  };
+
+  const handleRedirectUser = (user: User) => {
+    if (!user?.role?.name) return;
+
+    switch (user?.role?.name) {
+      case USER_CONSTANTS.ROLES.TRAINER:
+        navigate("/trainer/clients");
+        setUserData(user);
+        break;
+      case USER_CONSTANTS.ROLES.CLIENT:
+        navigate("/client/plans");
+        setUserData(user);
+        break;
     }
   };
 

@@ -15,26 +15,30 @@ import {
 } from "services/user/user.services";
 import { handleCreateErrorToast } from "lib/utils/toast";
 import { loginFormValidation } from "./validations";
+import { useThemeContext } from "contexts/theme/Theme";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { User } from "lib/types/user/user.types";
 import Google from "../../../../public/google.svg";
 import Icons from "lib/utils/icons/icons";
 
-type Props = {
-  invite: any;
+type FormikValues = {
+  email: string;
+  password: string;
 };
 
-export default function LoginForm({ invite }: Props) {
+export default function LoginForm() {
   const navigate = useNavigate();
+  const { theme } = useThemeContext();
   const { setUserData } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const formik = useFormik({
+  const formik = useFormik<FormikValues>({
     initialValues: {
       email: "",
       password: "",
@@ -45,20 +49,12 @@ export default function LoginForm({ invite }: Props) {
     },
   });
 
-  const handleLoginWithEmail = async (data: any) => {
+  const handleLoginWithEmail = async (data: FormikValues) => {
     setIsLoading(true);
     try {
-      const response: any = await loginWithEmailService(data);
-      if (response?.role?.name === USER_CONSTANTS.ROLES.TRAINER) {
-        navigate("/trainer/clients");
-        setUserData(response);
-      }
-
-      if (response?.role?.name === USER_CONSTANTS.ROLES.CLIENT) {
-        navigate("/client/plans");
-        setUserData(response);
-      }
-    } catch (error: any) {
+      const response = await loginWithEmailService(data);
+      handleRedirectUser(response);
+    } catch (error: unknown) {
       console.log(error);
       handleCreateErrorToast("Credenciales inválidas");
     }
@@ -68,31 +64,32 @@ export default function LoginForm({ invite }: Props) {
   const handleLoginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      const response = await googleAuthService(invite);
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.TRAINER
-      ) {
-        navigate("/trainer/clients");
-        setUserData(response);
-      }
-
-      if (
-        response &&
-        response?.data?.role?.name === USER_CONSTANTS.ROLES.CLIENT
-      ) {
-        navigate("/client/plans");
-        setUserData(response);
-      }
-    } catch (error) {
+      const response = await googleAuthService();
+      handleRedirectUser(response);
+    } catch (error: unknown) {
       console.log(error);
       handleCreateErrorToast("Error en el servidor");
     }
     setIsLoading(false);
   };
 
+  const handleRedirectUser = (user: User) => {
+    if (!user?.role?.name) return;
+
+    switch (user?.role?.name) {
+      case USER_CONSTANTS.ROLES.TRAINER:
+        navigate("/trainer/clients");
+        setUserData(user);
+        break;
+      case USER_CONSTANTS.ROLES.CLIENT:
+        navigate("/client/plans");
+        setUserData(user);
+        break;
+    }
+  };
+
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
         <InputLabel htmlFor="password" sx={{ fontWeight: 600 }}>
           Email
@@ -107,12 +104,6 @@ export default function LoginForm({ invite }: Props) {
           onChange={formik?.handleChange}
           error={
             Boolean(formik?.touched?.email) && Boolean(formik?.errors?.email)
-          }
-          helperText={
-            Boolean(formik?.touched?.email) &&
-            Boolean(formik?.errors?.email) && (
-              <span>{formik?.errors?.email}</span>
-            )
           }
         />
       </Grid>

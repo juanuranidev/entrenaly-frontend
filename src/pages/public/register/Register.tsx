@@ -1,13 +1,16 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useThemeContext } from "contexts/theme/Theme";
-import { useNavigate } from "react-router-dom";
-import LoginForm from "components/forms/login-form/LoginForm";
+import InviteInformation from "pages/public/register/components/invite-information/InviteInformation";
+import RegisterForm from "components/forms/register-form/RegisterForm";
 import Footer from "components/common/footer/Footer";
 import Logo from "components/common/logo/Logo";
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
+  const [params] = useSearchParams();
+  const invite: string | null = params.get("invite");
 
   return (
     <Box
@@ -16,8 +19,15 @@ export default function Login() {
       flexDirection="column"
       bgcolor={theme?.colors?.background?.secondary}
     >
-      <Stack alignItems="center" p={theme?.spacing(4)}>
+      <Stack
+        alignItems="center"
+        p={theme?.spacing(4)}
+        gap={theme?.spacing(2)}
+        flexDirection={{ base: "column", sm: "row" }}
+        justifyContent={invite ? "space-between" : "center"}
+      >
         <Logo />
+        {invite ? <InviteInformation invite={invite} /> : null}
       </Stack>
       <Card
         sx={{
@@ -26,25 +36,27 @@ export default function Login() {
           gap: theme?.spacing(4),
           flexDirection: "column",
           maxWidth: { base: "100%", sm: "30rem" },
-          padding: theme?.spacing(5),
+          padding: { base: theme?.spacing(4), sm: theme?.spacing(5) },
         }}
       >
         <Typography textAlign="left" fontWeight={600} fontSize={25}>
-          Ingresar
+          Registrarse
         </Typography>
-        <LoginForm />
+        <RegisterForm invite={invite} />
         <Box display="flex" justifyContent="center">
           <Typography
+            variant="body1"
             color="primary"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/")}
             sx={{
               cursor: "pointer",
+              userSelect: "none",
               "&:hover": {
                 textDecoration: "underline",
               },
             }}
           >
-            ¿No tienes una cuenta? Registrarse
+            ¿Ya tienes una cuenta? Ingresar
           </Typography>
         </Box>
       </Card>

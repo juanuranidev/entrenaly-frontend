@@ -20,5 +20,6 @@ export type Client = {
 
 export type Invite = {
   id: string;
-  trainerInfo: any;
+  trainerName?: string | null;
+  trainerImage?: string | null;
 };

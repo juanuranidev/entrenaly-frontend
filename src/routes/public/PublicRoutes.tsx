@@ -9,11 +9,22 @@ const Loadable =
       </Suspense>
     );
 
-const Login = Loadable(lazy(() => import("pages/public/login/Login")));
+const LoginView = Loadable(lazy(() => import("pages/public/login/Login")));
+const RegisterView = Loadable(
+  lazy(() => import("pages/public/register/Register"))
+);
 
 const PublicRoutes = {
-  path: "/",
-  element: <Login />,
+  children: [
+    {
+      path: "/",
+      element: <LoginView />,
+    },
+    {
+      path: "/register",
+      element: <RegisterView />,
+    },
+  ],
 };
 
 export default PublicRoutes;

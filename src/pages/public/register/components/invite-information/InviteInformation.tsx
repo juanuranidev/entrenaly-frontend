@@ -9,13 +9,12 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { useReadInviteInformation } from "hooks/client/useReadInviteInformation";
 
 type Props = {
-  invite: string;
+  invite: string | undefined;
 };
 
 export default function InviteInformation({ invite }: Props) {
   const { theme } = useThemeContext();
-  const { inviteInformation, isLoading }: any =
-    useReadInviteInformation(invite);
+  const { inviteInformation, isLoading } = useReadInviteInformation(invite);
 
   if (isLoading) return <CircularProgress />;
   if (!isLoading && !inviteInformation) return null;
@@ -31,9 +30,9 @@ export default function InviteInformation({ invite }: Props) {
         </Typography>
       </Box>
       <Avatar
-        alt={inviteInformation?.trainerName}
-        src={inviteInformation?.trainerImage}
         sx={{ width: 40, height: 40 }}
+        alt={inviteInformation?.trainerName ?? ""}
+        src={inviteInformation?.trainerImage ?? ""}
       />
     </Stack>
   );
