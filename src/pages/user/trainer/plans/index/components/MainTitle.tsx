@@ -68,11 +68,7 @@ export default function MainTitle() {
                       <ListItemIcon>
                         <Icons.pdfs style={{ fontSize: 20 }} />
                       </ListItemIcon>
-                      <ListItemText>
-                        {planType?.name === PLAN_CONSTANTS.TYPES.WEEKLY
-                          ? "Mensual"
-                          : planType?.name}
-                      </ListItemText>
+                      <ListItemText>{planType?.name}</ListItemText>
                     </ListItemButton>
                   ))}
                 </List>
