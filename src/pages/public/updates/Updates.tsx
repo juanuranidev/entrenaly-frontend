@@ -5,6 +5,10 @@ import Icons from "lib/utils/icons/icons";
 
 const updates = [
   {
+    version: "1.1.0",
+    features: ["Se agregó un nuevo filtro de ejercicios por categoria"],
+  },
+  {
     version: "1.0.0",
     features: [
       "Nueva vista para agregar clientes, ver su información y editar su ficha médica.",

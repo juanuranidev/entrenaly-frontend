@@ -98,13 +98,15 @@ export default function ExerciseCard({
           {isVariant ? exercise?.variant?.name : exercise?.name}
         </Typography>
       </Box>
-      <AddOrUpdateVariantForm
-        exerciseId={exercise?.id}
-        open={openFormAddVariant}
-        exerciseSelected={exercise}
-        onClose={() => setOpenFormAddVariant(false)}
-        onSubmit={() => handleRefetchExercises()}
-      />
+      {openFormAddVariant ? (
+        <AddOrUpdateVariantForm
+          exerciseId={exercise?.id}
+          open={openFormAddVariant}
+          exerciseSelected={exercise}
+          onClose={() => setOpenFormAddVariant(false)}
+          onSubmit={() => handleRefetchExercises()}
+        />
+      ) : null}
     </React.Fragment>
   );
 }

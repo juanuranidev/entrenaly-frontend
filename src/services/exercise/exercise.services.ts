@@ -45,13 +45,17 @@ export const createExerciseDescriptionService = async (description: string) => {
     throw error;
   }
 };
-export const readExercisesService = async (name?: string) => {
+export const readExercisesService = async (
+  name?: string,
+  exerciseCategoryId?: number | null
+) => {
   try {
     const response = await request({
       method: "GET",
       url: "/exercise/v1/get",
       params: {
         name,
+        exerciseCategoryId,
       },
     });
 

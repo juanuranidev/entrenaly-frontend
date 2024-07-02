@@ -2,19 +2,24 @@ import { Card, Grid, Alert, CircularProgress } from "@mui/material";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useDebounce } from "hooks/useDebounce";
-import { Exercise } from "lib/types/exercise/exercise.types";
+import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useState } from "react";
 import MainTitle from "./components/main-title/MainTitle";
 import ExerciseCard from "./components/exercise-card/ExerciseCard";
 import ExercisesSearchBar from "./components/exercises-search-bar/ExercisesSearchBar";
+import ExercisesCategories from "components/common/exercises-categories/ExercisesCategories";
 
 export default function Exercises() {
-  const { theme } = useThemeContext();
   const [searchValue, setSearchValue] = useState<string>("");
+  const [exerciseCategorySelected, setExerciseCategorySelected] =
+    useState<ExerciseCategory | null>(null);
 
+  const { theme } = useThemeContext();
   const { debouncedValue } = useDebounce(searchValue, 500);
-  const { exercises, isLoading, handleRefetchExercises } =
-    useReadExercises(debouncedValue);
+  const { exercises, isLoading, handleRefetchExercises } = useReadExercises(
+    debouncedValue,
+    exerciseCategorySelected?.id
+  );
 
   return (
     <Grid container spacing={theme?.spacing(3)}>
@@ -35,6 +40,13 @@ export default function Exercises() {
               <ExercisesSearchBar
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <ExercisesCategories
+                handleRefetchExercises={handleRefetchExercises}
+                exerciseCategorySelected={exerciseCategorySelected}
+                setExerciseCategorySelected={setExerciseCategorySelected}
               />
             </Grid>
             {isLoading ? (

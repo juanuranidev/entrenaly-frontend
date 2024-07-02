@@ -1,20 +1,15 @@
-import {
-  Box,
-  Stack,
-  Button,
-  IconButton,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Box, Stack, Button, IconButton, Typography } from "@mui/material";
+import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useEffect, useState } from "react";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
 import { useThemeContext } from "contexts/theme/Theme";
+import ExercisesCategories from "components/common/exercises-categories/ExercisesCategories";
+import ExercisesSearchBar from "pages/user/trainer/exercises/index/components/exercises-search-bar/ExercisesSearchBar";
 import { useDebounce } from "hooks/useDebounce";
 import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
-import { Exercise } from "lib/types/exercise/exercise.types";
 
 type Props = {
   open: boolean;
@@ -27,10 +22,15 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[] | []>(
     []
   );
+  const [exerciseCategorySelected, setExerciseCategorySelected] =
+    useState<ExerciseCategory | null>(null);
 
   const { theme } = useThemeContext();
   const { debouncedValue } = useDebounce(searchValue, 500);
-  const { exercises } = useReadExercises(debouncedValue);
+  const { exercises, handleRefetchExercises } = useReadExercises(
+    debouncedValue,
+    exerciseCategorySelected?.id
+  );
 
   const toggleExerciseSelection = (exercise: Exercise) => {
     setExercisesSelected((prevSelected) => {
@@ -74,21 +74,20 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
       <Typography fontWeight={600} fontSize={15} mb={theme?.spacing(2)}>
         Selecciona los ejercicios que quieres agregar
       </Typography>
-      <TextField
-        fullWidth
-        label="Buscar"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        InputProps={{
-          startAdornment: <Icons.search />,
-          endAdornment: searchValue ? (
-            <IconButton size="small" onClick={() => setSearchValue("")}>
-              <Icons.close fontSize="small" />
-            </IconButton>
-          ) : null,
-        }}
-      />
-      <Box overflow="auto" pt={theme?.spacing(4)} height="calc(100% - 10rem)">
+      <Box mb={theme?.spacing(2)}>
+        <ExercisesSearchBar
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </Box>
+      <Box mb={theme?.spacing(2)}>
+        <ExercisesCategories
+          handleRefetchExercises={handleRefetchExercises}
+          exerciseCategorySelected={exerciseCategorySelected}
+          setExerciseCategorySelected={setExerciseCategorySelected}
+        />
+      </Box>
+      <Box overflow="auto" pt={theme?.spacing(2)} height="calc(100% - 10rem)">
         <Stack
           width="95%"
           margin="auto"
@@ -108,7 +107,12 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
               />
             ))
           ) : (
-            <Typography fontWeight={600} fontSize={15} my={theme?.spacing(20)}>
+            <Typography
+              fontSize={15}
+              fontWeight={600}
+              minHeight="20dvh"
+              my={theme?.spacing(20)}
+            >
               ¡No hay ejercicios!
             </Typography>
           )}

@@ -8,14 +8,20 @@ type UseReadExercises = {
   handleRefetchExercises: () => Promise<void>;
 };
 
-export const useReadExercises = (name?: string): UseReadExercises => {
+export const useReadExercises = (
+  name?: string,
+  exerciseCategoryId?: number | null
+): UseReadExercises => {
   const [exercises, setExercises] = useState<Exercise[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleReadExercises = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response: Exercise[] = await readExercisesService(name);
+      const response: Exercise[] = await readExercisesService(
+        name,
+        exerciseCategoryId
+      );
 
       setExercises(response);
     } catch (error) {
