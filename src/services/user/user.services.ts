@@ -101,7 +101,6 @@ export const registerWithEmailService = async (data: any): Promise<User> => {
     const user: User = await createUserService(googleUser);
     return user;
   } catch (error) {
-    await deleteUserByIdService(googleUser.user);
     throw error;
   }
 };
@@ -146,7 +145,6 @@ export const googleAuthService = async (
     const user: User = await createUserWithGoogleService(googleUser);
     return user;
   } catch (error) {
-    await deleteUserByIdService(googleUser.user);
     throw error;
   }
 };
