@@ -1,6 +1,16 @@
-# Entrenaly (frontend)
+- [Sobre Entrenaly](#sobre-entrenaly)
+- [Arquitectura del proyecto](#arquitectura-del-proyecto)
+  - [Capas del software](#capas-del-software)
+  - [Estructura de carpetas](#estructura-de-carpetas)
+  - [Sobre la forma de escribir código](#sobre-la-forma-de-escribir-código)
+- [Instalación](#instalación)
+    - [Prerrequisitos](#prerrequisitos)
+    - [Pasos de instalación](#pasos-de-instalación)
+- [Sobre mi](#sobre-mi)
+- [Licencia](#licencia)
 
-Entrenaly es una aplicación diseñada para optimizar y simplificar las tareas de los entrenadores personales, permitiéndoles gestionar todos los aspectos de su trabajo en un solo lugar de manera fácil y eficiente. Con Entrenaly los entrenadores pueden administrar sus clientes con su información médica, elaborar planes de entrenamiento personalizados y asignándolos directamente a cada uno de ellos.
+## Sobre Entrenaly
+Entrenaly es una aplicación diseñada para optimizar y simplificar las tareas de los entrenadores personales, permitiéndoles gestionar todos los aspectos de su trabajo en un solo lugar de manera fácil y eficiente. Con Entrenaly los entrenadores pueden administrar sus clientes con su información médica, elaborar planes de entrenamiento personalizados y asignarlos directamente a cada uno de ellos.
 
 La aplicación también permite a los entrenadores añadir sus propios ejercicios con soporte multimedia, como GIFs o videos, para que los clientes puedan visualizar las demostraciones necesarias al revisar sus planes de entrenamiento.
 
@@ -8,25 +18,25 @@ Cada cliente tiene acceso a la aplicación donde puede ver todos sus planes asig
 
 ![entrenalt-exercises view](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/dd4e706c-6e1d-4ac8-91d5-07fda6245003)
 
+---
 
 ## Arquitectura del proyecto
-
 Para la arquitectura del frontend dividí la aplicación en "capas", algo parecido a la "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios, estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
 
 Es importante mencionar que la arquitectura se basa fuértemente en las distintas entidades del negocio, las mismas afectan principalmente en la estructura de carpetas y del código en general.
 
 Las entidades del Entrenaly son:
 
-- client (Cliente)
-- exercise (Ejercicio
-- plan (Plan)
-- user (Usuario)
+- Client (Cliente)
+- Exercise (Ejercicio)
+- Plan (Plan)
+- User (Usuario)
 
 El siguiente gráfico muestra cómo están compuestas las capas de la estructura del proyecto:
 
 ![entrenaly-layers](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/26fbc9c7-ae3b-4be4-a54b-a3b66af89f12)
 
-Podemos observar que mientras más lejos del centro se encuentra una capa, más se utiliza dentro del sistema por lo que es fundamental que sea fácil manipular, modificar y reemplazar de ser necesario, ya que si no genera un impacto negativo en todo el software.
+Mientras más lejos del centro se encuentra una capa, más se utiliza dentro del sistema por lo que es fundamental que sea fácil manipular, modificar y reemplazar de ser necesario, si no generará un impacto negativo en todo el software.
 
 Caso contrario, mientras más cerca del centro esté una capa más forma parte del core de la aplicación por lo que es poco probable que se tenga que cambiar a futuro.
 
@@ -36,52 +46,50 @@ Además, podemos ver unas flechas que van desde el centro hacia afuera, las mism
 - Pages y Layouts pueden importarse tanto a si mismos como a Components y Context.
 - Components, y Contexts pueden importarse tanto a si mismos como a Services, Hooks y Lib.
 
-Como mencioné anteriormente, Services, hooks y Lib al ser carpetas que están en la última capa deben contener funciones específicas que puedan ser reemplazadas fácilmente, ya sean funciónes de lectura de datos en la carpeta Services o la creación de toast en la carpeta de Lib.
+Como mencioné anteriormente, Services, Hooks y Lib al ser carpetas que están en la última capa deben contener funciones específicas que puedan ser reemplazadas fácilmente, ya sean funciónes de lectura de datos en la carpeta Services o la creación de toast en la carpeta de Lib.
 
-### Sobre las capas
+---
+
+### Capas del software
 
 Repasemos cada capa con sus respectivas carpetas:
 
-#### Routes:
-
+Routes:  
 Hace referencia a las rutas de nuestra aplicación, ya sea para el administrados, entrenadoy y/o cliente.
 
-#### Pages:
-
+Pages:  
 Hace referencia a las páginas de nuestra aplicación, las que van a ser llamadas dentro de las rutas.
 
-#### Layout:
+Layout:  
 Hace referencia a la plantilla por defecto que van a tener todas las páginas de nuestra aplicación, el mismo va a ser llamado dentro de las páginas.
 
-#### Context:
-
+Context:  
 Hace referencia a todos los react context que van a manejar los distintos estados globales dentro de nuestra aplicación, los mismos van a ser llamados principalmente por las páginas y los componentes.
 
-#### Components:
+Components:  
+Hace referencia a todos los componentes que se utilizan a lo largo de las distintas páginas y layouts, dentro de los mismos encontraremos componentes de tipo "common" (componentes comunes de react), componentes de tipo "forms" (formularios) y componentes de tipo "dialogs" (también llamados modales). Lo ideal es que si un componente se utiliza dos veces de la misma forma dentro de nuestra aplicación debe ir acá.
 
-Hace referencia a todos los componentes que se utilizan a lo largo de las distintas páginas y layouts, dentro de los mismos encontraremos componentes de tipo "common" /(componentes comunes de react), componentes de tipo "forms" (formularios) y componentes de tipo "dialogs" (diálogos o modales). Lo ideal es que si un componente se utiliza dos veces de la misma forma dentro de nuestra aplicación debe ir acá.
-
-#### Services:
-
+Services:  
 Hace referencia a la parte dentro de nuestra aplicación que interactúa con el backend, básicamente operaciones CRUD.
 
-#### Hooks:
-
+Hooks:  
 Hace referencia a funciones específicas que se repiten a lo largo de nuestra aplicación, idealmente se utilizan para todos los servicios de tipo GET, así poder tener un código más simple y controlar mejor cada petición.
 
-#### Lib:
-
+Lib:  
 Hace referencia a librerías, herramientas específicas y/o paquetes que se utilizan a lo largo de la aplicación. Por ejemplo configuraciónes, constantes, types, utils, etc.
 
-### Sobre la estructura de carpetas
+---
 
-Importante:
+### Estructura de carpetas
 
+Importante:  
 A lo largo de la explicación vamos a distinguir entre dos tipos de archivos:
 
+```
 archivos-typescript.ts
 
 ComponentesReact.tsx
+```
 
 Dentro de cada carpeta principal que conforman las distintas capas del software veremos que las entidades juegan un punto clave ya que dividimos los archivos que tengan dentro en base a las mismas.
 
@@ -101,6 +109,7 @@ Cada carpeta que contenga un componente de React (ComponentesReact.tsx) contará
     [component] - Carpeta principal
       [components] - Carpeta con los componentes del componente principal
       [styles] - Carpeta con los estilos del componente principal
+      [lib] - Carpeta con funciones específicas (por ejemplo validations.js de yup)
       Component.tsx - Componente principal
 ```
 
@@ -114,7 +123,9 @@ Los services tienen distintas carpetas dependiendo la entidad porque se basan fu
 
 En cambio, tanto env.ts como toast.ts contienen archivos typescript normales, que son independiente de las entidades y como no dependen de las mismas deben guardarse sin carpeta.
 
-#### Sobre la forma de escribir código
+---
+
+### Sobre la forma de escribir código
 
 Siempre es importante definir cómo se debe escribir el código, si bien no hay que encontrar la forma perfecta de hacerlo es importante seguir una buena linealidad que esté documentada, así es más fácil el entenderlo a futuro y no aumenta el costo de la comprensión del software.
 
@@ -134,8 +145,7 @@ Cualquier función dentro de estas capas que se encargue de realizar algo espec�
     3 - Entidad o componente con el que interactúa.
 ```
 
-Hooks:
-
+Hooks:  
 Los hooks deben ser nombrados y utilizados de la siguiente manera, ya sea que se trate de una entidad del negocio (Exercise) o una entidad aparte (Debounce):
 
 ```bash
@@ -146,8 +156,7 @@ Los hooks deben ser nombrados y utilizados de la siguiente manera, ya sea que se
     3 - Entidad
 ```
 
-Services:
-
+Services:  
 Los services deben ser nombrados y utilizados de la siguiente manera, ya sea que se trate de una entidad del negocio (Exercise) o una entidad aparte (CloudinaryCredentials):
 
 ```bash
@@ -158,8 +167,7 @@ Los services deben ser nombrados y utilizados de la siguiente manera, ya sea que
     3 - Especificador de la capa
 ```
 
-Lib:
-
+Lib:  
 Dentro de lib puede variar mucho la estructura ya que podemos encontrarnos con distintos tipos de librerías, herramientas componentes de react o funciones. Sin embargo, con respecto a las funciones siempre trataremos de mantener este formato:
 
 ```bash
@@ -169,6 +177,8 @@ Dentro de lib puede variar mucho la estructura ya que podemos encontrarnos con d
     2 - entidad
     3 - Especificador de la capa
 ```
+
+---
 
 ## Instalación
 
@@ -188,40 +198,37 @@ Antes de realizar la instalación, asegúrate de tener las siguientes herramient
    ```bash
    git clone https://github.com/juanuranidev/entrenaly-frontend
    ```
+
 2. Navega hasta el directorio:
    ```bash
    cd entrenaly-frontend
    ```
+
 3. Instala las dependencias:
    ```bash
    npm install
    ```
+
 4. Crea un archivo .env basado en el archivo .env.example y agrega tus variables de entorno:
-   `VITE_BACKEND_BASE_URL=`
-
-   `VITE_FRONTEND_BASE_URL=`
-
-   `VITE_APP_VERSION=`
-
-   `VITE_FIREBASE_API_KEY=`
-
-   `VITE_FIREBASE_AUTH_DOMAIN=`
-
-   `VITE_FIREBASE_PROJECT_ID=`
-
-   `VITE_FIREBASE_STORAGE_BUCKET=`
-
-   `VITE_FIREBASE_MESSAGING_SENDER_ID=`
-
-   `VITE_FIREBASE_APP_ID=`
-
+   `VITE_BACKEND_BASE_URL=`  
+   `VITE_FRONTEND_BASE_URL=`  
+   `VITE_APP_VERSION=`  
+   `VITE_FIREBASE_API_KEY=`  
+   `VITE_FIREBASE_AUTH_DOMAIN=`  
+   `VITE_FIREBASE_PROJECT_ID=`  
+   `VITE_FIREBASE_STORAGE_BUCKET=`  
+   `VITE_FIREBASE_MESSAGING_SENDER_ID=`  
+   `VITE_FIREBASE_APP_ID=`  
    `VITE_FIREBASE_MEASUREMENT_ID=`
 
 5. Inicia el modo desarrollo:
    ```bash
    npm run dev
    ```
+
 6. Abre tu navegador y visita http://localhost:5173/ para ver la aplicación
+
+---
 
 ## Sobre mi
 
@@ -235,7 +242,9 @@ Conectemos en LinkedIn:
 
 https://www.linkedin.com/in/juanurani/
 
-## License
+---
+
+## Licencia
 
 MIT License
 
