@@ -1,13 +1,16 @@
-- [Sobre Entrenaly](#sobre-entrenaly)
-- [Arquitectura del proyecto](#arquitectura-del-proyecto)
-  - [Capas del software](#capas-del-software)
-  - [Estructura de carpetas](#estructura-de-carpetas)
-  - [Sobre la forma de escribir código](#sobre-la-forma-de-escribir-código)
-- [Instalación](#instalación)
+- [Español]
+  - [Sobre Entrenaly](#sobre-entrenaly)
+  - [Arquitectura del software](#arquitectura-del-software)
+    - [Capas del software](#capas-del-software)
+    - [Estructura de carpetas](#estructura-de-carpetas)
+    - [Sobre la forma de escribir código](#sobre-la-forma-de-escribir-código)
+  - [Instalación](#instalación)
     - [Prerrequisitos](#prerrequisitos)
     - [Pasos de instalación](#pasos-de-instalación)
-- [Sobre mi](#sobre-mi)
-- [Licencia](#licencia)
+  - [Sobre mi](#sobre-mi)
+  - [Licencia](#licencia)
+
+---
 
 ## Sobre Entrenaly
 Entrenaly es una aplicación diseñada para optimizar y simplificar las tareas de los entrenadores personales, permitiéndoles gestionar todos los aspectos de su trabajo en un solo lugar de manera fácil y eficiente. Con Entrenaly los entrenadores pueden administrar sus clientes con su información médica, elaborar planes de entrenamiento personalizados y asignarlos directamente a cada uno de ellos.
@@ -20,7 +23,7 @@ Cada cliente tiene acceso a la aplicación donde puede ver todos sus planes asig
 
 ---
 
-## Arquitectura del proyecto
+## Arquitectura del software
 Para la arquitectura del frontend dividí la aplicación en "capas", algo parecido a la "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios, estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
 
 Es importante mencionar que la arquitectura se basa fuértemente en las distintas entidades del negocio, las mismas afectan principalmente en la estructura de carpetas y del código en general.
@@ -47,8 +50,6 @@ Además, podemos ver unas flechas que van desde el centro hacia afuera, las mism
 - Components, y Contexts pueden importarse tanto a si mismos como a Services, Hooks y Lib.
 
 Como mencioné anteriormente, Services, Hooks y Lib al ser carpetas que están en la última capa deben contener funciones específicas que puedan ser reemplazadas fácilmente, ya sean funciónes de lectura de datos en la carpeta Services o la creación de toast en la carpeta de Lib.
-
----
 
 ### Capas del software
 
@@ -78,18 +79,14 @@ Hace referencia a funciones específicas que se repiten a lo largo de nuestra ap
 Lib:  
 Hace referencia a librerías, herramientas específicas y/o paquetes que se utilizan a lo largo de la aplicación. Por ejemplo configuraciónes, constantes, types, utils, etc.
 
----
-
 ### Estructura de carpetas
 
 Importante:  
 A lo largo de la explicación vamos a distinguir entre dos tipos de archivos:
 
-```
-archivos-typescript.ts
 
+archivos-typescript.ts  
 ComponentesReact.tsx
-```
 
 Dentro de cada carpeta principal que conforman las distintas capas del software veremos que las entidades juegan un punto clave ya que dividimos los archivos que tengan dentro en base a las mismas.
 
@@ -122,8 +119,6 @@ Los services tienen distintas carpetas dependiendo la entidad porque se basan fu
 ![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/5f636343-00b5-4594-957b-80f9b06c978f)
 
 En cambio, tanto env.ts como toast.ts contienen archivos typescript normales, que son independiente de las entidades y como no dependen de las mismas deben guardarse sin carpeta.
-
----
 
 ### Sobre la forma de escribir código
 
