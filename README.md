@@ -103,7 +103,7 @@ Lo mismo se repite tanto para Pages, Constants, Layouts, Hooks, y Forms, el hace
 Cada carpeta que contenga un componente de React (ComponentesReact.tsx) contará con la siguiente estructura:
 
 ```bash
-    [component] - Carpeta principal
+   [component] - Carpeta principal
       [components] - Carpeta con los componentes del componente principal
       [styles] - Carpeta con los estilos del componente principal
       [lib] - Carpeta con funciones específicas (por ejemplo validations.js de yup)
@@ -122,9 +122,9 @@ En cambio, tanto env.ts como toast.ts contienen archivos typescript normales, qu
 
 ### Sobre la forma de escribir código
 
-Siempre es importante definir cómo se debe escribir el código, si bien no hay que encontrar la forma perfecta de hacerlo es importante seguir una buena linealidad que esté documentada, así es más fácil el entenderlo a futuro y no aumenta el costo de la comprensión del software.
+Siempre es importante definir cómo se debe escribir el código, si bien no hay que encontrar la forma perfecta de hacerlo es fundamental seguir una buena linealidad y que esté documentada, así es más fácil el entenderlo a futuro y no aumenta el costo de la comprensión del software.
 
-No voy a profundizar mucho en esto, sino voy a dar una simple manera de escribir código en base a la capa donde nos encontremos, la acción que queremos realizar y, de ser así, la entidad con la que estamos interactuando, abstrayendonos de la tecnología y de los métodos en sí.
+No voy a profundizar demasiado en esto, sino voy a dar una simple manera de escribir código en base a la capa donde nos encontremos, la acción que queremos realizar y, de ser así, la entidad con la que estamos interactuando, abstrayendonos de la tecnología y de los métodos en sí.
 
 Repasemos esta regla dentro de las distintas capas
 
