@@ -1,4 +1,4 @@
-- [Español]
+- Español
   - [Sobre Entrenaly](#sobre-entrenaly)
   - [Arquitectura del software](#arquitectura-del-software)
     - [Capas del software](#capas-del-software)
@@ -81,9 +81,7 @@ Hace referencia a librerías, herramientas específicas y/o paquetes que se util
 
 ### Estructura de carpetas
 
-Importante:  
 A lo largo de la explicación vamos a distinguir entre dos tipos de archivos:
-
 
 archivos-typescript.ts  
 ComponentesReact.tsx
@@ -179,7 +177,7 @@ Dentro de lib puede variar mucho la estructura ya que podemos encontrarnos con d
 
 Para instalar y correr el proyecto de forma local lee los siguientes pasos
 
-#### Prerrequisitos
+### Prerrequisitos
 
 Antes de realizar la instalación, asegúrate de tener las siguientes herramientas configuradas:
 
@@ -187,7 +185,7 @@ Antes de realizar la instalación, asegúrate de tener las siguientes herramient
 - [Backend Entrenaly](https://github.com/juanuranidev/entrenaly-backend)
 - [Aplicación de Firebase para autenticación](https://firebase.google.com/)
 
-#### Pasos de instalación
+### Pasos de instalación
 
 1. Clona este repositorio:
    ```bash
