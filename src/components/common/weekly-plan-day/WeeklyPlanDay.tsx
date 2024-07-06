@@ -37,14 +37,14 @@ export default function WeeklyPlanDay({ day }: Props) {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography fontWeight={600} fontSize={26}>
+            <Typography fontWeight={600} fontSize={{ xs: 20, md: 26 }}>
               {day?.dayOfWeek?.name}
             </Typography>
             <ExercisesImagesSumary exercises={day?.exercises} />
           </Stack>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container spacing={theme?.spacing(3)}>
+          <Grid item container spacing={theme?.spacing(3)}>
             {day?.exercises?.map((exercise: Exercise, index: number) => (
               <ExerciseView exercise={exercise} key={index} />
             ))}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Exercise } from "lib/types/exercise/exercise.types";
 import ExerciseImageDialog from "components/dialogs/exercise-image-dialog/ExerciseImageDialog";
+import { Exercise } from "lib/types/exercise/exercise.types";
 
 type Props = {
   exercise: Exercise;
@@ -17,38 +17,44 @@ export default function ExerciseView({ exercise }: Props) {
 
   return (
     <React.Fragment>
-      <Grid item container spacing={theme?.spacing(2)}>
-        <Grid item xs={10}>
-          <Typography fontWeight={600} fontSize={14}>
-            {isVariant ? exercise?.variant?.name : exercise?.name}
-          </Typography>
-          <Typography fontWeight={400} fontSize={13}>
-            {exercise?.description}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={2}
-          display="flex"
-          alignItems="flex-end"
-          flexDirection="column"
-          justifyContent="center"
-        >
+      <Grid
+        item
+        xs={12}
+        display="flex"
+        gap={theme?.spacing(2)}
+        alignItems="center"
+      >
+        <Box display="flex" alignItems="center" flexDirection="column">
           <img
             alt={isVariant ? exercise?.variant?.name : exercise?.name}
             src={isVariant ? exercise?.variant?.image : exercise?.image}
             onClick={() => setOpenExerciseImageDialog(true)}
             style={{
-              width: 60,
-              height: 60,
+              width: 50,
+              height: 50,
               cursor: "pointer",
               objectFit: "contain",
               borderRadius: theme?.spacing(1),
               border: `2px solid ${theme?.colors?.border?.primary}`,
             }}
           />
-          <Typography fontSize={10}>Ver imágen</Typography>
-        </Grid>
+          <Typography fontSize={8} fontWeight={600}>
+            ver imágen
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            fontSize={{ xs: 13, md: 15 }}
+            fontWeight={600}
+            color={exercise?.superset ? theme?.colors.brand.primary : ""}
+          >
+            {isVariant ? exercise?.variant?.name : exercise?.name}{" "}
+            {exercise?.superset ? "- super serie" : ""}
+          </Typography>
+          <Typography fontWeight={400} fontSize={13}>
+            {exercise?.description}
+          </Typography>
+        </Box>
       </Grid>
       <ExerciseImageDialog
         open={openExerciseImageDialog}

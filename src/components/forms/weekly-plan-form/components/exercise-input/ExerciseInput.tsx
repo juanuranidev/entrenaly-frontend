@@ -2,18 +2,20 @@ import {
   Box,
   Chip,
   Stack,
+  Switch,
   Divider,
   MenuItem,
   TextField,
   Typography,
   Autocomplete,
+  FormControlLabel,
   CircularProgress,
 } from "@mui/material";
 import {
   Exercise,
   ExerciseDescription,
 } from "lib/types/exercise/exercise.types";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { createExerciseDescriptionService } from "services/exercise/exercise.services";
 import { useThemeContext } from "contexts/theme/Theme";
 import { PlanDay } from "lib/types/plan/plan.types";
@@ -55,28 +57,41 @@ export default function ExerciseInput({
   };
 
   const handleChangeDescripcion = (description: string) => {
-    const exerciseFormatted = {
-      ...exercise,
-      description,
-    };
+    const dayIndex = formik.values.days.findIndex(
+      (d: PlanDay) => d.dayOfWeek.id === day.dayOfWeek.id
+    );
 
-    const newExercises = day?.exercises?.map((e: Exercise) => {
-      if (e.name === exercise.name) {
-        return exerciseFormatted;
-      }
+    if (dayIndex === -1) return;
 
-      return e;
-    });
+    const exerciseIndex = formik.values.days[dayIndex].exercises.findIndex(
+      (e: Exercise) => e.name === exercise.name
+    );
 
-    const newDays = formik?.values?.days?.map((d: PlanDay) => {
-      if (d.dayOfWeek?.id === day?.dayOfWeek?.id) {
-        return { ...day, exercises: newExercises };
-      }
+    if (exerciseIndex === -1) return;
 
-      return d;
-    });
+    formik.setFieldValue(
+      `days[${dayIndex}].exercises[${exerciseIndex}].description`,
+      description
+    );
+  };
 
-    formik.setFieldValue("days", newDays);
+  const handleChangeSuperset = (value: boolean) => {
+    const dayIndex = formik.values.days.findIndex(
+      (d: PlanDay) => d.dayOfWeek.id === day.dayOfWeek.id
+    );
+
+    if (dayIndex === -1) return;
+
+    const exerciseIndex = formik.values.days[dayIndex].exercises.findIndex(
+      (e: Exercise) => e.name === exercise.name
+    );
+
+    if (exerciseIndex === -1) return;
+
+    formik.setFieldValue(
+      `days[${dayIndex}].exercises[${exerciseIndex}].superset`,
+      value
+    );
   };
 
   const handleManageDefaultValues = () => {
@@ -134,22 +149,53 @@ export default function ExerciseInput({
           }}
         />
         <Box width="100%">
-          {exercise?.variant ? (
-            <Chip
-              size="small"
-              color="success"
-              label="Variante"
-              variant="outlined"
+          <Stack
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Stack
+              flexDirection="row"
+              alignItems="center"
+              gap={theme?.spacing(2)}
+            >
+              <Chip
+                size="small"
+                color="primary"
+                variant="outlined"
+                label={exercise?.category?.name}
+              />
+              {exercise?.variant ? (
+                <Chip
+                  size="small"
+                  color="success"
+                  label="Variante"
+                  variant="outlined"
+                />
+              ) : null}
+              {exercise?.hasUser ? (
+                <Chip
+                  size="small"
+                  color="success"
+                  label="Creado"
+                  variant="outlined"
+                />
+              ) : null}
+            </Stack>
+
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={exercise?.superset}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleChangeSuperset(e.target.checked)
+                  }
+                />
+              }
+              label="Super serie"
+              labelPlacement="start"
             />
-          ) : null}
-          {exercise?.hasUser ? (
-            <Chip
-              size="small"
-              color="success"
-              label="Creado"
-              variant="outlined"
-            />
-          ) : null}
+          </Stack>
           <Typography my={theme?.spacing(2)} fontWeight={600} fontSize={14}>
             {isVariant ? exercise?.variant?.name : exercise?.name}
           </Typography>
