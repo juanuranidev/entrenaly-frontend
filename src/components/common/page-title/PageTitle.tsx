@@ -21,7 +21,7 @@ export default function PageTitle({ title, action }: Props) {
       paddingLeft={isLargeScreen ? theme?.spacing(0) : theme?.spacing(4)}
       paddingRight={isLargeScreen ? theme?.spacing(0) : theme?.spacing(4)}
     >
-      <Typography fontWeight={700} fontSize={20}>
+      <Typography fontWeight={700} fontSize={{ xs: 18, md: 20 }}>
         {title}
       </Typography>
       {action ? <Box>{action}</Box> : null}

@@ -7,6 +7,7 @@ export type Exercise = {
   image?: string;
   variant?: Variant | null;
   description?: string | null;
+  superset?: boolean;
 };
 
 export type Variant = {

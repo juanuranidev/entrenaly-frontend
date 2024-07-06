@@ -20,8 +20,8 @@ export default function ExercisesImagesSumary({ exercises }: Props) {
             alt={exercise?.name}
             src={isVariant ? exercise?.variant?.image : exercise?.image}
             style={{
-              width: 60,
-              height: 60,
+              width: 50,
+              height: 50,
               objectFit: "contain",
               borderRadius: theme?.spacing(1),
               border: `2px solid ${theme?.colors?.border?.primary}`,
