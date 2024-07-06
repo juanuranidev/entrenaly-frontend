@@ -38,7 +38,7 @@ export default function ExerciseView({ exercise }: Props) {
               border: `2px solid ${theme?.colors?.border?.primary}`,
             }}
           />
-          <Typography fontSize={10} fontWeight={600}>
+          <Typography fontSize={8} fontWeight={600}>
             ver imágen
           </Typography>
         </Box>
