@@ -5,6 +5,13 @@ import Icons from "lib/utils/icons/icons";
 
 const updates = [
   {
+    version: "1.2.0",
+    features: [
+      "Se agregaron más de 50 ejercicios nuevos",
+      "Se agregó la posibilidad de incluir varios ejercicios en una super serie",
+    ],
+  },
+  {
     version: "1.1.0",
     features: ["Se agregó un nuevo filtro de ejercicios por categoria"],
   },
