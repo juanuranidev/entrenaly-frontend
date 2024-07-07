@@ -9,10 +9,22 @@
     - [Pasos de instalación](#pasos-de-instalación)
   - [Sobre mi](#sobre-mi)
   - [Licencia](#licencia)
+- English
+  - [About Entrenaly](#about-entrenaly)
+  - [Software architecture](#software-architecture)
+    - [Software layers](#software-layers)
+    - [Folder structure](#folder-structure)
+    - [About the way to write code](#about-the-way-to-write-code)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Installation steps](#installation-steps)
+  - [About me](#about-me)
+  - [License](#license)
 
 ---
 
 ## Sobre Entrenaly
+
 Entrenaly es una aplicación diseñada para optimizar y simplificar las tareas de los entrenadores personales, permitiéndoles gestionar todos los aspectos de su trabajo en un solo lugar de manera fácil y eficiente. Con Entrenaly los entrenadores pueden administrar sus clientes con su información médica, elaborar planes de entrenamiento personalizados y asignarlos directamente a cada uno de ellos.
 
 La aplicación también permite a los entrenadores añadir sus propios ejercicios con soporte multimedia, como GIFs o videos, para que los clientes puedan visualizar las demostraciones necesarias al revisar sus planes de entrenamiento.
@@ -24,6 +36,7 @@ Cada cliente tiene acceso a la aplicación donde puede ver todos sus planes asig
 ---
 
 ## Arquitectura del software
+
 Para la arquitectura dividí el software en "capas", una estructura similar a "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios. Estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
 
 Es importante mencionar que la arquitectura se basa fuértemente en las distintas entidades del negocio, las mismas afectan en la estructura de carpetas y del código en general.
@@ -256,4 +269,254 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## About Entrenaly
+
+Entrenaly is an application designed to optimize and simplify the tasks of personal trainers, allowing them to manage all aspects of their work in one place easily and efficiently. With Entrenaly, trainers can manage their clients with their medical information, create personalized training plans and assign them directly to each client.
+
+The application also allows trainers to add their own exercises with multimedia support, such as GIFs or videos, so that clients can view the necessary demonstrations when reviewing their training plans.
+
+Each client has access to the application where they can view all their assigned plans, thus facilitating a detailed and efficient tracking of their progress.
+
+![entrenalt-exercises view](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/dd4e706c-6e1d-4ac8-91d5-07fda6245003)
+
+---
+
+## Software architecture
+
+For the architecture I divided the software into "layers", a structure similar to "Clean Architecture", in order to better separate responsibilities and make it a maintainable, scalable and easily changeable software. These layers have different responsibilities, obligations and prohibitions.
+
+It is important to mention that the architecture is strongly based on the different business entities, which affect the structure of folders and code in general.
+
+The entities of the Entrenaly are:
+
+- Client
+- Exercise
+- Plan
+- User
+
+The following graphic shows how the layers of the project structure are composed:
+
+![entrenaly-layers](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/26fbc9c7-ae3b-4be4-a54b-a3b66af89f12)
+
+The farther a layer is from the center, the more it is used throughout the software, so it is essential that it is easy to modify and replace if necessary, otherwise it will have a negative impact on the whole software. On the contrary, the closer a layer is to the center, the less it is used throughout the software because it is part of its core, so it is unlikely that it will have to be changed or modified in the future.
+
+In addition, we can see some arrows that go from the center outwards, they indicate how the layers should behave when they interact with each other. This put in practice is nothing more than an import rule, for example, from the Services folder we cannot interact with the Routes folder since it is the core of our application, however from the hooks we can access the services.
+
+- Routes can import Pages and Layouts
+- Pages and Layouts can import themselves as well as Components and Contexts.
+- Components, and Contexts can import themselves as well as Services, Hooks and Lib.
+
+As I mentioned before, Services, Hooks and Lib being folders that are in the last layer must contain specific functions that can be easily replaced, be it data reading functions in the Services folder or toast creation in the Lib folder.
+
+### Software layers
+
+Let's review each layer with its respective folders:
+
+**Routes**  
+Refers to the routes of our application, either for the administrator, trainer and/or client, they will handle the logic of which route to return depending on the requirements.
+
+**Pages  
+Refers to the pages of our application, which will be called within the routes, each page will be responsible for all the logic that has to be sent to each specific route.
+
+**Layout  
+Refers to the template that will have each page that is displayed in our application, they will be called within the pages and may vary depending on the authentication or user role.
+
+**Context  
+It makes reference to all the React Context that are going to handle the different global states inside our application, they are going to be called mainly by the pages and the components.
+
+**Components 
+Refers to all the components that are used throughout the different pages and layouts, within them we will find components of type "common" (common react components), components of type "forms" (forms) and components of type "dialogs" (also called "modal"). Ideally, if a component is used twice in the same way within our application it should go here.
+
+**Services  
+Refers to the part within our application that interacts with the different api's necessary for the software to work.
+
+**Hooks  
+Refers to specific functions that are repeated throughout our application, ideally they are used for all GET type services, so we can have a simpler code and better control each request.
+
+**Lib  
+Refers to the library within our software, something similar to a JavaScript library, i.e. specific tools and/or packages that are used throughout the application. For example configurations, constants, types, utils, notifications, etc.
+
+### Folder structure
+
+Throughout the explanation we will distinguish between two types of files:
+
+files-typescript.ts  
+ComponentsReact.tsx
+
+Inside each main folder that conforms the different layers of the software we will see that the entities play a key point since we divide the files that they have inside based on the same ones.
+
+This can be seen for example in the Services folder, where the different services are divided into four folders: Client, Exercise, Plan, User, alluding to the software entities.
+
+![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/da378b2c-13d0-49db-ab1d-b2b461a3c71f)
+
+We can also see this pattern in the Routes folder which in this particular case divides the user entity based on the different roles and adds a new folder called "public" which refers to the public routes.
+
+![frontent-architecture](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/d3642293-b79c-4230-b188-95ab87fa1b4f)
+
+This same pattern is repeated for Pages, Constants, Layouts, Hooks, and Forms, doing this helps to better divide the files and not have a folder with too many folders inside.
+
+Each folder containing a React component (ComponentsReact.tsx) will have the following structure:
+
+```bash
+   [component] - Main folder
+      [components] - Folder with the main component components
+      [styles] - Folder with styles of the main component
+      [lib] - Folder with specific functions (for example yup´s validations.js)
+      Component.tsx - Main component
+```
+
+Folders containing typescript files, for example file-typescript.ts, should stand alone, without main folder, as long as they are not based on project entities. Lets see some examples:
+
+Services have different folders depending on the entity because they are mainly based on the entities.
+
+![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/da378b2c-13d0-49db-ab1d-b2b461a3c71f)
+
+On the other hand, both env.ts and toast.ts contain normal typescript files, which are independent of the entities, and since they do not depend on the entities they should be stored without a folder.
+
+![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/5f636343-00b5-4594-957b-80f9b06c978f)
+
+### About the way to write code
+
+Within each software it is important to define how the code should be written, although it is not necessary to find the perfect way to do it, it is essential to follow a good linearity that is documented, so it will be easier to understand it in the future and it will not increase the cost of understanding the software.
+
+Next I will give a simple way to write code based on the layer where we are, the action we want to perform and, if so, the entity with which we are interacting, abstracting from the technology and the methods themselves.
+
+Let´s review this rule within the different layers:
+
+**Pages and Components**.  
+Any function within these layers that is responsible for doing something specific should be named as follows:
+
+```bash
+    1[handle]2[Open]3[ModalExercises].
+
+    1 - Identifier of the .tsx file layer
+    2 - Verb based on the action to be performed (open, modify, resize, etc).
+    3 - Entity or component with which it interacts.
+```
+
+**Hooks**  
+The hooks must be named and used in the following way, with respect to point 3 the same can change whether it is a business entity (Exercise) or a separate entity (debounce):
+
+```bash
+    1[use]2[Read]3[Exercises]
+
+    1 - Identifier of the hooks layer
+    2 - Verb based on the CRUD acronym
+    3 - Entity
+```
+**Services**  
+Services should be named and used as follows, whether it is a business entity (Exercise) or a separate entity (CloudinaryCredentials):
+
+```bash
+    1[get]2[Exercises]3[Service]
+
+    1 - verb based on the CRUD acronym
+    2 - entity
+    3 - layer specifier
+```
+
+**Lib**  
+Within lib the structure can vary a lot since we can find different types of libraries, react component tools or functions. However, with respect to functions we will always try to keep this format:
+
+```bash
+    1[create]2[Toast]3[Lib]
+
+    1 - verb based on the CRUD acronym
+    2 - entity
+    3 - layer specifier
+```
+
+---
+
+## Installation
+
+To install and run the project locally follow the steps below
+
+### Prerequisites
+
+Before performing the installation, make sure you have the following tools configured:
+
+- [Node.js](https://nodejs.org/) (version 18 or higher).
+- [Backend Entrenaly](https://github.com/juanuranidev/entrenaly-backend)
+- [Firebase application for authentication](https://firebase.google.com/)
+
+### Installation steps
+
+1. Clone this repository:
+   ````bash
+   git clone https://github.com/juanuranidev/entrenaly-frontend
+   ```
+
+2. Navigate to the directory:
+   ````bash
+   cd entrenaly-frontend
+   ```
+
+3. Install the dependencies:
+   ````bash
+   npm install
+   ```
+
+4. Create an .env file based on the .env.example file and add your environment variables:
+   `VITE_BACKEND_BASE_URL=` 
+   `VITE_FRONTEND_BASE_URL=http://localhost:5173/`  
+   `VITE_APP_VERSION=1.2.0`  
+   `VITE_FIREBASE_API_KEY=`  
+   `VITE_FIREBASE_AUTH_DOMAIN=`  
+   `VITE_FIREBASE_PROJECT_ID=`  
+   `VITE_FIREBASE_STORAGE_BUCKET=`  
+   `VITE_FIREBASE_STORAGE_BUCKET=`  
+   `VITE_FIREBASE_MESSAGING_SENDER_ID=`  
+   `VITE_FIREBASE_APP_ID=`  
+   `VITE_FIREBASE_MEASUREMENT_ID=`.
+
+5. Start development mode:
+   ````bash
+   npm run dev
+   ```
+
+6. Open your browser and visit http://localhost:5173/ to see the application
+
+---
+
+## About me
+
+Proactive, creative and passionate about developing innovative applications. With more than two years of professional experience as a software developer, I especially enjoy creating everyday applications and software architecture. I am currently pursuing a degree in Software Engineering at Siglo 21 University, which reinforces my commitment to continuous growth and evolution towards a solid career in software engineering and architecture.
+
+You can see my portfolio at the following link:
+
+https://juanurani.netlify.app/
+
+Let's connect on LinkedIn:
+
+https://www.linkedin.com/in/juanurani/
+
+---
+
+## License
+
+MIT License
+
+Copyright (c) [2024] [Juan Urani].
+
+Permission is hereby granted, free of charge, to any person who obtains a copy
+of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including
+in the Software without restriction, including without limitation the rights to use, copy, modify, merge, modify, merge, reverse engineer, copy, modify, merge, reverse engineer
+to use, copy, modify, merge, merge, publish, distribute, sublicense and/or sell copies of the Software.
+sublicense and/or sell copies of the Software, and to permit persons to whom the Software is made available to use, copy, modify, merge, publish, distribute, sublicense and/or sell copies of the Software, subject to the following
+the Software, subject to the following conditions:
+
+The foregoing copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE FOLLOWING
+IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE IN ANY EVENT FOR ANY CLAIM, DAMAGE OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY OR OTHERWISE, WHETHER IN CONTRACT, TORT, NEGLIGENCE OR OTHERWISE.
+LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING OUT OF,
+FROM OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE SOFTWARE.
 SOFTWARE.
