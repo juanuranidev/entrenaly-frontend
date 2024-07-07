@@ -1,5 +1,5 @@
-import SubscriptionView from "./subscription-view/SubscriptionView";
-import ProfileView from "./profile-view/ProfileView";
+import SubscriptionView from "../components/subscription-view/SubscriptionView";
+import ProfileView from "../components/profile-view/ProfileView";
 import { JSX } from "react";
 
 export type ProfileNavbarItem = {

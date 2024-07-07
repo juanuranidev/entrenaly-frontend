@@ -18,6 +18,7 @@ import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";
 import ExerciseInput from "../exercise-input/ExerciseInput";
+import ExercisesImagesSumary from "components/common/exercises-images-summary/ExercisesImagesSumary";
 
 type Props = {
   day: PlanDay;
@@ -70,23 +71,7 @@ export default function AccordionDay({
               mr={theme?.spacing(1)}
               gap={theme?.spacing(1.5)}
             >
-              {day?.exercises?.slice(0, 2).map((exercise: any) => (
-                <img
-                  key={exercise?.name}
-                  src={
-                    exercise?.variant
-                      ? exercise?.variant?.image
-                      : exercise?.image
-                  }
-                  style={{
-                    width: 40,
-                    height: 40,
-                    objectFit: "contain",
-                    borderRadius: theme?.spacing(1),
-                    border: `2px solid ${theme?.colors?.border?.primary}`,
-                  }}
-                />
-              ))}
+              <ExercisesImagesSumary exercises={day?.exercises} />
             </Stack>
           </Stack>
         </AccordionSummary>

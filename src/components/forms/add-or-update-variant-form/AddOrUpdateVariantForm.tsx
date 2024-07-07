@@ -11,11 +11,8 @@ import {
   createVariantService,
   updateVariantService,
 } from "services/exercise/exercise.services";
-import {
-  handleCreateErrorToast,
-  handleCreateSuccessToast,
-} from "lib/utils/toast";
-import { addOrUpdateVariantFormValidations } from "./utils/validations";
+import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
+import { addOrUpdateVariantFormValidations } from "./lib/validations";
 import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -93,13 +90,13 @@ export default function AddOrUpdateVariantForm({
       }
       onClose();
 
-      handleCreateSuccessToast(
+      createSuccessToastLib(
         `Variante ${updateVariant ? "actualizada" : "creada"} con éxito`
       );
     } catch (error) {
       console.log(error);
       const action = updateVariant ? "actualizar" : "crear";
-      handleCreateErrorToast(`Error al ${action} variante intente nuevamente`);
+      createErrorToastLib(`Error al ${action} variante intente nuevamente`);
     }
     setIsLoading(false);
   };
@@ -182,21 +179,23 @@ export default function AddOrUpdateVariantForm({
               }
             />
           </Grid>
-          <Grid item xs={12}>
-            <img
-              src={formik?.values?.image}
-              style={{
-                width: "100%",
-                height: "100%",
-                margin: "auto",
-                objectFit: "contain",
-                aspectRatio: "16/12",
-              }}
-            />
-          </Grid>
+          {formik?.values?.image ? (
+            <Grid item xs={12}>
+              <img
+                src={formik?.values?.image}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "auto",
+                  objectFit: "contain",
+                  aspectRatio: "16/12",
+                }}
+              />
+            </Grid>
+          ) : null}
         </Grid>
       </Box>
-      <Box py={theme?.spacing(3)} bgcolor={theme?.colors?.background?.primary}>
+      <Box py={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
         <Button
           fullWidth
           color="primary"

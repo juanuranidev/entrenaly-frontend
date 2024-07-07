@@ -15,7 +15,7 @@ export default function CustomTab({
   const { theme } = useThemeContext();
 
   return (
-    <Grid item key={navbarItem}>
+    <Grid item>
       <ListItemButton
         sx={{
           color:

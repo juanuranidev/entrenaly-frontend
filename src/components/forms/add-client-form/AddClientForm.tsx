@@ -9,7 +9,7 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import { handleCreateSuccessToast } from "lib/utils/toast";
+import { createSuccessToastLib } from "lib/utils/toast";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
@@ -37,7 +37,7 @@ export default function AddClientForm({ open, onClose }: Props) {
     try {
       await navigator.clipboard.writeText(invite);
 
-      handleCreateSuccessToast("Invitación copiada");
+      createSuccessToastLib("Invitación copiada");
       setCopied(true);
     } catch (error) {
       console.error(error);

@@ -1,36 +1,138 @@
 import { Typography, Grid, Button } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import CustomTab from "components/common/custom-tab/CustomTab";
 import Icons from "lib/utils/icons/icons";
-
-const updates = [
-  {
-    version: "1.2.0",
-    features: [
-      "Se agregaron más de 50 ejercicios nuevos",
-      "Se agregó la posibilidad de incluir varios ejercicios en una super serie",
-    ],
-  },
-  {
-    version: "1.1.0",
-    features: ["Se agregó un nuevo filtro de ejercicios por categoria"],
-  },
-  {
-    version: "1.0.0",
-    features: [
-      "Nueva vista para agregar clientes, ver su información y editar su ficha médica.",
-      "Nueva vista para crear planes de tipo semanal, verlos, editarlos y asignarlos a clientes.",
-      "Nueva vista para ver ejercicios, crear nuevos y agregar variantes a los existentes.",
-    ],
-  },
-];
 
 export default function Updates() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
+  const [currentView, setCurrentView] = useState<string>("Versión 1.0.0");
+
+  const profileNavbarItems = () => {
+    return [
+      {
+        name: " Versión 1.3.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 07/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se actualizó la pantalla de actualizaciones.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se actualizó la arquitectura del código.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
+      {
+        name: " Versión 1.2.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 06/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregó la posibilidad de incluir varios ejercicios en una
+                super serie.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
+      {
+        name: "Versión 1.1.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 02/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregó un nuevo filtro de ejercicios por categoria.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
+      {
+        name: "Versión 1.0.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 01/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregó una nueva vista para agregar clientes, ver su
+                información y editar su ficha médica.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregó una nueva vista para crear planes de tipo semanal,
+                verlos, editarlos y asignarlos a clientes.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregó una nueva vista para ver ejercicios, crear nuevos y
+                agregar variantes a los existentes.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
+    ];
+  };
+
   return (
-    <Grid container spacing={theme?.spacing(2)}>
+    <Grid container spacing={theme?.spacing(4)} pr={theme?.spacing(2)}>
       <Grid item xs={12} display="flex" justifyContent="center">
         <Button
           variant="outlined"
@@ -40,23 +142,38 @@ export default function Updates() {
           Volver
         </Button>
       </Grid>
-      <Grid item xs={11} lg={6} marginX="auto">
-        {updates.map((update: { version: string; features: string[] }) => (
-          <Grid item xs={12} key={update?.version}>
-            <Typography fontWeight={700} fontSize={16} mb={theme?.spacing(1)}>
-              Versión: {update?.version}
-            </Typography>
-            {update.features.map((feature: string) => (
-              <Typography
-                fontWeight={500}
-                ml={theme?.spacing(2)}
-                fontSize={{ base: 12, md: 16 }}
-              >
-                - {feature}
-              </Typography>
-            ))}
-          </Grid>
-        ))}
+      <Grid
+        item
+        container
+        xs={12}
+        lg={6}
+        marginX="auto"
+        alignItems="flex-start"
+        spacing={theme?.spacing(4)}
+      >
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={3}
+          container
+          flexDirection="column"
+          spacing={theme?.spacing(4)}
+        >
+          {profileNavbarItems().map((navbarItem: any) => (
+            <CustomTab
+              key={navbarItem.name}
+              navbarItem={navbarItem}
+              currentView={currentView}
+              setCurrentView={setCurrentView}
+            />
+          ))}
+        </Grid>
+        {
+          profileNavbarItems().find(
+            (navbarItem: any) => navbarItem.name === currentView
+          )?.view
+        }
       </Grid>
     </Grid>
   );

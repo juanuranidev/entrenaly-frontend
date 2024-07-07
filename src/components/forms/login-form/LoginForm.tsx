@@ -13,8 +13,8 @@ import {
   googleAuthService,
   loginWithEmailService,
 } from "services/user/user.services";
-import { handleCreateErrorToast } from "lib/utils/toast";
-import { loginFormValidation } from "./validations";
+import { createErrorToastLib } from "lib/utils/toast";
+import { loginFormValidation } from "./lib/validations";
 import { useThemeContext } from "contexts/theme/Theme";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
@@ -56,7 +56,7 @@ export default function LoginForm() {
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
-      handleCreateErrorToast("Credenciales inválidas");
+      createErrorToastLib("Credenciales inválidas");
     }
     setIsLoading(false);
   };
@@ -68,7 +68,7 @@ export default function LoginForm() {
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
-      handleCreateErrorToast("Error en el servidor");
+      createErrorToastLib("Error en el servidor");
     }
     setIsLoading(false);
   };

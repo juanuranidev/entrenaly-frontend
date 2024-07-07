@@ -6,7 +6,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 import ExercisesCategories from "components/common/exercises-categories/ExercisesCategories";
 import ExercisesSearchBar from "pages/user/trainer/exercises/index/components/exercises-search-bar/ExercisesSearchBar";
 import { useDebounce } from "hooks/useDebounce";
-import ExerciseCard from "../../../../common/exercise-card/ExerciseCard";
+import ExerciseCard from "../../common/exercise-card/ExerciseCard";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
@@ -58,6 +58,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
   useEffect(() => {
     if (!open) {
       setSearchValue("");
+      setExerciseCategorySelected(null);
     }
   }, [open]);
 
@@ -118,7 +119,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           )}
         </Stack>
       </Box>
-      <Box py={theme?.spacing(3)} bgcolor={theme?.colors?.background?.primary}>
+      <Box py={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
         <Button
           fullWidth
           variant="contained"

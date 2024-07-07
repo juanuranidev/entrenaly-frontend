@@ -1,9 +1,6 @@
-import {
-  profileNavbarItems,
-  PROFILE_NAVBAR_ITEMS_NAMES,
-} from "./components/Utils";
+import { profileNavbarItems, PROFILE_NAVBAR_ITEMS_NAMES } from "./lib/Utils";
 import { Grid, Card, Button } from "@mui/material";
-import { ProfileNavbarItem } from "./components/Utils";
+import { ProfileNavbarItem } from "./lib/Utils";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

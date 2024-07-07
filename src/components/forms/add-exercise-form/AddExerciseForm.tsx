@@ -7,17 +7,14 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import {
-  handleCreateErrorToast,
-  handleCreateSuccessToast,
-} from "lib/utils/toast";
-import { addExerciseFormValidations } from "./utils/validations";
+import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
+import { addExerciseFormValidations } from "./lib/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { createExerciseService } from "services/exercise/exercise.services";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
-import { Exercise } from "lib/types/exercise/exercise.types";
+import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
@@ -57,11 +54,11 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
         await onSubmit();
       }
 
-      handleCreateSuccessToast("Ejercicio creado con éxito");
+      createSuccessToastLib("Ejercicio creado con éxito");
       onClose();
     } catch (error) {
       console.log(error);
-      handleCreateErrorToast("Error al crear ejercicio");
+      createErrorToastLib("Error al crear ejercicio");
     }
     setIsLoading(false);
   };
@@ -124,7 +121,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
               }
             >
               {exercisesCategories?.length > 0
-                ? exercisesCategories?.map((category: any) => (
+                ? exercisesCategories?.map((category: ExerciseCategory) => (
                     <MenuItem key={category?.id} value={category?.id}>
                       {category?.name}
                     </MenuItem>
@@ -151,19 +148,21 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <img
-              alt="Ejercicio"
-              src={formik?.values?.image}
-              style={{
-                width: "100%",
-                height: "100%",
-                margin: "auto",
-                objectFit: "contain",
-                aspectRatio: "16/12",
-              }}
-            />
-          </Grid>
+          {formik?.values?.image ? (
+            <Grid item xs={12} sm={12}>
+              <img
+                alt="Ejercicio"
+                src={formik?.values?.image}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "auto",
+                  objectFit: "contain",
+                  aspectRatio: "16/12",
+                }}
+              />
+            </Grid>
+          ) : null}
         </Grid>
       </Box>
       <Box py={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>

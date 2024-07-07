@@ -4,17 +4,17 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { DayOfWeek, PlanDay } from "lib/types/plan/plan.types";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
-import DayCard from "../day-card/DayCard";
+import DayCard from "./components/day-card/DayCard";
 import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSubmit: (day: any) => void;
+  onSubmit: (day: DayOfWeek) => void;
   daysAlreadyAdded: PlanDay[];
 };
 
-export default function AddDayDrawer({
+export default function AddDayForm({
   open,
   onClose,
   onSubmit,

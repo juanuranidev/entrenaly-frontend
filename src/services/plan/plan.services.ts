@@ -1,110 +1,78 @@
 import request from "services/request";
 
 export const createWeeklyPlanService = async (data: any) => {
-  try {
-    const response = await request({
-      method: "POST",
-      url: "/plan/v1/create/weekly-plan",
-      data: {
-        data,
-      },
-    });
+  const response = await request({
+    method: "POST",
+    url: "/plan/v1/create/weekly-plan",
+    data: {
+      data,
+    },
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readPlansTypesService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/plans-types",
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/plans-types",
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readDaysOfWeekService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/days-of-week",
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/days-of-week",
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readPlansCategoriesService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/plan-categories",
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/plan-categories",
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readPlansByUserIdService = async () => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/plans-by-user-id",
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/plans-by-user-id",
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readPlansByClientIdService = async (clientId: string) => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/plans-by-client-id",
-      params: {
-        clientId,
-      },
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/plans-by-client-id",
+    params: {
+      clientId,
+    },
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const readWeeklyPlanService = async (planId: string) => {
-  try {
-    const response = await request({
-      method: "GET",
-      url: "/plan/v1/read/weekly-plan",
-      params: {
-        planId,
-      },
-    });
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/weekly-plan",
+    params: {
+      planId,
+    },
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 export const updateWeeklyPlanService = async (data: any) => {
-  try {
-    const response = await request({
-      method: "POST",
-      url: "/plan/v1/update/weekly-plan",
-      data: {
-        data,
-      },
-    });
+  const response = await request({
+    method: "POST",
+    url: "/plan/v1/update/weekly-plan",
+    data: {
+      data,
+    },
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };

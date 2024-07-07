@@ -13,10 +13,10 @@ export const firebaseConfig = {
   measurementId: ENV.FIREBASE_MEASUREMENT_ID,
 };
 
-const initializeFirebaseApp = () => {
+const createFirebaseConectionLib = () => {
   const app = initializeApp(firebaseConfig);
   getAnalytics(app);
   getAuth(app);
 };
 
-export default initializeFirebaseApp;
+export default createFirebaseConectionLib;

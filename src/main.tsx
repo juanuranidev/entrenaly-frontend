@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AuthContextProvider } from "contexts/auth/Auth";
 import { ThemeContextProvider } from "contexts/theme/Theme";
 import { BrowserRouter as Router } from "react-router-dom";
-import initializeFirebaseApp from "./lib/config/firebase";
+import createFirebaseConectionLib from "./lib/config/firebase";
 import ReactDOM from "react-dom/client";
 import Routes from "routes";
 import Theme from "./lib/theme/Theme";
@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Analytics />
       <Toaster richColors position="bottom-left" />
       <Theme>
-        {initializeFirebaseApp()}
+        {createFirebaseConectionLib()}
         <Router>
           <ThemeContextProvider>
             <AuthContextProvider>

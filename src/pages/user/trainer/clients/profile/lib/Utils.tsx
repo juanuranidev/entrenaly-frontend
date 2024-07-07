@@ -1,5 +1,5 @@
-import PlansView from "./plans-view/PlansView";
-import ProfileView from "./profile-view/ProfileView";
+import PlansView from "../components/plans-view/PlansView";
+import ProfileView from "../components/profile-view/ProfileView";
 
 export type ProfileNavbarItem = {
   name: string;

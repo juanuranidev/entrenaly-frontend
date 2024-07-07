@@ -13,11 +13,8 @@ import {
   googleAuthService,
   registerWithEmailService,
 } from "services/user/user.services";
-import {
-  handleCreateErrorToast,
-  handleCreateSuccessToast,
-} from "lib/utils/toast";
-import { registerFormValidation } from "./validations";
+import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
+import { registerFormValidation } from "./lib/validations";
 import { useAuthContext } from "contexts/auth/Auth";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +50,7 @@ export default function RegisterForm({ invite }: any) {
     try {
       const response = await registerWithEmailService(data);
       handleRedirectUser(response);
-      handleCreateSuccessToast("Registrado con éxito");
+      createSuccessToastLib("Registrado con éxito");
     } catch (error: unknown) {
       console.log(error);
       handleManageRegisterWithEmailError(error);
@@ -66,9 +63,9 @@ export default function RegisterForm({ invite }: any) {
 
     switch (true) {
       case errorString.includes("email-already-in-use"):
-        return handleCreateErrorToast("Email ya en uso");
+        return createErrorToastLib("Email ya en uso");
       default:
-        return handleCreateErrorToast("Error en el servidor");
+        return createErrorToastLib("Error en el servidor");
     }
   };
 
@@ -79,7 +76,7 @@ export default function RegisterForm({ invite }: any) {
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
-      handleCreateErrorToast("Error en el servidor");
+      createErrorToastLib("Error en el servidor");
     }
   };
 
