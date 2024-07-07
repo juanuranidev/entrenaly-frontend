@@ -60,6 +60,11 @@ export default function Updates() {
             </Grid>
             <Grid item xs={12}>
               <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se agregaron más de 50 ejercicios nuevos.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
                 Se agregó la posibilidad de incluir varios ejercicios en una
                 super serie.
               </Typography>
