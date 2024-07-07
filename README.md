@@ -473,7 +473,7 @@ Before performing the installation, make sure you have the following tools confi
    `VITE_FIREBASE_STORAGE_BUCKET=`  
    `VITE_FIREBASE_MESSAGING_SENDER_ID=`  
    `VITE_FIREBASE_APP_ID=`  
-   `VITE_FIREBASE_MEASUREMENT_ID=`.
+   `VITE_FIREBASE_MEASUREMENT_ID=`
 
 5. Start development mode:
    ```bash
