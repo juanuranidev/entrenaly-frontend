@@ -476,7 +476,7 @@ Before performing the installation, make sure you have the following tools confi
    `VITE_FIREBASE_MEASUREMENT_ID=`.
 
 5. Start development mode:
-   ````bash
+   ```bash
    npm run dev
    ```
 
