@@ -18,7 +18,7 @@ export default function ViewWeeklyPlan() {
     <Grid container spacing={theme?.spacing(3)}>
       <Grid item xs={12}>
         <PageTitle
-          title={plan?.name!}
+          title={plan?.name ?? ""}
           action={
             <Button
               variant="outlined"
@@ -30,9 +30,12 @@ export default function ViewWeeklyPlan() {
           }
         />
       </Grid>
-      {plan?.days?.map((day: PlanDay) => (
-        <WeeklyPlanDay key={day?.dayOfWeek?.id} day={day} />
-      ))}
+
+      {plan?.days?.length
+        ? plan?.days?.map((day: PlanDay) => (
+            <WeeklyPlanDay key={day?.dayOfWeek?.id} day={day} />
+          ))
+        : null}
     </Grid>
   );
 }

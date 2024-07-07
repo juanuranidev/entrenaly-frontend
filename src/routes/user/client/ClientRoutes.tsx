@@ -4,12 +4,11 @@ import ClientLayout from "layouts/user/client/ClientLayout";
 import Plans from "pages/user/client/plans/index/Plans";
 
 const Loadable =
-  (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
-    (
-      <Suspense fallback={<CircularProgress />}>
-        <Component {...props} />
-      </Suspense>
-    );
+  (Component: ComponentType<any>) => (props: { [key: string]: any }) => (
+    <Suspense fallback={<CircularProgress />}>
+      <Component {...props} />
+    </Suspense>
+  );
 
 const NotFound = Loadable(
   lazy(() => import("pages/user/trainer/not-found/NotFound"))

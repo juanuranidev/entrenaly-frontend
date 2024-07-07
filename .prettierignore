@@ -1,0 +1,8 @@
+dist
+node_modules
+package-lock.json
+package.json
+README.md
+tsconfig.json
+vercel.json
+vite.config.ts

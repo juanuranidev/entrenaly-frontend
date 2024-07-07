@@ -3,12 +3,11 @@ import { CircularProgress } from "@mui/material";
 import PublicLayout from "layouts/public/PublicLayout";
 
 const Loadable =
-  (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
-    (
-      <Suspense fallback={<CircularProgress />}>
-        <Component {...props} />
-      </Suspense>
-    );
+  (Component: ComponentType<any>) => (props: { [key: string]: any }) => (
+    <Suspense fallback={<CircularProgress />}>
+      <Component {...props} />
+    </Suspense>
+  );
 
 const LoginView = Loadable(lazy(() => import("pages/public/login/Login")));
 const UpdatesView = Loadable(

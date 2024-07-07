@@ -1,5 +1,6 @@
 import SubscriptionView from "./subscription-view/SubscriptionView";
 import ProfileView from "./profile-view/ProfileView";
+import { JSX } from "react";
 
 export type ProfileNavbarItem = {
   name: string;

@@ -24,9 +24,8 @@ export const AuthContextProvider = ({ children }: any) => {
       const response: any = await getUserSessionService();
       if (!response) throw "Not an user in session";
 
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.authId}`;
+      axios.defaults.headers.common["Authorization"] =
+        `Bearer ${response.authId}`;
 
       setUserData(response);
     } catch (error) {

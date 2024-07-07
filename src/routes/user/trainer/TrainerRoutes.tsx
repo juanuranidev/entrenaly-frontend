@@ -3,12 +3,11 @@ import { CircularProgress } from "@mui/material";
 import TrainerLayout from "layouts/user/trainer/TrainerLayout";
 
 const Loadable =
-  (Component: ComponentType<any>) => (props: { [key: string]: any }) =>
-    (
-      <Suspense fallback={<CircularProgress />}>
-        <Component {...props} />
-      </Suspense>
-    );
+  (Component: ComponentType<any>) => (props: { [key: string]: any }) => (
+    <Suspense fallback={<CircularProgress />}>
+      <Component {...props} />
+    </Suspense>
+  );
 
 const Plans = Loadable(
   lazy(() => import("pages/user/trainer/plans/index/Plans"))
