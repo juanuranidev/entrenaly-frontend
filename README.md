@@ -24,9 +24,9 @@ Cada cliente tiene acceso a la aplicación donde puede ver todos sus planes asig
 ---
 
 ## Arquitectura del software
-Para la arquitectura del frontend dividí la aplicación en "capas", algo parecido a la "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios, estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
+Para la arquitectura dividí el software en "capas", una estructura similar a "Clean Architecture", así poder separar mejor las responsabilidadaes y lograr que se convierta en un software mantenible, escalable y con facilidad para los cambios. Estas capas tienen distintas responsabilidades, obligaciones y prohibiciones.
 
-Es importante mencionar que la arquitectura se basa fuértemente en las distintas entidades del negocio, las mismas afectan principalmente en la estructura de carpetas y del código en general.
+Es importante mencionar que la arquitectura se basa fuértemente en las distintas entidades del negocio, las mismas afectan en la estructura de carpetas y del código en general.
 
 Las entidades del Entrenaly son:
 
@@ -39,11 +39,9 @@ El siguiente gráfico muestra cómo están compuestas las capas de la estructura
 
 ![entrenaly-layers](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/26fbc9c7-ae3b-4be4-a54b-a3b66af89f12)
 
-Mientras más lejos del centro se encuentra una capa, más se utiliza dentro del sistema por lo que es fundamental que sea fácil manipular, modificar y reemplazar de ser necesario, si no generará un impacto negativo en todo el software.
+Mientras más lejos del centro se encuentra una capa, más se utiliza a lo largo de todo el software por lo que es fundamental que sea fácil de modificar y reemplazar de ser necesario, si no generará un impacto negativo en todo el software. Caso contrario, mientras más cerca del centro esté una capa menos se utiliza a lo largo de todo el software porque forma parte del core del mismo, por lo que es poco probable que se tenga que cambiar o modificar a futuro.
 
-Caso contrario, mientras más cerca del centro esté una capa más forma parte del core de la aplicación por lo que es poco probable que se tenga que cambiar a futuro.
-
-Además, podemos ver unas flechas que van desde el centro hacia afuera, las mismas indican una obligatoriedad al momento de interactuar entre si. Esto puesto en práctica no es más que una regla de imports, por ejemplo, desde la carpeta de Services no podemos interactuar con la carpeta Routes ya que es el core de nuestra aplicación, sin embargo desde los hooks podemos acceder a los services.
+Además, podemos ver unas flechas que van desde el centro hacia afuera, las mismas indican como se deben comportar las capas cuando interactúen entre si. Esto puesto en práctica no es más que una regla de imports, por ejemplo, desde la carpeta de Services no podemos interactuar con la carpeta Routes ya que es el core de nuestra aplicación, sin embargo desde los hooks podemos acceder a los services.
 
 - Routes puede importar Pages y Layouts
 - Pages y Layouts pueden importarse tanto a si mismos como a Components y Context.
@@ -55,29 +53,29 @@ Como mencioné anteriormente, Services, Hooks y Lib al ser carpetas que están e
 
 Repasemos cada capa con sus respectivas carpetas:
 
-Routes:  
-Hace referencia a las rutas de nuestra aplicación, ya sea para el administrados, entrenadoy y/o cliente.
+**Routes**  
+Hace referencia a las rutas de nuestra aplicación, ya sea para el administrados, entrenador y/o cliente, las mismas se van a encargar de manejar la lógica de qué ruta devolver dependiendo los requerimientos.
 
-Pages:  
-Hace referencia a las páginas de nuestra aplicación, las que van a ser llamadas dentro de las rutas.
+**Pages**  
+Hace referencia a las páginas de nuestra aplicación, las que van a ser llamadas dentro de las rutas, cada página se va a encargar de toda la lógica que se tenga que enviar a cada ruta en específico.
 
-Layout:  
-Hace referencia a la plantilla por defecto que van a tener todas las páginas de nuestra aplicación, el mismo va a ser llamado dentro de las páginas.
+**Layout**  
+Hace referencia a la plantilla que van a tener cada página que se muestre en nuestra aplicación, las mismas van a ser llamadas dentro de las páginas y podrán variar dependiendo la autenticación o el rol del usuario.
 
-Context:  
-Hace referencia a todos los react context que van a manejar los distintos estados globales dentro de nuestra aplicación, los mismos van a ser llamados principalmente por las páginas y los componentes.
+**Context**  
+Hace referencia a todos los React Context que van a manejar los distintos estados globales dentro de nuestra aplicación, los mismos van a ser llamados principalmente por las páginas y los componentes.
 
-Components:  
+**Components** 
 Hace referencia a todos los componentes que se utilizan a lo largo de las distintas páginas y layouts, dentro de los mismos encontraremos componentes de tipo "common" (componentes comunes de react), componentes de tipo "forms" (formularios) y componentes de tipo "dialogs" (también llamados modales). Lo ideal es que si un componente se utiliza dos veces de la misma forma dentro de nuestra aplicación debe ir acá.
 
-Services:  
-Hace referencia a la parte dentro de nuestra aplicación que interactúa con el backend, básicamente operaciones CRUD.
+**Services**  
+Hace referencia a la parte dentro de nuestra aplicación que interactúa con las distintas api's necesarias para el funcionamiento del software.
 
-Hooks:  
+**Hooks**  
 Hace referencia a funciones específicas que se repiten a lo largo de nuestra aplicación, idealmente se utilizan para todos los servicios de tipo GET, así poder tener un código más simple y controlar mejor cada petición.
 
-Lib:  
-Hace referencia a librerías, herramientas específicas y/o paquetes que se utilizan a lo largo de la aplicación. Por ejemplo configuraciónes, constantes, types, utils, etc.
+**Lib**  
+Hace referencia a la librería dentro de nuestro software, algo similar a una librería de JavaScript, es decir herramientas específicas y/o paquetes que se utilizan a lo largo de la aplicación. Por ejemplo configuraciónes, constantes, types, utils, notificaciones, etc.
 
 ### Estructura de carpetas
 
@@ -88,15 +86,15 @@ ComponentesReact.tsx
 
 Dentro de cada carpeta principal que conforman las distintas capas del software veremos que las entidades juegan un punto clave ya que dividimos los archivos que tengan dentro en base a las mismas.
 
-![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/da378b2c-13d0-49db-ab1d-b2b461a3c71f)
-
 Esto lo podemos ver por ejemplo en la carpeta de Services, donde los distintos servicios se dividen entre cuatro carpetas: Client, Exercise, Plan, User, haciendo alusión a las entidades del software.
 
-![folder](https://github.com/juanuranidev/juanuranidev/assets/96846723/d55d344d-6ed2-4546-aca8-e3c88ff3c286)
+![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/da378b2c-13d0-49db-ab1d-b2b461a3c71f)
 
-También podemos verlo en la carpeta de routes la cual en este caso contiene una más llamada "public" la cuál hace referencia a las rutas públicas.
+También podemos ver este patrón en la carpeta Routes la cual en este caso en particular divide la entidad de user en base a los distintos roles y agrega una nueva carpeta llamada "public" la cual hace referencia a las rutas públicas.
 
-Lo mismo se repite tanto para Pages, Constants, Layouts, Hooks, y Forms, el hacer esto ayuda a dividir mejor los archivos y no tener una carpeta con demasiadas carpetas dentro.
+![frontent-architecture](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/d3642293-b79c-4230-b188-95ab87fa1b4f)
+
+Este mismo patrón se repite tanto para Pages, Constants, Layouts, Hooks, y Forms, el hacer esto ayuda a dividir mejor los archivos y no tener una carpeta con demasiadas carpetas dentro.
 
 Cada carpeta que contenga un componente de React (ComponentesReact.tsx) contará con la siguiente estructura:
 
@@ -108,26 +106,25 @@ Cada carpeta que contenga un componente de React (ComponentesReact.tsx) contará
       Component.tsx - Componente principal
 ```
 
-Las carpetas que contienen archivos de typescript (archivos-typescript.ts) deben estar solos, sin carpeta principal, siempre y cuando no se basen en las entidades del proyecto. Veamos unos ejemplos:
+Las carpetas que contienen archivos de typescript, por ejemplo archivo-typescript.ts, deben estar solos, sin carpeta principal, siempre y cuando no se basen en las entidades del proyecto. Veamos unos ejemplos:
+
+Los services tienen distintas carpetas dependiendo la entidad porque se basan principalmente en las mismas.
 
 ![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/da378b2c-13d0-49db-ab1d-b2b461a3c71f)
 
-Los services tienen distintas carpetas dependiendo la entidad porque se basan fuértemente en las mismas.
+En cambio, tanto env.ts como toast.ts contienen archivos typescript normales, que son independiente de las entidades, y como no dependen de las mismas deben guardarse sin carpeta.
 
 ![folder](https://github.com/juanuranidev/entrenaly-frontend/assets/96846723/5f636343-00b5-4594-957b-80f9b06c978f)
 
-En cambio, tanto env.ts como toast.ts contienen archivos typescript normales, que son independiente de las entidades y como no dependen de las mismas deben guardarse sin carpeta.
-
 ### Sobre la forma de escribir código
 
-Siempre es importante definir cómo se debe escribir el código, si bien no hay que encontrar la forma perfecta de hacerlo es fundamental seguir una buena linealidad y que esté documentada, así es más fácil el entenderlo a futuro y no aumenta el costo de la comprensión del software.
+Dentro de cada software es importante definir cómo se debe escribir el código, si bien no hay que encontrar la forma perfecta de hacerlo es fundamental seguir una buena linealidad que esté documentada, así será más fácil el entenderlo a futuro y no aumentará el costo de la comprensión del software.
 
-No voy a profundizar demasiado en esto, sino voy a dar una simple manera de escribir código en base a la capa donde nos encontremos, la acción que queremos realizar y, de ser así, la entidad con la que estamos interactuando, abstrayendonos de la tecnología y de los métodos en sí.
+A continuación voy a dar una manera simple de escribir código en base a la capa donde nos encontremos, la acción que queremos realizar y, de ser así, la entidad con la que estamos interactuando, abstrayéndonos de la tecnología y de los métodos en sí.
 
-Repasemos esta regla dentro de las distintas capas
+Repasemos esta regla dentro de las distintas capas:
 
-Pages y Components:
-
+**Pages y Components**  
 Cualquier función dentro de estas capas que se encargue de realizar algo específico deberá ser nombrada de la siguiente manera:
 
 ```bash
@@ -138,8 +135,8 @@ Cualquier función dentro de estas capas que se encargue de realizar algo espec�
     3 - Entidad o componente con el que interactúa.
 ```
 
-Hooks:  
-Los hooks deben ser nombrados y utilizados de la siguiente manera, ya sea que se trate de una entidad del negocio (Exercise) o una entidad aparte (Debounce):
+**Hooks**  
+Los hooks deben ser nombrados y utilizados de la siguiente manera, con respecto al punto 3 el mismo puede cariar ya sea que se trate de una entidad del negocio (Exercise) o una entidad aparte (debounce):
 
 ```bash
     1[use]2[Read]3[Exercises]
@@ -149,7 +146,7 @@ Los hooks deben ser nombrados y utilizados de la siguiente manera, ya sea que se
     3 - Entidad
 ```
 
-Services:  
+**Services**  
 Los services deben ser nombrados y utilizados de la siguiente manera, ya sea que se trate de una entidad del negocio (Exercise) o una entidad aparte (CloudinaryCredentials):
 
 ```bash
@@ -160,7 +157,7 @@ Los services deben ser nombrados y utilizados de la siguiente manera, ya sea que
     3 - Especificador de la capa
 ```
 
-Lib:  
+**Lib**  
 Dentro de lib puede variar mucho la estructura ya que podemos encontrarnos con distintos tipos de librerías, herramientas componentes de react o funciones. Sin embargo, con respecto a las funciones siempre trataremos de mantener este formato:
 
 ```bash
@@ -175,7 +172,7 @@ Dentro de lib puede variar mucho la estructura ya que podemos encontrarnos con d
 
 ## Instalación
 
-Para instalar y correr el proyecto de forma local lee los siguientes pasos
+Para instalar y correr el proyecto de forma local sigue los siguientes pasos
 
 ### Prerrequisitos
 
@@ -204,8 +201,8 @@ Antes de realizar la instalación, asegúrate de tener las siguientes herramient
 
 4. Crea un archivo .env basado en el archivo .env.example y agrega tus variables de entorno:
    `VITE_BACKEND_BASE_URL=`  
-   `VITE_FRONTEND_BASE_URL=`  
-   `VITE_APP_VERSION=`  
+   `VITE_FRONTEND_BASE_URL=http://localhost:5173/`  
+   `VITE_APP_VERSION=1.2.0`  
    `VITE_FIREBASE_API_KEY=`  
    `VITE_FIREBASE_AUTH_DOMAIN=`  
    `VITE_FIREBASE_PROJECT_ID=`  
