@@ -319,25 +319,25 @@ Let's review each layer with its respective folders:
 **Routes**  
 Refers to the routes of our application, either for the administrator, trainer and/or client, they will handle the logic of which route to return depending on the requirements.
 
-**Pages  
+**Pages**  
 Refers to the pages of our application, which will be called within the routes, each page will be responsible for all the logic that has to be sent to each specific route.
 
-**Layout  
+**Layout**  
 Refers to the template that will have each page that is displayed in our application, they will be called within the pages and may vary depending on the authentication or user role.
 
-**Context  
+**Context**  
 It makes reference to all the React Context that are going to handle the different global states inside our application, they are going to be called mainly by the pages and the components.
 
-**Components 
+**Components** 
 Refers to all the components that are used throughout the different pages and layouts, within them we will find components of type "common" (common react components), components of type "forms" (forms) and components of type "dialogs" (also called "modal"). Ideally, if a component is used twice in the same way within our application it should go here.
 
-**Services  
+**Services**  
 Refers to the part within our application that interacts with the different api's necessary for the software to work.
 
-**Hooks  
+**Hooks**  
 Refers to specific functions that are repeated throughout our application, ideally they are used for all GET type services, so we can have a simpler code and better control each request.
 
-**Lib  
+**Lib**  
 Refers to the library within our software, something similar to a JavaScript library, i.e. specific tools and/or packages that are used throughout the application. For example configurations, constants, types, utils, notifications, etc.
 
 ### Folder structure
@@ -391,7 +391,7 @@ Let´s review this rule within the different layers:
 Any function within these layers that is responsible for doing something specific should be named as follows:
 
 ```bash
-    1[handle]2[Open]3[ModalExercises].
+    1[handle]2[Open]3[ModalExercises]
 
     1 - Identifier of the .tsx file layer
     2 - Verb based on the action to be performed (open, modify, resize, etc).
@@ -408,6 +408,7 @@ The hooks must be named and used in the following way, with respect to point 3 t
     2 - Verb based on the CRUD acronym
     3 - Entity
 ```
+
 **Services**  
 Services should be named and used as follows, whether it is a business entity (Exercise) or a separate entity (CloudinaryCredentials):
 
@@ -447,17 +448,17 @@ Before performing the installation, make sure you have the following tools confi
 ### Installation steps
 
 1. Clone this repository:
-   ````bash
+   ```bash
    git clone https://github.com/juanuranidev/entrenaly-frontend
    ```
 
 2. Navigate to the directory:
-   ````bash
+   ```bash
    cd entrenaly-frontend
    ```
 
 3. Install the dependencies:
-   ````bash
+   ```bash
    npm install
    ```
 
