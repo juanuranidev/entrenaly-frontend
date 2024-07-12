@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Button, Grid, IconButton, Stack } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
 import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";
 import { PlanDay } from "lib/types/plan/plan.types";
 import PageTitle from "components/common/page-title/PageTitle";
@@ -20,7 +20,7 @@ export default function ViewWeeklyPlan() {
         <PageTitle
           title={plan?.name ?? ""}
           action={
-            <Stack alignItems="center" justifyContent="space-between">
+            <>
               <IconButton>
                 <Icons.download />
               </IconButton>
@@ -29,9 +29,9 @@ export default function ViewWeeklyPlan() {
                 startIcon={<Icons.undo />}
                 onClick={() => navigate("/client/plans")}
               >
-                Volver
+                Volvera
               </Button>
-            </Stack>
+            </>
           }
         />
       </Grid>
