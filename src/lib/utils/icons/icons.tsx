@@ -15,6 +15,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -42,6 +43,7 @@ const Icons = {
   visibilityOff: (props: any) => <VisibilityOffIcon {...props} />,
   download: (props: any) => <DownloadIcon {...props} />,
   down: (props: any) => <KeyboardArrowDownIcon {...props} />,
+  calendar: (props: any) => <CalendarMonthIcon {...props} />,
 };
 
 export default Icons;
