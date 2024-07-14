@@ -51,5 +51,4 @@ export default defineConfig({
       components: "/src/components",
     },
   },
-  base: "https://entrenaly.vercel.app/",
 });
