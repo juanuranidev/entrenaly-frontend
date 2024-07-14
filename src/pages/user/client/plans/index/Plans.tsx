@@ -4,6 +4,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
 import PageTitle from "components/common/page-title/PageTitle";
 import PlanCard from "./components/plan-card/PlanCard";
+import { Plan } from "lib/types/plan/plan.types";
 
 export default function Plans() {
   const { userData } = useAuthContext();
@@ -29,10 +30,13 @@ export default function Plans() {
               flexWrap="wrap"
               flexDirection="row"
               alignItems="center"
-              gap={theme?.spacing(3)}
+              gap={theme?.spacing(2)}
+              justifyContent={{ xs: "center", md: "flex-start" }}
             >
               {plans.length ? (
-                plans.map((plan: any) => <PlanCard plan={plan} key={plan.id} />)
+                plans.map((plan: Plan) => (
+                  <PlanCard plan={plan} key={plan.id} />
+                ))
               ) : (
                 <Typography fontWeight={600} fontSize={20}>
                   ¡No tienes planes todavía!

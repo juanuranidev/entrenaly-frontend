@@ -1,4 +1,11 @@
-import { Box, Stack, Button, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Button,
+  IconButton,
+  Typography,
+  Badge,
+} from "@mui/material";
 import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useEffect, useState } from "react";
 import { useReadExercises } from "hooks/exercise/useReadExercises";
@@ -18,12 +25,12 @@ type Props = {
 };
 
 export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [exerciseCategorySelected, setExerciseCategorySelected] =
+    useState<ExerciseCategory | null>(null);
   const [exercisesSelected, setExercisesSelected] = useState<Exercise[] | []>(
     []
   );
-  const [exerciseCategorySelected, setExerciseCategorySelected] =
-    useState<ExerciseCategory | null>(null);
 
   const { theme } = useThemeContext();
   const { debouncedValue } = useDebounce(searchValue, 500);
@@ -58,6 +65,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
   useEffect(() => {
     if (!open) {
       setSearchValue("");
+      setExercisesSelected([]);
       setExerciseCategorySelected(null);
     }
   }, [open]);
@@ -119,7 +127,32 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
           )}
         </Stack>
       </Box>
-      <Box py={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
+      <Box pb={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
+        <Stack
+          gap={2}
+          display="flex"
+          flexDirection="row"
+          pt={theme?.spacing(4)}
+          my={theme?.spacing(2)}
+          overflow={{
+            xs: "scroll",
+            md: "hidden",
+          }}
+          justifyContent={{
+            xs: "flex-start",
+            md: "center",
+          }}
+          flexWrap={{
+            xs: "nowrap",
+            md: "wrap",
+          }}
+        >
+          {exercisesSelected.map((exercise: Exercise, index: number) => (
+            <Badge badgeContent={index + 1} color="primary">
+              <img src={exercise.image} width="50rem" />;
+            </Badge>
+          ))}
+        </Stack>
         <Button
           fullWidth
           variant="contained"

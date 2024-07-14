@@ -9,12 +9,52 @@ export default function Updates() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
-  const [currentView, setCurrentView] = useState<string>("Versión 1.0.0");
+  const [currentView, setCurrentView] = useState<string>("Versión 1.4.0");
 
   const profileNavbarItems = () => {
     return [
       {
-        name: " Versión 1.3.0",
+        name: "Versión 1.4.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 14/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Ahora se puede descargar un plan en formato pdf.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se actualizó la pantalla de planes para los clientes.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Ahora se pueden ver los ejercicios que se están seleccionado
+                para agregarlos a un plan.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Se arreglaron bugs y se hicieron varias mejoras visuales.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
+      {
+        name: "Versión 1.3.0",
         view: (
           <Grid
             item
@@ -43,7 +83,7 @@ export default function Updates() {
         ),
       },
       {
-        name: " Versión 1.2.0",
+        name: "Versión 1.2.0",
         view: (
           <Grid
             item

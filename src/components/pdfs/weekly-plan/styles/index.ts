@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottom: "1px solid black",
     text: {
-      fontSize: 15,
+      fontSize: 12,
       marginBottom: 5,
     },
     logo: {

@@ -60,9 +60,10 @@ export default function PlanRow({ plan }: Props) {
             Ver plan
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, plan?.id)
-            }
+            onClick={() => {
+              downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, plan?.id);
+              setAnchorEl(null);
+            }}
           >
             Descargar pdf
           </MenuItem>

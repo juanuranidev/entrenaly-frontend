@@ -15,10 +15,10 @@ export default function WeeklyPlanPdf({ plan }: Props) {
       <Page size="A4" style={styles?.page}>
         <View style={styles?.header}>
           <View>
-            <Text style={styles?.header?.text}>Nombre: {plan?.name}</Text>
+            <Text style={styles?.header?.text}>{plan?.name}</Text>
             <Text style={styles?.header?.text}>Tipo: {plan?.type?.name}</Text>
             <Text style={styles?.header?.text}>
-              Fecha de creación: {moment(plan?.createdAt).format("DD/MM/YY")}
+              Inicio: {moment(plan?.createdAt).format("DD/MM/YY")}
             </Text>
           </View>
           <View>
@@ -40,7 +40,7 @@ export default function WeeklyPlanPdf({ plan }: Props) {
                   <Text
                     style={{
                       ...styles?.day?.exerciseName,
-                      color: exercise?.superset ? "blue" : "",
+                      color: exercise?.superset ? "#305FDE" : "",
                     }}
                   >
                     {exercise?.name}{" "}

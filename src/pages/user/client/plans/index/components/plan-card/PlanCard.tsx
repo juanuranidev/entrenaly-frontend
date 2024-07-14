@@ -15,9 +15,15 @@ export default function PlanCard({ plan }: Props) {
   return (
     <Card
       sx={{
-        flexGrow: 1,
         cursor: "pointer",
         padding: theme?.spacing(2),
+        width: {
+          xs: "100%",
+          sm: `calc(50% - ${theme?.spacing(2)})`,
+          md: "100%",
+          lg: `calc(33.33% - ${theme?.spacing(2)})`,
+          xl: `calc(25% - ${theme?.spacing(2)})`,
+        },
         "&:hover": {
           backgroundColor: theme?.colors?.background?.secondary,
           transition: "ease 0.4s",
