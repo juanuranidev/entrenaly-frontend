@@ -1,8 +1,14 @@
 import BaseLayout from "../components/base-layout/BaseLayout";
 import Icons from "lib/utils/icons/icons";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 export default function TrainerLayout() {
-  const navbarItems = [
+  const navbarItems: navbarItem[] | [] = [
     {
       title: "Clientes",
       url: "/trainer/clients",
@@ -20,7 +26,7 @@ export default function TrainerLayout() {
     },
   ];
 
-  const profileItems = [
+  const profileItems: navbarItem[] | [] = [
     {
       title: "Perfil",
       url: "/trainer/profile",

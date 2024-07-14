@@ -6,7 +6,6 @@ import {
   Dialog,
   IconButton,
   Typography,
-  DialogTitle,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useState } from "react";
@@ -28,11 +27,11 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <Box
+      {...other}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
         <Grid container spacing={2} sx={{ padding: 2 }}>
@@ -60,12 +59,12 @@ export default function InstallAppDialog({ open, close }: Props) {
 
   return (
     <Dialog open={open} onClose={close} maxWidth="sm">
-      <DialogTitle display="flex" justifyContent="flex-end">
-        <IconButton onClick={close}>
-          <Icons.close />
-        </IconButton>
-      </DialogTitle>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+        }}
+      >
         <Tabs
           value={value}
           variant="fullWidth"
@@ -74,6 +73,9 @@ export default function InstallAppDialog({ open, close }: Props) {
         >
           <Tab label="Navegador" {...a11yProps(0)} />
           <Tab label="Celular" {...a11yProps(1)} />
+          <IconButton onClick={close}>
+            <Icons.close />
+          </IconButton>
         </Tabs>
       </Box>
       <Box height={{ xs: "18rem", sm: "22rem", md: "28rem" }} overflow="auto">

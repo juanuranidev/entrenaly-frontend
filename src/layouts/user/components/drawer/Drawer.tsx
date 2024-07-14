@@ -3,10 +3,16 @@ import { Box, List, useMediaQuery, Drawer as MUIDrawer } from "@mui/material";
 import Logo from "components/common/logo/Logo";
 import NavbarItem from "../navbar-item/NavbarItem";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 type Props = {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (value: boolean) => void;
-  navbarItems: any;
+  navbarItems: navbarItem[] | [];
 };
 
 export default function Drawer({
@@ -49,7 +55,7 @@ export default function Drawer({
           <Logo showVersion />
         </Box>
         <List>
-          {navbarItems.map((item: any) => (
+          {navbarItems.map((item: navbarItem) => (
             <NavbarItem
               item={item}
               key={item?.title}

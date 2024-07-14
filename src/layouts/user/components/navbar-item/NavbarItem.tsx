@@ -2,8 +2,14 @@ import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeContext } from "contexts/theme/Theme";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 type Props = {
-  item: any;
+  item: navbarItem;
   setIsDrawerOpen: (value: boolean) => void;
 };
 
@@ -18,7 +24,7 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
   return (
     <ListItemButton
       color="primary"
-      key={item.url}
+      key={item?.url}
       sx={{
         marginY: theme?.spacing(1),
         backgroundColor: currentView

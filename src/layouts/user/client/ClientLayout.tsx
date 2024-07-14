@@ -1,8 +1,14 @@
 import BaseLayout from "../components/base-layout/BaseLayout";
 import Icons from "lib/utils/icons/icons";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 export default function ClientLayout() {
-  const navbarItems = [
+  const navbarItems: navbarItem[] | [] = [
     {
       title: "Planes",
       url: "/client/plans",
@@ -10,12 +16,12 @@ export default function ClientLayout() {
     },
   ];
 
-  const profileItems = [
-    {
-      title: "Perfil",
-      url: "/client/profile",
-      icon: <Icons.person fontSize="medium" />,
-    },
+  const profileItems: navbarItem[] | [] = [
+    // {
+    //   title: "Perfil",
+    //   url: "/client/profile",
+    //   icon: <Icons.person fontSize="medium" />,
+    // },
   ];
 
   return <BaseLayout navbarItems={navbarItems} profileItems={profileItems} />;

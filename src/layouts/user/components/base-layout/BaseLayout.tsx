@@ -5,14 +5,20 @@ import { Outlet } from "react-router-dom";
 import Drawer from "../drawer/Drawer";
 import Header from "../header/Header";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 type Props = {
-  navbarItems: any;
-  profileItems: any;
+  navbarItems: navbarItem[] | [];
+  profileItems: navbarItem[] | [];
 };
 
 export default function BaseLayout({ navbarItems, profileItems }: Props) {
   const { theme } = useThemeContext();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
   return (
     <Stack direction="row" height="100dvh">

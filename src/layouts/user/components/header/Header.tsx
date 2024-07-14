@@ -3,9 +3,15 @@ import Profile from "../profile/Profile";
 import { useThemeContext } from "contexts/theme/Theme";
 import { IconButton, useMediaQuery, Box } from "@mui/material";
 
+type navbarItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
 type Props = {
   setIsDrawerOpen: (value: boolean) => void;
-  profileItems: any;
+  profileItems: navbarItem[] | [];
 };
 
 export default function Header({ setIsDrawerOpen, profileItems }: Props) {

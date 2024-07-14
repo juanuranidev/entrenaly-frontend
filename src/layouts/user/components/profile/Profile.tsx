@@ -22,7 +22,17 @@ import { useNavigate } from "react-router-dom";
 import Icons from "lib/utils/icons/icons";
 import InstallAppDialog from "components/dialogs/install-app-dialog/InstallAppDialog";
 
-export default function Profile({ profileItems }: any) {
+type profileItem = {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+};
+
+type Props = {
+  profileItems: profileItem[] | [];
+};
+
+export default function Profile({ profileItems }: Props) {
   const navigate = useNavigate();
   const anchorRef = useRef<any>(null);
 
@@ -54,7 +64,6 @@ export default function Profile({ profileItems }: any) {
           ref={anchorRef}
           onClick={() => setOpen((prevOpen) => !prevOpen)}
           sx={{
-            // display: "flex",
             p: theme?.spacing(1),
             borderRadius: theme?.spacing(1),
             "&:hover": {
@@ -87,7 +96,7 @@ export default function Profile({ profileItems }: any) {
         >
           <ClickAwayListener onClickAway={() => setOpen(false)}>
             <List sx={{ padding: theme?.spacing(1) }}>
-              {profileItems.map((item: any) => (
+              {profileItems.map((item: profileItem) => (
                 <ListItemButton
                   key={item?.title}
                   sx={{
