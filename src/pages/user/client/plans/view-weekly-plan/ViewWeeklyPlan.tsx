@@ -1,11 +1,13 @@
+import { Button, Grid, IconButton, Stack } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Button, Grid, IconButton } from "@mui/material";
-import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";
+import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
+import { downloadPdfLib } from "lib/utils/download-pdf/DownloadPdf";
 import { PlanDay } from "lib/types/plan/plan.types";
-import PageTitle from "components/common/page-title/PageTitle";
 import Icons from "lib/utils/icons/icons";
+import PageTitle from "components/common/page-title/PageTitle";
+import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";
 
 export default function ViewWeeklyPlan() {
   const { planId } = useParams();
@@ -20,8 +22,17 @@ export default function ViewWeeklyPlan() {
         <PageTitle
           title={plan?.name ?? ""}
           action={
-            <>
-              <IconButton>
+            <Stack
+              flexDirection="row"
+              alignItems="center"
+              gap={theme?.spacing(2)}
+              justifyContent="space-between"
+            >
+              <IconButton
+                onClick={() =>
+                  downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, planId)
+                }
+              >
                 <Icons.download />
               </IconButton>
               <Button
@@ -29,9 +40,9 @@ export default function ViewWeeklyPlan() {
                 startIcon={<Icons.undo />}
                 onClick={() => navigate("/client/plans")}
               >
-                Volvera
+                Volver
               </Button>
-            </>
+            </Stack>
           }
         />
       </Grid>

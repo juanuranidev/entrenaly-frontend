@@ -8,6 +8,8 @@ import {
   IconButton,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
+import { downloadPdfLib } from "lib/utils/download-pdf/DownloadPdf";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Plan } from "lib/types/plan/plan.types";
@@ -56,6 +58,13 @@ export default function PlanRow({ plan }: Props) {
             onClick={() => navigate(`/trainer/plans/view/weekly/${plan?.id}`)}
           >
             Ver plan
+          </MenuItem>
+          <MenuItem
+            onClick={() =>
+              downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, plan?.id)
+            }
+          >
+            Descargar pdf
           </MenuItem>
           <MenuItem
             onClick={() => navigate(`/trainer/plans/edit/weekly/${plan?.id}`)}

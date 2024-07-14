@@ -1,7 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useThemeContext } from "contexts/theme/Theme";
-import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
 import { Button, Grid, IconButton, Stack } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
+import { useThemeContext } from "contexts/theme/Theme";
+import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
+import { downloadPdfLib } from "lib/utils/download-pdf/DownloadPdf";
 import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import PageTitle from "components/common/page-title/PageTitle";
@@ -22,10 +24,15 @@ export default function ViewWeeklyPlan() {
           action={
             <Stack
               flexDirection="row"
-              justifyContent="space-between"
               alignItems="center"
+              gap={theme?.spacing(2)}
+              justifyContent="space-between"
             >
-              <IconButton>
+              <IconButton
+                onClick={() =>
+                  downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, planId)
+                }
+              >
                 <Icons.download />
               </IconButton>
               <Button
@@ -39,7 +46,6 @@ export default function ViewWeeklyPlan() {
           }
         />
       </Grid>
-
       {plan?.days?.length
         ? plan?.days?.map((day: PlanDay) => (
             <WeeklyPlanDay key={day?.dayOfWeek?.id} day={day} />
