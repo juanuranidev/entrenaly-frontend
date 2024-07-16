@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Drawer from "../drawer/Drawer";
 import Header from "../header/Header";
+import MobileNavbar from "../mobile-navbar/MobileNavbar";
 
 type navbarItem = {
   title: string;
@@ -41,6 +42,7 @@ export default function BaseLayout({ navbarItems, profileItems }: Props) {
           <Outlet />
         </Box>
       </Box>
+      <MobileNavbar navbarItems={navbarItems} />
     </Stack>
   );
 }
