@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 type navbarItem = {
   title: string;
   url: string;
@@ -10,5 +12,7 @@ type Props = {
 
 export default function MobileNavbar({ navbarItems }: Props) {
   console.log(navbarItems);
-  return <div>MobileNavbar</div>;
+  return <Box>
+    <p>Test</p>
+  </Box>;
 }
