@@ -12,7 +12,9 @@ type Props = {
 
 export default function MobileNavbar({ navbarItems }: Props) {
   console.log(navbarItems);
-  return <Box>
-    <p>Test</p>
-  </Box>;
+  return (
+    <Box>
+      <p>Test</p>
+    </Box>
+  );
 }
