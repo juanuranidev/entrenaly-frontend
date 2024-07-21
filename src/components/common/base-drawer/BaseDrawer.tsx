@@ -26,7 +26,7 @@ export default function BaseDrawer({
 }: Props) {
   const { theme } = useThemeContext();
   const isSmallScreen: boolean = useMediaQuery(
-    theme?.breakpoints?.down("md") || "(max-width:00px)"
+    theme?.breakpoints?.down("md") || "(max-width:900px)"
   );
 
   if (isSmallScreen) {

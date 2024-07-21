@@ -1,23 +1,17 @@
-import Icons from "lib/utils/icons/icons";
-import Profile from "../profile/Profile";
+import Logo from "components/common/logo/Logo";
+import Profile from "./components/profile/Profile";
+import { navbarItem } from "layouts/user/lib/types";
 import { useThemeContext } from "contexts/theme/Theme";
-import { IconButton, useMediaQuery, Box } from "@mui/material";
-
-type navbarItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
+import { useMediaQuery, Box } from "@mui/material";
 
 type Props = {
-  setIsDrawerOpen: (value: boolean) => void;
   profileItems: navbarItem[] | [];
 };
 
-export default function Header({ setIsDrawerOpen, profileItems }: Props) {
+export default function Header({ profileItems }: Props) {
   const { theme } = useThemeContext();
-  const isLargeScreen: boolean = useMediaQuery(
-    theme?.breakpoints?.up("md") || "(min-width:900px)"
+  const isSmallScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.down("md") || "(max-width:600px)"
   );
 
   return (
@@ -28,14 +22,10 @@ export default function Header({ setIsDrawerOpen, profileItems }: Props) {
         padding: theme?.spacing(1.5),
         backgroundColor: theme?.colors?.background?.primary,
         borderBottom: `2px solid ${theme?.colors?.border?.primary}`,
-        justifyContent: isLargeScreen ? "flex-end" : "space-between",
+        justifyContent: isSmallScreen ? "space-between" : "flex-end",
       }}
     >
-      {!isLargeScreen ? (
-        <IconButton onClick={() => setIsDrawerOpen(true)}>
-          <Icons.menu />
-        </IconButton>
-      ) : null}
+      {isSmallScreen ? <Logo /> : null}
       <Profile profileItems={profileItems} />
     </Box>
   );
