@@ -12,17 +12,17 @@ export default function TrainerLayout() {
     {
       title: "Clientes",
       url: "/trainer/clients",
-      icon: <Icons.person fontSize="medium" />,
+      icon: <Icons.person fontSize="small" />,
     },
     {
       title: "Planes",
       url: "/trainer/plans",
-      icon: <Icons.plans fontSize="medium" />,
+      icon: <Icons.plans fontSize="small" />,
     },
     {
       title: "Ejercicios",
       url: "/trainer/exercises",
-      icon: <Icons.dumbbell fontSize="medium" />,
+      icon: <Icons.dumbbell fontSize="small" />,
     },
   ];
 
@@ -30,7 +30,7 @@ export default function TrainerLayout() {
     {
       title: "Perfil",
       url: "/trainer/profile",
-      icon: <Icons.person fontSize="medium" />,
+      icon: <Icons.person fontSize="small" />,
     },
   ];
 

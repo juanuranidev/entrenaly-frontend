@@ -12,7 +12,7 @@ export default function ClientLayout() {
     {
       title: "Planes",
       url: "/client/plans",
-      icon: <Icons.plans fontSize="medium" />,
+      icon: <Icons.plans fontSize="small" />,
     },
   ];
 

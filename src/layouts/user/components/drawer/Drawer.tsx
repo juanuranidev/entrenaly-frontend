@@ -25,6 +25,10 @@ export default function Drawer({
     theme?.breakpoints?.up("md") || "(min-width:900px)"
   );
 
+  // const isSmallScreen: boolean = useMediaQuery(
+  //   theme?.breakpoints?.down("md") || "(max-width:600px)"
+  // );
+
   return (
     <MUIDrawer
       open={isDrawerOpen}

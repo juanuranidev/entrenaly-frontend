@@ -1,32 +1,30 @@
 import { Box, Stack } from "@mui/material";
-import Icons from "lib/utils/icons/icons";
-
-type navbarItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
+import { navbarItem } from "layouts/user/lib/types";
+import { useThemeContext } from "contexts/theme/Theme";
+import MobileNavbarItem from "./components/mobile-navbar-item/MobileNavbarItem";
 
 type Props = {
   navbarItems: navbarItem[] | [];
 };
 
 export default function MobileNavbar({ navbarItems }: Props) {
-  console.log(navbarItems);
+  const { theme } = useThemeContext();
+
   return (
     <Box
       style={{
-        position: "fixed",
         bottom: 0,
-        height: "5rem",
-        backgroundColor: "white",
         width: "100%",
+        position: "fixed",
+        backgroundColor: theme?.colors?.background?.primary,
       }}
     >
       <Stack flexDirection="row" justifyContent="center" alignItems="center">
-        <Icons.person style={{ flexGrow: 1 }} />
-        <Icons.plans style={{ flexGrow: 1 }} />
-        <Icons.dumbbell style={{ flexGrow: 1 }} />
+        {navbarItems.length
+          ? navbarItems.map((navbarItem: navbarItem) => (
+              <MobileNavbarItem navbarItem={navbarItem} />
+            ))
+          : null}
       </Stack>
     </Box>
   );

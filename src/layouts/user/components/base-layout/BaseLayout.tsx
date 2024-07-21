@@ -1,16 +1,11 @@
+import { Box, Stack, useMediaQuery } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
-import { Box, Stack } from "@mui/material";
+import { navbarItem } from "layouts/user/lib/types";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Drawer from "../drawer/Drawer";
 import Header from "../header/Header";
 import MobileNavbar from "../mobile-navbar/MobileNavbar";
-
-type navbarItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
 
 type Props = {
   navbarItems: navbarItem[] | [];
@@ -20,6 +15,10 @@ type Props = {
 export default function BaseLayout({ navbarItems, profileItems }: Props) {
   const { theme } = useThemeContext();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+  const isSmallScreen: boolean = useMediaQuery(
+    theme?.breakpoints?.down("md") || "(max-width:600px)"
+  );
 
   return (
     <Stack direction="row" height="100dvh">
@@ -42,7 +41,7 @@ export default function BaseLayout({ navbarItems, profileItems }: Props) {
           <Outlet />
         </Box>
       </Box>
-      <MobileNavbar navbarItems={navbarItems} />
+      {isSmallScreen ? <MobileNavbar navbarItems={navbarItems} /> : null}
     </Stack>
   );
 }
