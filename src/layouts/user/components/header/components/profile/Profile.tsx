@@ -19,17 +19,12 @@ import { useThemeContext } from "contexts/theme/Theme";
 import { useAuthContext } from "contexts/auth/Auth";
 import { signOutService } from "services/user/user.services";
 import { useNavigate } from "react-router-dom";
+import { navbarItem } from "layouts/user/lib/types";
 import Icons from "lib/utils/icons/icons";
 import InstallAppDialog from "components/dialogs/install-app-dialog/InstallAppDialog";
 
-type profileItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
-
 type Props = {
-  profileItems: profileItem[] | [];
+  profileItems: navbarItem[] | [];
 };
 
 export default function Profile({ profileItems }: Props) {
@@ -96,7 +91,7 @@ export default function Profile({ profileItems }: Props) {
         >
           <ClickAwayListener onClickAway={() => setOpen(false)}>
             <List sx={{ padding: theme?.spacing(1) }}>
-              {profileItems.map((item: profileItem) => (
+              {profileItems.map((item: navbarItem) => (
                 <ListItemButton
                   key={item?.title}
                   sx={{

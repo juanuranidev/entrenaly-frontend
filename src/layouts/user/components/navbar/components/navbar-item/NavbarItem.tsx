@@ -1,19 +1,13 @@
 import { ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeContext } from "contexts/theme/Theme";
-
-type navbarItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
+import { navbarItem } from "layouts/user/lib/types";
 
 type Props = {
   item: navbarItem;
-  setIsDrawerOpen: (value: boolean) => void;
 };
 
-export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
+export default function NavbarItem({ item }: Props) {
   const { theme } = useThemeContext();
 
   const navigate = useNavigate();
@@ -36,10 +30,7 @@ export default function NavbarItem({ item, setIsDrawerOpen }: Props) {
             : theme?.colors.text?.secondary,
         },
       }}
-      onClick={() => {
-        setIsDrawerOpen(false);
-        navigate(item?.url);
-      }}
+      onClick={() => navigate(item?.url)}
     >
       <ListItemIcon>{item?.icon}</ListItemIcon>
       <ListItemText>{item?.title}</ListItemText>

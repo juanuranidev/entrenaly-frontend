@@ -16,6 +16,7 @@ export default function MobileNavbar({ navbarItems }: Props) {
         bottom: 0,
         width: "100%",
         position: "fixed",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         backgroundColor: theme?.colors?.background?.primary,
       }}
     >

@@ -1,11 +1,6 @@
-import BaseLayout from "../components/base-layout/BaseLayout";
 import Icons from "lib/utils/icons/icons";
-
-type navbarItem = {
-  title: string;
-  url: string;
-  icon: JSX.Element;
-};
+import BaseLayout from "../components/base-layout/BaseLayout";
+import { navbarItem } from "../lib/types";
 
 export default function TrainerLayout() {
   const navbarItems: navbarItem[] | [] = [
