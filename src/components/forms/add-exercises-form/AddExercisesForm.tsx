@@ -129,18 +129,15 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
       </Box>
       <Box pb={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
         <Stack
-          gap={2}
           display="flex"
           flexDirection="row"
-          pt={theme?.spacing(4)}
+          pt={theme?.spacing(2)}
           my={theme?.spacing(2)}
+          gap={theme?.spacing(2)}
+          justifyContent="flex-start"
           overflow={{
             xs: "scroll",
             md: "hidden",
-          }}
-          justifyContent={{
-            xs: "flex-start",
-            md: "center",
           }}
           flexWrap={{
             xs: "nowrap",
@@ -149,7 +146,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
         >
           {exercisesSelected.map((exercise: Exercise, index: number) => (
             <Badge badgeContent={index + 1} color="primary">
-              <img src={exercise.image} width="50rem" />;
+              <img src={exercise.image} width="45rem" />;
             </Badge>
           ))}
         </Stack>

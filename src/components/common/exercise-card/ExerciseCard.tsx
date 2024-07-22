@@ -27,7 +27,7 @@ export default function ExerciseCard({
       spacing={theme?.spacing(1)}
       borderRadius={theme?.spacing(2)}
       width={{
-        base: `calc(100% - ${theme?.spacing(2)})`,
+        xs: `calc(100% - ${theme?.spacing(2)})`,
         sm: `calc(50% - ${theme?.spacing(2)})`,
       }}
       sx={{ cursor: "pointer", userSelect: "none" }}

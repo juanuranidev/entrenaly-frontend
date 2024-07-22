@@ -45,7 +45,20 @@ export default function ExercisesCategories({
   }
 
   return (
-    <Stack flexDirection="row" flexWrap="wrap" gap={theme?.spacing(2)}>
+    <Stack
+      display="flex"
+      flexDirection="row"
+      gap={theme?.spacing(2)}
+      justifyContent="flex-start"
+      overflow={{
+        xs: "scroll",
+        md: "hidden",
+      }}
+      flexWrap={{
+        xs: "nowrap",
+        md: "wrap",
+      }}
+    >
       {exercisesCategories.length
         ? exercisesCategories.map((exerciseCategory: ExerciseCategory) => (
             <Chip
