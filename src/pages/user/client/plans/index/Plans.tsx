@@ -5,6 +5,7 @@ import { useAuthContext } from "contexts/auth/Auth";
 import PageTitle from "components/common/page-title/PageTitle";
 import PlanCard from "./components/plan-card/PlanCard";
 import { Plan } from "lib/types/plan/plan.types";
+import OnboardingClientDialog from "components/dialogs/onboarding-client-dialog/OnboardingClientDialog";
 
 export default function Plans() {
   const { userData } = useAuthContext();
@@ -46,6 +47,7 @@ export default function Plans() {
           </Grid>
         </Card>
       </Grid>
+      <OnboardingClientDialog open close={() => {}} />
     </Grid>
   );
 }
