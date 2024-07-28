@@ -1,7 +1,8 @@
 export type Exercise = {
-  id: number;
+  id?: number;
   name: string;
-  category: ExerciseCategory;
+  category?: ExerciseCategory;
+  categoryId?: string | number;
   hasUser?: boolean;
   video?: string;
   image?: string;

@@ -10,7 +10,7 @@ import Puller from "../puller/Puller";
 
 type Props = {
   open: boolean;
-  children: any;
+  children: JSX.Element[];
   isLoading?: boolean;
   onClose: () => void;
   styles?: any;
