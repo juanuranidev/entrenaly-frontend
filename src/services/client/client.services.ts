@@ -49,3 +49,18 @@ export const updateClientMedicalInformationService = async (
 
   return response.data;
 };
+export const updateClientOnboardingStatusService = async (
+  clientId: string,
+  onboardingStatus: boolean
+) => {
+  const response = await request({
+    method: "POST",
+    url: "/client/v1/update/client-onboarding-status",
+    params: {
+      clientId,
+      onboardingStatus,
+    },
+  });
+
+  return response.data;
+};

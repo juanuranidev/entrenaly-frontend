@@ -1,7 +1,14 @@
-import { Box, Grid, Button, TextField, IconButton } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Button,
+  TextField,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { updateClientMedicalInformationService } from "services/client/client.services";
 import { useThemeContext } from "contexts/theme/Theme";
-import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Client } from "lib/types/client/client.types";
@@ -12,6 +19,7 @@ import Icons from "lib/utils/icons/icons";
 type Props = {
   open: boolean;
   onClose: () => void;
+  onboarding?: boolean;
   onSubmit?: () => Promise<void>;
   clientSelected: Client | null;
 };
@@ -20,6 +28,7 @@ export default function UpdateMedicalInformationForm({
   open,
   onClose,
   onSubmit,
+  onboarding,
   clientSelected,
 }: Props) {
   const { theme } = useThemeContext();
@@ -44,7 +53,11 @@ export default function UpdateMedicalInformationForm({
           await onSubmit();
         }
 
-        createSuccessToastLib("Cliente actualizado con éxito");
+        createSuccessToastLib(
+          onboarding
+            ? "Datos actualizadons con éxito"
+            : "Cliente actualizado con éxito"
+        );
         onClose();
       } catch (error) {
         createErrorToastLib("Error al actualizar los datos");
@@ -66,6 +79,14 @@ export default function UpdateMedicalInformationForm({
       />
       <Box height="calc(100% - 10rem)" overflow="auto">
         <Grid container spacing={theme?.spacing(4)}>
+          {onboarding ? (
+            <Grid item xs={12}>
+              <Typography fontSize={15} fontWeight={500}>
+                Completa tu ficha médica así tu entrenador tendrá más
+                información acerca de ti.
+              </Typography>
+            </Grid>
+          ) : null}
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth

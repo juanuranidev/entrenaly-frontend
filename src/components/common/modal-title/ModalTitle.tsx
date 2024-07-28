@@ -3,7 +3,7 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 
 type Props = {
   title: string;
-  action?: any;
+  action?: JSX.Element;
 };
 
 export default function ModalTitle({ title, action }: Props) {

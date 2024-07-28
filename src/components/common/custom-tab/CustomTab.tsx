@@ -2,9 +2,12 @@ import { Grid, ListItemButton, ListItemText } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
-  navbarItem: any;
-  currentView: any;
-  setCurrentView: any;
+  navbarItem: {
+    name: string;
+    view: JSX.Element;
+  };
+  currentView: string;
+  setCurrentView: (value: string) => void;
 };
 
 export default function CustomTab({
