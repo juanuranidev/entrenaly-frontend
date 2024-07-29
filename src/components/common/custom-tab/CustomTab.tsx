@@ -4,7 +4,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 type Props = {
   navbarItem: {
     name: string;
-    view: JSX.Element;
+    view: JSX.Element | JSX.Element[];
   };
   currentView: string;
   setCurrentView: (value: string) => void;

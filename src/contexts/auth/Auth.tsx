@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }: any) => {
   const handleManageSession = async () => {
     setIsLoading(true);
     try {
-      const response: any = await getUserSessionService();
+      const response = await getUserSessionService();
       if (!response) throw "Not an user in session";
 
       axios.defaults.headers.common["Authorization"] =

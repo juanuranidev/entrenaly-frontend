@@ -1,3 +1,4 @@
+import { Client } from "../client/client.types";
 import { Exercise } from "../exercise/exercise.types";
 import { User } from "../user/user.types";
 
@@ -7,7 +8,7 @@ export type Plan = {
   type: PlanType;
   category: PlanCategory;
   createdAt: string;
-  clients: any;
+  clients: Client[] | [];
   user?: User;
   days?: PlanDay[] | null;
 };

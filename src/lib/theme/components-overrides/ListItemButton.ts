@@ -1,4 +1,6 @@
-export default function ListItemButton(theme: any) {
+import { Theme } from "lib/types/theme.types";
+
+export default function ListItemButton(theme: Theme) {
   return {
     MuiListItemButton: {
       defaultProps: {

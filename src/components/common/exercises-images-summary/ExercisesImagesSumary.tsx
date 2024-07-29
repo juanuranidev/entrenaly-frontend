@@ -10,15 +10,15 @@ export default function ExercisesImagesSumary({ exercises }: Props) {
   const { theme } = useThemeContext();
 
   return (
-    <Stack direction="row" mr={theme?.spacing(1)} gap={theme?.spacing(1.5)}>
-      {exercises?.slice(0, 3).map((exercise: any, index: number) => {
-        const isVariant: boolean = exercise?.hasVariant;
+    <Stack direction="row" mr={theme?.spacing(2)} gap={theme?.spacing(2)}>
+      {exercises?.slice(0, 3).map((exercise: Exercise, index: number) => {
+        const hasVariant: boolean = exercise?.hasVariant;
 
         return (
           <img
             key={index}
-            alt={exercise?.name}
-            src={isVariant ? exercise?.variant?.image : exercise?.image}
+            alt={hasVariant ? exercise?.variant?.name : exercise?.name}
+            src={hasVariant ? exercise?.variant?.image : exercise?.image}
             style={{
               width: 50,
               height: 50,

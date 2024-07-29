@@ -1,4 +1,6 @@
-export default function Dialog(theme: any) {
+import { Theme } from "lib/types/theme.types";
+
+export default function Dialog(theme: Theme) {
   return {
     MuiDialog: {
       styleOverrides: {

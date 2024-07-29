@@ -3,7 +3,7 @@ import { useThemeContext } from "contexts/theme/Theme";
 
 type Props = {
   title: string;
-  action?: any;
+  action?: JSX.Element[];
 };
 
 export default function PageTitle({ title, action }: Props) {

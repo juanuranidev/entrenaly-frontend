@@ -1,6 +1,7 @@
 export type Exercise = {
   id?: number;
   name: string;
+  hasVariant: boolean;
   category?: ExerciseCategory;
   categoryId?: string | number;
   hasUser?: boolean;

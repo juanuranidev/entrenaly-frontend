@@ -15,6 +15,8 @@ import { useReadClients } from "hooks/client/useReadClients";
 import { useReadPlansCategories } from "hooks/plan/useReadPlansCategories";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useEffect } from "react";
+import { PlanCategory } from "lib/types/plan/plan.types";
+import { Client } from "lib/types/client/client.types";
 
 type Props = {
   formik: any;
@@ -76,7 +78,7 @@ export default function MainInformation({ formik, plan }: Props) {
           }
         >
           {plansCategories.length
-            ? plansCategories?.map((planCategory: any) => (
+            ? plansCategories?.map((planCategory: PlanCategory) => (
                 <MenuItem key={planCategory?.id} value={planCategory?.id}>
                   {planCategory?.name}
                 </MenuItem>
@@ -118,7 +120,7 @@ export default function MainInformation({ formik, plan }: Props) {
                   gap: theme?.spacing(2),
                 }}
               >
-                {selected?.map((value: any) => (
+                {selected?.map((value: Client) => (
                   <Chip
                     key={value.id}
                     color="primary"
