@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function TableCell(theme: Theme) {
+export default function TableCell(theme: any) {
   return {
     MuiTableCell: {
       styleOverrides: {

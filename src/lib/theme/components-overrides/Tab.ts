@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function Tab(theme: Theme) {
+export default function Tab(theme: any) {
   return {
     MuiTab: {
       styleOverrides: {

@@ -1,5 +1,5 @@
 export type Exercise = {
-  id?: number;
+  id: number;
   name: string;
   hasVariant: boolean;
   category?: ExerciseCategory;

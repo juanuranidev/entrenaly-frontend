@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function Card(theme: Theme) {
+export default function Card(theme: any) {
   return {
     MuiCard: {
       styleOverrides: {

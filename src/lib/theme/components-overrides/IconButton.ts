@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function IconButton(theme: Theme) {
+export default function IconButton(theme: any) {
   return {
     MuiIconButton: {
       styleOverrides: {

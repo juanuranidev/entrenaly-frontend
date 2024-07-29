@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function Alert(theme: Theme) {
+export default function Alert(theme: any) {
   return {
     MuiAlert: {
       styleOverrides: {

@@ -1,6 +1,4 @@
-import { Theme } from "lib/types/theme.types";
-
-export default function Button(theme: Theme) {
+export default function Button(theme: any) {
   const disabledStyle = {
     "&.Mui-disabled": {
       backgroundColor: "#eeeeee",

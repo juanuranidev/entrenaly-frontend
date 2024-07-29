@@ -10,7 +10,7 @@ import Typography from "./general/typography";
 import shadows from "./general/shadows";
 import colors from "./general/colors";
 
-export default function Theme({ children }: JSX.Element) {
+export default function Theme({ children }: any) {
   const themeTypography = Typography("Poppins, sans-serif");
   const themeOptions = useMemo(
     () => ({
