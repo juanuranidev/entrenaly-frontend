@@ -9,10 +9,40 @@ export default function Updates() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
 
-  const [currentView, setCurrentView] = useState<string>("Versión 1.4.0");
+  const [currentView, setCurrentView] = useState<string>("Versión 1.5.0");
 
   const profileNavbarItems = () => {
     return [
+      {
+        name: "Versión 1.5.0",
+        view: (
+          <Grid
+            item
+            container
+            xs={12}
+            md={6}
+            lg={9}
+            spacing={theme?.spacing(2)}
+          >
+            <Grid item xs={12}>
+              <Typography fontSize={18} fontWeight={600}>
+                Fecha: 28/07/2024
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Nueva barra de navegación para dispositivos móviles.
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography fontSize={{ xs: 14, lg: 16 }}>
+                Ahora tus clientes pueden cargar su ficha médica cuando entran
+                por primera vez en la aplicación.
+              </Typography>
+            </Grid>
+          </Grid>
+        ),
+      },
       {
         name: "Versión 1.4.0",
         view: (
