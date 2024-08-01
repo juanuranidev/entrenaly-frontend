@@ -63,6 +63,15 @@ export const readUserService = async () => {
   return response.data;
 };
 
+export const readAppReleasesService = async () => {
+  const response = await request({
+    method: "GET",
+    url: `users/v1/read/app-releases`,
+  });
+
+  return response.data;
+};
+
 // Auth provider
 export const registerWithEmailService = async (data: any): Promise<User> => {
   const response: UserCredential = await createUserWithEmailAndPassword(
