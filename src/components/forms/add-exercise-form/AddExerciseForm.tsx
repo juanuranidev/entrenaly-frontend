@@ -45,7 +45,7 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
     },
   });
 
-  const handleCreateExercise = async (exercise: Exercise) => {
+  const handleCreateExercise = async (exercise: any) => {
     setIsLoading(true);
     try {
       await createExerciseService(exercise);

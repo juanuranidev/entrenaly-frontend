@@ -10,9 +10,8 @@ import TableCell from "./TableCell";
 import IconButton from "./IconButton";
 import ButtonBase from "./ButtonBase";
 import ListItemButton from "./ListItemButton";
-import { Theme } from "lib/types/theme.types";
 
-export default function ComponentsOverrides(theme: Theme) {
+export default function ComponentsOverrides(theme: any) {
   return merge(
     Link(),
     Tabs(),

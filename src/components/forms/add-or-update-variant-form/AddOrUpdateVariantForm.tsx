@@ -24,7 +24,7 @@ import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;
-  exerciseId: number;
+  exerciseId: number | undefined | null;
   onClose: () => void;
   onSubmit?: () => Promise<void>;
   exerciseSelected?: Exercise;
