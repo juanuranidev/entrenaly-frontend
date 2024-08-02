@@ -1,11 +1,4 @@
-import {
-  Box,
-  Grid,
-  Button,
-  TextField,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Button, IconButton } from "@mui/material";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { updateClientMedicalInformationService } from "services/client/client.services";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -15,6 +8,9 @@ import { Client } from "lib/types/client/client.types";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import Icons from "lib/utils/icons/icons";
+import ModalTabs from "./components/moda-tabs/ModalTabs";
+import MedicalInformationTab from "./components/medical-information-tab/MedicalInformationTab";
+import TypeOfBodyTab from "./components/type-of-body-tab/TypeOfBodyTab";
 
 type Props = {
   open: boolean;
@@ -24,6 +20,12 @@ type Props = {
   clientSelected: Client | null;
 };
 
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
 export default function UpdateMedicalInformationForm({
   open,
   onClose,
@@ -32,6 +34,8 @@ export default function UpdateMedicalInformationForm({
   clientSelected,
 }: Props) {
   const { theme } = useThemeContext();
+
+  const [tabValue, setTabValue] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -40,6 +44,7 @@ export default function UpdateMedicalInformationForm({
       clientId: clientSelected?.id || "",
       height: clientSelected?.height || "",
       weight: clientSelected?.weight || "",
+      typeOfBody: clientSelected?.weight || "",
       injuries: clientSelected?.injuries || "",
       medicalConditions: clientSelected?.medicalConditions || "",
     },
@@ -66,6 +71,27 @@ export default function UpdateMedicalInformationForm({
       setIsLoading(false);
     },
   });
+  function CustomTabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <Box
+        {...other}
+        overflow="auto"
+        role="tabpanel"
+        hidden={value !== index}
+        height="calc(100% - 10rem)"
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+      >
+        {value === index && (
+          <Grid container spacing={2} sx={{ padding: 2 }}>
+            {children}
+          </Grid>
+        )}
+      </Box>
+    );
+  }
 
   return (
     <BaseDrawer open={open} onClose={onClose}>
@@ -77,79 +103,13 @@ export default function UpdateMedicalInformationForm({
           </IconButton>
         }
       />
-      <Box height="calc(100% - 10rem)" overflow="auto">
-        <Grid container spacing={theme?.spacing(4)}>
-          {onboarding ? (
-            <Grid item xs={12}>
-              <Typography fontSize={15} fontWeight={500}>
-                Completa tu ficha médica así tu entrenador tendrá más
-                información acerca de ti.
-              </Typography>
-            </Grid>
-          ) : null}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              name="weight"
-              label="Peso"
-              onBlur={formik?.handleBlur}
-              value={formik?.values?.weight}
-              onChange={formik?.handleChange}
-              sx={{ marginTop: theme?.spacing(1) }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              name="height"
-              label="Altura"
-              onBlur={formik?.handleBlur}
-              value={formik?.values?.height}
-              onChange={formik?.handleChange}
-              sx={{ marginTop: theme?.spacing(1) }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              minRows={4}
-              maxRows={4}
-              name="goals"
-              label="Objetivos"
-              onBlur={formik?.handleBlur}
-              value={formik?.values?.goals}
-              onChange={formik?.handleChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              minRows={4}
-              maxRows={4}
-              name="injuries"
-              label="Lesiones"
-              onBlur={formik?.handleBlur}
-              value={formik?.values?.injuries}
-              onChange={formik?.handleChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              minRows={4}
-              maxRows={4}
-              name="medicalConditions"
-              label="Condiciones médicas"
-              onBlur={formik?.handleBlur}
-              value={formik?.values?.medicalConditions}
-              onChange={formik?.handleChange}
-            />
-          </Grid>
-        </Grid>
-      </Box>
+      <ModalTabs tabValue={tabValue} setTabValue={setTabValue} />
+      <CustomTabPanel value={tabValue} index={0}>
+        <MedicalInformationTab formik={formik} onboarding={onboarding} />
+      </CustomTabPanel>
+      <CustomTabPanel value={tabValue} index={1}>
+        <TypeOfBodyTab formik={formik} />
+      </CustomTabPanel>
       <Box py={theme?.spacing(4)} bgcolor={theme?.colors?.background?.primary}>
         <Button
           fullWidth
