@@ -55,7 +55,6 @@ export default function MainTitle() {
                   {plansTypes.map((planType: PlanType) => (
                     <ListItemButton
                       key={planType?.id}
-                      disabled={planType?.name === PLAN_CONSTANTS.TYPES.CIRCUIT}
                       onClick={() =>
                         navigate(handleGetUrlByPlanType(planType?.name))
                       }
