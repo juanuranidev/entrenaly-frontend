@@ -9,6 +9,7 @@ export type Plan = {
   category: PlanCategory;
   createdAt: string;
   clients: Client[] | [];
+  circuits?: PlanCircuit | null;
   user?: User;
   days?: PlanDay[] | null;
 };
@@ -33,7 +34,14 @@ export type PlanDay = {
   id: number;
   planId: string;
   dayOfWeek: DayOfWeek;
-  exercises: Exercise[];
+  exercises: Exercise[] | [];
+};
+
+type PlanCircuit = {
+  id: number;
+  planDayId: string;
+  order: number;
+  exercises: Exercise[] | [];
 };
 
 export type PlanExercise = {
