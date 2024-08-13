@@ -11,6 +11,17 @@ export const createWeeklyPlanService = async (data: any) => {
 
   return response.data;
 };
+export const createCircuitPlanService = async (data: any) => {
+  const response = await request({
+    method: "POST",
+    url: "/plan/v1/create/circuit-plan",
+    data: {
+      data,
+    },
+  });
+
+  return response.data;
+};
 export const readPlansTypesService = async () => {
   const response = await request({
     method: "GET",
@@ -65,10 +76,32 @@ export const readWeeklyPlanService = async (planId: string) => {
 
   return response.data;
 };
+export const readCircuitPlanService = async (planId: string) => {
+  const response = await request({
+    method: "GET",
+    url: "/plan/v1/read/circuit-plan",
+    params: {
+      planId,
+    },
+  });
+
+  return response.data;
+};
 export const updateWeeklyPlanService = async (data: any) => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/update/weekly-plan",
+    data: {
+      data,
+    },
+  });
+
+  return response.data;
+};
+export const updateCircuitPlanService = async (data: any) => {
+  const response = await request({
+    method: "POST",
+    url: "/plan/v1/update/circuit-plan",
     data: {
       data,
     },
