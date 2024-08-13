@@ -27,6 +27,19 @@ export default function PlanRow({ plan }: Props) {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
+  const handleRenderPlanEditUrl = (plan: Plan): string => {
+    switch (plan?.type?.name) {
+      case PLAN_CONSTANTS.TYPES.WEEKLY:
+        return `/trainer/plans/edit/weekly/${plan?.id}`;
+
+      case PLAN_CONSTANTS.TYPES.CIRCUIT:
+        return `/trainer/plans/edit/circuit/${plan?.id}`;
+
+      default:
+        return "";
+    }
+  };
+
   return (
     <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell align="left">
@@ -67,9 +80,7 @@ export default function PlanRow({ plan }: Props) {
           >
             Descargar pdf
           </MenuItem>
-          <MenuItem
-            onClick={() => navigate(`/trainer/plans/edit/weekly/${plan?.id}`)}
-          >
+          <MenuItem onClick={() => navigate(handleRenderPlanEditUrl(plan))}>
             Editar
           </MenuItem>
         </Menu>

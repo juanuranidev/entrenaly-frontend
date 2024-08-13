@@ -36,6 +36,11 @@ const ClientProfile = Loadable(
 const EditWeeklyPlan = Loadable(
   lazy(() => import("pages/user/trainer/plans/edit-weekly-plan/EditWeeklyPlan"))
 );
+const EditCircuitPlan = Loadable(
+  lazy(
+    () => import("pages/user/trainer/plans/edit-circuit-plan/EditCircuitPlan")
+  )
+);
 const NotFound = Loadable(
   lazy(() => import("pages/user/trainer/not-found/NotFound"))
 );
@@ -66,6 +71,10 @@ const TrainerRoutes = {
     {
       path: "/trainer/plans/new/circuit",
       element: <NewCircuitPlan />,
+    },
+    {
+      path: "/trainer/plans/edit/circuit/:planId",
+      element: <EditCircuitPlan />,
     },
     {
       path: "/trainer/plans/edit/weekly/:planId",
