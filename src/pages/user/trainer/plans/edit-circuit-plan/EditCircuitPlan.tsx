@@ -9,7 +9,6 @@ export default function EditCircuitPlan() {
   const { planId } = useParams();
   const { theme } = useThemeContext();
   const { plan } = useReadCircuitPlan(planId);
-  console.log(plan);
 
   return (
     <Grid container spacing={theme?.spacing(2)}>

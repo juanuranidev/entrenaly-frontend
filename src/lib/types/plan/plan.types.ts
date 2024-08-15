@@ -8,7 +8,7 @@ export type Plan = {
   type: PlanType;
   category: PlanCategory;
   createdAt: string;
-  clients: Client[] | [];
+  clients: Client[] | [] | string[];
   user?: User;
   days?: PlanDay[] | null;
 };

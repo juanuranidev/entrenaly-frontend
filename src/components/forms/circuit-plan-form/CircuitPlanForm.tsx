@@ -1,5 +1,6 @@
 import {
   createCircuitPlanService,
+  updateCircuitPlanService,
   // createWeeklyPlanService,
   // updateWeeklyPlanService,
 } from "services/plan/plan.services";
@@ -42,9 +43,8 @@ export default function CircuitPlanForm({ plan }: Props) {
     },
     async onSubmit(values) {
       handleVerifyDescriptions(values.days);
-      console.log(values);
       if (editPlan) {
-        // handleUpdateWeeklyPlan(values);
+        handleUpdateWeeklyPlan(values);
       } else {
         handlePostCircuitPlan(values);
       }
@@ -67,20 +67,19 @@ export default function CircuitPlanForm({ plan }: Props) {
     setIsLoading(false);
   };
 
-  // const handleUpdateWeeklyPlan = async (data: any) => {
-  //   setIsLoading(true);
-  //   handleVerifyDescriptions(data.days);
-  //   try {
-  //     await updateWeeklyPlanService(data);
+  const handleUpdateWeeklyPlan = async (data: any) => {
+    setIsLoading(true);
+    try {
+      await updateCircuitPlanService(data);
 
-  //     createSuccessToastLib("Plan actualizado con éxito");
-  //     navigate("/trainer/plans");
-  //   } catch (error) {
-  //     console.log(error);
-  //     createErrorToastLib("Error al actualizar el plan");
-  //   }
-  //   setIsLoading(false);
-  // };
+      createSuccessToastLib("Plan actualizado con éxito");
+      navigate("/trainer/plans");
+    } catch (error) {
+      console.log(error);
+      createErrorToastLib("Error al actualizar el plan");
+    }
+    setIsLoading(false);
+  };
 
   const handleOnSubmitDrawerDays = (day: DayOfWeek) => {
     formik.setFieldValue("days", [
@@ -110,7 +109,7 @@ export default function CircuitPlanForm({ plan }: Props) {
   };
   return (
     <Grid container spacing={theme?.spacing(4)}>
-      <PlanMainInformationForm formik={formik} />
+      <PlanMainInformationForm formik={formik} plan={plan} />
       <Grid item xs={6} display="flex" alignItems="center">
         <Typography fontWeight={600} fontSize={16}>
           Días de la semana

@@ -25,7 +25,7 @@ type Props = {
 
 export default function MainInformation({ formik, plan }: Props) {
   const { theme } = useThemeContext();
-  const { clients }: any = useReadClients();
+  const { clients } = useReadClients();
   const { plansCategories } = useReadPlansCategories();
 
   const handleSetInitialClients = () => {

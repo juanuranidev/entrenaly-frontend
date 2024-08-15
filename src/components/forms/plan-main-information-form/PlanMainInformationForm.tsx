@@ -12,35 +12,35 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { Client } from "lib/types/client/client.types";
-import { PlanCategory } from "lib/types/plan/plan.types";
+import { Plan, PlanCategory } from "lib/types/plan/plan.types";
 import { useReadClients } from "hooks/client/useReadClients";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useReadPlansCategories } from "hooks/plan/useReadPlansCategories";
+import { useEffect } from "react";
 
 type Props = {
+  plan: Plan | null | undefined;
   formik: any;
 };
 
-export default function PlanMainInformationForm({ formik }: Props) {
+export default function PlanMainInformationForm({ plan, formik }: Props) {
   const { theme } = useThemeContext();
   const { clients } = useReadClients();
   const { plansCategories } = useReadPlansCategories();
 
-  //   const handleSetInitialClients = () => {
-  //     if (!plan) return;
-  //     if (!clients.length) return;
-  //     if (!plan.clients.length) return;
+  const handleSetInitialClients = () => {
+    if (!plan) return;
+    if (!clients.length) return;
 
-  //     // const clientsSelected = clients.filter((client: Client) =>
-  //     //   plan.clients.includes(client)
-  //     // );
+    const clientsSelected: Client[] = clients.filter((client: Client) =>
+      (plan.clients as string[]).includes(client.id)
+    );
+    formik.setFieldValue("clients", clientsSelected);
+  };
 
-  //     formik.setFieldValue("clients", clientsSelected);
-  //   };
-
-  //   useEffect(() => {
-  //     handleSetInitialClients();
-  //   }, [plan, clients]);
+  useEffect(() => {
+    handleSetInitialClients();
+  }, [plan, clients]);
 
   return (
     <>
