@@ -1,9 +1,9 @@
 import { Box, Card, Stack, Typography, Divider } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
 import { useNavigate } from "react-router-dom";
 import { Plan } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
-import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
 
 type Props = {
   plan: Plan;
