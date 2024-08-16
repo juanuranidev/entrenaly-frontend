@@ -40,6 +40,19 @@ export default function PlanRow({ plan }: Props) {
     }
   };
 
+  const handleRenderPlanViewUrl = (plan: Plan): string => {
+    switch (plan?.type?.name) {
+      case PLAN_CONSTANTS.TYPES.WEEKLY:
+        return `/trainer/plans/view/weekly/${plan?.id}`;
+
+      case PLAN_CONSTANTS.TYPES.CIRCUIT:
+        return `/trainer/plans/view/circuit/${plan?.id}`;
+
+      default:
+        return "";
+    }
+  };
+
   return (
     <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell align="left">
@@ -67,9 +80,7 @@ export default function PlanRow({ plan }: Props) {
           open={Boolean(anchorEl)}
           onClose={() => setAnchorEl(null)}
         >
-          <MenuItem
-            onClick={() => navigate(`/trainer/plans/view/weekly/${plan?.id}`)}
-          >
+          <MenuItem onClick={() => navigate(handleRenderPlanViewUrl(plan))}>
             Ver plan
           </MenuItem>
           <MenuItem
