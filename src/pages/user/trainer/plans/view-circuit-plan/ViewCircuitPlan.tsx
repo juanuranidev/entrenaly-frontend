@@ -1,6 +1,6 @@
 import { Button, Grid, IconButton, Stack } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { useReadWeeklyPlan } from "hooks/plan/useReadWeeklyPlan";
+import { useReadCircuitPlan } from "hooks/plan/useReadCircuitPlan";
 import { useThemeContext } from "contexts/theme/Theme";
 import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
 import { downloadPdfLib } from "lib/utils/download-pdf/DownloadPdf";
@@ -9,10 +9,10 @@ import Icons from "lib/utils/icons/icons";
 import PageTitle from "components/common/page-title/PageTitle";
 import WeeklyPlanDay from "components/common/view-plan-day/ViewPlanDay";
 
-export default function ViewWeeklyPlan() {
+export default function ViewCircuitPlan() {
   const { planId } = useParams();
   const { theme } = useThemeContext();
-  const { plan } = useReadWeeklyPlan(planId);
+  const { plan } = useReadCircuitPlan(planId);
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function ViewWeeklyPlan() {
             >
               <IconButton
                 onClick={() =>
-                  downloadPdfLib(PLAN_CONSTANTS.TYPES.WEEKLY, planId)
+                  downloadPdfLib(PLAN_CONSTANTS.TYPES.CIRCUIT, planId)
                 }
               >
                 <Icons.download />
@@ -48,7 +48,7 @@ export default function ViewWeeklyPlan() {
       </Grid>
       {plan?.days?.length
         ? plan?.days?.map((day: PlanDay) => (
-            <WeeklyPlanDay key={day?.dayOfWeek?.id} day={day} />
+            <WeeklyPlanDay key={day?.dayOfWeek?.id} day={day} hasCircuits />
           ))
         : null}
     </Grid>
