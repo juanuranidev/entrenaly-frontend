@@ -22,6 +22,18 @@ type Props = {
 export default function ViewPlanDay({ day, hasCircuits = false }: Props) {
   const { theme } = useThemeContext();
 
+  const handleRenderExercisesImagesSummary = () => {
+    if (!hasCircuits) {
+      return day?.exercises;
+    }
+
+    if (day?.circuits && day?.circuits?.length) {
+      return day?.circuits[0]?.exercises;
+    }
+
+    return [];
+  };
+
   return (
     <Grid item xs={12}>
       <Accordion
@@ -42,7 +54,9 @@ export default function ViewPlanDay({ day, hasCircuits = false }: Props) {
             <Typography fontWeight={600} fontSize={{ xs: 20, md: 26 }}>
               {day?.dayOfWeek?.name}
             </Typography>
-            <ExercisesImagesSumary exercises={day?.exercises} />
+            <ExercisesImagesSumary
+              exercises={handleRenderExercisesImagesSummary()}
+            />
           </Stack>
         </AccordionSummary>
         <AccordionDetails>
