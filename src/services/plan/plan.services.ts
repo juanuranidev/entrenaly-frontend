@@ -1,6 +1,12 @@
+import {
+  DayOfWeek,
+  Plan,
+  PlanCategory,
+  PlanType,
+} from "lib/types/plan/plan.types";
 import request from "services/request";
 
-export const createWeeklyPlanService = async (data: any) => {
+export const createWeeklyPlanService = async (data: any): Promise<Plan> => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/create/weekly-plan",
@@ -11,7 +17,8 @@ export const createWeeklyPlanService = async (data: any) => {
 
   return response.data;
 };
-export const createCircuitPlanService = async (data: any) => {
+
+export const createCircuitPlanService = async (data: any): Promise<Plan> => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/create/circuit-plan",
@@ -22,7 +29,8 @@ export const createCircuitPlanService = async (data: any) => {
 
   return response.data;
 };
-export const readPlansTypesService = async () => {
+
+export const readPlansTypesService = async (): Promise<PlanType[] | []> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/plans-types",
@@ -30,7 +38,8 @@ export const readPlansTypesService = async () => {
 
   return response.data;
 };
-export const readDaysOfWeekService = async () => {
+
+export const readDaysOfWeekService = async (): Promise<DayOfWeek[] | []> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/days-of-week",
@@ -38,7 +47,10 @@ export const readDaysOfWeekService = async () => {
 
   return response.data;
 };
-export const readPlansCategoriesService = async () => {
+
+export const readPlansCategoriesService = async (): Promise<
+  PlanCategory[] | []
+> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/plan-categories",
@@ -46,7 +58,8 @@ export const readPlansCategoriesService = async () => {
 
   return response.data;
 };
-export const readPlansByUserIdService = async () => {
+
+export const readPlansByUserIdService = async (): Promise<Plan[] | []> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/plans-by-user-id",
@@ -54,7 +67,10 @@ export const readPlansByUserIdService = async () => {
 
   return response.data;
 };
-export const readPlansByClientIdService = async (clientId: string) => {
+
+export const readPlansByClientIdService = async (
+  clientId: string
+): Promise<Plan[] | []> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/plans-by-client-id",
@@ -65,7 +81,8 @@ export const readPlansByClientIdService = async (clientId: string) => {
 
   return response.data;
 };
-export const readWeeklyPlanService = async (planId: string) => {
+
+export const readWeeklyPlanService = async (planId: string): Promise<Plan> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/weekly-plan",
@@ -76,7 +93,8 @@ export const readWeeklyPlanService = async (planId: string) => {
 
   return response.data;
 };
-export const readCircuitPlanService = async (planId: string) => {
+
+export const readCircuitPlanService = async (planId: string): Promise<Plan> => {
   const response = await request({
     method: "GET",
     url: "/plan/v1/read/circuit-plan",
@@ -87,7 +105,8 @@ export const readCircuitPlanService = async (planId: string) => {
 
   return response.data;
 };
-export const updateWeeklyPlanService = async (data: any) => {
+
+export const updateWeeklyPlanService = async (data: any): Promise<Plan> => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/update/weekly-plan",
@@ -98,7 +117,8 @@ export const updateWeeklyPlanService = async (data: any) => {
 
   return response.data;
 };
-export const updateCircuitPlanService = async (data: any) => {
+
+export const updateCircuitPlanService = async (data: any): Promise<Plan> => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/update/circuit-plan",

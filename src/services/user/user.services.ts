@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { firebaseConfig } from "lib/config/firebase";
 import { initializeApp } from "firebase/app";
-import { User } from "lib/types/user/user.types";
+import { AppRelease, User } from "lib/types/user/user.types";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -54,7 +54,7 @@ export const readUserByAuthIdService = async (
   return response.data;
 };
 
-export const readUserService = async () => {
+export const readUserService = async (): Promise<User | null> => {
   const response = await request({
     method: "GET",
     url: `users/v1/read`,
@@ -63,7 +63,7 @@ export const readUserService = async () => {
   return response.data;
 };
 
-export const readAppReleasesService = async () => {
+export const readAppReleasesService = async (): Promise<AppRelease[] | []> => {
   const response = await request({
     method: "GET",
     url: `users/v1/read/app-releases`,
@@ -148,6 +148,6 @@ export const getUserSessionService = (): Promise<User | null> => {
   });
 };
 
-export const signOutService = async () => {
+export const signOutService = async (): Promise<void> => {
   await signOut(auth);
 };

@@ -16,7 +16,7 @@ export const useReadPlansCategories = (): UseReadPlansCategories => {
   const handleReadPlansCategories = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readPlansCategoriesService();
+      const response: PlanCategory[] | [] = await readPlansCategoriesService();
 
       setPlansCategories(response);
     } catch (error) {

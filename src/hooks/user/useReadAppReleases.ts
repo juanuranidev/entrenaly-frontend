@@ -14,7 +14,7 @@ export const useReadAppReleases = (): UseReadAppReleases => {
   const handleReadAppReleases = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readAppReleasesService();
+      const response: AppRelease[] | [] = await readAppReleasesService();
 
       setAppReleases(response);
     } catch (error) {

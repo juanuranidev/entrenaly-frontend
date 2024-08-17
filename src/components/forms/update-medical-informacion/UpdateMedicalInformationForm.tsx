@@ -44,7 +44,7 @@ export default function UpdateMedicalInformationForm({
       clientId: clientSelected?.id || "",
       height: clientSelected?.height || "",
       weight: clientSelected?.weight || "",
-      typeOfBody: clientSelected?.weight || "",
+      typeOfBody: clientSelected?.typeOfBody || "",
       injuries: clientSelected?.injuries || "",
       medicalConditions: clientSelected?.medicalConditions || "",
     },

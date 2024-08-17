@@ -18,7 +18,7 @@ export const useReadCircuitPlan = (
 
     setIsLoading(true);
     try {
-      const response = await readCircuitPlanService(planId);
+      const response: Plan = await readCircuitPlanService(planId);
 
       setPlan(response);
     } catch (error) {

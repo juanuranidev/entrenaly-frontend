@@ -1,5 +1,6 @@
-import { readInviteService } from "services/client/client.services";
 import { useState, useEffect } from "react";
+import { readInviteService } from "services/client/client.services";
+import { Invite } from "lib/types/client/client.types";
 
 type UseReadInvite = {
   invite: string | null;
@@ -13,7 +14,7 @@ export const useReadInvite = (): UseReadInvite => {
   const handleReadInvite = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readInviteService();
+      const response: Invite = await readInviteService();
 
       setInvite(response.id);
     } catch (error) {

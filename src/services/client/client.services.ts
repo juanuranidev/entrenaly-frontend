@@ -1,6 +1,7 @@
+import { Client, Invite } from "lib/types/client/client.types";
 import request from "services/request";
 
-export const readClientService = async (clientId: string) => {
+export const readClientService = async (clientId: string): Promise<Client> => {
   const response = await request({
     method: "GET",
     url: "/client/v1/read/client",
@@ -11,7 +12,8 @@ export const readClientService = async (clientId: string) => {
 
   return response.data;
 };
-export const readClientsService = async () => {
+
+export const readClientsService = async (): Promise<Client[]> => {
   const response = await request({
     method: "GET",
     url: "/client/v1/read/clients",
@@ -19,7 +21,8 @@ export const readClientsService = async () => {
 
   return response.data;
 };
-export const readInviteService = async () => {
+
+export const readInviteService = async (): Promise<Invite> => {
   const response = await request({
     method: "GET",
     url: "/client/v1/read/invite",
@@ -27,7 +30,10 @@ export const readInviteService = async () => {
 
   return response.data;
 };
-export const readInviteInformationService = async (inviteId: string) => {
+
+export const readInviteInformationService = async (
+  inviteId: string
+): Promise<Invite> => {
   const response = await request({
     method: "GET",
     url: "/client/v1/read/invite-information",
@@ -36,9 +42,10 @@ export const readInviteInformationService = async (inviteId: string) => {
 
   return response.data;
 };
+
 export const updateClientMedicalInformationService = async (
   clientMedicalInformation: any
-) => {
+): Promise<Client> => {
   const response = await request({
     method: "POST",
     url: "/client/v1/update/client-medical-information",
@@ -49,6 +56,7 @@ export const updateClientMedicalInformationService = async (
 
   return response.data;
 };
+
 export const updateClientOnboardingStatusService = async (
   clientId: string,
   onboardingStatus: boolean

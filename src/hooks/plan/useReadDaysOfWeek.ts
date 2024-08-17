@@ -14,7 +14,7 @@ export const useReadDaysOfWeek = (): UseReadDaysOfWeek => {
   const handleReadDaysOfWeek = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readDaysOfWeekService();
+      const response: DayOfWeek[] | [] = await readDaysOfWeekService();
 
       setDaysOfWeek(response);
     } catch (error) {
