@@ -44,7 +44,7 @@ export default function AddClientForm({ open, onClose }: Props) {
     }
   };
 
-  const handleRenderEndAdornment = () => {
+  const handleRenderEndAdornment = (): JSX.Element => {
     if (copied) {
       return (
         <InputAdornment position="start">

@@ -8,10 +8,11 @@ import { createExerciseDescriptionService } from "services/exercise/exercise.ser
 import { ExerciseDescription } from "lib/types/exercise/exercise.types";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
+import { SyntheticEvent } from "react";
 
 type Props = {
   defaultValue: string;
-  handleChange: (value: any) => void;
+  handleChange: (value: string) => void;
   exercisesDescriptions: ExerciseDescription[];
   handleRefetchGetExercisesDescriptions: () => Promise<void>;
 };
@@ -27,7 +28,7 @@ export default function DescriptionsInput({
   const [autocompleteValue, setAutocompleteValue] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handlePostExerciseDescription = async () => {
+  const handlePostExerciseDescription = async (): Promise<void> => {
     setIsLoading(true);
     try {
       const response = await createExerciseDescriptionService(inputValue);
@@ -40,7 +41,7 @@ export default function DescriptionsInput({
     setIsLoading(false);
   };
 
-  const handleManageDefaultValues = () => {
+  const handleManageDefaultValues = (): void => {
     if (!defaultValue || !exercisesDescriptions.length) return;
 
     setInputValue(defaultValue ?? "");
@@ -51,7 +52,7 @@ export default function DescriptionsInput({
     setAutocompleteValue(exerciseDescription);
   };
 
-  const handleRenderNoOptionsText = () => {
+  const handleRenderNoOptionsText = (): JSX.Element | null => {
     if (isLoading) {
       return <CircularProgress size={15} />;
     }
@@ -80,12 +81,16 @@ export default function DescriptionsInput({
     <Autocomplete
       size="small"
       value={autocompleteValue}
-      onChange={(_event: any, newValue: string | null) => {
+      onChange={(
+        _event: SyntheticEvent<Element, Event>,
+        newValue: string | null
+      ) => {
         setAutocompleteValue(newValue);
       }}
       inputValue={inputValue}
       getOptionLabel={(option) => option?.description || ""}
       onInputChange={(_event, newInputValue) => {
+        console.log(newInputValue);
         setInputValue(newInputValue);
         handleChange(newInputValue);
       }}

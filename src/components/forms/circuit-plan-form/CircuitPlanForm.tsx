@@ -1,10 +1,9 @@
 import {
   createCircuitPlanService,
   updateCircuitPlanService,
-  // createWeeklyPlanService,
-  // updateWeeklyPlanService,
 } from "services/plan/plan.services";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
+import { CreateCircuitPlan, UpdateCircuitPlan } from "services/plan/types";
 import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
 import { weeklyPlanFormValidations } from "./lib/validations";
 import { DayOfWeek, Plan, PlanDay } from "lib/types/plan/plan.types";
@@ -39,12 +38,12 @@ export default function CircuitPlanForm({ plan }: Props) {
       clients: [],
       name: plan?.name || "",
       planId: plan?.id || null,
-      categoryId: plan?.category?.id || "",
+      categoryId: plan?.category?.id || null,
     },
     async onSubmit(values) {
       handleVerifyDescriptions(values.days);
       if (editPlan) {
-        handleUpdateWeeklyPlan(values);
+        handleUpdateCircuitPlan(values);
       } else {
         handlePostCircuitPlan(values);
       }
@@ -53,7 +52,9 @@ export default function CircuitPlanForm({ plan }: Props) {
     enableReinitialize: true,
   });
 
-  const handlePostCircuitPlan = async (data: any) => {
+  const handlePostCircuitPlan = async (
+    data: CreateCircuitPlan
+  ): Promise<void> => {
     setIsLoading(true);
     try {
       await createCircuitPlanService(data);
@@ -67,7 +68,9 @@ export default function CircuitPlanForm({ plan }: Props) {
     setIsLoading(false);
   };
 
-  const handleUpdateWeeklyPlan = async (data: any) => {
+  const handleUpdateCircuitPlan = async (
+    data: UpdateCircuitPlan
+  ): Promise<void> => {
     setIsLoading(true);
     try {
       await updateCircuitPlanService(data);
@@ -81,7 +84,7 @@ export default function CircuitPlanForm({ plan }: Props) {
     setIsLoading(false);
   };
 
-  const handleOnSubmitDrawerDays = (day: DayOfWeek) => {
+  const handleOnSubmitDrawerDays = (day: DayOfWeek): void => {
     formik.setFieldValue("days", [
       ...formik.values.days,
       {
@@ -92,21 +95,34 @@ export default function CircuitPlanForm({ plan }: Props) {
     setOpenDrawerDays(false);
   };
 
-  const handleVerifyDescriptions = (days: any) => {
+  const handleVerifyDescriptions = (days: PlanDay[] | []): void => {
     for (const day of days) {
-      for (const circuit of day.circuits) {
-        for (const exercise of circuit.exercises) {
-          if (!exercise.description) {
-            createErrorToastLib(
-              "Hay ejercicios en los circuitos sin descripción"
-            );
+      if (day && Array.isArray(day.circuits) && day.circuits.length > 0) {
+        for (const circuit of day.circuits) {
+          if (Array.isArray(circuit.exercises)) {
+            for (const exercise of circuit.exercises) {
+              if (!exercise.description) {
+                createErrorToastLib(
+                  "Hay ejercicios en los circuitos sin descripción"
+                );
+                setIsLoading(false);
+                throw "";
+              }
+            }
+          } else {
+            createErrorToastLib("Hay circuitos sin ejercicios.");
             setIsLoading(false);
             throw "";
           }
         }
+      } else {
+        createErrorToastLib("Hay días sin circuitos o circuitos vacíos.");
+        setIsLoading(false);
+        throw "";
       }
     }
   };
+
   return (
     <Grid container spacing={theme?.spacing(4)}>
       <PlanMainInformationForm formik={formik} plan={plan} />

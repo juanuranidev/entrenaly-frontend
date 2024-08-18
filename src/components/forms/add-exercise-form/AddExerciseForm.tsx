@@ -10,14 +10,16 @@ import {
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { addExerciseFormValidations } from "./lib/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
+import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { createExerciseService } from "services/exercise/exercise.services";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
+import { CreateExercise } from "services/exercise/lib/types";
 import { useFormik } from "formik";
-import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
+import type { AddExerciseForm } from "./lib/types";
 
 type Props = {
   open: boolean;
@@ -33,11 +35,11 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
   const { exercisesCategories, isLoading: isCategoriesLoading } =
     useReadExercisesCategories();
 
-  const formik = useFormik({
+  const formik = useFormik<AddExerciseForm>({
     initialValues: {
       name: "",
       image: "",
-      categoryId: "",
+      categoryId: null,
     },
     validationSchema: addExerciseFormValidations,
     onSubmit(values) {
@@ -45,7 +47,9 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
     },
   });
 
-  const handleCreateExercise = async (exercise: any) => {
+  const handleCreateExercise = async (
+    exercise: CreateExercise
+  ): Promise<void> => {
     setIsLoading(true);
     try {
       await createExerciseService(exercise);
@@ -63,15 +67,9 @@ export default function AddExerciseForm({ open, onClose, onSubmit }: Props) {
     setIsLoading(false);
   };
 
-  const handleSetInitialValues = () => {
-    formik.setFieldValue("name", "");
-    formik.setFieldValue("image", "");
-    formik.setFieldValue("categoryId", "");
-  };
-
   useEffect(() => {
     if (open) {
-      handleSetInitialValues();
+      formik.resetForm();
     }
   }, [open]);
 

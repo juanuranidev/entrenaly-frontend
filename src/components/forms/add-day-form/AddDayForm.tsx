@@ -23,7 +23,7 @@ export default function AddDayForm({
   const { theme } = useThemeContext();
   const { daysOfWeek } = useReadDaysOfWeek();
 
-  const handleSelectDay = (day: DayOfWeek) => {
+  const handleSelectDay = (day: DayOfWeek): void => {
     onSubmit(day);
     onClose();
   };
