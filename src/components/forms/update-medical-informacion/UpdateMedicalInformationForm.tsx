@@ -1,6 +1,7 @@
 import { Box, Grid, Button, IconButton } from "@mui/material";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { updateClientMedicalInformationService } from "services/client/client.services";
+import { UpdateClientMedicalInformationForm } from "./lib/types";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -38,7 +39,7 @@ export default function UpdateMedicalInformationForm({
   const [tabValue, setTabValue] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const formik = useFormik({
+  const formik = useFormik<UpdateClientMedicalInformationForm>({
     initialValues: {
       goals: clientSelected?.goals || "",
       clientId: clientSelected?.id || "",

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, ReactNode } from "react";
 import {
   createTheme,
   CssBaseline,
@@ -10,7 +10,11 @@ import Typography from "./general/typography";
 import shadows from "./general/shadows";
 import colors from "./general/colors";
 
-export default function Theme({ children }: any) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function Theme({ children }: Props) {
   const themeTypography = Typography("Poppins, sans-serif");
   const themeOptions = useMemo(
     () => ({

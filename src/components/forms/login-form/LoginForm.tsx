@@ -16,19 +16,16 @@ import {
 import { createErrorToastLib } from "lib/utils/toast";
 import { loginFormValidation } from "./lib/validations";
 import { useThemeContext } from "contexts/theme/Theme";
+import { LoginWithEmail } from "services/user/types";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { LoginForm } from "./lib/types";
 import { useState } from "react";
 import { User } from "lib/types/user/user.types";
 import Google from "../../../../public/google.svg";
 import Icons from "lib/utils/icons/icons";
-
-type FormikValues = {
-  email: string;
-  password: string;
-};
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -38,7 +35,7 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const formik = useFormik<FormikValues>({
+  const formik = useFormik<LoginForm>({
     initialValues: {
       email: "",
       password: "",
@@ -49,10 +46,10 @@ export default function LoginForm() {
     },
   });
 
-  const handleLoginWithEmail = async (data: FormikValues) => {
+  const handleLoginWithEmail = async (data: LoginWithEmail): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await loginWithEmailService(data);
+      const response: User = await loginWithEmailService(data);
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
@@ -61,10 +58,10 @@ export default function LoginForm() {
     setIsLoading(false);
   };
 
-  const handleLoginWithGoogle = async () => {
+  const handleLoginWithGoogle = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await googleAuthService();
+      const response: User = await googleAuthService();
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
@@ -73,7 +70,7 @@ export default function LoginForm() {
     setIsLoading(false);
   };
 
-  const handleRedirectUser = (user: User) => {
+  const handleRedirectUser = (user: User): void => {
     if (!user?.role?.name) return;
 
     switch (user?.role?.name) {

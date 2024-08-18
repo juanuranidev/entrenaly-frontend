@@ -12,6 +12,7 @@ import {
 import { firebaseConfig } from "lib/config/firebase";
 import { initializeApp } from "firebase/app";
 import { AppRelease, User } from "lib/types/user/user.types";
+import { LoginWithEmail, RegisterWithEmail } from "./types";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -73,7 +74,9 @@ export const readAppReleasesService = async (): Promise<AppRelease[] | []> => {
 };
 
 // Auth provider
-export const registerWithEmailService = async (data: any): Promise<User> => {
+export const registerWithEmailService = async (
+  data: RegisterWithEmail
+): Promise<User> => {
   const response: UserCredential = await createUserWithEmailAndPassword(
     auth,
     data.email,
@@ -92,10 +95,9 @@ export const registerWithEmailService = async (data: any): Promise<User> => {
   return user;
 };
 
-export const loginWithEmailService = async (data: {
-  email: string;
-  password: string;
-}): Promise<User> => {
+export const loginWithEmailService = async (
+  data: LoginWithEmail
+): Promise<User> => {
   const response = await signInWithEmailAndPassword(
     auth,
     data.email,

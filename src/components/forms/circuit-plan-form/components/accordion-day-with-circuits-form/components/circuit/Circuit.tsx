@@ -3,6 +3,7 @@ import {
   ExerciseDescription,
 } from "lib/types/exercise/exercise.types";
 import { Box, Stack, Button, Typography } from "@mui/material";
+import { FormikProps, FormikValues } from "formik";
 import { useThemeContext } from "contexts/theme/Theme";
 import { DayCircuit } from "lib/types/plan/plan.types";
 import { useState } from "react";
@@ -13,7 +14,7 @@ import SmallCircuitExerciseInput from "./components/small-circuit-exercise-input
 
 type Props = {
   circuit: DayCircuit;
-  formik: any;
+  formik: FormikProps<FormikValues>;
   day: PlanDay;
   exercisesDescriptions: ExerciseDescription[];
   handleRefetchGetExercisesDescriptions: () => Promise<void>;
@@ -93,7 +94,7 @@ export default function Circuit({
         </Typography>
         <Box width="50%">
           <DescriptionsInput
-            handleChange={(value: any) =>
+            handleChange={(value: string) =>
               handleChangeCircuitDescription(circuit, value)
             }
             defaultValue={circuit?.description}

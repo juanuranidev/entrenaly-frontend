@@ -33,7 +33,7 @@ export default function AccordionDayWithCircuitsForm({
   const hasDayCircuits = Boolean(day?.circuits?.length);
   const { theme } = useThemeContext();
 
-  const [openModalConfirm, setOpenModalConfirm] = useState(false);
+  const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
 
   const handleDeleteDay = () => {
     const newDays = formik.values.days.filter(
@@ -43,8 +43,8 @@ export default function AccordionDayWithCircuitsForm({
     formik.setFieldValue("days", newDays);
   };
 
-  const handleAddCircuit = () => {
-    const dayIndex = formik.values.days.findIndex(
+  const handleAddCircuit = (): void => {
+    const dayIndex: number = formik.values.days.findIndex(
       (d: PlanDay) => d.dayOfWeek.id === day.dayOfWeek.id
     );
 

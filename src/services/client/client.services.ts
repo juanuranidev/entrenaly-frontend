@@ -1,5 +1,6 @@
 import { Client, Invite } from "lib/types/client/client.types";
 import request from "services/request";
+import { UpdateClientMedicalInformation } from "./types";
 
 export const readClientService = async (clientId: string): Promise<Client> => {
   const response = await request({
@@ -44,7 +45,7 @@ export const readInviteInformationService = async (
 };
 
 export const updateClientMedicalInformationService = async (
-  clientMedicalInformation: any
+  clientMedicalInformation: UpdateClientMedicalInformation
 ): Promise<Client> => {
   const response = await request({
     method: "POST",

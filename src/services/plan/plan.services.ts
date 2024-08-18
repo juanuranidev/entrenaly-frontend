@@ -5,6 +5,7 @@ import {
   PlanType,
 } from "lib/types/plan/plan.types";
 import request from "services/request";
+import { CreateCircuitPlan } from "./types";
 
 export const createWeeklyPlanService = async (data: any): Promise<Plan> => {
   const response = await request({
@@ -18,7 +19,9 @@ export const createWeeklyPlanService = async (data: any): Promise<Plan> => {
   return response.data;
 };
 
-export const createCircuitPlanService = async (data: any): Promise<Plan> => {
+export const createCircuitPlanService = async (
+  data: CreateCircuitPlan
+): Promise<Plan> => {
   const response = await request({
     method: "POST",
     url: "/plan/v1/create/circuit-plan",

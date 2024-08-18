@@ -15,8 +15,10 @@ import {
 } from "services/user/user.services";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { registerFormValidation } from "./lib/validations";
+import { RegisterWithEmail } from "services/user/types";
 import { useAuthContext } from "contexts/auth/Auth";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
+import { RegisterForm } from "./lib/types";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -25,19 +27,19 @@ import Google from "../../../../public/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-export default function RegisterForm({ invite }: any) {
+export default function RegisterForm({ invite }: string | null | undefined) {
   const navigate = useNavigate();
   const { setUserData } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const formik = useFormik({
+  const formik = useFormik<RegisterForm>({
     initialValues: {
       name: "",
       email: "",
       password: "",
-      invite: invite ?? "",
+      invite: invite ?? null,
     },
     validationSchema: registerFormValidation,
     onSubmit(values) {
@@ -45,10 +47,13 @@ export default function RegisterForm({ invite }: any) {
     },
   });
 
-  const handleRegisterWithEmail = async (data: any) => {
+  const handleRegisterWithEmail = async (
+    data: RegisterWithEmail
+  ): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await registerWithEmailService(data);
+      const response: User = await registerWithEmailService(data);
+
       handleRedirectUser(response);
       createSuccessToastLib("Registrado con éxito");
     } catch (error: unknown) {
@@ -58,7 +63,9 @@ export default function RegisterForm({ invite }: any) {
     setIsLoading(false);
   };
 
-  const handleManageRegisterWithEmailError = (error: unknown) => {
+  const handleManageRegisterWithEmailError = (
+    error: unknown
+  ): string | number => {
     const errorString = String(error);
 
     switch (true) {
@@ -69,10 +76,11 @@ export default function RegisterForm({ invite }: any) {
     }
   };
 
-  const handleRegisterWithGoogle = async () => {
+  const handleRegisterWithGoogle = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await googleAuthService(invite);
+      const response: User = await googleAuthService(invite);
+
       handleRedirectUser(response);
     } catch (error: unknown) {
       console.log(error);
@@ -106,10 +114,10 @@ export default function RegisterForm({ invite }: any) {
           name="name"
           size="small"
           placeholder="Juan"
-          value={formik.values.name}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.name) && Boolean(formik.errors.name)}
+          value={formik?.values?.name}
+          onBlur={formik?.handleBlur}
+          onChange={formik?.handleChange}
+          error={Boolean(formik?.touched?.name) && Boolean(formik?.errors.name)}
         />
       </Grid>
       <Grid item xs={12} md={6}>
@@ -118,13 +126,15 @@ export default function RegisterForm({ invite }: any) {
         </InputLabel>
         <TextField
           fullWidth
-          value={formik.values.email}
           name="email"
           size="small"
           placeholder="juan@gmail.com"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
+          onBlur={formik?.handleBlur}
+          value={formik?.values?.email}
+          onChange={formik?.handleChange}
+          error={
+            Boolean(formik?.touched?.email) && Boolean(formik?.errors?.email)
+          }
         />
       </Grid>
       <Grid item xs={12}>
@@ -137,18 +147,19 @@ export default function RegisterForm({ invite }: any) {
           id="password"
           name="password"
           placeholder="**********"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
+          onBlur={formik?.handleBlur}
+          onChange={formik?.handleChange}
+          value={formik?.values?.password}
           type={showPassword ? "text" : "password"}
           error={
-            Boolean(formik.touched.password) && Boolean(formik.errors.password)
+            Boolean(formik?.touched?.password) &&
+            Boolean(formik?.errors.password)
           }
           helperText={
-            Boolean(formik.touched.password) &&
-            Boolean(formik.errors.password) &&
-            formik.errors.password === "Mínimo 6 caracteres" && (
-              <span>{formik.errors.password}</span>
+            Boolean(formik?.touched?.password) &&
+            Boolean(formik?.errors?.password) &&
+            formik?.errors?.password === "Mínimo 6 caracteres" && (
+              <span>{formik?.errors?.password}</span>
             )
           }
           InputProps={{
@@ -173,7 +184,7 @@ export default function RegisterForm({ invite }: any) {
           fullWidth
           variant="contained"
           disabled={isLoading}
-          onClick={() => formik.handleSubmit()}
+          onClick={() => formik?.handleSubmit()}
           endIcon={isLoading ? <CircularProgress size={14} /> : null}
         >
           Registrarse

@@ -4,9 +4,10 @@ import {
   ExerciseDescription,
 } from "lib/types/exercise/exercise.types";
 import request from "services/request";
+import { CreateExercise, createVariant, updateVariant } from "./lib/types";
 
 export const createExerciseService = async (
-  exercise: any
+  exercise: CreateExercise
 ): Promise<Exercise> => {
   const response = await request({
     method: "POST",
@@ -19,7 +20,9 @@ export const createExerciseService = async (
   return response.data;
 };
 
-export const createVariantService = async (variant: any): Promise<Exercise> => {
+export const createVariantService = async (
+  variant: createVariant
+): Promise<Exercise> => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/create/variant",
@@ -83,7 +86,7 @@ export const readExercisesDescriptionsService = async (): Promise<
   return response.data;
 };
 
-export const updateVariantService = async (variant: any) => {
+export const updateVariantService = async (variant: updateVariant) => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/update/variant",

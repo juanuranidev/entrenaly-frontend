@@ -3,7 +3,7 @@ export type Exercise = {
   name: string;
   hasVariant: boolean;
   category?: ExerciseCategory;
-  categoryId?: string | number;
+  categoryId?: number;
   hasUser?: boolean;
   video?: string;
   image?: string;
