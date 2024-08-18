@@ -27,7 +27,11 @@ import Google from "../../../../public/google.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-export default function RegisterForm({ invite }: string | null | undefined) {
+type Props = {
+  invite: string | null | undefined;
+};
+
+export default function RegisterForm({ invite }: Props) {
   const navigate = useNavigate();
   const { setUserData } = useAuthContext();
 
