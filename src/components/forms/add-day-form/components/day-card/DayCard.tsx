@@ -14,8 +14,8 @@ export default function DayCard({
   handleSelectDay,
 }: Props) {
   const { theme } = useThemeContext();
-  const isDayAlreadyAdded = daysAlreadyAdded.find(
-    (obj: PlanDay) => obj.dayOfWeek.id === day.id
+  const isDayAlreadyAdded: boolean = Boolean(
+    daysAlreadyAdded.find((obj: PlanDay) => obj.dayOfWeek.id === day.id)
   );
 
   return (

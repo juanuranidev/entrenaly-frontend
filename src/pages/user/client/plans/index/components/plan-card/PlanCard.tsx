@@ -1,5 +1,6 @@
 import { Box, Card, Stack, Typography, Divider } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { PLAN_CONSTANTS } from "lib/constants/plan/plan.constants";
 import { useNavigate } from "react-router-dom";
 import { Plan } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
@@ -11,6 +12,19 @@ type Props = {
 export default function PlanCard({ plan }: Props) {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
+
+  const handleRenderPlanViewUrl = (plan: Plan): string => {
+    switch (plan?.type?.name) {
+      case PLAN_CONSTANTS.TYPES.WEEKLY:
+        return `/client/plans/view/weekly/${plan?.id}`;
+
+      case PLAN_CONSTANTS.TYPES.CIRCUIT:
+        return `/client/plans/view/circuit/${plan?.id}`;
+
+      default:
+        return "";
+    }
+  };
 
   return (
     <Card
@@ -29,7 +43,7 @@ export default function PlanCard({ plan }: Props) {
           transition: "ease 0.4s",
         },
       }}
-      onClick={() => navigate(`/client/plans/view/weekly/${plan?.id}`)}
+      onClick={() => navigate(handleRenderPlanViewUrl(plan))}
     >
       <Box display="flex" flexDirection="column" gap={theme?.spacing(2)}>
         <Stack flexDirection="row" alignItems="center" gap={theme?.spacing(2)}>

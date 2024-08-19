@@ -18,7 +18,7 @@ export const useReadPlansByClientId = (
 
     setIsLoading(true);
     try {
-      const response = await readPlansByClientIdService(clientId);
+      const response: Plan[] | [] = await readPlansByClientIdService(clientId);
 
       setPlans(response);
     } catch (error) {

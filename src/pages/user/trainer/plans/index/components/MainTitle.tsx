@@ -29,6 +29,8 @@ export default function MainTitle() {
   const handleGetUrlByPlanType = (planType: string): string => {
     if (planType === PLAN_CONSTANTS.TYPES.WEEKLY) {
       return "/trainer/plans/new/weekly";
+    } else if (planType === PLAN_CONSTANTS.TYPES.CIRCUIT) {
+      return "/trainer/plans/new/circuit";
     }
     return "";
   };
@@ -55,7 +57,6 @@ export default function MainTitle() {
                   {plansTypes.map((planType: PlanType) => (
                     <ListItemButton
                       key={planType?.id}
-                      disabled={planType?.name === PLAN_CONSTANTS.TYPES.CIRCUIT}
                       onClick={() =>
                         navigate(handleGetUrlByPlanType(planType?.name))
                       }

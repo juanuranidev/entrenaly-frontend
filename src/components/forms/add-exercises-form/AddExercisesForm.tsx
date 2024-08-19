@@ -39,7 +39,7 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
     exerciseCategorySelected?.id
   );
 
-  const toggleExerciseSelection = (exercise: Exercise) => {
+  const toggleExerciseSelection = (exercise: Exercise): void => {
     setExercisesSelected((prevSelected) => {
       const isExerciseSelected = prevSelected.some(
         (selectedExercise: Exercise) => selectedExercise.name === exercise.name
@@ -56,17 +56,21 @@ export default function AddExercisesForm({ open, onClose, onSubmit }: Props) {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     onSubmit(exercisesSelected);
     setExercisesSelected([]);
     onClose();
   };
 
+  const handleResetValues = (): void => {
+    setSearchValue("");
+    setExercisesSelected([]);
+    setExerciseCategorySelected(null);
+  };
+
   useEffect(() => {
     if (!open) {
-      setSearchValue("");
-      setExercisesSelected([]);
-      setExerciseCategorySelected(null);
+      handleResetValues();
     }
   }, [open]);
 

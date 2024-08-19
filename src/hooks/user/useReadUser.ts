@@ -14,7 +14,7 @@ export const useReadUser = (): UseReadUser => {
   const handleReadUser = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readUserService();
+      const response: User | null = await readUserService();
 
       setUser(response);
     } catch (error) {

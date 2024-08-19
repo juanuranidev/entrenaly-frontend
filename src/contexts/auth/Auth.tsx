@@ -1,9 +1,19 @@
-import { useEffect, useState, createContext, useContext } from "react";
+import {
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+} from "react";
 import { getUserSessionService } from "services/user/user.services";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import axios from "axios";
 import Logo from "components/common/logo/Logo";
+
+type Props = {
+  children: ReactNode;
+};
 
 const initialContextValue = {
   userData: null,
@@ -12,7 +22,7 @@ const initialContextValue = {
 export const AuthContext = createContext<any>(initialContextValue);
 export const useAuthContext = () => useContext(AuthContext);
 
-export const AuthContextProvider = ({ children }: any) => {
+export const AuthContextProvider = ({ children }: Props) => {
   const location = useLocation();
 
   const [userData, setUserData] = useState<any>(null);

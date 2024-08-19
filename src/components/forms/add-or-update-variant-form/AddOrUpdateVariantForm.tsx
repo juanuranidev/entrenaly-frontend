@@ -13,6 +13,8 @@ import {
 } from "services/exercise/exercise.services";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { addOrUpdateVariantFormValidations } from "./lib/validations";
+import { createVariant, updateVariant } from "services/exercise/lib/types";
+import type { AddOrUpdateVariantForm } from "./lib/types";
 import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { useThemeContext } from "contexts/theme/Theme";
@@ -24,7 +26,7 @@ import Icons from "lib/utils/icons/icons";
 
 type Props = {
   open: boolean;
-  exerciseId: number;
+  exerciseId: number | undefined | null;
   onClose: () => void;
   onSubmit?: () => Promise<void>;
   exerciseSelected?: Exercise;
@@ -37,35 +39,44 @@ export default function AddOrUpdateVariantForm({
   exerciseId,
   exerciseSelected,
 }: Props) {
-  const updateVariant = exerciseSelected?.variant;
+  const updateVariant: boolean = Boolean(exerciseSelected?.variant);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { theme } = useThemeContext();
   const { exercisesCategories, isLoading: isCategoriesLoading } =
     useReadExercisesCategories();
 
-  const handleFormatInitialExerciseValues = () => {
-    if (!exerciseSelected) return { name: "", video: "", format: "" };
+  const handleFormatInitialExerciseValues = (): AddOrUpdateVariantForm => {
+    if (!exerciseSelected) {
+      return {
+        name: "",
+        image: "",
+        categoryId: null,
+        variantId: null,
+        exerciseId: null,
+      };
+    }
 
     if (updateVariant) {
       return {
-        name: exerciseSelected?.variant?.name ?? "",
-        image: exerciseSelected?.variant?.image ?? "",
-        variantId: exerciseSelected?.variant?.id ?? "",
-        categoryId: exerciseSelected?.category?.id ?? "",
         exerciseId: exerciseId,
-      };
-    } else {
-      return {
-        name: exerciseSelected?.name ?? "",
-        image: exerciseSelected?.image ?? "",
-        categoryId: exerciseSelected?.category?.id ?? "",
-        exerciseId: exerciseId,
+        name: exerciseSelected.variant?.name ?? "",
+        image: exerciseSelected.variant?.image ?? "",
+        variantId: exerciseSelected.variant?.id ?? null,
+        categoryId: exerciseSelected.category?.id ?? null,
       };
     }
+
+    return {
+      variantId: null,
+      exerciseId: exerciseId,
+      name: exerciseSelected.name ?? "",
+      image: exerciseSelected.image ?? "",
+      categoryId: exerciseSelected.category?.id ?? null,
+    };
   };
 
-  const formik = useFormik({
+  const formik = useFormik<AddOrUpdateVariantForm>({
     initialValues: {
       ...handleFormatInitialExerciseValues(),
     },
@@ -76,7 +87,9 @@ export default function AddOrUpdateVariantForm({
     },
   });
 
-  const handleCreateOrUpdateVariant = async (variant: any) => {
+  const handleCreateOrUpdateVariant = async (
+    variant: updateVariant | createVariant
+  ) => {
     setIsLoading(true);
     try {
       if (updateVariant) {
@@ -95,7 +108,8 @@ export default function AddOrUpdateVariantForm({
       );
     } catch (error) {
       console.log(error);
-      const action = updateVariant ? "actualizar" : "crear";
+
+      const action: string = updateVariant ? "actualizar" : "crear";
       createErrorToastLib(`Error al ${action} variante intente nuevamente`);
     }
     setIsLoading(false);

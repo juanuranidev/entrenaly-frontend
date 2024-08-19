@@ -4,8 +4,10 @@ import {
 } from "services/plan/plan.services";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDescriptions";
+import { weeklyPlanFormValidations } from "./lib/validations";
 import { DayOfWeek, Plan, PlanDay } from "lib/types/plan/plan.types";
 import { Grid, Button, Typography } from "@mui/material";
+import type { WeeklyPlanForm } from "./lib/types";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -16,7 +18,7 @@ import AddDayForm from "../add-day-form/AddDayForm";
 import AccordionDay from "./components/accordion-day/AccordionDay";
 import MainInformation from "./components/main-information/MainInformation";
 import AddExercisesForm from "../add-exercises-form/AddExercisesForm";
-import { weeklyPlanFormValidations } from "./lib/validations";
+import { CreateWeeklyPlan, UpdateWeeklyPlan } from "services/plan/types";
 
 type Props = {
   plan?: Plan | null;
@@ -36,13 +38,13 @@ export default function WeeklyPlanForm({ plan }: Props) {
   const [openExercisesDrawer, setOpenExercisesDrawer] =
     useState<boolean>(false);
 
-  const formik = useFormik({
+  const formik = useFormik<WeeklyPlanForm>({
     initialValues: {
       days: plan?.days || [],
       clients: [],
       name: plan?.name || "",
-      planId: plan?.id || null,
-      categoryId: plan?.category?.id || "",
+      planId: plan?.id || "",
+      categoryId: plan?.category?.id || null,
     },
     async onSubmit(values) {
       if (editPlan) {
@@ -55,7 +57,9 @@ export default function WeeklyPlanForm({ plan }: Props) {
     enableReinitialize: true,
   });
 
-  const handlePostWeeklyPlan = async (data: any) => {
+  const handlePostWeeklyPlan = async (
+    data: CreateWeeklyPlan
+  ): Promise<void> => {
     setIsLoading(true);
     handleVerifyDescriptions(data.days);
     try {
@@ -70,7 +74,9 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setIsLoading(false);
   };
 
-  const handleUpdateWeeklyPlan = async (data: any) => {
+  const handleUpdateWeeklyPlan = async (
+    data: UpdateWeeklyPlan
+  ): Promise<void> => {
     setIsLoading(true);
     handleVerifyDescriptions(data.days);
     try {
@@ -90,7 +96,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setOpenExercisesDrawer(true);
   };
 
-  const handleSubmitExercisesDrawer = (selectedExercises: Exercise[]) => {
+  const handleSubmitExercisesDrawer = (selectedExercises: Exercise[]): void => {
     formik.setFieldValue("days", [
       ...formik.values.days,
       {
@@ -102,14 +108,20 @@ export default function WeeklyPlanForm({ plan }: Props) {
     setOpenExercisesDrawer(false);
   };
 
-  const handleVerifyDescriptions = (days: any) => {
+  const handleVerifyDescriptions = (days: PlanDay[] | []) => {
     for (const day of days) {
-      for (const exercise of day.exercises) {
-        if (!exercise.description) {
-          createErrorToastLib("Hay ejercicios sin descripción");
-          setIsLoading(false);
-          throw "";
+      if (day && Array.isArray(day.exercises)) {
+        for (const exercise of day.exercises) {
+          if (!exercise.description) {
+            createErrorToastLib("Hay ejercicios sin descripción");
+            setIsLoading(false);
+            throw "";
+          }
         }
+      } else {
+        createErrorToastLib("Hay ejercicios sin descripción");
+        setIsLoading(false);
+        throw "";
       }
     }
   };
@@ -128,7 +140,7 @@ export default function WeeklyPlanForm({ plan }: Props) {
         </Button>
       </Grid>
       {formik?.values?.days
-        ?.sort((a: any, b: any) => a.dayOfWeekId - b.dayOfWeekId)
+        ?.sort((a: PlanDay, b: PlanDay) => a?.dayOfWeek?.id - b?.dayOfWeek?.id)
         .map((day: PlanDay) => (
           <AccordionDay
             day={day}

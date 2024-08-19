@@ -7,7 +7,7 @@ import { downloadPdfLib } from "lib/utils/download-pdf/DownloadPdf";
 import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import PageTitle from "components/common/page-title/PageTitle";
-import WeeklyPlanDay from "components/common/weekly-plan-day/WeeklyPlanDay";
+import WeeklyPlanDay from "components/common/view-plan-day/ViewPlanDay";
 
 export default function ViewWeeklyPlan() {
   const { planId } = useParams();

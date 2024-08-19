@@ -18,6 +18,11 @@ const Profile = Loadable(
 const ViewWeeklyPlan = Loadable(
   lazy(() => import("pages/user/trainer/plans/view-weekly-plan/ViewWeeklyPlan"))
 );
+const ViewCircuitPlan = Loadable(
+  lazy(
+    () => import("pages/user/trainer/plans/view-circuit-plan/ViewCircuitPlan")
+  )
+);
 const Clients = Loadable(
   lazy(() => import("pages/user/trainer/clients/index/Clients"))
 );
@@ -27,11 +32,19 @@ const Exercises = Loadable(
 const NewWeeklyPlan = Loadable(
   lazy(() => import("pages/user/trainer/plans/new-weekly-plan/NewWeeklyPlan"))
 );
+const NewCircuitPlan = Loadable(
+  lazy(() => import("pages/user/trainer/plans/new-circuit-plan/NewCircuitPlan"))
+);
 const ClientProfile = Loadable(
   lazy(() => import("pages/user/trainer/clients/profile/ClientProfile"))
 );
 const EditWeeklyPlan = Loadable(
   lazy(() => import("pages/user/trainer/plans/edit-weekly-plan/EditWeeklyPlan"))
+);
+const EditCircuitPlan = Loadable(
+  lazy(
+    () => import("pages/user/trainer/plans/edit-circuit-plan/EditCircuitPlan")
+  )
 );
 const NotFound = Loadable(
   lazy(() => import("pages/user/trainer/not-found/NotFound"))
@@ -61,12 +74,24 @@ const TrainerRoutes = {
       element: <NewWeeklyPlan />,
     },
     {
+      path: "/trainer/plans/new/circuit",
+      element: <NewCircuitPlan />,
+    },
+    {
+      path: "/trainer/plans/edit/circuit/:planId",
+      element: <EditCircuitPlan />,
+    },
+    {
       path: "/trainer/plans/edit/weekly/:planId",
       element: <EditWeeklyPlan />,
     },
     {
       path: "/trainer/plans/view/weekly/:planId",
       element: <ViewWeeklyPlan />,
+    },
+    {
+      path: "/trainer/plans/view/circuit/:planId",
+      element: <ViewCircuitPlan />,
     },
     {
       path: "/trainer/exercises",

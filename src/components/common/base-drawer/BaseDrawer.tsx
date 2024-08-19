@@ -1,11 +1,12 @@
 import {
   Box,
   Drawer,
-  CircularProgress,
   useMediaQuery,
   SwipeableDrawer,
+  CircularProgress,
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
+import { CSSProperties } from "react";
 import Puller from "../puller/Puller";
 
 type Props = {
@@ -13,7 +14,7 @@ type Props = {
   children: JSX.Element[];
   isLoading?: boolean;
   onClose: () => void;
-  styles?: any;
+  styles?: CSSProperties;
   largeDrawer?: boolean;
 };
 

@@ -8,17 +8,31 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "contexts/theme/Theme";
 import { Exercise } from "lib/types/exercise/exercise.types";
-import { PlanDay } from "lib/types/plan/plan.types";
+import { DayCircuit, PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import ExerciseView from "./components/exercise-view/ExerciseView";
 import ExercisesImagesSumary from "../exercises-images-summary/ExercisesImagesSumary";
+import CircuitView from "./components/circuit-view/CircuitView";
 
 type Props = {
   day: PlanDay;
+  hasCircuits?: boolean;
 };
 
-export default function WeeklyPlanDay({ day }: Props) {
+export default function ViewPlanDay({ day, hasCircuits = false }: Props) {
   const { theme } = useThemeContext();
+
+  const handleRenderExercisesImagesSummary = () => {
+    if (!hasCircuits) {
+      return day?.exercises;
+    }
+
+    if (day?.circuits && day?.circuits?.length) {
+      return day?.circuits[0]?.exercises;
+    }
+
+    return [];
+  };
 
   return (
     <Grid item xs={12}>
@@ -40,15 +54,25 @@ export default function WeeklyPlanDay({ day }: Props) {
             <Typography fontWeight={600} fontSize={{ xs: 20, md: 26 }}>
               {day?.dayOfWeek?.name}
             </Typography>
-            <ExercisesImagesSumary exercises={day?.exercises} />
+            <ExercisesImagesSumary
+              exercises={handleRenderExercisesImagesSummary()}
+            />
           </Stack>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid item container spacing={theme?.spacing(3)}>
-            {day?.exercises?.map((exercise: Exercise, index: number) => (
-              <ExerciseView exercise={exercise} key={index} />
-            ))}
-          </Grid>
+          {hasCircuits ? (
+            <Grid item container spacing={theme?.spacing(3)}>
+              {day?.circuits?.map((circuit: DayCircuit) => (
+                <CircuitView circuit={circuit} key={circuit?.id} />
+              ))}
+            </Grid>
+          ) : (
+            <Grid item container spacing={theme?.spacing(3)}>
+              {day?.exercises?.map((exercise: Exercise, index: number) => (
+                <ExerciseView exercise={exercise} key={index} />
+              ))}
+            </Grid>
+          )}
         </AccordionDetails>
       </Accordion>
     </Grid>

@@ -19,8 +19,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <>
       <Analytics />
       <Toaster richColors position="bottom-left" />
+      {createFirebaseConectionLib()}
       <Theme>
-        {createFirebaseConectionLib()}
         <Router>
           <ThemeContextProvider>
             <AuthContextProvider>

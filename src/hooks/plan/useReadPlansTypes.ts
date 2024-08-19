@@ -14,7 +14,7 @@ export const useReadPlansTypes = (): UseReadPlansTypes => {
   const handleReadPlansTypes = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readPlansTypesService();
+      const response: PlanType[] | [] = await readPlansTypesService();
 
       setPlansTypes(response);
     } catch (error) {

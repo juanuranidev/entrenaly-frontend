@@ -14,7 +14,7 @@ export const useReadPlansByUserId = (): UseReadPlansByUserId => {
   const handleReadPlansByUserId = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await readPlansByUserIdService();
+      const response: Plan[] | [] = await readPlansByUserIdService();
 
       setPlans(response);
     } catch (error) {

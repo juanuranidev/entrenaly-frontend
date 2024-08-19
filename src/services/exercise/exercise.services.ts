@@ -1,6 +1,14 @@
+import {
+  Exercise,
+  ExerciseCategory,
+  ExerciseDescription,
+} from "lib/types/exercise/exercise.types";
 import request from "services/request";
+import { CreateExercise, createVariant, updateVariant } from "./lib/types";
 
-export const createExerciseService = async (exercise: any) => {
+export const createExerciseService = async (
+  exercise: CreateExercise
+): Promise<Exercise> => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/create",
@@ -11,7 +19,10 @@ export const createExerciseService = async (exercise: any) => {
 
   return response.data;
 };
-export const createVariantService = async (variant: any) => {
+
+export const createVariantService = async (
+  variant: createVariant
+): Promise<Exercise> => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/create/variant",
@@ -22,7 +33,10 @@ export const createVariantService = async (variant: any) => {
 
   return response.data;
 };
-export const createExerciseDescriptionService = async (description: string) => {
+
+export const createExerciseDescriptionService = async (
+  description: string
+): Promise<ExerciseDescription> => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/post/exercise-description",
@@ -33,10 +47,11 @@ export const createExerciseDescriptionService = async (description: string) => {
 
   return response.data;
 };
+
 export const readExercisesService = async (
   name?: string,
   exerciseCategoryId?: number | null
-) => {
+): Promise<Exercise[] | []> => {
   const response = await request({
     method: "GET",
     url: "/exercise/v1/get",
@@ -48,7 +63,10 @@ export const readExercisesService = async (
 
   return response.data;
 };
-export const readExercisesCategoriesService = async () => {
+
+export const readExercisesCategoriesService = async (): Promise<
+  ExerciseCategory[] | []
+> => {
   const response = await request({
     method: "GET",
     url: "/exercise/v1/get/categories",
@@ -56,7 +74,10 @@ export const readExercisesCategoriesService = async () => {
 
   return response.data;
 };
-export const readExercisesDescriptionsService = async () => {
+
+export const readExercisesDescriptionsService = async (): Promise<
+  ExerciseDescription[] | []
+> => {
   const response = await request({
     method: "GET",
     url: "/exercise/v1/get/exercises-descriptions",
@@ -64,7 +85,8 @@ export const readExercisesDescriptionsService = async () => {
 
   return response.data;
 };
-export const updateVariantService = async (variant: any) => {
+
+export const updateVariantService = async (variant: updateVariant) => {
   const response = await request({
     method: "POST",
     url: "/exercise/v1/update/variant",

@@ -1,3 +1,4 @@
+import { SvgIconProps } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,28 +23,28 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PowerSettingsNewSharpIcon from "@mui/icons-material/PowerSettingsNewSharp";
 
 const Icons = {
-  person: (props: any) => <PersonIcon {...props} />,
-  more: (props: any) => <MoreHorizIcon {...props} />,
-  checkBox: (props: any) => <CheckBoxIcon {...props} />,
-  power: (props: any) => <PowerSettingsNewSharpIcon {...props} />,
-  menu: (props: any) => <MenuIcon {...props} />,
-  close: (props: any) => <CloseIcon {...props} />,
-  add: (props: any) => <AddIcon {...props} />,
-  account: (props: any) => <AccountCircleIcon {...props} />,
-  plans: (props: any) => <FeedIcon {...props} />,
-  edit: (props: any) => <EditIcon {...props} />,
-  undo: (props: any) => <UndoIcon {...props} />,
-  pdfs: (props: any) => <PictureAsPdfIcon {...props} />,
-  expandMore: (props: any) => <ExpandMoreIcon {...props} />,
-  image: (props: any) => <ImageIcon {...props} />,
-  home: (props: any) => <HomeIcon {...props} />,
-  search: (props: any) => <SearchIcon {...props} />,
-  dumbbell: (props: any) => <FitnessCenterIcon {...props} />,
-  visibilityOn: (props: any) => <VisibilityIcon {...props} />,
-  visibilityOff: (props: any) => <VisibilityOffIcon {...props} />,
-  download: (props: any) => <DownloadIcon {...props} />,
-  down: (props: any) => <KeyboardArrowDownIcon {...props} />,
-  calendar: (props: any) => <CalendarMonthIcon {...props} />,
+  person: (props: SvgIconProps) => <PersonIcon {...props} />,
+  more: (props: SvgIconProps) => <MoreHorizIcon {...props} />,
+  checkBox: (props: SvgIconProps) => <CheckBoxIcon {...props} />,
+  power: (props: SvgIconProps) => <PowerSettingsNewSharpIcon {...props} />,
+  menu: (props: SvgIconProps) => <MenuIcon {...props} />,
+  close: (props: SvgIconProps) => <CloseIcon {...props} />,
+  add: (props: SvgIconProps) => <AddIcon {...props} />,
+  account: (props: SvgIconProps) => <AccountCircleIcon {...props} />,
+  plans: (props: SvgIconProps) => <FeedIcon {...props} />,
+  edit: (props: SvgIconProps) => <EditIcon {...props} />,
+  undo: (props: SvgIconProps) => <UndoIcon {...props} />,
+  pdfs: (props: SvgIconProps) => <PictureAsPdfIcon {...props} />,
+  expandMore: (props: SvgIconProps) => <ExpandMoreIcon {...props} />,
+  image: (props: SvgIconProps) => <ImageIcon {...props} />,
+  home: (props: SvgIconProps) => <HomeIcon {...props} />,
+  search: (props: SvgIconProps) => <SearchIcon {...props} />,
+  dumbbell: (props: SvgIconProps) => <FitnessCenterIcon {...props} />,
+  visibilityOn: (props: SvgIconProps) => <VisibilityIcon {...props} />,
+  visibilityOff: (props: SvgIconProps) => <VisibilityOffIcon {...props} />,
+  download: (props: SvgIconProps) => <DownloadIcon {...props} />,
+  down: (props: SvgIconProps) => <KeyboardArrowDownIcon {...props} />,
+  calendar: (props: SvgIconProps) => <CalendarMonthIcon {...props} />,
 };
 
 export default Icons;

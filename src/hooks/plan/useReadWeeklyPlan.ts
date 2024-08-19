@@ -18,7 +18,7 @@ export const useReadWeeklyPlan = (
 
     setIsLoading(true);
     try {
-      const response = await readWeeklyPlanService(planId);
+      const response: Plan = await readWeeklyPlanService(planId);
 
       setPlan(response);
     } catch (error) {

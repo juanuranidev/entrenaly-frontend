@@ -16,6 +16,11 @@ const NotFound = Loadable(
 const ViewWeeklyPlan = Loadable(
   lazy(() => import("pages/user/client/plans/view-weekly-plan/ViewWeeklyPlan"))
 );
+const ViewCircuitPlan = Loadable(
+  lazy(
+    () => import("pages/user/client/plans/view-circuit-plan/ViewCircuitPlan")
+  )
+);
 
 const ClientRoutes = {
   element: <ClientLayout />,
@@ -27,6 +32,10 @@ const ClientRoutes = {
     {
       path: "/client/plans/view/weekly/:planId",
       element: <ViewWeeklyPlan />,
+    },
+    {
+      path: "/client/plans/view/circuit/:planId",
+      element: <ViewCircuitPlan />,
     },
     {
       path: "*",

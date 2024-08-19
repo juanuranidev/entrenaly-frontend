@@ -15,11 +15,12 @@ export type Client = {
   height?: string;
   goals?: string;
   injuries?: string;
+  typeOfBody?: string;
   medicalConditions?: string;
 };
 
 export type Invite = {
   id: string;
-  trainerName?: string | null;
-  trainerImage?: string | null;
+  trainerName?: string;
+  trainerImage?: string;
 };
