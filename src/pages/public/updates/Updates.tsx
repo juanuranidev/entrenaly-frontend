@@ -11,6 +11,7 @@ export default function Updates() {
   const navigate = useNavigate();
   const { theme } = useThemeContext();
   const { appReleases } = useReadAppReleases();
+  const reversedAppReleases = [...appReleases].reverse();
 
   return (
     <Grid container spacing={theme?.spacing(4)} pr={theme?.spacing(2)}>
@@ -30,8 +31,8 @@ export default function Updates() {
         flexDirection="column"
         alignItems="center"
       >
-        {appReleases.length
-          ? appReleases.map((appRelease: AppRelease) => (
+        {reversedAppReleases.length
+          ? reversedAppReleases.map((appRelease: AppRelease) => (
               <Box
                 width={{ xs: "90%", md: "40%" }}
                 display="flex"
@@ -52,7 +53,7 @@ export default function Updates() {
                     Versión {appRelease.version}
                   </Typography>
                   <Typography
-                    fontSize={12}
+                    fontSize={14}
                     fontWeight={600}
                     sx={{ opacity: 0.6 }}
                   >
