@@ -15,10 +15,10 @@ import {
 } from "services/user/user.services";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
 import { registerFormValidation } from "./lib/validations";
+import type { RegisterForm } from "./lib/types";
 import { RegisterWithEmail } from "services/user/types";
 import { useAuthContext } from "contexts/auth/Auth";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
-import { RegisterForm } from "./lib/types";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";

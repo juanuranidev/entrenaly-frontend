@@ -12,6 +12,7 @@ import { addExerciseFormValidations } from "./lib/validations";
 import { useReadExercisesCategories } from "hooks/exercise/useReadExercisesCategories";
 import { Exercise, ExerciseCategory } from "lib/types/exercise/exercise.types";
 import { createExerciseService } from "services/exercise/exercise.services";
+import type { AddExerciseForm } from "./lib/types";
 import { useEffect, useState } from "react";
 import { useThemeContext } from "contexts/theme/Theme";
 import { CreateExercise } from "services/exercise/lib/types";
@@ -19,7 +20,6 @@ import { useFormik } from "formik";
 import ModalTitle from "components/common/modal-title/ModalTitle";
 import BaseDrawer from "components/common/base-drawer/BaseDrawer";
 import Icons from "lib/utils/icons/icons";
-import type { AddExerciseForm } from "./lib/types";
 
 type Props = {
   open: boolean;

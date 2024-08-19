@@ -7,8 +7,8 @@ import { useReadExercisesDescriptions } from "hooks/exercise/useReadExercisesDes
 import { weeklyPlanFormValidations } from "./lib/validations";
 import { DayOfWeek, Plan, PlanDay } from "lib/types/plan/plan.types";
 import { Grid, Button, Typography } from "@mui/material";
+import type { WeeklyPlanForm } from "./lib/types";
 import { useThemeContext } from "contexts/theme/Theme";
-import { WeeklyPlanForm } from "./lib/types";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Exercise } from "lib/types/exercise/exercise.types";

@@ -1,7 +1,7 @@
 import { Box, Grid, Button, IconButton } from "@mui/material";
 import { createErrorToastLib, createSuccessToastLib } from "lib/utils/toast";
+import type { UpdateClientMedicalInformationForm } from "./lib/types";
 import { updateClientMedicalInformationService } from "services/client/client.services";
-import { UpdateClientMedicalInformationForm } from "./lib/types";
 import { useThemeContext } from "contexts/theme/Theme";
 import { useFormik } from "formik";
 import { useState } from "react";

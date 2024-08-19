@@ -16,12 +16,12 @@ import {
 import { createErrorToastLib } from "lib/utils/toast";
 import { loginFormValidation } from "./lib/validations";
 import { useThemeContext } from "contexts/theme/Theme";
+import type { LoginForm } from "./lib/types";
 import { LoginWithEmail } from "services/user/types";
 import { USER_CONSTANTS } from "lib/constants/user/user.constants";
 import { useAuthContext } from "contexts/auth/Auth";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { LoginForm } from "./lib/types";
 import { useState } from "react";
 import { User } from "lib/types/user/user.types";
 import Google from "../../../../public/google.svg";
