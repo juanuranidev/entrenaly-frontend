@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import ENV from "../lib/utils/env";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 const request = async ({ method, url, params, data }: Props) => {
   try {
-    const response: any = await axios({
+    const response: AxiosResponse<any, any> = await axios({
       url: url,
       data: data,
       method: method,
