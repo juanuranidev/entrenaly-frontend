@@ -16,6 +16,7 @@ import { PlanDay } from "lib/types/plan/plan.types";
 import Icons from "lib/utils/icons/icons";
 import Circuit from "./components/circuit/Circuit";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";
+import { createSuccessToastLib } from "lib/utils/toast";
 
 type Props = {
   day: PlanDay;
@@ -41,6 +42,7 @@ export default function AccordionDayWithCircuitsForm({
     );
 
     formik.setFieldValue("days", newDays);
+    createSuccessToastLib("Día eliminado correctamente");
   };
 
   const handleAddCircuit = (): void => {

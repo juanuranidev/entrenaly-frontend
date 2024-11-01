@@ -28,7 +28,9 @@ export default function PlanMainInformationForm({ plan, formik }: Props) {
   const { clients } = useReadClients();
   const { plansCategories } = useReadPlansCategories();
 
-  const handleSetInitialClients = () => {
+  console.log(formik.values);
+
+  const handleSetInitialClients = (): void => {
     if (!plan) return;
     if (!clients.length) return;
 
@@ -38,9 +40,17 @@ export default function PlanMainInformationForm({ plan, formik }: Props) {
     formik.setFieldValue("clients", clientsSelected);
   };
 
+  const handleSetInitialPlanCategory = (): void => {
+    if (!plan) return;
+    if (!plansCategories.length) return;
+
+    formik.setFieldValue("categoryId", plan.category?.id);
+  };
+
   useEffect(() => {
+    handleSetInitialPlanCategory();
     handleSetInitialClients();
-  }, [plan, clients]);
+  }, [plan, clients, plansCategories]);
 
   return (
     <>
@@ -71,6 +81,7 @@ export default function PlanMainInformationForm({ plan, formik }: Props) {
           onBlur={formik?.handleBlur}
           onChange={formik?.handleChange}
           value={formik?.values?.categoryId}
+          InputLabelProps={{ shrink: Boolean(formik?.values?.categoryId) }}
           error={
             Boolean(formik?.touched?.categoryId) &&
             Boolean(formik?.errors?.categoryId)

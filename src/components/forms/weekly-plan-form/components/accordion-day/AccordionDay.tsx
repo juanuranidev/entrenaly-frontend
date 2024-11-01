@@ -19,6 +19,7 @@ import Icons from "lib/utils/icons/icons";
 import ConfirmDialog from "components/dialogs/confirm-dialog/ConfirmDialog";
 import ExerciseInput from "../exercise-input/ExerciseInput";
 import ExercisesImagesSumary from "components/common/exercises-images-summary/ExercisesImagesSumary";
+import { createSuccessToastLib } from "lib/utils/toast";
 
 type Props = {
   day: PlanDay;
@@ -43,6 +44,7 @@ export default function AccordionDay({
     );
 
     formik.setFieldValue("days", newDays);
+    createSuccessToastLib("Día eliminado correctamente");
   };
 
   return (

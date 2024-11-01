@@ -72,6 +72,7 @@ export default function MainInformation({ formik, plan }: Props) {
           onBlur={formik?.handleBlur}
           onChange={formik?.handleChange}
           value={formik?.values?.categoryId}
+          InputLabelProps={{ shrink: Boolean(formik?.values?.categoryId) }}
           error={
             Boolean(formik?.touched?.categoryId) &&
             Boolean(formik?.errors?.categoryId)
