@@ -90,7 +90,6 @@ export default function DescriptionsInput({
       inputValue={inputValue}
       getOptionLabel={(option) => option?.description || ""}
       onInputChange={(_event, newInputValue) => {
-        console.log(newInputValue);
         setInputValue(newInputValue);
         handleChange(newInputValue);
       }}

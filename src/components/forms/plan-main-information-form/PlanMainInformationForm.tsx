@@ -28,8 +28,6 @@ export default function PlanMainInformationForm({ plan, formik }: Props) {
   const { clients } = useReadClients();
   const { plansCategories } = useReadPlansCategories();
 
-  console.log(formik.values);
-
   const handleSetInitialClients = (): void => {
     if (!plan) return;
     if (!clients.length) return;
